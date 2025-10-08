@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.1-beta",
+  "version": "0.1.2-beta",
   "description": "A modern, component-based design system built with TypeScript and LitElement",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -25,17 +25,21 @@
     "./icons/*": "./DS1/x-icon/*.svg",
     "./utils/*": "./DS1/x-utils/*.js"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "DS1/**/*.ts",
+    "dist/*.js"
+  ],
   "scripts": {
     "dev": "bun run --bun serve",
-    "build": "bun run build:types && bun run build:components",
+    "build": "bun run build:bundle",
+    "build:bundle": "bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
     "build:types": "tsc --noEmit",
     "build:components": "bun run build:core && bun run build:units && bun run build:pages",
     "build:core": "bun run build:component -- 2 Core",
     "build:units": "bun run build:component -- 3 Unit",
     "build:pages": "bun run build:component -- 4 Page",
     "build:component": "bun run scripts/build-component.ts",
-    "prepublishOnly": "echo 'Skipping build - using source files directly'",
+    "prepublishOnly": "bun run build:bundle",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
@@ -61,11 +65,13 @@
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "esbuild": "^0.25.10",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@lit-labs/signals": "^0.1.3",
     "lit": "^3.0.0"
   },
   "peerDependencies": {
