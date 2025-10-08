@@ -10,15 +10,14 @@
 
     <!-- Import DS one bundled components -->
     <script type="module" src="../dist/ds-one.bundle.js"></script>
+    <script type="module" src="./load-translations.js"></script>
   </head>
   <body>
     <app-v1 type="default">
-      <text-v1 variant="heading">Welcome to DS one</text-v1>
-      <text-v1 variant="body"
-        >A modern design system built with web components</text-v1
-      >
-      <button-v1 variant="primary">Get Started</button-v1>
-      <button-v1 variant="secondary">Learn More</button-v1>
+      <text-v1 variant="heading" key="welcomeHeading"></text-v1>
+      <text-v1 variant="body" key="welcomeBody"></text-v1>
+      <button-v1 variant="primary" key="getStarted"></button-v1>
+      <button-v1 variant="secondary" key="learnMore"></button-v1>
     </app-v1>
   </body>
 </html>

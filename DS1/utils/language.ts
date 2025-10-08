@@ -101,6 +101,34 @@ export function loadTranslations(
   }
 }
 
+// Auto-load translations from window.DS_ONE_TRANSLATIONS if available
+if (typeof window !== "undefined") {
+  const loadFromWindow = () => {
+    const translations = (window as any).DS_ONE_TRANSLATIONS;
+    if (translations && typeof translations === "object") {
+      // Load all languages from the translations object
+      Object.keys(translations).forEach((key) => {
+        const value = translations[key];
+        if (typeof value === "object") {
+          // value is { en: "text", da: "tekst", ja: "テキスト" }
+          Object.keys(value).forEach((lang) => {
+            const langTranslations = translationStore.get(lang) || {};
+            langTranslations[key] = value[lang];
+            translationStore.set(lang, langTranslations);
+          });
+        }
+      });
+      console.log("DS one: Loaded translations from window.DS_ONE_TRANSLATIONS");
+    }
+  };
+
+  // Try to load immediately
+  loadFromWindow();
+
+  // Also listen for when translations are loaded dynamically
+  window.addEventListener("translations-ready", loadFromWindow);
+}
+
 export function setLanguage(language: LanguageCode): void {
   const normalized = normalizeLanguage(language);
 

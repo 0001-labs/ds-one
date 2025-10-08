@@ -1,0 +1,82 @@
+{
+  "welcomeHeading": {
+    "en": "Welcome to DS one",
+    "da": "Velkommen til DS one",
+    "ja": "DS oneへようこそ"
+  },
+  "welcomeBody": {
+    "en": "A modern design system built with web components",
+    "da": "Et moderne designsystem bygget med webkomponenter",
+    "ja": "Webコンポーネントで構築されたモダンなデザインシステム"
+  },
+  "getStarted": {
+    "en": "Get Started",
+    "da": "Kom i gang",
+    "ja": "はじめる"
+  },
+  "learnMore": {
+    "en": "Learn More",
+    "da": "Lær mere",
+    "ja": "詳細"
+  },
+  "iconsHeading": {
+    "en": "DS one Icons",
+    "da": "DS one Ikoner",
+    "ja": "DS one アイコン"
+  },
+  "iconsDescription": {
+    "en": "Icons are part of the DS one component library",
+    "da": "Ikoner er en del af DS one komponentbiblioteket",
+    "ja": "アイコンはDS oneコンポーネントライブラリの一部です"
+  },
+  "interactiveHeading": {
+    "en": "Interactive Demo",
+    "da": "Interaktiv Demo",
+    "ja": "インタラクティブデモ"
+  },
+  "clickButtons": {
+    "en": "Click the buttons to see interactions",
+    "da": "Klik på knapperne for at se interaktioner",
+    "ja": "ボタンをクリックして操作を確認"
+  },
+  "primaryAction": {
+    "en": "Primary Action",
+    "da": "Primær Handling",
+    "ja": "プライマリアクション"
+  },
+  "secondaryAction": {
+    "en": "Secondary Action",
+    "da": "Sekundær Handling",
+    "ja": "セカンダリアクション"
+  },
+  "titleButton": {
+    "en": "Title Button",
+    "da": "Titel Knap",
+    "ja": "タイトルボタン"
+  },
+  "chooseAccentColor": {
+    "en": "Choose your accent color:",
+    "da": "Vælg din accentfarve:",
+    "ja": "アクセントカラーを選択："
+  },
+  "selectLanguage": {
+    "en": "Select language:",
+    "da": "Vælg sprog:",
+    "ja": "言語を選択："
+  },
+  "cdnHeading": {
+    "en": "DS one from CDN",
+    "da": "DS one fra CDN",
+    "ja": "CDNからのDS one"
+  },
+  "cdnDescription": {
+    "en": "This example loads DS one directly from jsDelivr CDN",
+    "da": "Dette eksempel indlæser DS one direkte fra jsDelivr CDN",
+    "ja": "この例はDS oneをjsDelivr CDNから直接読み込みます"
+  },
+  "goToNextPage": {
+    "en": "Go to next page",
+    "da": "Gå til næste side",
+    "ja": "次のページへ"
+  }
+}

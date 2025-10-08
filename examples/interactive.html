@@ -15,11 +15,12 @@
       // Import bundled version from CDN (includes all dependencies)
       import "https://cdn.jsdelivr.net/npm/ds-one@0.1.4-beta/dist/ds-one.bundle.min.js";
     </script>
+    <script type="module" src="./load-translations.js"></script>
   </head>
   <body>
     <app-v1 type="default">
-      <text-v1 variant="heading">Interactive Demo</text-v1>
-      <text-v1 variant="body">Click the buttons to see interactions</text-v1>
+      <text-v1 variant="heading" key="interactiveHeading"></text-v1>
+      <text-v1 variant="body" key="clickButtons"></text-v1>
 
       <div
         style="
@@ -29,29 +30,30 @@
           flex-direction: column;
         "
       >
-        <button-v1 variant="primary" onclick="alert('Primary button clicked!')">
-          Primary Action
-        </button-v1>
-
+        <button-v1
+          variant="primary"
+          key="primaryAction"
+          onclick="alert('Primary button clicked!')"
+        ></button-v1>
         <button-v1
           variant="secondary"
+          key="secondaryAction"
           onclick="alert('Secondary button clicked!')"
-        >
-          Secondary Action
-        </button-v1>
-
-        <button-v1 variant="title" onclick="alert('Title button clicked!')">
-          Title Button
-        </button-v1>
+        ></button-v1>
+        <button-v1
+          variant="title"
+          key="titleButton"
+          onclick="alert('Title button clicked!')"
+        ></button-v1>
       </div>
 
       <div style="margin-top: 40px">
-        <text-v1 variant="body">Choose your accent color:</text-v1>
+        <text-v1 variant="body" key="chooseAccentColor"></text-v1>
         <cycle-v1 type="accent-color"></cycle-v1>
       </div>
 
       <div style="margin-top: 20px">
-        <text-v1 variant="body">Select language:</text-v1>
+        <text-v1 variant="body" key="selectLanguage"></text-v1>
         <cycle-v1 type="language"></cycle-v1>
       </div>
     </app-v1>
