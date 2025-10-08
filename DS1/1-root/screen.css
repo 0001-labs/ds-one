@@ -110,7 +110,7 @@ html {
 
 @font-face {
   font-family: GT-America-Standard-Regular;
-  src: url("../../Design system/1 Root/fonts/GT-America-Standard-Regular.woff2")
+  src: url("./fonts/GT-America-Standard-Regular.woff2")
     format("woff2");
   font-display: swap;
 }
