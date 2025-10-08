@@ -14,7 +14,7 @@ This document outlines the complete specification for publishing DS one as a dis
 {
   "name": "ds-one",
   "version": "0.1.0-beta",
-  "description": "A modern, component-based design system built with TypeScript and LitElement",
+  "description": "a plug and play design system built with TypeScript and LitElement",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -90,8 +90,8 @@ yarn add ds-one
 
 ```html
 <script type="module">
-  import 'https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.esm.js';
-  import 'https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css';
+  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.esm.js";
+  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css";
 </script>
 ```
 
@@ -99,15 +99,18 @@ yarn add ds-one
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.umd.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css"
+/>
 ```
 
 #### Skypack (ESM with auto-optimization)
 
 ```html
 <script type="module">
-  import 'https://cdn.skypack.dev/ds-one@0.1.0-beta';
-  import 'https://cdn.skypack.dev/ds-one@0.1.0-beta/1%20Root/screen.css';
+  import "https://cdn.skypack.dev/ds-one@0.1.0-beta";
+  import "https://cdn.skypack.dev/ds-one@0.1.0-beta/1%20Root/screen.css";
 </script>
 ```
 
@@ -176,16 +179,8 @@ ds-one/
     "experimentalDecorators": true,
     "useDefineForClassFields": false
   },
-  "include": [
-    "DS1/2-core/**/*",
-    "DS1/3-unit/**/*",
-    "DS1/4-page/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "**/*.test.ts"
-  ]
+  "include": ["DS1/2-core/**/*", "DS1/3-unit/**/*", "DS1/4-page/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
 ```
 
@@ -198,7 +193,7 @@ ds-one/
     "build:types": "tsc --noEmit",
     "build:components": "bun run build:core && bun run build:units && bun run build:pages",
     "build:core": "bun run build:component -- DS1/2-core",
-    "build:units": "bun run build:component -- DS1/3-unit", 
+    "build:units": "bun run build:component -- DS1/3-unit",
     "build:pages": "bun run build:component -- DS1/4-page",
     "build:component": "bun run scripts/build-component.ts",
     "prepublishOnly": "bun run build",
@@ -216,8 +211,8 @@ ds-one/
 
 ```javascript
 // Import entire design system
-import 'ds-one';
-import 'ds-one/styles';
+import "ds-one";
+import "ds-one/styles";
 
 // Components are auto-registered
 document.body.innerHTML = `
@@ -232,9 +227,9 @@ document.body.innerHTML = `
 
 ```javascript
 // Import specific components
-import 'ds-one/components/button-v1';
-import 'ds-one/components/text-v1';
-import 'ds-one/styles';
+import "ds-one/components/button-v1";
+import "ds-one/components/text-v1";
+import "ds-one/styles";
 
 // Use imported components
 document.body.innerHTML = `
@@ -247,8 +242,8 @@ document.body.innerHTML = `
 
 ```javascript
 // Import only what you need
-import { Button, Text, App } from 'ds-one';
-import 'ds-one/styles';
+import { Button, Text, App } from "ds-one";
+import "ds-one/styles";
 
 // Use imported components
 const app = new App();
@@ -260,7 +255,7 @@ const text = new Text();
 
 ```css
 /* Import only styles */
-@import 'ds-one/styles';
+@import "ds-one/styles";
 
 /* Use CSS custom properties */
 .my-component {
@@ -278,10 +273,16 @@ const text = new Text();
 <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one"></script>
 
 <!-- Specific version -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta"
+></script>
 
 <!-- Specific file -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/components/button-v1.js"></script>
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/components/button-v1.js"
+></script>
 ```
 
 ### Unpkg Configuration
@@ -294,7 +295,10 @@ const text = new Text();
 <script src="https://unpkg.com/ds-one@0.1.0-beta"></script>
 
 <!-- Styles -->
-<link rel="stylesheet" href="https://unpkg.com/ds-one@0.1.0-beta/1%20Root/screen.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/ds-one@0.1.0-beta/1%20Root/screen.css"
+/>
 ```
 
 ## TypeScript Support
@@ -305,37 +309,37 @@ const text = new Text();
 // Global component declarations
 declare global {
   interface HTMLElementTagNameMap {
-    'button-v1': Button;
-    'text-v1': Text;
-    'app-v1': App;
-    'cycle-v1': Cycle;
-    'icon-v1': Icon;
-    'tooltip-v1': Tooltip;
-    'price-v1': Price;
-    'markdown-v1': Markdown;
-    'federated-v1': Federated;
-    'home-v1': Home;
-    'list-v1': List;
-    'panel-v1': Panel;
-    'row-v1': Row;
+    "button-v1": Button;
+    "text-v1": Text;
+    "app-v1": App;
+    "cycle-v1": Cycle;
+    "icon-v1": Icon;
+    "tooltip-v1": Tooltip;
+    "price-v1": Price;
+    "markdown-v1": Markdown;
+    "federated-v1": Federated;
+    "home-v1": Home;
+    "list-v1": List;
+    "panel-v1": Panel;
+    "row-v1": Row;
   }
 }
 
 // Component interfaces
 interface Button extends HTMLElement {
-  variant: 'primary' | 'secondary' | 'title';
+  variant: "primary" | "secondary" | "title";
   disabled: boolean;
   key: string;
   href: string;
 }
 
 interface Text extends HTMLElement {
-  variant: 'heading' | 'body' | 'caption';
+  variant: "heading" | "body" | "caption";
   key: string;
 }
 
 interface App extends HTMLElement {
-  type: 'default' | 'board';
+  type: "default" | "board";
 }
 ```
 
@@ -360,7 +364,7 @@ For older browsers, include polyfills:
 <script src="https://unpkg.com/css-vars-ponyfill@2.4.7/dist/css-vars-ponyfill.min.js"></script>
 <script>
   cssVars({
-    onlyLegacy: true
+    onlyLegacy: true,
   });
 </script>
 ```
@@ -383,13 +387,18 @@ For older browsers, include polyfills:
 </style>
 
 <!-- Non-critical CSS loaded async -->
-<link rel="preload" href="ds-one/styles" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<link
+  rel="preload"
+  href="ds-one/styles"
+  as="style"
+  onload="this.onload=null;this.rel='stylesheet'"
+/>
 
 <!-- Components loaded on demand -->
 <script type="module">
   // Load components as needed
-  if (document.querySelector('button-v1')) {
-    import('ds-one/components/button-v1');
+  if (document.querySelector("button-v1")) {
+    import("ds-one/components/button-v1");
   }
 </script>
 ```
@@ -445,7 +454,7 @@ bun add ds-one
 # Patch release
 bun run release:patch
 
-# Minor release  
+# Minor release
 bun run release:minor
 
 # Major release
@@ -460,9 +469,11 @@ bun run release:beta
 ### Content Security Policy
 
 ```html
-<meta http-equiv="Content-Security-Policy" 
-      content="script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; 
-               style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com;">
+<meta
+  http-equiv="Content-Security-Policy"
+  content="script-src 'self' https://cdn.jsdelivr.net https://unpkg.com; 
+               style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com;"
+/>
 ```
 
 ### Package Integrity
@@ -477,12 +488,12 @@ bun run release:beta
 
 ```javascript
 // Before (local development)
-import './DS1/2-core/button-v1.ts';
-import './DS1/1-root/screen.css';
+import "./DS1/2-core/button-v1.ts";
+import "./DS1/1-root/screen.css";
 
 // After (NPM package)
-import 'ds-one/components/button-v1';
-import 'ds-one/styles';
+import "ds-one/components/button-v1";
+import "ds-one/styles";
 ```
 
 ### Version Updates
@@ -514,7 +525,7 @@ bun outdated ds-one
 window.DS_ONE_DEBUG = true;
 
 // Check component registration
-console.log(customElements.get('button-v1'));
+console.log(customElements.get("button-v1"));
 ```
 
 ## Future Enhancements

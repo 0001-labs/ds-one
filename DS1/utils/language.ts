@@ -55,7 +55,8 @@ const storedLanguage =
 
 // Create a reactive signal for the current language (Portfolio pattern)
 export const currentLanguage = {
-  value: (localStorage.getItem("language") as LanguageCode) || getBrowserLanguage(),
+  value:
+    (localStorage.getItem("language") as LanguageCode) || getBrowserLanguage(),
   set: function (lang: LanguageCode) {
     this.value = lang;
     localStorage.setItem("language", lang);
@@ -64,7 +65,7 @@ export const currentLanguage = {
         detail: { language: lang },
         bubbles: true,
         composed: true,
-      }),
+      })
     );
   },
 };
@@ -192,6 +193,6 @@ export function setLanguage(language: LanguageCode): void {
       detail: { language },
       bubbles: true,
       composed: true,
-    }),
+    })
   );
 }
