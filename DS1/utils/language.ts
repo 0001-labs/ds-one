@@ -1,56 +1,131 @@
 import { signal } from "@lit-labs/signals";
 
-export type LanguageCode = string;
+// Define the supported languages using ISO codes
+export type LanguageCode = "en-US" | "da-DK" | "ja-JP";
 
-type TranslationMap = Record<string, string>;
+// Define the structure of our translation data
+type TranslationData = {
+  [key: string]: string;
+};
 
 type NotionCache = Map<string, string>;
 
-const translationStore = new Map<LanguageCode, TranslationMap>();
 const notionStore = new Map<LanguageCode, NotionCache>();
+const defaultLanguage: LanguageCode = "en-US";
 
-const defaultLanguage: LanguageCode = "en";
+// Helper function to get browser language
+export function getBrowserLanguage(): LanguageCode {
+  if (typeof navigator === "undefined") {
+    return defaultLanguage;
+  }
 
+  const browserLang = navigator.language;
+
+  const supportedLanguages: Record<string, LanguageCode> = {
+    da: "da-DK",
+    ja: "ja-JP",
+    en: "en-US",
+  };
+
+  for (const [prefix, langCode] of Object.entries(supportedLanguages)) {
+    if (browserLang.startsWith(prefix)) {
+      return langCode;
+    }
+  }
+
+  return defaultLanguage;
+}
+
+// Get stored language from localStorage
 const storedLanguage =
   typeof window !== "undefined"
-    ? window.localStorage?.getItem("ds-one:language") ?? undefined
+    ? ((window.localStorage?.getItem(
+        "ds-one:language"
+      ) as LanguageCode | null) ?? undefined)
     : undefined;
 
+// Create a reactive signal for the current language
 export const currentLanguage = signal<LanguageCode>(
-  storedLanguage || defaultLanguage
+  storedLanguage || getBrowserLanguage()
 );
 
-function getLanguageBucket(language: LanguageCode): NotionCache {
-  const normalized = normalizeLanguage(language);
-  if (!notionStore.has(normalized)) {
-    notionStore.set(normalized, new Map());
-  }
-  return notionStore.get(normalized)!;
+// Translation data - will be set from window or imported
+let translationData: Record<LanguageCode, TranslationData> | null = null;
+
+// Check if we can import translations (for bundled versions)
+// In bundled contexts, translations might be directly imported
+// In example contexts, they'll be loaded from window.DS_ONE_TRANSLATIONS
+if (typeof window !== "undefined") {
+  // Try to load from window immediately
+  const checkWindow = () => {
+    const windowTranslations = (window as any).DS_ONE_TRANSLATIONS;
+    if (windowTranslations && typeof windowTranslations === "object") {
+      translationData = windowTranslations as Record<
+        LanguageCode,
+        TranslationData
+      >;
+      console.log(
+        "DS one: Loaded translations from window.DS_ONE_TRANSLATIONS"
+      );
+
+      // Mark as loaded
+      if (!(window as any).notionDataLoaded) {
+        window.dispatchEvent(new CustomEvent("translations-loaded"));
+        (window as any).notionDataLoaded = true;
+      }
+    }
+  };
+
+  // Try immediate load
+  checkWindow();
+
+  // Listen for dynamic loading
+  window.addEventListener("translations-ready", checkWindow);
+
+  // Initialize translations with a slight delay to give components time to set up
+  setTimeout(() => {
+    checkWindow();
+
+    // Dispatch language-changed with current language
+    const currentLang = currentLanguage.get();
+    window.dispatchEvent(
+      new CustomEvent("language-changed", {
+        detail: { language: currentLang },
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }, 100);
 }
 
-function normalizeLanguage(language: LanguageCode): LanguageCode {
-  return language.toLowerCase();
-}
+// Get translation by key
+export function translate(key: string): string {
+  const lang = currentLanguage.get();
 
-export function translate(
-  key: string,
-  language: LanguageCode = currentLanguage.get()
-): string {
-  const normalized = normalizeLanguage(language);
-  const languageTranslations = translationStore.get(normalized);
-
-  if (languageTranslations && key in languageTranslations) {
-    return languageTranslations[key];
+  if (!translationData) {
+    return key;
   }
 
-  const fallbackTranslations = translationStore.get(defaultLanguage);
-  if (fallbackTranslations && key in fallbackTranslations) {
-    return fallbackTranslations[key];
+  // Check if key exists in current language
+  if (translationData[lang]?.[key]) {
+    return translationData[lang][key];
   }
 
+  // Try fallback to English
+  if (lang !== defaultLanguage && translationData[defaultLanguage]?.[key]) {
+    return translationData[defaultLanguage][key];
+  }
+
+  console.warn(`[translate] No translation found for key "${key}"`);
   return key;
 }
 
+// Get text - synchronous version for components
+export function getText(key: string): string {
+  return translate(key);
+}
+
+// Get text from Notion data (async for compatibility)
 export async function getNotionText(
   key: string,
   language: LanguageCode = currentLanguage.get()
@@ -59,104 +134,92 @@ export async function getNotionText(
     return null;
   }
 
-  const bucket = getLanguageBucket(language);
-  return bucket.get(key) ?? null;
+  if (!translationData || !translationData[language]) {
+    return null;
+  }
+
+  const text = translationData[language][key];
+  if (text) {
+    return text;
+  }
+
+  // Fallback to English
+  if (language !== defaultLanguage && translationData[defaultLanguage]?.[key]) {
+    return translationData[defaultLanguage][key];
+  }
+
+  return null;
 }
 
+// Store Notion text (for dynamic updates)
 export function setNotionText(
   key: string,
   value: string,
   language: LanguageCode = currentLanguage.get()
 ): void {
-  if (!key) {
-    return;
-  }
+  if (!key) return;
 
   const bucket = getLanguageBucket(language);
   bucket.set(key, value);
 }
 
-export function getAvailableLanguages(): Promise<LanguageCode[]> {
-  if (translationStore.size === 0) {
-    return Promise.resolve([currentLanguage.get()]);
+function getLanguageBucket(language: LanguageCode): NotionCache {
+  if (!notionStore.has(language)) {
+    notionStore.set(language, new Map());
   }
-
-  return Promise.resolve(Array.from(translationStore.keys()));
+  return notionStore.get(language)!;
 }
 
+// Get available languages
+export function getAvailableLanguages(): Promise<LanguageCode[]> {
+  if (translationData) {
+    return Promise.resolve(Object.keys(translationData) as LanguageCode[]);
+  }
+  return Promise.resolve([defaultLanguage]);
+}
+
+// Load translations programmatically
 export function loadTranslations(
   language: LanguageCode,
-  translations: TranslationMap
+  translations: TranslationData
 ): void {
-  const normalized = normalizeLanguage(language);
-  const existing = translationStore.get(normalized) ?? {};
-  translationStore.set(normalized, { ...existing, ...translations });
+  if (!translationData) {
+    translationData = {} as Record<LanguageCode, TranslationData>;
+  }
+
+  const existing = translationData[language] ?? {};
+  translationData[language] = { ...existing, ...translations };
 
   if (typeof window !== "undefined") {
     window.dispatchEvent(
       new CustomEvent("translations-loaded", {
-        detail: { language: normalized },
+        detail: { language },
       })
     );
   }
 }
 
-// Auto-load translations from window.DS_ONE_TRANSLATIONS if available
-if (typeof window !== "undefined") {
-  const loadFromWindow = () => {
-    const translations = (window as any).DS_ONE_TRANSLATIONS;
-    if (translations && typeof translations === "object") {
-      // Load all languages from the translations object
-      Object.keys(translations).forEach((key) => {
-        const value = translations[key];
-        if (typeof value === "object") {
-          // value is { en: "text", da: "tekst", ja: "テキスト" }
-          Object.keys(value).forEach((lang) => {
-            const langTranslations = translationStore.get(lang) || {};
-            langTranslations[key] = value[lang];
-            translationStore.set(lang, langTranslations);
-          });
-        }
-      });
-      console.log("DS one: Loaded translations from window.DS_ONE_TRANSLATIONS");
-    }
-  };
-
-  // Try to load immediately
-  loadFromWindow();
-
-  // Also listen for when translations are loaded dynamically
-  window.addEventListener("translations-ready", loadFromWindow);
-}
-
+// Set language
 export function setLanguage(language: LanguageCode): void {
-  const normalized = normalizeLanguage(language);
-
-  if (normalized === currentLanguage.get()) {
+  if (language === currentLanguage.get()) {
     return;
   }
 
-  currentLanguage.set(normalized);
+  currentLanguage.set(language);
 
   if (typeof window !== "undefined") {
     try {
-      window.localStorage?.setItem("ds-one:language", normalized);
+      window.localStorage?.setItem("ds-one:language", language);
     } catch (error) {
       console.warn("ds-one: unable to persist language preference", error);
     }
 
     window.dispatchEvent(
       new CustomEvent("language-changed", {
-        detail: { language: normalized },
+        detail: { language },
+        bubbles: true,
+        composed: true,
       })
     );
   }
-}
-
-export function getBrowserLanguage(): LanguageCode {
-  if (typeof navigator !== "undefined" && navigator.language) {
-    return normalizeLanguage(navigator.language.split("-")[0]);
-  }
-
-  return defaultLanguage;
 }

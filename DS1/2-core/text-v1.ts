@@ -1,11 +1,5 @@
 import { LitElement, html, css } from "lit";
-import {
-  getNotionText,
-  translate,
-  currentLanguage,
-} from "../utils/language";
-import type { LanguageCode } from "../utils/language";
-import { getPriceLabel } from "../utils/pricing";
+import { getText } from "../utils/language";
 
 /**
  * A component for displaying text from translations
@@ -21,22 +15,14 @@ export class Text extends LitElement {
       key: { type: String, reflect: true },
       defaultValue: { type: String, reflect: true, attribute: "default-value" },
       fallback: { type: String, reflect: true }, // Kept for backward compatibility
-      type: { type: String, reflect: true },
-      country: { type: String, reflect: true },
-      region: { type: String, reflect: true },
       _text: { type: String, state: true },
-      _loading: { type: Boolean, state: true },
     };
   }
 
   declare key: string;
   declare defaultValue: string;
   declare fallback: string;
-  declare type: string;
-  declare country: string;
-  declare region: string;
   declare _text: string;
-  declare _loading: boolean;
   private boundHandlers: { languageChanged: EventListener };
 
   constructor() {
@@ -44,10 +30,7 @@ export class Text extends LitElement {
     this.key = "";
     this.defaultValue = "";
     this.fallback = "";
-    this.type = "";
-    this.country = "";
     this._text = "";
-    this._loading = true;
 
     // Create bound event handlers for proper cleanup
     this.boundHandlers = {
@@ -105,68 +88,30 @@ export class Text extends LitElement {
 
     if (
       changedProperties.has("key") ||
-      changedProperties.has("defaultValue") ||
-      changedProperties.has("type") ||
-      changedProperties.has("country") ||
-      changedProperties.has("region")
+      changedProperties.has("defaultValue")
     ) {
       this._loadText();
     }
   }
 
-  async _loadText() {
-    this._loading = true;
-    this.requestUpdate();
+  _loadText() {
+    if (!this.key) {
+      this._text = this.defaultValue || this.fallback || "";
+      return;
+    }
 
     try {
-      // Special mode: price label
-      if (this.type === "price") {
-        const lang: LanguageCode = currentLanguage.get();
-        const preferredCountry = this.region || this.country;
-        const label = getPriceLabel({
-          language: lang,
-          country: preferredCountry,
-        });
-        this._text = label;
-        this._loading = false;
-        return;
-      }
-
-      if (!this.key) {
-        this._text = this.defaultValue || this.fallback || "";
-        this._loading = false;
-        return;
-      }
-
-      // First try to get text from Notion
-      const notionText = await getNotionText(this.key);
-      if (notionText) {
-        this._text = notionText;
-        this._loading = false;
-        return;
-      }
-
-      // If no Notion text, try translation
-      const translatedText = translate(this.key);
-      if (translatedText && translatedText !== this.key) {
-        this._text = translatedText;
-      } else {
-        // Fall back to default value or fallback
-        this._text = this.defaultValue || this.fallback || this.key;
-      }
+      const text = getText(this.key);
+      this._text = text || this.defaultValue || this.fallback || this.key;
     } catch (error) {
       console.error("Error loading text for key:", this.key, error);
       this._text = this.defaultValue || this.fallback || this.key;
     }
-
-    this._loading = false;
     this.requestUpdate();
   }
 
   render() {
-    return html`<span class="${this._loading ? "loading" : ""}"
-      >${this._text}</span
-    >`;
+    return html`<span>${this._text || this.defaultValue || this.key}</span>`;
   }
 }
 

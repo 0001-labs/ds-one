@@ -7,8 +7,7 @@ import {
   css,
   type PropertyValues,
 } from "lit";
-import { getText } from "../utils/notionBrowser";
-import { currentLanguage, getNotionText } from "../utils/language";
+import { getText } from "../utils/language";
 
 declare global {
   interface Window {
@@ -58,7 +57,7 @@ export class Button extends LitElement {
     this.notionKey = null;
     this.key = "";
     this.fallback = "";
-    this.language = currentLanguage.get();
+    this.language = "en-US";
     this.defaultText = "";
     this.href = "";
     this._loading = false;
@@ -105,7 +104,7 @@ export class Button extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this._fetchText();
+    this._updateText();
 
     // Listen for language changes
     window.addEventListener("language-changed", this._handleLanguageChange);
@@ -117,58 +116,30 @@ export class Button extends LitElement {
   }
 
   _handleLanguageChange = () => {
-    this._fetchText();
+    this._updateText();
   };
 
   updated(changedProps: PropertyValues) {
     super.updated(changedProps);
 
     if (
-      changedProps.has("notionKey") ||
       changedProps.has("key") ||
-      changedProps.has("language")
+      changedProps.has("defaultText")
     ) {
-      this._fetchText();
+      this._updateText();
     }
   }
 
   /**
-   * Fetch text from Notion CMS
+   * Update text from translations (synchronous like Portfolio)
    */
-  private async _fetchText() {
-    this._loading = true;
-
-    try {
-      // First try using the key attribute (preferred method)
-      if (this.key) {
-        const text = await getNotionText(this.key);
-
-        if (text) {
-          this._notionText = text;
-          this._loading = false;
-          return;
-        }
-      }
-
-      // Fall back to legacy notionKey if key is not provided or text not found
-      if (this.notionKey) {
-        // Fetch text from Notion using the imported getText function
-        const text = await getText(
-          this.notionKey,
-          this.language || currentLanguage.get(),
-          this.defaultText
-        );
-        this._notionText = text;
-      } else {
-        this._notionText = this.fallback || this.defaultText || null;
-      }
-    } catch (error) {
-      console.error("Error fetching text for button:", error);
-      this._notionText = this.fallback || this.defaultText || null;
-    } finally {
-      this._loading = false;
-      (this as any).requestUpdate();
+  private _updateText() {
+    if (this.key) {
+      this._notionText = getText(this.key);
+    } else {
+      this._notionText = this.defaultText || this.fallback || null;
     }
+    this.requestUpdate();
   }
 
   render() {
