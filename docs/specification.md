@@ -136,12 +136,12 @@ ds-one/
 │   │   └── ...
 │   ├── 4-page/              # Page-level components
 │   │   └── app-v1.ts
-│   ├── utils/               # Shared utilities
+│   ├── x-utils/             # Shared utilities
 │   │   ├── language.ts
 │   │   ├── theme.ts
 │   │   ├── notionBrowser.ts
 │   │   └── ...
-│   └── x Icon/              # SVG icon library
+│   └── x-icon/              # SVG icon library
 │       ├── 1x.svg
 │       └── ...
 ├── dist/                    # Built files

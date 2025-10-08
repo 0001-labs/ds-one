@@ -126,8 +126,8 @@ DS one/
 │   ├── 2-core/       # Core components (buttons, text, etc.)
 │   ├── 3-unit/       # Composite components
 │   ├── 4-page/       # Page-level components
-│   ├── utils/        # Shared utilities (language, theme, etc.)
-│   └── x Icon/       # SVG icon library
+│   ├── x-utils/      # Shared utilities (language, theme, etc.)
+│   └── x-icon/       # SVG icon library
 ├── dist/             # Built files for NPM
 ├── examples/         # HTML examples
 └── docs/             # Documentation
