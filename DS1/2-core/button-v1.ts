@@ -1,13 +1,8 @@
 // button-v1.ts
 // Core button component
 
-import {
-  LitElement,
-  html,
-  css,
-  type PropertyValues,
-} from "lit";
-import { getText } from "../utils/language";
+import { LitElement, html, css, type PropertyValues } from "lit";
+import { getText, currentLanguage } from "../utils/language";
 
 declare global {
   interface Window {
@@ -122,10 +117,7 @@ export class Button extends LitElement {
   updated(changedProps: PropertyValues) {
     super.updated(changedProps);
 
-    if (
-      changedProps.has("key") ||
-      changedProps.has("defaultText")
-    ) {
+    if (changedProps.has("key") || changedProps.has("defaultText")) {
       this._updateText();
     }
   }

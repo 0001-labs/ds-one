@@ -86,10 +86,7 @@ export class Text extends LitElement {
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
 
-    if (
-      changedProperties.has("key") ||
-      changedProperties.has("defaultValue")
-    ) {
+    if (changedProperties.has("key") || changedProperties.has("defaultValue")) {
       this._loadText();
     }
   }
