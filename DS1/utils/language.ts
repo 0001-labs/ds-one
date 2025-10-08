@@ -12,7 +12,10 @@ type TranslationData = {
 import translationKeys from "./keys.json";
 
 // Cached translation data - initialize immediately with the imported data
-const translationData = translationKeys as Record<LanguageCode, TranslationData>;
+const translationData = translationKeys as Record<
+  LanguageCode,
+  TranslationData
+>;
 
 type NotionCache = Map<string, string>;
 
@@ -50,12 +53,12 @@ const storedLanguage =
       ) as LanguageCode | null) ?? undefined)
     : undefined;
 
-// Create a reactive signal for the current language
+// Create a reactive signal for the current language (Portfolio pattern)
 export const currentLanguage = {
-  value: (localStorage.getItem("ds-one:language") as LanguageCode) || getBrowserLanguage(),
+  value: (localStorage.getItem("language") as LanguageCode) || getBrowserLanguage(),
   set: function (lang: LanguageCode) {
     this.value = lang;
-    localStorage.setItem("ds-one:language", lang);
+    localStorage.setItem("language", lang);
     window.dispatchEvent(
       new CustomEvent("language-changed", {
         detail: { language: lang },
@@ -81,7 +84,7 @@ setTimeout(() => {
       detail: { language: currentLang },
       bubbles: true,
       composed: true,
-    }),
+    })
   );
 }, 100);
 
@@ -167,13 +170,17 @@ export function loadTranslations(
   translations: TranslationData
 ): void {
   // Since we have static data, this is mainly for compatibility
-  console.log(`Loading additional translations for ${language}:`, Object.keys(translations).length, 'keys');
+  console.log(
+    `Loading additional translations for ${language}:`,
+    Object.keys(translations).length,
+    "keys"
+  );
 }
 
-// Set language
+// Set language (Portfolio pattern)
 export function setLanguage(language: LanguageCode): void {
   // Update the language in localStorage first
-  localStorage.setItem("ds-one:language", language);
+  localStorage.setItem("language", language);
 
   // Then update the signal - this should trigger effects in components
   // that are subscribed to the signal

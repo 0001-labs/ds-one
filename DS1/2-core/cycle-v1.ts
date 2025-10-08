@@ -148,18 +148,10 @@ export class Cycle extends LitElement {
     this.initializeValues();
   }
 
-  async initializeValues() {
-    // Wait for translations to be ready
-    await this.waitForTranslations();
-
+  initializeValues() {
     if (this.type === "language") {
-      // Get available languages and set up language cycling
-      const availableLanguages = await getAvailableLanguages();
-      this.values = availableLanguages;
-
-      // Set initial value based on current language
-      const currentLang = currentLanguage.get();
-      this.currentValue = currentLang;
+      this.values = ["en-US", "ja-JP", "da-DK"];
+      this.currentValue = currentLanguage.value;
 
       // Set label
       this.label = this.getLabel();
@@ -360,8 +352,14 @@ export class Cycle extends LitElement {
       // Update current value
       this.currentValue = newLanguage;
 
-      // Set the new language
-      setLanguage(newLanguage as LanguageCode);
+      // Set the new language with view transition like Portfolio
+      if ((document as any).startViewTransition) {
+        (document as any).startViewTransition(() => {
+          setLanguage(newLanguage as LanguageCode);
+        });
+      } else {
+        setLanguage(newLanguage as LanguageCode);
+      }
 
       // Save settings
       saveSettings({ language: newLanguage as LanguageCode });
@@ -489,16 +487,27 @@ export class Cycle extends LitElement {
 
   getValueDisplay(value: string): string | any {
     if (this.type === "language") {
-      // Try to get translated language name
-      if (this.translationsReady) {
-        const translatedName = translate(`languages.${value}`);
-        if (translatedName && translatedName !== `languages.${value}`) {
-          return translatedName;
-        }
-      }
+      const lang = currentLanguage.value;
 
-      // Fall back to the language code itself
-      return value;
+      const languageNames: Record<string, Record<string, string>> = {
+        "en-US": {
+          "en-US": "English",
+          "da-DK": "Danish",
+          "ja-JP": "Japanese",
+        },
+        "da-DK": {
+          "en-US": "Engelsk",
+          "da-DK": "Dansk",
+          "ja-JP": "Japansk",
+        },
+        "ja-JP": {
+          "en-US": "英語",
+          "da-DK": "デンマーク語",
+          "ja-JP": "日本語",
+        },
+      };
+
+      return languageNames[lang]?.[value] || value.split("-")[0];
     } else if (this.type === "theme") {
       // Try to get translated theme name
       if (this.translationsReady) {
