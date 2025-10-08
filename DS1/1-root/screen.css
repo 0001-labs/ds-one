@@ -110,8 +110,7 @@ html {
 
 @font-face {
   font-family: GT-America-Standard-Regular;
-  src: url("./fonts/GT-America-Standard-Regular.woff2")
-    format("woff2");
+  src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
@@ -234,8 +233,8 @@ body.mobile {
   height: var(--item-height);
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
-  outline: calc(var(--outline-stroke) * var(--scaling-factor)) solid
-      var(--black),
+  outline:
+    calc(var(--outline-stroke) * var(--scaling-factor)) solid var(--black),
     var(--white);
 }
 
@@ -246,8 +245,8 @@ body.mobile {
   width: var(--item-width);
   height: var(--item-height);
   margin-right: var(--margin-correction);
-  outline: calc(var(--outline-stroke) * var(--scaling-factor)) solid
-      var(--black),
+  outline:
+    calc(var(--outline-stroke) * var(--scaling-factor)) solid var(--black),
     var(--white);
 }
 
