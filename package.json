@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.7-beta",
+  "version": "0.1.7",
   "description": "a plug and play design system built with TypeScript and Lit",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
