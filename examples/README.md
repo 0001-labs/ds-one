@@ -81,7 +81,7 @@ bun add ds-one@beta
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="node_modules/ds-one/DS/1 Root/screen.css" />
+    <link rel="stylesheet" href="node_modules/ds-one/DS1/1-root/screen.css" />
     <script type="module" src="node_modules/ds-one/dist/index.esm.js"></script>
   </head>
   <body>
@@ -98,7 +98,7 @@ bun add ds-one@beta
   <head>
     <link 
       rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/DS/1%20Root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/DS1/1-root/screen.css"
     />
     <script type="module">
       import 'https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.esm.js';

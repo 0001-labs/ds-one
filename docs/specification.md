@@ -117,34 +117,39 @@ yarn add ds-one
 
 ```
 ds-one/
+├── DS1/                     # Source files
+│   ├── 0-face/              # Device and language detection
+│   │   ├── 2025-04-23-device.ts
+│   │   └── 2025-04-23-language.ts
+│   ├── 1-root/              # Core styles and fonts
+│   │   ├── screen.css
+│   │   ├── dev.css
+│   │   └── fonts/
+│   ├── 2-core/              # Core components
+│   │   ├── button-v1.ts
+│   │   ├── text-v1.ts
+│   │   ├── app-v1.ts
+│   │   └── ...
+│   ├── 3-unit/              # Composite components
+│   │   ├── list-v1.ts
+│   │   ├── panel-v1.ts
+│   │   └── ...
+│   ├── 4-page/              # Page-level components
+│   │   └── app-v1.ts
+│   ├── utils/               # Shared utilities
+│   │   ├── language.ts
+│   │   ├── theme.ts
+│   │   ├── notionBrowser.ts
+│   │   └── ...
+│   └── x Icon/              # SVG icon library
+│       ├── 1x.svg
+│       └── ...
 ├── dist/                    # Built files
-│   ├── index.js            # CommonJS build
-│   ├── index.esm.js        # ES Module build
-│   ├── index.umd.js        # UMD build
-│   ├── index.d.ts          # TypeScript definitions
-│   └── components/         # Individual component builds
-│       ├── button-v1.js
-│       ├── text-v1.js
-│       └── app-v1.js
-├── 1 Root/                 # Core styles and fonts
-│   ├── screen.css
-│   ├── dev.css
-│   └── fonts/
-├── 2 Core/                 # Core components
-│   ├── button-v1.ts
-│   ├── text-v1.ts
-│   ├── app-v1.ts
-│   └── ...
-├── 3 Unit/                 # Composite components
-│   ├── list-v1.ts
-│   ├── panel-v1.ts
-│   └── ...
-├── 4 Page/                 # Page-level components
-│   └── app-v1.ts
-├── x Icon/                 # SVG icon library
-│   ├── 1x.svg
-│   ├── 2x.svg
-│   └── ...
+│   ├── index.js             # CommonJS build
+│   ├── index.esm.js         # ES Module build
+│   └── index.d.ts           # TypeScript definitions
+├── examples/                # HTML examples
+├── docs/                    # Documentation
 ├── package.json
 ├── README.md
 └── LICENSE
@@ -172,9 +177,9 @@ ds-one/
     "useDefineForClassFields": false
   },
   "include": [
-    "2 Core/**/*",
-    "3 Unit/**/*",
-    "4 Page/**/*"
+    "DS1/2-core/**/*",
+    "DS1/3-unit/**/*",
+    "DS1/4-page/**/*"
   ],
   "exclude": [
     "node_modules",
@@ -192,9 +197,9 @@ ds-one/
     "build": "bun run build:types && bun run build:components",
     "build:types": "tsc --noEmit",
     "build:components": "bun run build:core && bun run build:units && bun run build:pages",
-    "build:core": "bun run build:component -- 2 Core",
-    "build:units": "bun run build:component -- 3 Unit", 
-    "build:pages": "bun run build:component -- 4 Page",
+    "build:core": "bun run build:component -- DS1/2-core",
+    "build:units": "bun run build:component -- DS1/3-unit", 
+    "build:pages": "bun run build:component -- DS1/4-page",
     "build:component": "bun run scripts/build-component.ts",
     "prepublishOnly": "bun run build",
     "dev": "bun run --bun serve",
@@ -472,8 +477,8 @@ bun run release:beta
 
 ```javascript
 // Before (local development)
-import './2 Core/button-v1.ts';
-import './1 Root/screen.css';
+import './DS1/2-core/button-v1.ts';
+import './DS1/1-root/screen.css';
 
 // After (NPM package)
 import 'ds-one/components/button-v1';

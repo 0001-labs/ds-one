@@ -8,7 +8,7 @@
   "type": "module",
   "files": [
     "dist/",
-    "DS/",
+    "DS1/",
     "README.md",
     "LICENSE"
   ],
@@ -18,11 +18,11 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./DS/1 Root/screen.css",
-    "./components/*": "./DS/2 Core/*.js",
-    "./units/*": "./DS/3 Unit/*.js",
-    "./pages/*": "./DS/4 Page/*.js",
-    "./icons/*": "./DS/x Icon/*.svg"
+    "./styles": "./DS1/1-root/screen.css",
+    "./components/*": "./DS1/2-core/*.js",
+    "./units/*": "./DS1/3-unit/*.js",
+    "./pages/*": "./DS1/4-page/*.js",
+    "./icons/*": "./DS1/x Icon/*.svg"
   },
   "sideEffects": false,
   "scripts": {
@@ -31,7 +31,7 @@
     "build:types": "tsc --noEmit",
     "build:components": "bun run build:core && bun run build:units && bun run build:pages",
     "build:core": "bun run build:component -- 2 Core",
-    "build:units": "bun run build:component -- 3 Unit", 
+    "build:units": "bun run build:component -- 3 Unit",
     "build:pages": "bun run build:component -- 4 Page",
     "build:component": "bun run scripts/build-component.ts",
     "prepublishOnly": "echo 'Skipping build - using source files directly'",

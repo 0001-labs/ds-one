@@ -120,12 +120,17 @@ Try DS one in your browser: **[ds-one.dev/demo](https://ds-one.dev/demo)**
 
 ```
 DS one/
-├── 0 Face/           # Device and language detection
-├── 1 Root/           # Core styles, fonts, and design tokens
-├── 2 Core/           # Core components (buttons, text, etc.)
-├── 3 Unit/           # Composite components
-├── 4 Page/           # Page-level components
-└── x Icon/           # SVG icon library
+├── DS1/
+│   ├── 0-face/       # Device and language detection
+│   ├── 1-root/       # Core styles, fonts, and design tokens
+│   ├── 2-core/       # Core components (buttons, text, etc.)
+│   ├── 3-unit/       # Composite components
+│   ├── 4-page/       # Page-level components
+│   ├── utils/        # Shared utilities (language, theme, etc.)
+│   └── x Icon/       # SVG icon library
+├── dist/             # Built files for NPM
+├── examples/         # HTML examples
+└── docs/             # Documentation
 ```
 
 ## Roadmap
