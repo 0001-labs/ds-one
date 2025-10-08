@@ -6,12 +6,9 @@ import {
   html,
   css,
   type PropertyValues,
-} from "../../Ezo/Web/node_modules/lit/index.js";
-import { getText } from "../../Ezo/Web/client/language/notionBrowser";
-import {
-  currentLanguage,
-  getNotionText,
-} from "../../Ezo/Web/client/language/languageUtils";
+} from "lit";
+import { getText } from "../utils/notionBrowser";
+import { currentLanguage, getNotionText } from "../utils/language";
 
 declare global {
   interface Window {
@@ -61,7 +58,7 @@ export class Button extends LitElement {
     this.notionKey = null;
     this.key = "";
     this.fallback = "";
-    this.language = "en";
+    this.language = currentLanguage.get();
     this.defaultText = "";
     this.href = "";
     this._loading = false;
@@ -158,7 +155,7 @@ export class Button extends LitElement {
         // Fetch text from Notion using the imported getText function
         const text = await getText(
           this.notionKey,
-          this.language,
+          this.language || currentLanguage.get(),
           this.defaultText
         );
         this._notionText = text;

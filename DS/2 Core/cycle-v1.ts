@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 import {
   translate,
   currentLanguage,
@@ -6,12 +6,11 @@ import {
   loadTranslations,
   getAvailableLanguages,
   setLanguage,
-} from "../../Ezo/Web/client/language/languageUtils";
-import type { LanguageCode } from "../../Ezo/Web/client/language/languageUtils";
-import { currentTheme } from "../../Ezo/Web/client/utilities/themeUtils";
-import type { ThemeType } from "../../Ezo/Web/client/utilities/themeUtils";
-import { saveSettings } from "../../Ezo/Web/client/utilities/settingsUtils";
-import "../../Ezo/Web/client/utilities/userUtils";
+} from "../utils/language";
+import type { LanguageCode } from "../utils/language";
+import { currentTheme, setTheme } from "../utils/theme";
+import type { ThemeType } from "../utils/theme";
+import { saveSettings } from "../utils/settings";
 import "./button-v1";
 import "./icon-v1";
 
@@ -382,22 +381,13 @@ export class Cycle extends LitElement {
       // Update current value
       this.currentValue = newTheme;
 
-      // Set the new theme
-      localStorage.setItem("theme", newTheme);
-
-      // Update document classes
-      document.documentElement.classList.remove("light-theme", "dark-theme");
-      document.documentElement.classList.add(`${newTheme}-theme`);
+      // Set the new theme using the shared helper
+      setTheme(newTheme as ThemeType);
 
       // Save settings
       saveSettings({ theme: newTheme as ThemeType });
 
-      // Dispatch theme change event
-      window.dispatchEvent(
-        new CustomEvent("theme-changed", {
-          detail: { theme: newTheme },
-        })
-      );
+      // Theme helper already emits the change event, so no manual dispatch here
     } else if (this.type === "accent-color") {
       // Cycle through accent colors
       const currentIndex = this.values.indexOf(this.currentValue);

@@ -1,8 +1,5 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
-import {
-  translate,
-  getNotionText,
-} from "../../Ezo/Web/client/language/languageUtils";
+import { LitElement, html, css } from "lit";
+import { translate, getNotionText } from "../utils/language";
 
 export class Tooltip extends LitElement {
   static properties = {

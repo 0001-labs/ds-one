@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 
 // Home tab button that reveals on hover (active) or stays visible and non-interactive (disabled)
 export class Home extends LitElement {

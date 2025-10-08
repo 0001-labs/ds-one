@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 
 customElements.define('markdown-v1', class Markdown extends LitElement {
   static properties = {
