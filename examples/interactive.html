@@ -6,10 +6,15 @@
     <title>DS one - Interactive Example</title>
 
     <!-- Import DS one styles -->
-    <link rel="stylesheet" href="../DS1/1-root/screen.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.4-beta/DS1/1-root/screen.css"
+    />
 
-    <!-- Import DS one bundled components -->
-    <script type="module" src="../dist/ds-one.bundle.js"></script>
+    <script type="module">
+      // Import bundled version from CDN (includes all dependencies)
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.4-beta/dist/ds-one.bundle.min.js";
+    </script>
   </head>
   <body>
     <app-v1 type="default">
