@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { translate, getNotionText } from "../x-utils/language";
+import { translate, getNotionText } from "../utils/language";
 
 export class Tooltip extends LitElement {
   static properties = {

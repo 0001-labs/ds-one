@@ -3,9 +3,9 @@ import {
   getNotionText,
   translate,
   currentLanguage,
-} from "../x-utils/language";
-import type { LanguageCode } from "../x-utils/language";
-import { getPriceLabel } from "../x-utils/pricing";
+} from "../utils/language";
+import type { LanguageCode } from "../utils/language";
+import { getPriceLabel } from "../utils/pricing";
 
 /**
  * A component for displaying text from translations

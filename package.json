@@ -22,8 +22,8 @@
     "./components/*": "./DS1/2-core/*.js",
     "./units/*": "./DS1/3-unit/*.js",
     "./pages/*": "./DS1/4-page/*.js",
-    "./icons/*": "./DS1/x-icon/*.svg",
-    "./utils/*": "./DS1/x-utils/*.js"
+    "./icons/*": "./DS1/x Icon/*.svg",
+    "./utils/*": "./DS1/utils/*.js"
   },
   "sideEffects": [
     "DS1/**/*.ts",

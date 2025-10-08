@@ -1,25 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DS one - Basic Example</title>
-    
+
     <!-- Import DS one styles -->
     <link rel="stylesheet" href="../DS1/1-root/screen.css" />
-    
-    <!-- Import DS one components -->
-    <script type="module" src="../DS1/2-core/app-v1.ts"></script>
-    <script type="module" src="../DS1/2-core/button-v1.ts"></script>
-    <script type="module" src="../DS1/2-core/text-v1.ts"></script>
+
+    <!-- Import DS one bundled components -->
+    <script type="module" src="../dist/ds-one.bundle.js"></script>
   </head>
   <body>
     <app-v1 type="default">
       <text-v1 variant="heading">Welcome to DS one</text-v1>
-      <text-v1 variant="body">A modern design system built with web components</text-v1>
+      <text-v1 variant="body"
+        >A modern design system built with web components</text-v1
+      >
       <button-v1 variant="primary">Get Started</button-v1>
       <button-v1 variant="secondary">Learn More</button-v1>
     </app-v1>
   </body>
 </html>
-

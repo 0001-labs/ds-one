@@ -1,48 +1,54 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DS one - Interactive Example</title>
-    
+
     <!-- Import DS one styles -->
     <link rel="stylesheet" href="../DS1/1-root/screen.css" />
-    
-    <!-- Import DS one components -->
-    <script type="module" src="../DS1/2-core/app-v1.ts"></script>
-    <script type="module" src="../DS1/2-core/button-v1.ts"></script>
-    <script type="module" src="../DS1/2-core/text-v1.ts"></script>
-    <script type="module" src="../DS1/2-core/cycle-v1.ts"></script>
+
+    <!-- Import DS one bundled components -->
+    <script type="module" src="../dist/ds-one.bundle.js"></script>
   </head>
   <body>
     <app-v1 type="default">
       <text-v1 variant="heading">Interactive Demo</text-v1>
       <text-v1 variant="body">Click the buttons to see interactions</text-v1>
-      
-      <div style="margin-top: 20px; display: flex; gap: 10px; flex-direction: column;">
+
+      <div
+        style="
+          margin-top: 20px;
+          display: flex;
+          gap: 10px;
+          flex-direction: column;
+        "
+      >
         <button-v1 variant="primary" onclick="alert('Primary button clicked!')">
           Primary Action
         </button-v1>
-        
-        <button-v1 variant="secondary" onclick="alert('Secondary button clicked!')">
+
+        <button-v1
+          variant="secondary"
+          onclick="alert('Secondary button clicked!')"
+        >
           Secondary Action
         </button-v1>
-        
+
         <button-v1 variant="title" onclick="alert('Title button clicked!')">
           Title Button
         </button-v1>
       </div>
-      
-      <div style="margin-top: 40px;">
+
+      <div style="margin-top: 40px">
         <text-v1 variant="body">Choose your accent color:</text-v1>
         <cycle-v1 type="accent-color"></cycle-v1>
       </div>
-      
-      <div style="margin-top: 20px;">
+
+      <div style="margin-top: 20px">
         <text-v1 variant="body">Select language:</text-v1>
         <cycle-v1 type="language"></cycle-v1>
       </div>
     </app-v1>
   </body>
 </html>
-

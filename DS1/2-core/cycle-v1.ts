@@ -6,11 +6,11 @@ import {
   loadTranslations,
   getAvailableLanguages,
   setLanguage,
-} from "../x-utils/language";
-import type { LanguageCode } from "../x-utils/language";
-import { currentTheme, setTheme } from "../x-utils/theme";
-import type { ThemeType } from "../x-utils/theme";
-import { saveSettings } from "../x-utils/settings";
+} from "../utils/language";
+import type { LanguageCode } from "../utils/language";
+import { currentTheme, setTheme } from "../utils/theme";
+import type { ThemeType } from "../utils/theme";
+import { saveSettings } from "../utils/settings";
 import "./button-v1";
 import "./icon-v1";
 

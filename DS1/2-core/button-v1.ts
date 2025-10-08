@@ -7,8 +7,8 @@ import {
   css,
   type PropertyValues,
 } from "lit";
-import { getText } from "../x-utils/notionBrowser";
-import { currentLanguage, getNotionText } from "../x-utils/language";
+import { getText } from "../utils/notionBrowser";
+import { currentLanguage, getNotionText } from "../utils/language";
 
 declare global {
   interface Window {
