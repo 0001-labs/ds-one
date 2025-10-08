@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.4-beta",
+  "version": "0.1.5-beta",
   "description": "A modern, component-based design system built with TypeScript and LitElement",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
