@@ -1,7 +1,7 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
-import { currentLanguage } from "../../Ezo/Web/client/language/languageUtils";
-import type { LanguageCode } from "../../Ezo/Web/client/language/languageUtils";
-import { getPriceLabel } from "../../Ezo/Web/src/pricing";
+import { LitElement, html, css } from "lit";
+import { currentLanguage } from "../utils/language";
+import type { LanguageCode } from "../utils/language";
+import { getPriceLabel } from "../utils/pricing";
 
 /**
  * A component for displaying the monthly price label based on language/region

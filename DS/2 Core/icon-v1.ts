@@ -1,6 +1,5 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
-import { unsafeHTML } from "../../Ezo/Web/node_modules/lit/directives/unsafe-html.js";
-import type { PropertyValues } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css, type PropertyValues } from "lit";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 export class Icon extends LitElement {
   static properties = {

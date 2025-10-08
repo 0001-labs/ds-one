@@ -1,6 +1,6 @@
 // /Users/joachim/Library/Mobile Documents/com~apple~CloudDocs/Design system/3 Unit/panel-v1.ts
 
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 
 export class Panel extends LitElement {
   static styles = css`

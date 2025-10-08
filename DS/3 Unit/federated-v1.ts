@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 
 export class Federated extends LitElement {
   static styles = css`

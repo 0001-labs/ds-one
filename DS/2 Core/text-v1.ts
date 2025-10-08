@@ -1,16 +1,11 @@
-import { LitElement, html, css } from "../../Ezo/Web/node_modules/lit/index.js";
+import { LitElement, html, css } from "lit";
 import {
   getNotionText,
   translate,
   currentLanguage,
-} from "../../Ezo/Web/client/language/languageUtils";
-import type { LanguageCode } from "../../Ezo/Web/client/language/languageUtils";
-import {
-  Directive,
-  directive,
-} from "../../Ezo/Web/node_modules/lit/directive.js";
-import { signal } from "../../Ezo/Web/node_modules/@lit-labs/signals/index.js";
-import { getPriceLabel } from "../../Ezo/Web/src/pricing";
+} from "../utils/language";
+import type { LanguageCode } from "../utils/language";
+import { getPriceLabel } from "../utils/pricing";
 
 /**
  * A component for displaying text from translations
