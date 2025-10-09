@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DS one - Portfolio Components Test</title>
+
+    <!-- Load DS one styles -->
+    <link rel="stylesheet" href="../DS1/1-root/screen.css" />
+
+    <!-- Load translations -->
+    <script type="module" src="./load-translations.js"></script>
+
+    <!-- Load DS one bundled components -->
+    <script type="module" src="../dist/ds-one.bundle.js"></script>
+
+    <style>
+      body {
+        padding: 40px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid var(--slate-light);
+        border-radius: 4px;
+      }
+
+      h3 {
+        margin-top: 0;
+        font-family: var(--typeface);
+      }
+    </style>
+  </head>
+  <body>
+    <app-v1>
+      <h1>DS one - Migrated Portfolio Components</h1>
+
+      <div class="section">
+        <h3>1. Year Component</h3>
+        <p>Current year: <year-v1></year-v1></p>
+      </div>
+
+      <div class="section">
+        <h3>2. Link Component</h3>
+        <p>External link: <link-v1 href="https://github.com"></link-v1></p>
+      </div>
+
+      <div class="section">
+        <h3>3. Title Component</h3>
+        <title-v1 key="welcomeHeading"></title-v1>
+      </div>
+
+      <div class="section">
+        <h3>4. Header Component</h3>
+        <header-v1>
+          <text-v1 key="welcomeBody"></text-v1>
+        </header-v1>
+      </div>
+
+      <div class="section">
+        <h3>5. Attributes Component</h3>
+        <attributes-v1
+          type="project"
+          year="year2025"
+          category="categorySoftware"
+          status="statusOngoing"
+        >
+        </attributes-v1>
+      </div>
+
+      <div class="section">
+        <h3>6. Navigation Components</h3>
+        <singlenav-v1 type="projects"></singlenav-v1>
+        <br /><br />
+        <doublenav-v1
+          previous="/prev"
+          next="/next"
+          previous-text="Previous"
+          next-text="Next"
+        >
+        </doublenav-v1>
+      </div>
+
+      <div class="section">
+        <h3>7. Download CV Component</h3>
+        <downloadcv-v1
+          url-en="https://example.com/cv-en.pdf"
+          url-da="https://example.com/cv-da.pdf"
+          url-ja="https://example.com/cv-ja.pdf"
+          filename="test-cv"
+        >
+        </downloadcv-v1>
+      </div>
+
+      <div class="section">
+        <h3>8. Icons</h3>
+        <p>
+          <icon-v1 type="open"></icon-v1>
+          <icon-v1 type="left"></icon-v1>
+          <icon-v1 type="right"></icon-v1>
+          <icon-v1 type="expand"></icon-v1>
+          <icon-v1 type="email"></icon-v1>
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>9. Language Switcher</h3>
+        <cycle-v1 type="language"></cycle-v1>
+      </div>
+    </app-v1>
+  </body>
+</html>

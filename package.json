@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "a plug and play design system built with TypeScript and Lit",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -18,19 +18,16 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
     },
+    "./DS1/*": "./DS1/*",
     "./styles": "./DS1/1-root/screen.css",
-    "./components/*": "./DS1/2-core/*.js",
-    "./units/*": "./DS1/3-unit/*.js",
-    "./pages/*": "./DS1/4-page/*.js",
-    "./icons/*": "./DS1/x Icon/*.svg",
-    "./utils/*": "./DS1/utils/*.js"
+    "./dist/*": "./dist/*"
   },
   "sideEffects": [
     "DS1/**/*.ts",
     "dist/*.js"
   ],
   "scripts": {
-    "dev": "bun run --bun serve",
+    "dev": "bun run server.ts",
     "build": "bun run build:bundle",
     "build:bundle": "bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
     "build:types": "tsc --noEmit",
@@ -43,7 +40,6 @@
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
     "test": "bun test",
-    "serve": "bun run --bun serve -p 3000",
     "release:patch": "bun run scripts/release.js patch",
     "release:minor": "bun run scripts/release.js minor",
     "release:major": "bun run scripts/release.js major",

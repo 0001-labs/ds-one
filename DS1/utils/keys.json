@@ -15,7 +15,19 @@
     "selectLanguage": "Select language:",
     "cdnHeading": "DS one from CDN",
     "cdnDescription": "This example loads DS one directly from jsDelivr CDN",
-    "goToNextPage": "Go to next page"
+    "goToNextPage": "Go to next page",
+    "link": "Link",
+    "projects": "Projects",
+    "workExperience": "Work experience",
+    "downloadCV": "Download CV",
+    "year2025": "2025",
+    "categorySoftware": "Software",
+    "statusOngoing": "Ongoing",
+    "statusDone": "Done",
+    "statusPending": "Pending",
+    "statusNotStarted": "Not started",
+    "hideImage": "Hide image",
+    "viewImage": "View image"
   },
   "da-DK": {
     "welcomeHeading": "Velkommen til DS one",
@@ -33,7 +45,19 @@
     "selectLanguage": "Vælg sprog:",
     "cdnHeading": "DS one fra CDN",
     "cdnDescription": "Dette eksempel indlæser DS one direkte fra jsDelivr CDN",
-    "goToNextPage": "Gå til næste side"
+    "goToNextPage": "Gå til næste side",
+    "link": "Link",
+    "projects": "Projekter",
+    "workExperience": "Erfaring",
+    "downloadCV": "Hent CV",
+    "year2025": "2025",
+    "categorySoftware": "Software",
+    "statusOngoing": "I gang",
+    "statusDone": "Færdig",
+    "statusPending": "Afventer",
+    "statusNotStarted": "Ikke begyndt",
+    "hideImage": "Skjul billede",
+    "viewImage": "Vis billede"
   },
   "ja-JP": {
     "welcomeHeading": "DS oneへようこそ",
@@ -51,6 +75,18 @@
     "selectLanguage": "言語を選択：",
     "cdnHeading": "CDNからのDS one",
     "cdnDescription": "この例はDS oneをjsDelivr CDNから直接読み込みます",
-    "goToNextPage": "次のページへ"
+    "goToNextPage": "次のページへ",
+    "link": "リンク",
+    "projects": "プロジェクト",
+    "workExperience": "職務経験",
+    "downloadCV": "履歴書DL",
+    "year2025": "2025年",
+    "categorySoftware": "ソフトウェア",
+    "statusOngoing": "進行中",
+    "statusDone": "完了",
+    "statusPending": "保留中",
+    "statusNotStarted": "未開始",
+    "hideImage": "画像を非表示",
+    "viewImage": "画像を表示"
   }
 }
