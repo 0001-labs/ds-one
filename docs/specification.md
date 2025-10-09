@@ -532,6 +532,7 @@ console.log(customElements.get("button-v1"));
 
 ### Planned Features
 
+- [ ] Starlight documentation site with component, theming, and integration guides
 - [ ] ESM-only package for smaller bundle size
 - [ ] Individual component packages (`@ds-one/button`, `@ds-one/text`)
 - [ ] Framework-specific wrappers (React, Vue, Angular)

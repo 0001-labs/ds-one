@@ -108,6 +108,7 @@ Try DS one in your browser: **[ds-one.dev/demo](https://ds-one.dev/demo)**
 - Enhanced theming documentation
 - Component testing suite
 - Storybook integration
+- Starlight documentation site with component and theming guides
 
 ### Planned (0.2.0+)
 
