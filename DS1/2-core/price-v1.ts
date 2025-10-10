@@ -83,7 +83,7 @@ export class Price extends LitElement {
 
   private _loadPrice() {
     this._loading = true;
-    const lang: LanguageCode = currentLanguage.get();
+    const lang: LanguageCode = currentLanguage.value;
     const preferredCountry = this.region || this.country;
     const label = getPriceLabel({ language: lang, country: preferredCountry });
     this._label = label;

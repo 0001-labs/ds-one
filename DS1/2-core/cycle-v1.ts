@@ -2,9 +2,8 @@ import { LitElement, html, css } from "lit";
 import {
   translate,
   currentLanguage,
-  getBrowserLanguage,
-  loadTranslations,
-  getAvailableLanguages,
+  getAvailableLanguagesSync,
+  getLanguageDisplayName,
   setLanguage,
 } from "../utils/language";
 import type { LanguageCode } from "../utils/language";
@@ -148,9 +147,11 @@ export class Cycle extends LitElement {
     this.initializeValues();
   }
 
-  initializeValues() {
+  async initializeValues() {
     if (this.type === "language") {
-      this.values = ["en-US", "ja-JP", "da-DK"];
+      // Dynamically get available languages from translation data
+      const availableLanguages = getAvailableLanguagesSync();
+      this.values = availableLanguages;
       this.currentValue = currentLanguage.value;
 
       // Set label
@@ -251,7 +252,7 @@ export class Cycle extends LitElement {
   async setupInitialValue() {
     if (this.type === "language") {
       // Get current language
-      const currentLang = currentLanguage.get();
+      const currentLang = currentLanguage.value;
       this.currentValue = currentLang;
 
       // Update label
@@ -487,27 +488,9 @@ export class Cycle extends LitElement {
 
   getValueDisplay(value: string): string | any {
     if (this.type === "language") {
-      const lang = currentLanguage.value;
-
-      const languageNames: Record<string, Record<string, string>> = {
-        "en-US": {
-          "en-US": "English",
-          "da-DK": "Danish",
-          "ja-JP": "Japanese",
-        },
-        "da-DK": {
-          "en-US": "Engelsk",
-          "da-DK": "Dansk",
-          "ja-JP": "Japansk",
-        },
-        "ja-JP": {
-          "en-US": "英語",
-          "da-DK": "デンマーク語",
-          "ja-JP": "日本語",
-        },
-      };
-
-      return languageNames[lang]?.[value] || value.split("-")[0];
+      return getLanguageDisplayName(value, {
+        locale: currentLanguage.value,
+      });
     } else if (this.type === "theme") {
       // Try to get translated theme name
       if (this.translationsReady) {
@@ -716,6 +699,13 @@ export class Cycle extends LitElement {
 
   private handleTranslationsLoaded() {
     this.translationsReady = true;
+
+    // Refresh language values if this is a language cycle
+    if (this.type === "language") {
+      const availableLanguages = getAvailableLanguagesSync();
+      this.values = availableLanguages;
+    }
+
     this.setupInitialValue();
   }
 

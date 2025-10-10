@@ -6,19 +6,22 @@
     <title>DS one - Interactive Example</title>
 
     <!-- Import DS one styles -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.5-beta/DS1/1-root/screen.css"
-    />
+    <link rel="stylesheet" href="/1-root/screen.css" />
 
-    <script type="module">
-      // Import bundled version from CDN (includes all dependencies)
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.5-beta/dist/ds-one.bundle.min.js";
-    </script>
+    <!-- Import DS one components directly for development -->
+    <script type="module" src="./example-project/registry.ts"></script>
     <script type="module" src="./load-translations.js"></script>
   </head>
   <body>
-    <div class="layout-grid" style="width: 100%; height: 100%"></div>
+    <ds-grid
+      visible="true"
+      style="width: 100%; height: 300px"
+      columns="34"
+      rows="300"
+      cell-width="60"
+      cell-height="20"
+      gap="0"
+    ></ds-grid>
     <app-v1 type="default">
       <text-v1 variant="heading" key="interactiveHeading"></text-v1>
       <text-v1 variant="body" key="clickButtons"></text-v1>

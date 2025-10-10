@@ -1,44 +1,55 @@
-// View mode state management utility
+// viewMode.ts
+// View mode utilities for managing text/image view states
+
 export type ViewMode = "text" | "image";
 
-const VIEW_KEY = "view";
+const VIEW_MODE_KEY = "ds-view-mode";
+const DEFAULT_VIEW_MODE: ViewMode = "text";
 
-// Reactive-ish holder, mirrors language pattern
-export const currentViewMode = {
-  value: ((): ViewMode => {
-    try {
-      const saved = localStorage.getItem(VIEW_KEY);
-      return saved === "image" ? "image" : "text";
-    } catch (_e) {
-      return "text";
-    }
-  })(),
-  set(mode: ViewMode) {
-    this.value = mode;
-    try {
-      localStorage.setItem(VIEW_KEY, mode);
-    } catch (_e) {
-      /* no-op */
-    }
+/**
+ * Get the current view mode from localStorage or return default
+ */
+export function getViewMode(): ViewMode {
+  if (typeof window === "undefined") {
+    return DEFAULT_VIEW_MODE;
+  }
+
+  try {
+    const stored = localStorage.getItem(VIEW_MODE_KEY);
+    return stored === "image" || stored === "text" ? stored : DEFAULT_VIEW_MODE;
+  } catch {
+    return DEFAULT_VIEW_MODE;
+  }
+}
+
+/**
+ * Set the view mode in localStorage and dispatch change event
+ */
+export function setViewMode(mode: ViewMode): void {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  try {
+    localStorage.setItem(VIEW_MODE_KEY, mode);
+
+    // Dispatch custom event for components to listen to
     window.dispatchEvent(
       new CustomEvent("view-mode-changed", {
         detail: mode,
-        bubbles: true,
-        composed: true,
       })
     );
-  },
-};
-
-export function getViewMode(): ViewMode {
-  return currentViewMode.value;
+  } catch (error) {
+    console.warn("Failed to save view mode:", error);
+  }
 }
 
-export function setViewMode(mode: ViewMode): void {
-  currentViewMode.set(mode);
-}
-
-export function initializeViewMode(): void {
-  const mode = getViewMode();
-  window.dispatchEvent(new CustomEvent("view-mode-changed", { detail: mode }));
+/**
+ * Toggle between text and image view modes
+ */
+export function toggleViewMode(): ViewMode {
+  const currentMode = getViewMode();
+  const newMode = currentMode === "text" ? "image" : "text";
+  setViewMode(newMode);
+  return newMode;
 }

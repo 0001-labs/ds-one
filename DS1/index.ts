@@ -1,6 +1,9 @@
 // DS one - Main entry point for all components
 // Export all components for easy importing
 
+// Initialize CDN loader (will auto-load external translations if available)
+import "./utils/cdn-loader";
+
 // Core components
 export * from "./2-core/app-v1";
 export * from "./2-core/button-v1";
@@ -27,9 +30,11 @@ export * from "./3-unit/panel-v1";
 export * from "./3-unit/row-v1";
 export * from "./3-unit/singlenav-v1";
 export * from "./3-unit/doublenav-v1";
+export * from "./3-unit/ds-table";
 
 // Page components
-export * from "./4 Page/app-v1";
+export * from "./4-page/ds-grid";
+export * from "./4-page/ds-layout";
 
 // Utilities
 export * from "./utils/language";
@@ -37,5 +42,3 @@ export * from "./utils/theme";
 export * from "./utils/viewMode";
 export * from "./utils/settings";
 export * from "./utils/pricing";
-
-

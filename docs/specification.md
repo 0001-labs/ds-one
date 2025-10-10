@@ -6,6 +6,23 @@
 
 This document outlines the complete specification for publishing DS one as a distributable NPM package, including installation methods, file structure, build process, and usage patterns.
 
+## Supported Languages
+
+DS one supports the following languages out of the box:
+
+- **Danish** (da)
+- **Norwegian** (no)
+- **Swedish** (sv)
+- **German** (de)
+- **English** (en)
+- **French** (fr)
+- **Spanish** (es)
+- **Chinese** (zh)
+- **Japanese** (ja)
+- **Korean** (ko)
+
+The design system uses standard [ISO 639-1 language codes](https://www.w3schools.com/tags/ref_language_codes.asp). The internationalization features automatically detect available languages from your translation files and provide real-time language switching capabilities through the `<cycle-v1 type="language">` component.
+
 ## Package Information
 
 ### Basic Metadata
@@ -297,9 +314,255 @@ const text = new Text();
 <!-- Styles -->
 <link
   rel="stylesheet"
-  href="https://unpkg.com/ds-one@0.1.0-beta/1%20Root/screen.css"
+  href="https://unpkg.com/ds-one@0.1.0-beta/1-root/screen.css"
 />
 ```
+
+### Internationalization with CDN
+
+DS one includes a powerful, automatic translation system for CDN users. The system automatically detects and loads translations from a local JSON file (defaults to `keys.json`), making internationalization simple and intuitive. Out of the box the cycle component prioritises these 10 languages (using standard HTML `lang` codes in your JSON keys): Danish (`da-DK`), Norwegian (`nb-NO`), Swedish (`sv-SE`), German (`de-DE`), English (`en-US`), French (`fr-FR`), Spanish (`es-ES`), Chinese (`zh-Hans` or `zh-Hant`), Japanese (`ja-JP`), and Korean (`ko-KR`).
+
+#### Automatic Translation Loading
+
+The CDN bundle automatically attempts to load a translation JSON file from the same directory as your HTML file.
+
+**For common filenames:** Automatically tries `keys.json`, `tekst.json`, `tekster.json`, `language.json`, `languages.json`, `translations.json`, `translate.json`, `i18n.json`, `locales.json`, `strings.json`, `text.json`, `texts.json` (no configuration needed).
+
+**For ANY custom filename** (like `my-project-2024.json` or `site-languages.json`), specify it with:
+
+- `data-ds-one-translations="filename.json"` on the `<script>` tag, OR
+- `window.DS_ONE_TRANSLATIONS_FILE = "filename.json"` before import, OR
+- `<meta name="ds-one:translations" content="filename.json" />`
+
+If none are found, the system falls back to bundled translations.
+
+**Basic Setup (auto-detects common filenames):**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Multilingual Site</title>
+
+    <!-- Import CSS stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/screen.css"
+    />
+
+    <!-- Import DS one bundle - will auto-load keys.json, tekst.json, etc. -->
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+    </script>
+  </head>
+  <body>
+    <!-- Language selector - automatically shows available languages -->
+    <cycle-v1 type="language"></cycle-v1>
+
+    <!-- Text components with translation keys -->
+    <text-v1 key="welcome"></text-v1>
+    <text-v1 key="description"></text-v1>
+
+    <!-- Works in buttons too -->
+    <button-v1 variant="primary">
+      <text-v1 key="getStarted"></text-v1>
+    </button-v1>
+  </body>
+</html>
+```
+
+**Custom Filename (ANY name works):**
+
+```html
+<!-- For a file named 230984324u023.json or my-custom-name.json -->
+<script type="module" data-ds-one-translations="230984324u023.json">
+  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+</script>
+```
+
+#### Translation File Structure
+
+Create a translation JSON file (default name `keys.json`) in the same directory as your HTML files. The system uses ISO language codes as top-level keys:
+
+```json
+{
+  "en-US": {
+    "welcome": "Welcome to our website",
+    "description": "This is a demonstration of translations",
+    "getStarted": "Get Started"
+  },
+  "da-DK": {
+    "welcome": "Velkommen til vores hjemmeside",
+    "description": "Dette er en demonstration af oversættelser",
+    "getStarted": "Kom i gang"
+  },
+  "ja-JP": {
+    "welcome": "ウェブサイトへようこそ",
+    "description": "これは翻訳のデモンストレーションです",
+    "getStarted": "はじめる"
+  }
+}
+```
+
+**Supported Language Codes:**
+
+- Use ISO 639-1 language codes with ISO 3166-1 country codes
+- Format: `language-COUNTRY` (e.g., `en-US`, `da-DK`, `ja-JP`)
+- The system is extensible and supports any valid ISO language code
+
+#### Dynamic Language Detection
+
+The `<cycle-v1 type="language">` component automatically:
+
+1. **Detects available languages** from your translation file
+2. **Shows only the languages you've defined** (no manual configuration)
+3. **Persists user language choice** in localStorage
+4. **Updates all text components** in real-time when language changes
+
+```html
+<!-- Language cycle - automatically populated with available languages -->
+<cycle-v1 type="language"></cycle-v1>
+```
+
+If your translation file has 3 languages, the cycle will show 3 options. Add a 4th language to the JSON, and it automatically appears in the cycle—no code changes needed!
+
+Language labels are generated automatically using `Intl.DisplayNames` (when available) and fall back to curated names for the 10 priority languages: Danish, Norwegian, Swedish, Portuguese, Spanish, Chinese, Korean, Japanese, English, and German.
+
+#### Auto-Updating Components
+
+All `<text-v1>` components with a `key` attribute automatically update when the user changes language. No page reload required.
+
+```html
+<!-- These all update automatically when language changes -->
+<text-v1 key="siteTitle"></text-v1>
+<text-v1 key="welcomeMessage"></text-v1>
+<text-v1 key="footerCopyright"></text-v1>
+
+<!-- Works inside other components too -->
+<button-v1 variant="primary">
+  <text-v1 key="submitButton"></text-v1>
+</button-v1>
+```
+
+#### Complete Example
+
+**File structure:**
+
+```
+my-website/
+├── index.html
+├── about.html
+├── contact.html
+└── keys.json (or your chosen filename)
+```
+
+**Example translation file (`keys.json`):**
+
+```json
+{
+  "en-US": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "welcome": "Welcome",
+    "description": "A modern multilingual website"
+  },
+  "da-DK": {
+    "home": "Hjem",
+    "about": "Om",
+    "contact": "Kontakt",
+    "welcome": "Velkommen",
+    "description": "En moderne flersproget hjemmeside"
+  },
+  "ja-JP": {
+    "home": "ホーム",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "welcome": "ようこそ",
+    "description": "モダンな多言語ウェブサイト"
+  }
+}
+```
+
+**index.html:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Multilingual Site</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/screen.css"
+    />
+
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.8/dist/ds-one.bundle.min.js";
+    </script>
+  </head>
+  <body>
+    <!-- Header with language selector -->
+    <header>
+      <text-v1 key="welcome"></text-v1>
+      <cycle-v1 type="language"></cycle-v1>
+    </header>
+
+    <!-- Navigation - all text updates on language change -->
+    <nav>
+      <button-v1 href="index.html"><text-v1 key="home"></text-v1></button-v1>
+      <button-v1 href="about.html"><text-v1 key="about"></text-v1></button-v1>
+      <button-v1 href="contact.html"
+        ><text-v1 key="contact"></text-v1
+      ></button-v1>
+    </nav>
+
+    <!-- Content -->
+    <main>
+      <text-v1 key="description"></text-v1>
+    </main>
+  </body>
+</html>
+```
+
+#### How It Works
+
+1. **Automatic Detection**: When the CDN bundle loads, it automatically attempts to fetch your configured translation file (falling back to `./keys.json`)
+2. **Language Registration**: Available languages are extracted from the JSON keys
+3. **Component Initialization**: The `cycle-v1` component populates with available languages
+4. **User Selection**: User clicks the language cycle to change languages
+5. **Event Broadcasting**: A `language-changed` event is dispatched
+6. **Automatic Updates**: All `text-v1` components listen for the event and update their content
+7. **Persistence**: The selected language is saved to localStorage
+
+#### Benefits
+
+- **Zero Configuration**: Just add a translation JSON file next to your HTML
+- **Automatic Discovery**: Languages are detected from the JSON structure
+- **Real-time Updates**: No page reload needed
+- **Persistent Preference**: User's language choice is remembered
+- **Extensible**: Add new languages by editing JSON—no code changes
+- **Fallback Support**: Falls back to bundled translations if no translation file is found
+
+#### Advanced: Custom Translation Loading
+
+For advanced use cases, you can manually load translations:
+
+```javascript
+// Load custom translations programmatically
+window.DS_ONE_TRANSLATIONS = {
+  "en-US": { key: "value" },
+  "fr-FR": { key: "valeur" },
+};
+
+// Notify the system
+window.dispatchEvent(new CustomEvent("translations-ready"));
+```
+
+See the complete working example in `examples/project-cdn/`.
 
 ## TypeScript Support
 
@@ -528,11 +791,49 @@ window.DS_ONE_DEBUG = true;
 console.log(customElements.get("button-v1"));
 ```
 
+## Documentation Strategy
+
+### Starlight Documentation Site
+
+The primary documentation will be built using [Starlight](https://starlight.astro.build/), Astro's documentation framework, providing:
+
+- **Component Documentation**: Interactive component examples with live code
+- **API Reference**: Complete TypeScript interface documentation
+- **Theming Guide**: Customization and theming instructions
+- **Integration Guides**: Framework-specific implementation examples
+- **Design Tokens**: Color, typography, and spacing reference
+- **Migration Guides**: Version upgrade instructions
+
+### Notion Sync Integration
+
+Documentation will be synchronized with Notion for:
+
+- **Internal Documentation**: Team collaboration and internal notes
+- **Design System Governance**: Component approval workflows
+- **Version Control**: Documentation versioning alongside code releases
+- **Cross-Platform Access**: Notion's collaborative editing and commenting
+- **Integration with Design Process**: Seamless handoff between design and development
+
+#### Sync Implementation
+
+```typescript
+// Automated sync from Starlight to Notion
+interface DocumentationSync {
+  source: "starlight";
+  target: "notion";
+  components: ComponentDocumentation[];
+  api: APIDocumentation[];
+  guides: IntegrationGuide[];
+  syncFrequency: "on-release" | "on-commit" | "manual";
+}
+```
+
 ## Future Enhancements
 
 ### Planned Features
 
-- [ ] Starlight documentation site with component, theming, and integration guides
+- [x] Starlight documentation site with component, theming, and integration guides
+- [ ] Notion sync integration for collaborative documentation
 - [ ] ESM-only package for smaller bundle size
 - [ ] Individual component packages (`@ds-one/button`, `@ds-one/text`)
 - [ ] Framework-specific wrappers (React, Vue, Angular)

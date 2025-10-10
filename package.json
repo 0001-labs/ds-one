@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.8",
+  "version": "0.1.9-beta.3",
   "description": "a plug and play design system built with TypeScript and Lit",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -27,7 +27,7 @@
     "dist/*.js"
   ],
   "scripts": {
-    "dev": "bun run server.ts",
+    "dev": "vite",
     "build": "bun run build:bundle",
     "build:bundle": "bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
     "build:types": "tsc --noEmit",
@@ -43,7 +43,11 @@
     "release:patch": "bun run scripts/release.js patch",
     "release:minor": "bun run scripts/release.js minor",
     "release:major": "bun run scripts/release.js major",
-    "release:beta": "bun run scripts/release.js beta"
+    "release:beta": "bun run scripts/release.js beta",
+    "docs:dev": "cd web && bun run dev",
+    "docs:build": "cd web && bun run build",
+    "docs:preview": "cd web && bun run preview",
+    "docs:deploy": "cd web && bun run deploy"
   },
   "keywords": [
     "design-system",
@@ -63,7 +67,8 @@
     "esbuild": "^0.25.10",
     "eslint": "^8.0.0",
     "prettier": "^3.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vite": "^7.1.9"
   },
   "dependencies": {
     "@lit-labs/signals": "^0.1.3",

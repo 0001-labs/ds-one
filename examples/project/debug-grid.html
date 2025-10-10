@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debug DS Grid</title>
+
+    <!-- Import DS one styles -->
+    <link rel="stylesheet" href="/1-root/screen.css" />
+
+    <!-- Import DS one components directly for development -->
+    <script type="module" src="./registry.ts"></script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        background: #f0f0f0;
+        min-height: 100vh;
+        position: relative;
+      }
+
+      .content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Make sure ds-grid is visible for debugging */
+      ds-grid {
+        border: 2px solid red !important;
+        background: rgba(255, 0, 0, 0.1) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Debug DS Grid</h1>
+
+    <!-- DS Grid Component -->
+    <ds-grid
+      columns="12"
+      rows="20"
+      cell-width="50"
+      cell-height="30"
+      gap="1"
+    ></ds-grid>
+
+    <div class="content">
+      <h2>Content Area</h2>
+      <p>This content should appear over the grid.</p>
+      <p>
+        If you see a red border around the grid area, the component is working.
+      </p>
+    </div>
+
+    <script>
+      // Debug script
+      setTimeout(() => {
+        console.log("=== DS Grid Debug ===");
+
+        const grid = document.querySelector("ds-grid");
+        console.log("Grid element:", grid);
+
+        if (grid) {
+          console.log("Grid shadow root:", grid.shadowRoot);
+          console.log("Grid computed styles:", window.getComputedStyle(grid));
+          console.log("Grid offset dimensions:", {
+            width: grid.offsetWidth,
+            height: grid.offsetHeight,
+          });
+
+          // Check if the grid has any content
+          const gridContent = grid.shadowRoot?.querySelector(".grid");
+          console.log("Grid content element:", gridContent);
+          if (gridContent) {
+            console.log(
+              "Grid content styles:",
+              window.getComputedStyle(gridContent)
+            );
+          }
+        } else {
+          console.error("DS Grid element not found!");
+        }
+
+        // Check if custom elements are supported
+        console.log("Custom elements supported:", "customElements" in window);
+        console.log("DS Grid defined:", customElements.get("ds-grid"));
+      }, 2000);
+    </script>
+  </body>
+</html>

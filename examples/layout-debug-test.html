@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DS Layout Debug Mode Test</title>
+    <style>
+      body {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+      }
+      .controls {
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px 20px;
+        margin: 5px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      button.active {
+        background: #28a745;
+      }
+      .example-content {
+        margin-top: 20px;
+      }
+      ds-layout {
+        margin: 20px 0;
+      }
+      /* Content for grid areas */
+      .square-content {
+        grid-area: square;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      .title-content {
+        grid-area: title;
+        background: #e9ecef;
+        border: 1px solid #ced4da;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .header-content {
+        grid-area: header;
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+      .projects-content {
+        grid-area: projects;
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        padding: 10px;
+      }
+      .bio-content {
+        grid-area: bio;
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+      }
+      .nav-content {
+        grid-area: nav;
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+      }
+      .footer-content {
+        grid-area: footer;
+        background: #e2e3e5;
+        border: 1px solid #d6d8db;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DS Layout Debug Mode Test</h1>
+
+    <div class="controls">
+      <button id="toggleDebug" onclick="toggleDebug()">
+        Enable Debug Mode
+      </button>
+      <button id="toggleContent" onclick="toggleContent()">Show Content</button>
+    </div>
+
+    <div class="example-content">
+      <h2>Layout with Debug Mode</h2>
+      <ds-layout id="layout">
+        <div class="square-content">Square</div>
+        <div class="title-content">Page Title</div>
+        <div class="header-content">Header Section</div>
+        <div class="projects-content">
+          <h3>Projects</h3>
+          <p>
+            This is the projects section with some content to demonstrate the
+            layout.
+          </p>
+        </div>
+        <div class="bio-content">
+          <h3>Bio</h3>
+          <p>This is the bio section with some personal information.</p>
+        </div>
+        <div class="nav-content">Navigation</div>
+        <div class="footer-content">Footer</div>
+      </ds-layout>
+    </div>
+
+    <script type="module">
+      // Import the layout component
+      import { Layout } from "/DS1/4-page/ds-layout.js";
+
+      // Define the custom element
+      customElements.define("ds-layout", Layout);
+
+      window.toggleDebug = function () {
+        const layout = document.getElementById("layout");
+        const button = document.getElementById("toggleDebug");
+
+        if (layout.mode === "debug") {
+          layout.mode = "";
+          button.textContent = "Enable Debug Mode";
+          button.classList.remove("active");
+        } else {
+          layout.mode = "debug";
+          button.textContent = "Disable Debug Mode";
+          button.classList.add("active");
+        }
+      };
+
+      window.toggleContent = function () {
+        const layout = document.getElementById("layout");
+        const button = document.getElementById("toggleContent");
+
+        if (layout.innerHTML.includes("Square")) {
+          layout.innerHTML = "<slot></slot>";
+          button.textContent = "Show Content";
+        } else {
+          layout.innerHTML = `
+                    <div class="square-content">Square</div>
+                    <div class="title-content">Page Title</div>
+                    <div class="header-content">Header Section</div>
+                    <div class="projects-content">
+                        <h3>Projects</h3>
+                        <p>This is the projects section with some content to demonstrate the layout.</p>
+                    </div>
+                    <div class="bio-content">
+                        <h3>Bio</h3>
+                        <p>This is the bio section with some personal information.</p>
+                    </div>
+                    <div class="nav-content">Navigation</div>
+                    <div class="footer-content">Footer</div>
+                `;
+          button.textContent = "Hide Content";
+        }
+      };
+    </script>
+  </body>
+</html>

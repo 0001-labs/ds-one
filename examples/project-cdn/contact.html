@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - DS one CDN Translation Example</title>
+
+    <!-- Import CSS stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/screen.css"
+    />
+
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+    </script>
+  </head>
+  <body>
+    <ds-grid></ds-grid>
+    <ds-layout mode="portfolio" debug>
+      <!-- Header -->
+      <div style="grid-area: header">
+        <text-v1
+          key="siteTitle"
+          style="font-size: var(--text-2xl); font-weight: bold"
+        ></text-v1>
+      </div>
+
+      <!-- Navigation -->
+      <div style="grid-area: nav">
+        <button-v1 variant="secondary" href="index.html">
+          <text-v1 key="home"></text-v1>
+        </button-v1>
+        <button-v1 variant="secondary" href="about.html">
+          <text-v1 key="about"></text-v1>
+        </button-v1>
+        <button-v1 variant="primary" href="contact.html">
+          <text-v1 key="contact"></text-v1>
+        </button-v1>
+      </div>
+
+      <!-- Main content -->
+      <div style="grid-area: bio">
+        <text-v1
+          key="contactTitle"
+          style="
+            font-size: var(--text-xl);
+            font-weight: bold;
+            display: block;
+            margin-bottom: var(--1);
+          "
+        ></text-v1>
+        <text-v1 key="contactDescription" style="display: block"></text-v1>
+      </div>
+
+      <!-- Footer -->
+      <div style="grid-area: footer">
+        <text-v1 key="copyright"></text-v1>
+        <cycle-v1 type="language"></cycle-v1>
+      </div>
+    </ds-layout>
+  </body>
+</html>
