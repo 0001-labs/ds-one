@@ -8,25 +8,45 @@
     <!-- Import DS one from CDN -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.5-beta/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/screen.css"
     />
 
     <script type="module">
       // Import bundled version from CDN (includes all dependencies)
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.5-beta/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
     </script>
     <script type="module" src="./load-translations.js"></script>
   </head>
   <body>
-    <app-v1 type="default">
-      <text-v1 variant="heading" key="cdnHeading"></text-v1>
-      <text-v1 variant="body" key="cdnDescription"></text-v1>
-      <button-v1
-        variant="secondary"
-        key="goToNextPage"
-        href="interactive.html"
-      ></button-v1>
-    </app-v1>
-    <link-v1 href="interactive.html">Interactive Example</link-v1>
+    <ds-layout mode="portfolio" align="center">
+      <div style="grid-area: title">
+        <text-v1 variant="heading" key="cdnHeading"></text-v1>
+      </div>
+      <div
+        style="
+          grid-area: projects;
+          display: flex;
+          flex-direction: column;
+          gap: var(--1);
+        "
+      >
+        <text-v1 variant="body" key="cdnDescription"></text-v1>
+      </div>
+      <div
+        style="
+          grid-area: nav;
+          display: flex;
+          flex-direction: column;
+          gap: var(--1);
+        "
+      >
+        <button-v1
+          variant="secondary"
+          key="goToNextPage"
+          href="interactive.html"
+        ></button-v1>
+        <link-v1 href="interactive.html">Interactive Example</link-v1>
+      </div>
+    </ds-layout>
   </body>
 </html>

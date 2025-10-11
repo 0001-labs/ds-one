@@ -233,10 +233,23 @@ import "ds-one/styles";
 
 // Components are auto-registered
 document.body.innerHTML = `
-  <app-v1 type="default">
-    <text-v1 variant="heading" key="welcomeTitle">Welcome</text-v1>
-    <button-v1 variant="primary" key="getStarted">Get Started</button-v1>
-  </app-v1>
+  <ds-layout mode="portfolio" align="center">
+    <text-v1
+      style="grid-area: title"
+      variant="heading"
+      key="welcomeTitle"
+    >
+      Welcome
+    </text-v1>
+    <div
+      style="grid-area: projects; display: flex; gap: var(--1)"
+    >
+      <button-v1 variant="primary" key="getStarted">
+        Get Started
+      </button-v1>
+      <button-v1 variant="secondary">Learn more</button-v1>
+    </div>
+  </ds-layout>
 `;
 ```
 
@@ -259,13 +272,23 @@ document.body.innerHTML = `
 
 ```javascript
 // Import only what you need
-import { Button, Text, App } from "ds-one";
+import { Button, Text, Layout } from "ds-one";
 import "ds-one/styles";
 
 // Use imported components
-const app = new App();
+const layout = new Layout();
+layout.mode = "portfolio";
+
 const button = new Button();
+button.variant = "primary";
+button.textContent = "Click me";
+
 const text = new Text();
+text.variant = "body";
+text.textContent = "Hello World";
+
+layout.append(text, button);
+document.body.append(layout);
 ```
 
 ### 4. CSS-only Import

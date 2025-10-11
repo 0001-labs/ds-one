@@ -6,7 +6,6 @@ import "../../DS1/1-root/screen.css";
 // Import all components from DS one package
 import "../../DS1/4-page/ds-grid";
 import "../../DS1/4-page/ds-layout";
-import "../../DS1/4-page/app-v1";
 
 // Core components
 import "../../DS1/2-core/text-v1";

@@ -5,7 +5,6 @@
 import "./utils/cdn-loader";
 
 // Core components
-export * from "./2-core/app-v1";
 export * from "./2-core/button-v1";
 export * from "./2-core/text-v1";
 export * from "./2-core/icon-v1";

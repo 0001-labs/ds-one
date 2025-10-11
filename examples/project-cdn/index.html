@@ -18,7 +18,7 @@
     </script>
   </head>
   <body>
-    <ds-grid></ds-grid>
+    <ds-grid align="center"></ds-grid>
     <ds-layout mode="portfolio" debug>
       <!-- Title -->
       <div style="grid-area: title">
@@ -74,6 +74,12 @@
         <text-v1 key="copyright"></text-v1>
         <cycle-v1 type="language"></cycle-v1>
       </div>
+    </ds-layout>
+
+    <ds-layout mode="company" debug>
+      <text-v1 style="grid-area: header" key="Jo4712"></text-v1>
+      <ds-table id="project-table" style="grid-area: content"></ds-table>
+      <text-v1 style="grid-area: footer" key="ds1"></text-v1>
     </ds-layout>
   </body>
 </html>
