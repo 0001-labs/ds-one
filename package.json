@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.1.9-beta.3",
+  "version": "0.1.9-beta.4",
   "description": "a plug and play design system built with TypeScript and Lit",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -24,12 +24,12 @@
   },
   "sideEffects": [
     "DS1/**/*.ts",
-    "dist/*.js"
+    "dist/**/*.js"
   ],
   "scripts": {
     "dev": "vite",
     "build": "bun run build:bundle",
-    "build:bundle": "bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/bundle-entry.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
+    "build:bundle": "bunx tsc && bunx esbuild dist/index.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/index.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
     "build:types": "tsc --noEmit",
     "build:components": "bun run build:core && bun run build:units",
     "build:core": "bun run build:component -- DS1/2-core",

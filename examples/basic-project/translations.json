@@ -1,0 +1,58 @@
+{
+  "en": {
+    "siteTitle": "Basic Project",
+    "welcome": "Welcome to Basic Project",
+    "description": "This project loads the DS one design system locally from TypeScript files. Perfect for development and customization.",
+    "aboutTitle": "About This Project",
+    "aboutDescription": "This is a demonstration of loading DS one components directly from the local file system. All components are imported via the registry.ts file which references the DS1 folder.",
+    "contactTitle": "Get In Touch",
+    "contactDescription": "This project demonstrates how to structure a multi-page application using the DS one design system with local imports.",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "learnMore": "Learn More",
+    "copyright": "© 2025 DS one - Local Development"
+  },
+  "da": {
+    "siteTitle": "Basis Projekt",
+    "welcome": "Velkommen til Basis Projekt",
+    "description": "Dette projekt indlæser DS one designsystemet lokalt fra TypeScript-filer. Perfekt til udvikling og tilpasning.",
+    "aboutTitle": "Om Dette Projekt",
+    "aboutDescription": "Dette er en demonstration af indlæsning af DS one-komponenter direkte fra det lokale filsystem. Alle komponenter importeres via registry.ts-filen, som refererer til DS1-mappen.",
+    "contactTitle": "Kontakt Os",
+    "contactDescription": "Dette projekt demonstrerer, hvordan man strukturerer en flersidet applikation ved hjælp af DS one designsystemet med lokale importer.",
+    "home": "Hjem",
+    "about": "Om",
+    "contact": "Kontakt",
+    "learnMore": "Lær Mere",
+    "copyright": "© 2025 DS one - Lokal Udvikling"
+  },
+  "ja": {
+    "siteTitle": "基本プロジェクト",
+    "welcome": "基本プロジェクトへようこそ",
+    "description": "このプロジェクトは、TypeScriptファイルからローカルにDS oneデザインシステムを読み込みます。開発とカスタマイズに最適です。",
+    "aboutTitle": "このプロジェクトについて",
+    "aboutDescription": "これは、ローカルファイルシステムから直接DS oneコンポーネントをロードするデモンストレーションです。すべてのコンポーネントは、DS1フォルダーを参照するregistry.tsファイルを介してインポートされます。",
+    "contactTitle": "お問い合わせ",
+    "contactDescription": "このプロジェクトは、ローカルインポートを使用してDS oneデザインシステムで複数ページのアプリケーションを構築する方法を示します。",
+    "home": "ホーム",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "learnMore": "詳細を見る",
+    "copyright": "© 2025 DS one - ローカル開発"
+  },
+  "de": {
+    "siteTitle": "Basis Projekt",
+    "welcome": "Willkommen beim Basis Projekt",
+    "description": "Dieses Projekt lädt das DS one Designsystem lokal aus TypeScript-Dateien. Perfekt für Entwicklung und Anpassung.",
+    "aboutTitle": "Über Dieses Projekt",
+    "aboutDescription": "Dies ist eine Demonstration des Ladens von DS one-Komponenten direkt aus dem lokalen Dateisystem. Alle Komponenten werden über die registry.ts-Datei importiert, die auf den DS1-Ordner verweist.",
+    "contactTitle": "Kontaktieren Sie Uns",
+    "contactDescription": "Dieses Projekt zeigt, wie man eine mehrseitige Anwendung mit dem DS one Designsystem unter Verwendung lokaler Importe strukturiert.",
+    "home": "Startseite",
+    "about": "Über",
+    "contact": "Kontakt",
+    "learnMore": "Mehr Erfahren",
+    "copyright": "© 2025 DS one - Lokale Entwicklung"
+  }
+}

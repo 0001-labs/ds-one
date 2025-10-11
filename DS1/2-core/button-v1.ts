@@ -4,19 +4,6 @@
 import { LitElement, html, css, type PropertyValues } from "lit";
 import { getText, currentLanguage } from "../utils/language";
 
-declare global {
-  interface Window {
-    addEventListener(type: string, listener: EventListener): void;
-    removeEventListener(type: string, listener: EventListener): void;
-    location: { href: string };
-  }
-  interface CustomElementRegistry {
-    define(name: string, constructor: typeof LitElement): void;
-  }
-  var customElements: CustomElementRegistry;
-  var window: Window;
-}
-
 export class Button extends LitElement {
   static properties = {
     variant: { type: String, reflect: true },

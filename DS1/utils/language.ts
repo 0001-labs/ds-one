@@ -84,7 +84,7 @@ let translationData = getTranslationData();
 type NotionCache = Map<string, string>;
 
 const notionStore = new Map<LanguageCode, NotionCache>();
-const defaultLanguage: LanguageCode = "en-US";
+const defaultLanguage: LanguageCode = "en";
 
 function extractPrimarySubtag(code: LanguageCode): string {
   if (!code) {
@@ -225,35 +225,35 @@ export function getLanguageDisplayName(
 }
 
 const BROWSER_LANGUAGE_PREFERENCES: Record<string, LanguageCode> = {
-  da: "da-DK",
-  "da-dk": "da-DK",
-  no: "nb-NO",
-  nb: "nb-NO",
-  "nb-no": "nb-NO",
-  nn: "nn-NO",
-  "nn-no": "nn-NO",
-  sv: "sv-SE",
-  "sv-se": "sv-SE",
-  pt: "pt-PT",
-  "pt-pt": "pt-PT",
-  "pt-br": "pt-BR",
-  es: "es-ES",
-  "es-es": "es-ES",
-  "es-mx": "es-MX",
-  zh: "zh-Hans",
-  "zh-cn": "zh-Hans",
-  "zh-hans": "zh-Hans",
-  "zh-tw": "zh-Hant",
-  "zh-hant": "zh-Hant",
-  ko: "ko-KR",
-  "ko-kr": "ko-KR",
-  ja: "ja-JP",
-  "ja-jp": "ja-JP",
-  en: "en-US",
-  "en-us": "en-US",
-  "en-gb": "en-GB",
-  de: "de-DE",
-  "de-de": "de-DE",
+  da: "da",
+  "da-dk": "da",
+  no: "nb",
+  nb: "nb",
+  "nb-no": "nb",
+  nn: "nn",
+  "nn-no": "nn",
+  sv: "sv",
+  "sv-se": "sv",
+  pt: "pt",
+  "pt-pt": "pt",
+  "pt-br": "pt",
+  es: "es",
+  "es-es": "es",
+  "es-mx": "es",
+  zh: "zh",
+  "zh-cn": "zh",
+  "zh-hans": "zh",
+  "zh-tw": "zh",
+  "zh-hant": "zh",
+  ko: "ko",
+  "ko-kr": "ko",
+  ja: "ja",
+  "ja-jp": "ja",
+  en: "en",
+  "en-us": "en",
+  "en-gb": "en",
+  de: "de",
+  "de-de": "de",
 };
 
 function resolvePreferredLanguage(languageTag: string): LanguageCode | null {

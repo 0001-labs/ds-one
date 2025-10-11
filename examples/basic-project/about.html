@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic Project - About</title>
+
+    <!-- Import DS one styles -->
+    <link rel="stylesheet" href="../../DS1/1-root/screen.css" />
+
+    <!-- Import DS one bundle -->
+    <script type="module" src="../../dist/ds-one.bundle.js"></script>
+
+    <!-- Load translations -->
+    <script>
+      window.DS_ONE_TRANSLATIONS_FILE = "./translations.json";
+    </script>
+  </head>
+  <body>
+    <ds-grid align="center"></ds-grid>
+
+    <ds-layout mode="portfolio" debug>
+      <!-- Title -->
+      <div style="grid-area: title">
+        <text-v1
+          key="siteTitle"
+          style="font-size: var(--text-2xl); font-weight: bold"
+        ></text-v1>
+      </div>
+
+      <!-- Navigation -->
+      <div style="grid-area: nav">
+        <button-v1 variant="secondary" href="index.html">
+          <text-v1 key="home"></text-v1>
+        </button-v1>
+        <button-v1 variant="primary" href="about.html">
+          <text-v1 key="about"></text-v1>
+        </button-v1>
+        <button-v1 variant="secondary" href="contact.html">
+          <text-v1 key="contact"></text-v1>
+        </button-v1>
+      </div>
+
+      <!-- Main content -->
+      <div style="grid-area: projects">
+        <text-v1
+          key="aboutTitle"
+          style="
+            font-size: var(--text-xl);
+            font-weight: bold;
+            display: block;
+            margin-bottom: var(--1);
+          "
+        ></text-v1>
+        <text-v1
+          key="aboutDescription"
+          style="display: block; margin-bottom: var(--2)"
+        ></text-v1>
+      </div>
+
+      <!-- Footer -->
+      <div style="grid-area: footer">
+        <text-v1 key="copyright"></text-v1>
+        <cycle-v1 type="language"></cycle-v1>
+      </div>
+    </ds-layout>
+  </body>
+</html>

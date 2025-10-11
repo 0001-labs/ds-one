@@ -148,14 +148,12 @@ ds-one/
 │   ├── 2-core/              # Core components
 │   │   ├── button-v1.ts
 │   │   ├── text-v1.ts
-│   │   ├── app-v1.ts
 │   │   └── ...
 │   ├── 3-unit/              # Composite components
 │   │   ├── list-v1.ts
 │   │   ├── panel-v1.ts
 │   │   └── ...
 │   ├── 4-page/              # Page-level components
-│   │   └── app-v1.ts
 │   ├── x-utils/             # Shared utilities
 │   │   ├── language.ts
 │   │   ├── theme.ts
@@ -411,17 +409,17 @@ Create a translation JSON file (default name `keys.json`) in the same directory 
 
 ```json
 {
-  "en-US": {
+  "en": {
     "welcome": "Welcome to our website",
     "description": "This is a demonstration of translations",
     "getStarted": "Get Started"
   },
-  "da-DK": {
+  "da": {
     "welcome": "Velkommen til vores hjemmeside",
     "description": "Dette er en demonstration af oversættelser",
     "getStarted": "Kom i gang"
   },
-  "ja-JP": {
+  "ja": {
     "welcome": "ウェブサイトへようこそ",
     "description": "これは翻訳のデモンストレーションです",
     "getStarted": "はじめる"
@@ -485,21 +483,21 @@ my-website/
 
 ```json
 {
-  "en-US": {
+  "en": {
     "home": "Home",
     "about": "About",
     "contact": "Contact",
     "welcome": "Welcome",
     "description": "A modern multilingual website"
   },
-  "da-DK": {
+  "da": {
     "home": "Hjem",
     "about": "Om",
     "contact": "Kontakt",
     "welcome": "Velkommen",
     "description": "En moderne flersproget hjemmeside"
   },
-  "ja-JP": {
+  "ja": {
     "home": "ホーム",
     "about": "について",
     "contact": "お問い合わせ",
@@ -597,7 +595,6 @@ declare global {
   interface HTMLElementTagNameMap {
     "button-v1": Button;
     "text-v1": Text;
-    "app-v1": App;
     "cycle-v1": Cycle;
     "icon-v1": Icon;
     "tooltip-v1": Tooltip;

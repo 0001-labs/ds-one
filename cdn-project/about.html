@@ -3,23 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About - DS one CDN Translation Example</title>
+    <title>CDN Project - About</title>
 
-    <!-- Import CSS stylesheet -->
+    <!-- Import CSS from CDN -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/screen.css"
     />
 
+    <!-- Import DS one bundle from CDN -->
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@beta/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
-    <ds-grid></ds-grid>
+    <ds-grid align="center"></ds-grid>
+
     <ds-layout mode="portfolio" debug>
-      <!-- Header -->
-      <div style="grid-area: header">
+      <!-- Title -->
+      <div style="grid-area: title">
         <text-v1
           key="siteTitle"
           style="font-size: var(--text-2xl); font-weight: bold"
@@ -40,7 +42,7 @@
       </div>
 
       <!-- Main content -->
-      <div style="grid-area: bio">
+      <div style="grid-area: projects">
         <text-v1
           key="aboutTitle"
           style="
@@ -50,7 +52,10 @@
             margin-bottom: var(--1);
           "
         ></text-v1>
-        <text-v1 key="aboutDescription" style="display: block"></text-v1>
+        <text-v1
+          key="aboutDescription"
+          style="display: block; margin-bottom: var(--2)"
+        ></text-v1>
       </div>
 
       <!-- Footer -->
