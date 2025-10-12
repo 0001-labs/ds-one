@@ -19,14 +19,8 @@ const { sidebar } = Astro.locals.starlightRoute;
         font-weight: 600;
         cursor: pointer;
         list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
         user-select: none;
       ">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="transition: transform 0.2s;">
-          <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
         {group.label}
       </summary>
       
@@ -105,16 +99,16 @@ const { sidebar } = Astro.locals.starlightRoute;
     color: white !important;
   }
 
-  details[open] summary svg {
-    transform: rotate(90deg);
-  }
-
   summary::-webkit-details-marker {
     display: none;
   }
 
   summary:hover {
     color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  details[open] summary {
+    color: #FFF !important;
   }
 </style>
 
