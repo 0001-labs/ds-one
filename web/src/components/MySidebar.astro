@@ -10,21 +10,30 @@ const { sidebar } = Astro.locals.starlightRoute;
   overflow-y: auto;
 ">
   {sidebar.map((group, groupIndex) => (
-    <div style="margin-bottom: 2rem;">
-      <div style="
+    <details open style="margin-bottom: 1rem;">
+      <summary style="
         color: rgba(255, 255, 255, 0.7);
         font-size: 0.875rem;
         letter-spacing: 0.05em;
-        margin-bottom: 0.5rem;
+        padding: 0.5rem 0;
         font-weight: 600;
+        cursor: pointer;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        user-select: none;
       ">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="transition: transform 0.2s;">
+          <path d="M4 2L8 6L4 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
         {group.label}
-      </div>
+      </summary>
       
       <ul style="
         list-style: none;
         padding: 0;
-        margin: 0;
+        margin: 0.5rem 0 0 0;
       ">
         {group.entries.map((entry) => (
           <li style="margin: 0;">
@@ -75,7 +84,7 @@ const { sidebar } = Astro.locals.starlightRoute;
           </li>
         ))}
       </ul>
-    </div>
+    </details>
   ))}
 
   <div style="
@@ -94,6 +103,18 @@ const { sidebar } = Astro.locals.starlightRoute;
   a:hover {
     background: rgba(255, 255, 255, 0.15) !important;
     color: white !important;
+  }
+
+  details[open] summary svg {
+    transform: rotate(90deg);
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
   }
 </style>
 
