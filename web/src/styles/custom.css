@@ -1,0 +1,130 @@
+/* Custom styles for DS one documentation */
+
+:root {
+  /* Content layout */
+  --sl-content-width: 55rem;
+
+  /* Typography */
+  --sl-text-5xl: 3.5rem;
+  --sl-text-4xl: 2.5rem;
+
+  /* Colors - Purple theme to match the sidebar */
+  --sl-color-accent: #667eea;
+  --sl-color-accent-low: rgba(102, 126, 234, 0.15);
+  --sl-color-accent-high: #5568d3;
+
+  /* Spacing */
+  --sl-nav-height: 4rem;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] {
+  --sl-color-accent: #8b9cf5;
+  --sl-color-accent-low: rgba(139, 156, 245, 0.2);
+}
+
+.sidebar-content {
+  padding: 0;
+  width: 280px;
+}
+
+/* Hero section on homepage */
+.hero {
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.1) 0%,
+    rgba(118, 75, 162, 0.1) 100%
+  );
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+/* Code blocks */
+.expressive-code {
+  margin: 2rem 0;
+}
+
+/* Links */
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--sl-color-accent-high);
+}
+
+/* Cards */
+.card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Headers */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+/* Main content area */
+.main-pane {
+  padding: 2rem;
+}
+
+/* Sidebar backdrop on mobile */
+@media (max-width: 50rem) {
+  [aria-label="Main"] {
+    padding: 1rem;
+  }
+}
+
+/* Custom scrollbar for sidebar */
+nav::-webkit-scrollbar {
+  width: 8px;
+}
+
+nav::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Button styles in content */
+.sl-link-button {
+  transition: all 0.2s ease;
+}
+
+.sl-link-button:hover {
+  transform: translateY(-1px);
+}
+
+/* Table styles */
+table {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: rgba(102, 126, 234, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}

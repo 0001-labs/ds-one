@@ -1,0 +1,137 @@
+---
+title: Live Demo
+description: Interactive demo of DS one components on this page
+---
+
+import { Card } from "@astrojs/starlight/components";
+
+## DS one Components Live Demo
+
+This page demonstrates DS one components working live, loaded from the CDN. All components on this page are actual DS one web components!
+
+### Buttons
+
+<div style="display: flex; gap: 1rem; flex-wrap: wrap; margin: 2rem 0;">
+  <button-v1 variant="primary">Primary Button</button-v1>
+  <button-v1 variant="secondary">Secondary Button</button-v1>
+  <button-v1 variant="text">Text Button</button-v1>
+</div>
+
+```html
+<button-v1 variant="primary">Primary Button</button-v1>
+<button-v1 variant="secondary">Secondary Button</button-v1>
+<button-v1 variant="text">Text Button</button-v1>
+```
+
+### Text Components
+
+<div style="margin: 2rem 0;">
+  <text-v1 variant="heading">This is a DS one heading</text-v1>
+  <text-v1 variant="body">
+    This is DS one body text. It adapts to your theme automatically.
+  </text-v1>
+  <text-v1 variant="small">
+    This is small text for captions and secondary information.
+  </text-v1>
+</div>
+
+```html
+<text-v1 variant="heading">This is a DS one heading</text-v1>
+<text-v1 variant="body">Body text content</text-v1>
+<text-v1 variant="small">Small text</text-v1>
+```
+
+### Icons
+
+<div style="display: flex; gap: 1rem; font-size: 2rem; margin: 2rem 0;">
+  <icon-v1 name="check"></icon-v1>
+  <icon-v1 name="star"></icon-v1>
+  <icon-v1 name="search"></icon-v1>
+  <icon-v1 name="close"></icon-v1>
+  <icon-v1 name="open"></icon-v1>
+</div>
+
+```html
+<icon-v1 name="check"></icon-v1>
+<icon-v1 name="star"></icon-v1>
+<icon-v1 name="search"></icon-v1>
+```
+
+### Links
+
+<div style="margin: 2rem 0;">
+  <link-v1 href="https://github.com/jo4712/ds-one">Visit GitHub</link-v1>
+</div>
+
+```html
+<link-v1 href="https://github.com/jo4712/ds-one">Visit GitHub</link-v1>
+```
+
+### Tooltips
+
+<div style="margin: 2rem 0;">
+  <tooltip-v1 text="This is helpful tooltip information!">
+    Hover over me
+  </tooltip-v1>
+</div>
+
+```html
+<tooltip-v1 text="This is helpful tooltip information!">
+  Hover over me
+</tooltip-v1>
+```
+
+### Interactive Example
+
+All DS one components support standard DOM events. Here's an example with buttons:
+
+<div style="margin: 2rem 0;">
+  <button-v1 variant="primary">Interactive Button</button-v1>
+  <button-v1 variant="secondary">Try Clicking!</button-v1>
+</div>
+
+```html
+<!-- DS one buttons work with standard event listeners -->
+<button-v1 variant="primary" id="my-button">Click Me</button-v1>
+
+<script>
+  document
+    .getElementById("my-button")
+    .addEventListener("click", () => alert("Clicked!"));
+</script>
+```
+
+### Combined Example
+
+<div style="padding: 2rem; background: rgba(102, 126, 234, 0.1); border-radius: 0.5rem; margin: 2rem 0;">
+  <text-v1 variant="heading">
+    <icon-v1
+      name="star"
+      style="vertical-align: middle; margin-right: 0.5rem;"
+    ></icon-v1>
+    Featured Section
+  </text-v1>
+  <text-v1 variant="body" style="display: block; margin: 1rem 0;">
+    DS one components work seamlessly together and adapt to your design system.
+  </text-v1>
+  <div style="display: flex; gap: 1rem;">
+    <button-v1 variant="primary">Get Started</button-v1>
+    <button-v1 variant="secondary">Learn More</button-v1>
+  </div>
+</div>
+
+## Why It Works
+
+DS one components are loaded from the CDN in the `<head>` of every page via our custom `CustomHead.astro` component. This means:
+
+- ✅ Components work on every page
+- ✅ No build step required for the components
+- ✅ Always up-to-date with the latest version
+- ✅ Fast loading from CDN
+- ✅ Automatic theme adaptation
+
+## Next Steps
+
+- [View all components](/components/button/)
+- [Learn about theming](/built-in/theming/)
+- [Explore i18n support](/built-in/i18n/)
