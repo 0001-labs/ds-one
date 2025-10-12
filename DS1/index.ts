@@ -41,3 +41,4 @@ export * from "./utils/theme";
 export * from "./utils/viewMode";
 export * from "./utils/settings";
 export * from "./utils/pricing";
+export * from "./utils/scroll";

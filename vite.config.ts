@@ -1,18 +1,17 @@
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  root: "examples",
+  root: ".",
   server: {
-    open: true,
+    open: "/examples/",
   },
   build: {
-    outDir: "../dist",
+    outDir: "dist",
     emptyOutDir: false,
   },
   resolve: {
     alias: {
-      "ds-one": "../DS1",
+      "ds-one": "./DS1",
     },
   },
-  publicDir: "../DS1",
 });

@@ -3,23 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CDN Project - Home</title>
+    <title>CDN Project - About</title>
 
     <!-- Import CSS from CDN -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.4/DS1/1-root/screen.css"
     />
 
     <!-- Import DS one bundle from CDN -->
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@beta/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.4/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout mode="portfolio">
+    <ds-layout mode="portfolio" debug>
       <!-- Title -->
       <div style="grid-area: title">
         <text-v1
@@ -30,10 +30,10 @@
 
       <!-- Navigation -->
       <div style="grid-area: nav">
-        <button-v1 variant="primary" href="index.html">
+        <button-v1 variant="secondary" href="index.html">
           <text-v1 key="home"></text-v1>
         </button-v1>
-        <button-v1 variant="secondary" href="about.html">
+        <button-v1 variant="primary" href="about.html">
           <text-v1 key="about"></text-v1>
         </button-v1>
         <button-v1 variant="secondary" href="contact.html">
@@ -44,7 +44,7 @@
       <!-- Main content -->
       <div style="grid-area: projects">
         <text-v1
-          key="welcome"
+          key="aboutTitle"
           style="
             font-size: var(--text-xl);
             font-weight: bold;
@@ -53,12 +53,9 @@
           "
         ></text-v1>
         <text-v1
-          key="description"
+          key="aboutDescription"
           style="display: block; margin-bottom: var(--2)"
         ></text-v1>
-        <button-v1 variant="primary">
-          <text-v1 key="learnMore"></text-v1>
-        </button-v1>
       </div>
 
       <!-- Footer -->
