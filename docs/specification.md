@@ -51,7 +51,7 @@ The design system uses standard [ISO 639-1 language codes](https://www.w3schools
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./styles": "./1 Root/screen.css",
+    "./styles": "./1 Root/one.css",
     "./components/*": "./2 Core/*.js",
     "./units/*": "./3 Unit/*.js",
     "./pages/*": "./4 Page/*.js",
@@ -108,7 +108,7 @@ yarn add ds-one
 ```html
 <script type="module">
   import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.esm.js";
-  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css";
+  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/one.css";
 </script>
 ```
 
@@ -118,7 +118,7 @@ yarn add ds-one
 <script src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.umd.js"></script>
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/screen.css"
+  href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/one.css"
 />
 ```
 
@@ -127,7 +127,7 @@ yarn add ds-one
 ```html
 <script type="module">
   import "https://cdn.skypack.dev/ds-one@0.1.0-beta";
-  import "https://cdn.skypack.dev/ds-one@0.1.0-beta/1%20Root/screen.css";
+  import "https://cdn.skypack.dev/ds-one@0.1.0-beta/1%20Root/one.css";
 </script>
 ```
 
@@ -142,7 +142,7 @@ ds-one/
 │   │   ├── 2025-04-23-device.ts
 │   │   └── 2025-04-23-language.ts
 │   ├── 1-root/              # Core styles and fonts
-│   │   ├── screen.css
+│   │   ├── one.css
 │   │   ├── dev.css
 │   │   └── fonts/
 │   ├── 2-core/              # Core components
@@ -335,7 +335,7 @@ document.body.append(layout);
 <!-- Styles -->
 <link
   rel="stylesheet"
-  href="https://unpkg.com/ds-one@0.1.0-beta/1-root/screen.css"
+  href="https://unpkg.com/ds-one@0.1.0-beta/1-root/one.css"
 />
 ```
 
@@ -370,7 +370,7 @@ If none are found, the system falls back to bundled translations.
     <!-- Import CSS stylesheet -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/one.css"
     />
 
     <!-- Import DS one bundle - will auto-load keys.json, tekst.json, etc. -->
@@ -518,7 +518,7 @@ my-website/
 
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/one.css"
     />
 
     <script type="module">
@@ -772,7 +772,7 @@ bun run release:beta
 ```javascript
 // Before (local development)
 import "./DS1/2-core/button-v1.ts";
-import "./DS1/1-root/screen.css";
+import "./DS1/1-root/one.css";
 
 // After (NPM package)
 import "ds-one/components/button-v1";

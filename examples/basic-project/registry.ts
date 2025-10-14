@@ -1,7 +1,7 @@
 // Unified registry - imports all DS one components
 // This file loads the design system locally from the DS1 folder
 
-import "../../DS1/1-root/screen.css";
+import "../../DS1/1-root/one.css";
 
 // Import all components from DS one
 import "../../DS1/4-page/ds-grid";

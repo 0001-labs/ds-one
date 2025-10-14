@@ -37,7 +37,7 @@ yarn add ds-one@beta
   <head>
     <link
       rel="stylesheet"
-      href="node_modules/design-system-one/1 Root/screen.css"
+      href="node_modules/design-system-one/1 Root/one.css"
     />
     <script
       type="module"

@@ -28,6 +28,13 @@
   width: 280px;
 }
 
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  padding: 40px 0 40px 40px !important;
+}
+
 /* Hero section on homepage */
 .hero {
   background: linear-gradient(

@@ -37,7 +37,7 @@ For quick prototyping or simple projects, you can load DS one directly from a CD
     <!-- DS one Styles -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/one.css"
     />
 
     <!-- DS one Components -->
@@ -63,7 +63,7 @@ For automatic updates to the latest beta version, you can use the `@beta` tag:
 ></script>
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/screen.css"
+  href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/one.css"
 />
 ```
 

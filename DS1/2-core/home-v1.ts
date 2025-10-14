@@ -52,7 +52,7 @@ export class Home extends LitElement {
 
   static styles = css`
     :host {
-      /* local sizing vars, derived from screen.css */
+      /* local sizing vars, derived from one.css */
       --home-visible: calc(var(--1) * 0.1); /* 2px */
 
       position: relative;

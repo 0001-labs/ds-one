@@ -114,29 +114,6 @@ html {
   font-display: swap;
 }
 
-body {
-  -ms-overflow-style: none;
-  margin: 0;
-  font-family: var(--typeface), sans-serif;
-  font-size: var(--type-size-default);
-  color: var(--black), var(--white);
-  letter-spacing: -0.2px;
-  background-color: var(--white), var(--black);
-  transition: background-color 1s ease;
-  text-decoration-line: none;
-}
-
-body.mobile {
-  margin-top: 0;
-  padding-left: calc(20px * var(--scaling-factor));
-  padding-right: calc(20px * var(--scaling-factor));
-  align-items: center;
-  justify-content: center;
-  width: calc(280px * var(--scaling-factor));
-  background-color: var(--light-green), var(--black);
-  transition: background-color 1s ease;
-}
-
 .matrix__board {
   position: relative;
   top: calc(21.5px * var(--scaling-factor));

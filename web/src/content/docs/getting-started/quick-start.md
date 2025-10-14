@@ -17,7 +17,7 @@ Create a simple HTML page using DS one components:
 
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/screen.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/one.css"
     />
     <script
       type="module"

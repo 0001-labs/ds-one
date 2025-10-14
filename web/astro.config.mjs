@@ -4,6 +4,14 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
+  vite: {
+    server: {
+      fs: {
+        // Allow serving files from parent directory
+        allow: [".."],
+      },
+    },
+  },
   integrations: [
     starlight({
       title: "DS one",
