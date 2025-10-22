@@ -1,4 +1,3 @@
-// /Users/Jo4712/Library/Mobile Documents/com~apple~CloudDocs/Design system/3 Unit/panel-v1.ts
 
 import { LitElement, html, css } from "lit";
 
