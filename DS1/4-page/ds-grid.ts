@@ -19,8 +19,8 @@ export class Grid extends LitElement {
 
   static styles = css`
     :host {
-      margin-top: 0.5px;
-      margin-left: 0px;
+      margin-top: 0.5px !important;
+      margin-left: 0.5px !important;
       display: grid;
       width: 100%;
       height: 100%;
@@ -28,8 +28,8 @@ export class Grid extends LitElement {
       grid-template-columns: repeat(auto-fill, 19px);
       grid-template-rows: repeat(auto-fill, 19px);
       gap: 1px;
-      row-rule: 1px solid rgba(215, 215, 215, 0.05);
-      column-rule: 1px solid rgba(238, 238, 238, 0.05);
+      row-rule: 1px solid rgba(215, 215, 215, 0.022);
+      column-rule: 1px solid rgba(238, 238, 238, 0.022);
       outline: 1px solid #100101e7;
       position: absolute;
       top: 0;

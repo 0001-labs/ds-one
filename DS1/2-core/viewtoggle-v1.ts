@@ -68,7 +68,7 @@ export class ViewToggle extends LitElement {
     const label =
       this._mode === "image" ? getText("hideImage") : getText("viewImage");
     return html`
-      <button-v1 variant="primary" @click=${this._toggle}>${label}</button-v1>
+      <ds-button variant="primary" @click=${this._toggle}>${label}</ds-button>
     `;
   }
 }

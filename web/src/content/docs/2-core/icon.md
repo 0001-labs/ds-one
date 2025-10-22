@@ -27,10 +27,10 @@ DS One includes 50+ icons:
 
 ## Attributes
 
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `name` | `string` | - | Icon name to display |
-| `size` | `string` | `'1em'` | Icon size (CSS unit) |
+| Attribute | Type     | Default | Description          |
+| --------- | -------- | ------- | -------------------- |
+| `name`    | `string` | -       | Icon name to display |
+| `size`    | `string` | `'1em'` | Icon size (CSS unit) |
 
 ## Sizing
 
@@ -53,18 +53,18 @@ Icons inherit the current text color:
 ## In Buttons
 
 ```html
-<button-v1 variant="primary">
+<ds-button variant="primary">
   <icon-v1 name="check"></icon-v1>
   Save
-</button-v1>
+</ds-button>
 ```
 
 ## Icon List
 
 Common icons include:
+
 - Navigation: `up`, `down`, `left`, `right`
 - Actions: `check`, `close`, `plus`, `delete`
 - UI: `search`, `star`, `lock`, `see`
 - Content: `note`, `page`, `title`, `icon`
 - Layout: `expand`, `collapse`, `minimize`
-

@@ -1,5 +1,6 @@
 ---
 // MyHeader component - custom header for docs
+import Search from '@astrojs/starlight/components/Search.astro';
 ---
 
 <header style="
@@ -7,16 +8,15 @@
   border-bottom: 1px solid black;
   display: flex;
   align-items: center;
-  height: 80px;
+  height: 80.5px;
   
 ">
   <!-- Left: Logo -->
   <div style="
     display: flex;
     align-items: center;
-    height: 80px;
-    margin-left: -0.5px;
-    width: 280px;
+    height: 81px;
+    width: 280.5px;
     padding: 40px;
     border-right: 1px black solid;
   ">
@@ -30,6 +30,8 @@
       flex-direction: row;
       align-items: baseline;
       letter-spacing: -4%;
+      margin-bottom: 14px;
+
     ">
       DS one
       <div style="
@@ -45,7 +47,7 @@
 
   <div style="
     width: 20px;
-    height: 80px;
+    height: 80.5px;
     border-right: 1px black solid;
   ">
   </div>
@@ -55,45 +57,11 @@
     flex: 1;
     display: flex;
     align-items: center;
+    margin-top: 0.5px
     padding: 20px;
+    padding-left: 39.5px;
   ">
-    <div style="
-      width: 300px;
-      height: var(--2);
-      display: flex;
-      align-items: center;
-      background: #171717;
-      border-radius: 4px;
-    ">
-      <input
-        type="search"
-        placeholder="Search docs..."
-        style="
-          flex: 1;
-          background: transparent;
-          border: none;
-          color: #CDCDCD;
-          font-size: 0.875rem;
-          font-family: 'GT-America-Standard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          outline: none;
-        "
-      />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        style="color: #666; margin-left: 0.5rem;"
-      >
-        <circle cx="11" cy="11" r="8"></circle>
-        <path d="m21 21-4.35-4.35"></path>
-      </svg>
-    </div>
+    <Search class="custom-search" />
   </div>
 
   <!-- Right: Actions -->
@@ -104,50 +72,20 @@
     min-width: fit-content;
   ">
     <!-- Language Toggle -->
-    <button-v1
+    <ds-button
       no-background
       style="--button-color: #CDCDCD; font-size: 0.875rem; cursor: pointer; transition: color 0.2s ease;"
     >
       EN
-    </button-v1>
+    </ds-button>
 
     <!-- Theme Toggle -->
-    <button-v1
+    <ds-button
       no-background
       style="--button-color: #CDCDCD; font-size: 0.875rem; cursor: pointer; transition: color 0.2s ease;"
     >
       Dark
-    </button-v1>
-
-    <!-- GitHub Link -->
-    <a
-      href="https://github.com/jo4712/ds-one"
-      target="_blank"
-      rel="noreferrer"
-      style="
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        color: #CDCDCD;
-        transition: color 0.2s ease;
-      "
-      onmouseover="this.style.color = '#F1F1F1';"
-      onmouseout="this.style.color = '#CDCDCD';"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-5.7-2.87 3.37 3.37 0 0 0-5.7 2.87v3.87m0-13.87a3.37 3.37 0 0 1 5.7-2.87 3.37 3.37 0 0 1 5.7 2.87v3.87"></path>
-      </svg>
-    </a>
+    </ds-button>
   </div>
 </header>
 
@@ -156,11 +94,41 @@
     font-family: 'GT-America-Standard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
-  input::placeholder {
-    color: #666;
+  /* Style the search component to match the design */
+  :global(.custom-search) {
+    width: 300px;
+    max-width: 300px;
   }
 
-  input:focus {
+  :global(.custom-search button[data-open-modal]) {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #171717;
+    border: none;
+    border-radius: 4px;
+    color: #CDCDCD;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: 'GT-America-Standard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: color 0.2s ease;
+  }
+
+  :global(.custom-search button[data-open-modal]:hover) {
+    color: #F1F1F1;
+  }
+
+  :global(.custom-search button[data-open-modal]:focus) {
     outline: none;
+  }
+
+  :global(.custom-search button[data-open-modal] kbd) {
+    display: none;
+  }
+
+  :global(.custom-search button[data-open-modal] svg) {
+    width: 16px;
+    height: 16px;
   }
 </style>

@@ -33,10 +33,10 @@ DS one components automatically adapt to mobile devices:
 Components automatically handle touch events on mobile devices:
 
 ```html
-<button-v1 variant="primary">
+<ds-button variant="primary">
   <!-- Handles both click and touch events -->
   Tap Me
-</button-v1>
+</ds-button>
 ```
 
 ## Device-Specific Styling
@@ -46,14 +46,14 @@ Apply styles based on device type:
 ```css
 /* Mobile-specific styles */
 @media (max-width: 768px) {
-  button-v1 {
+  ds-button {
     --button-size: larger;
   }
 }
 
 /* Touch device styles */
 @media (hover: none) {
-  button-v1 {
+  ds-button {
     --button-padding: 1rem;
   }
 }

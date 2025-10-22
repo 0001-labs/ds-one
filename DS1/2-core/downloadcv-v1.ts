@@ -126,12 +126,12 @@ export class DownloadCV extends LitElement {
   render() {
     const disabled = !this._activeUrl;
     return html`
-      <button-v1
+      <ds-button
         variant="primary"
         .disabled=${disabled}
         default-text=${translate("downloadCV")}
         @click=${() => this._download()}
-      ></button-v1>
+      ></ds-button>
     `;
   }
 }

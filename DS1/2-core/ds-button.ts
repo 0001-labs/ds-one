@@ -1,4 +1,4 @@
-// button-v1.ts
+// ds-button.ts
 // Core button component
 
 import { LitElement, html, css, type PropertyValues } from "lit";
@@ -14,6 +14,7 @@ export class Button extends LitElement {
       reflect: true,
       attribute: "no-background",
     },
+    blank: { type: Boolean, reflect: true },
     notionKey: { type: String, attribute: "notion-key" },
     key: { type: String },
     fallback: { type: String },
@@ -29,6 +30,7 @@ export class Button extends LitElement {
   declare disabled: boolean;
   declare bold: boolean;
   declare "no-background": boolean;
+  declare blank: boolean;
   declare notionKey: string | null;
   declare key: string;
   declare fallback: string;
@@ -46,6 +48,7 @@ export class Button extends LitElement {
     this.disabled = false;
     this.bold = false;
     this["no-background"] = false;
+    this.blank = false;
     this.notionKey = null;
     this.key = "";
     this.fallback = "";
@@ -58,7 +61,7 @@ export class Button extends LitElement {
 
   static styles = css`
     button {
-      height: calc(var(--08) * var(--scaling-factor));
+      max-height: calc(var(--08) * var(--scaling-factor));
       border: none;
       cursor: pointer;
       font-size: calc(var(--type-size-default) * var(--scaling-factor));
@@ -91,6 +94,7 @@ export class Button extends LitElement {
 
     button[no-background] {
       background-color: transparent;
+      max-height: var(--1);
       padding: 0;
       color: var(--button-color, inherit);
     }
@@ -169,20 +173,24 @@ export class Button extends LitElement {
     if (this.href) {
       e.preventDefault();
       e.stopPropagation();
-      window.location.href = this.href;
+      if (this.blank) {
+        window.open(this.href, "_blank", "noopener,noreferrer");
+      } else {
+        window.location.href = this.href;
+      }
       return;
     }
 
     // Otherwise, rely on the native 'click' event bubbling from the inner
-    // <button> through the shadow boundary to consumers of <button-v1>.
+    // <button> through the shadow boundary to consumers of <ds-button>.
     // Do not re-dispatch a synthetic 'click' here to avoid duplicate events.
   }
 }
 
-customElements.define("button-v1", Button);
+customElements.define("ds-button", Button);
 
 declare global {
   interface HTMLElementTagNameMap {
-    "button-v1": Button;
+    "ds-button": Button;
   }
 }

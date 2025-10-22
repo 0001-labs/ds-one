@@ -17,11 +17,11 @@ Create a simple HTML page using DS one components:
 
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@beta/DS1/1-root/one.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
     />
     <script
       type="module"
-      src="https://cdn.jsdelivr.net/npm/ds-one@beta/dist/ds-one.bundle.js"
+      src="https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.js"
     ></script>
   </head>
   <body>
@@ -36,8 +36,8 @@ Create a simple HTML page using DS one components:
           A modern design system built with TypeScript and Lit.
         </text-v1>
 
-        <button-v1 variant="primary">Get Started</button-v1>
-        <button-v1 variant="secondary">Learn More</button-v1>
+        <ds-button variant="primary">Get Started</ds-button>
+        <ds-button variant="secondary">Learn More</ds-button>
       </main>
     </ds-layout>
   </body>
@@ -49,9 +49,9 @@ Create a simple HTML page using DS one components:
 ### Button
 
 ```html
-<button-v1 variant="primary">Primary Button</button-v1>
-<button-v1 variant="secondary">Secondary Button</button-v1>
-<button-v1 variant="text">Text Button</button-v1>
+<ds-button variant="primary">Primary Button</ds-button>
+<ds-button variant="secondary">Secondary Button</ds-button>
+<ds-button variant="text">Text Button</ds-button>
 ```
 
 ### Text
@@ -78,7 +78,7 @@ DS one includes built-in internationalization:
   import {
     setLanguage,
     loadTranslations,
-  } from "https://cdn.jsdelivr.net/npm/ds-one@beta/dist/ds-one.bundle.js";
+  } from "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.js";
 
   // Load translations
   await loadTranslations({
@@ -96,6 +96,6 @@ DS one includes built-in internationalization:
 
 ## Next Steps
 
-- Explore [all components](/components/button/)
+- Explore [all components](/2-core/button/)
 - Learn about [theming](/advanced/theming/)
 - Set up [internationalization](/advanced/i18n/)

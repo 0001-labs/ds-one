@@ -39,7 +39,7 @@ bun link ds-one
 
 # Install in test project
 cd /path/to/test-project
-bun add ds-one
+bun add ds-one@alpha
 ```
 
 ## Step 4: Publish to NPM
@@ -66,13 +66,13 @@ Once published, install in any project:
 
 ```bash
 # Using bun
-bun add ds-one
+bun add ds-one@alpha
 
 # Using npm
-npm install ds-one
+npm install ds-one@alpha
 
 # Install specific version
-bun add ds-one@0.1.0-beta
+bun add ds-one@0.1.11-alpha.0
 ```
 
 ## Usage in Another Project
@@ -80,12 +80,12 @@ bun add ds-one@0.1.0-beta
 ### Import All Components
 
 ```javascript
-import 'ds-one';
-import 'ds-one/styles';
+import "ds-one";
+import "ds-one/styles";
 
 // All components are now registered
 document.body.innerHTML = `
-  <button-v1 variant="primary">Click me</button-v1>
+  <ds-button variant="primary">Click me</ds-button>
   <text-v1 variant="heading">Hello World</text-v1>
 `;
 ```
@@ -93,9 +93,9 @@ document.body.innerHTML = `
 ### Import Specific Components
 
 ```javascript
-import 'ds-one/components/button-v1';
-import 'ds-one/components/text-v1';
-import 'ds-one/styles';
+import "ds-one/components/ds-button";
+import "ds-one/components/text-v1";
+import "ds-one/styles";
 ```
 
 ### Import in HTML
@@ -103,15 +103,15 @@ import 'ds-one/styles';
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" href="node_modules/ds-one/DS/1 Root/screen.css">
-  <script type="module">
-    import 'node_modules/ds-one/dist/index.esm.js';
-  </script>
-</head>
-<body>
-  <button-v1 variant="primary" key="myButton">Get Started</button-v1>
-</body>
+  <head>
+    <link rel="stylesheet" href="node_modules/ds-one/DS/1 Root/screen.css" />
+    <script type="module">
+      import "node_modules/ds-one/dist/index.esm.js";
+    </script>
+  </head>
+  <body>
+    <ds-button variant="primary" key="myButton">Get Started</ds-button>
+  </body>
 </html>
 ```
 
@@ -145,7 +145,7 @@ npm publish
 You can only unpublish within 72 hours:
 
 ```bash
-npm unpublish ds-one@0.1.0-beta
+npm unpublish ds-one@alpha
 ```
 
 ## Package URLs
@@ -153,14 +153,15 @@ npm unpublish ds-one@0.1.0-beta
 After publishing, your package will be available at:
 
 - **NPM**: https://www.npmjs.com/package/ds-one
-- **jsDelivr CDN**: https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta
-- **unpkg CDN**: https://unpkg.com/ds-one@0.1.0-beta
+- **jsDelivr CDN**: https://cdn.jsdelivr.net/npm/ds-one@alpha
+- **unpkg CDN**: https://unpkg.com/ds-one@alpha
 
 ## Troubleshooting
 
 ### Package Name Taken
 
 If "ds-one" is taken, try:
+
 - @jo4712/ds-one (scoped package)
 - ds-one-components
 - ds1
@@ -221,7 +222,7 @@ npm version patch
 npm view ds-one
 
 # Install in another project
-bun add ds-one
+bun add ds-one@alpha
 ```
 
 ## Next Steps
@@ -233,4 +234,3 @@ After publishing:
 3. Create usage examples
 4. Share on social media
 5. Submit to component libraries/directories
-

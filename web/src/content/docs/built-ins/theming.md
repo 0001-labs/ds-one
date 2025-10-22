@@ -37,11 +37,11 @@ DS one automatically adapts to system dark mode preferences:
 
 ```html
 <div style="--accent-color: #ef4444;">
-  <button-v1 variant="primary">Red Button</button-v1>
+  <ds-button variant="primary">Red Button</ds-button>
 </div>
 
 <div style="--accent-color: #10b981;">
-  <button-v1 variant="primary">Green Button</button-v1>
+  <ds-button variant="primary">Green Button</ds-button>
 </div>
 ```
 

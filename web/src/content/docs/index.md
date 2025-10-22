@@ -1,6 +1,6 @@
 ---
-title: Installation
-description: Learn how to install DS one in your project
+title: Introduction
+description: Learn how to install and use DS one in your project
 ---
 
 ## Installation Methods
@@ -85,5 +85,5 @@ import "ds-one/styles";
 
 ## Next Steps
 
-- [Quick Start Guide](/getting-started/quick-start/) - Learn the basics
+- [Manual Setup](/start-here/quick-start/) - Learn the basics
 - [Components](/2-core/button/) - Explore available components

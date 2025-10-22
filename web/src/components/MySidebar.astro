@@ -1,9 +1,11 @@
 ---
 // Get the sidebar data from Starlight
+import pkg from '../../../package.json' assert { type: 'json' };
+// No need for githubUrl, SVG will be inlined directly
 const { sidebar } = Astro.locals.starlightRoute;
 ---
 
-<nav style="
+<nav id="sidebar-nav" style="
   padding: 40px;
   background: #1F1F1F;
   height: 100%;
@@ -19,51 +21,48 @@ const { sidebar } = Astro.locals.starlightRoute;
         list-style: none;
         user-select: none;
         display: flex;
-        padding: 4px 0;
         align-items: center;
         width: 100%;
         height: 20px;
       ">
-        <button-v1 
+        <ds-button 
           bold 
           no-background
         >
           {group.label}
-        </button-v1>
+        </ds-button>
       </summary>
       
       <ul style="
         list-style: none;
         display: flex;
         flex-direction: column;
-        padding-left: 20px;
-        gap: 0px;
+        align-items: left;
        
 
       " data-first-two={groupIndex < 2}>
         {group.entries.map((entry) => {
           const isFirstTwo = groupIndex < 2;
           return (
-            <li style=" height: 20px;">
+            <li style=" height: 20px; display: flex; align-items: center; height: 20l">
               {isFirstTwo ? (
-                <a href={entry.href}">
-                  <button-v1
-                    no-background
-                    aria-current={entry.isCurrent ? 'page' : undefined}
-                    style={`--button-color: ${entry.isCurrent ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.85)'}; width: 100%; text-align: left; cursor: pointer; transition: color 0.2s ease;`}
-                  >
-                    {entry.label}
-                  </button-v1>
-                </a>
+                <ds-button
+                  no-background
+                  aria-current={entry.isCurrent ? 'page' : undefined}
+                  href={entry.href}
+                  style={`--button-color: ${entry.isCurrent ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.85)'}; width: 100%; text-align: left; height: 20px;`}
+                >
+                  {entry.label}
+                </ds-button>
               ) : (
-                <a href={entry.href} style="text-decoration: none; display: block; display: flex; gap: 4px;">
-                  <button-v1
-                    variant={entry.isCurrent ? 'primary' : 'secondary'}
-                    aria-current={entry.isCurrent ? 'page' : undefined}
-                  >
-                    {entry.label}
-                  </button-v1>
-                </a>
+                <ds-button
+                  variant={entry.isCurrent ? 'primary' : 'secondary'}
+                  aria-current={entry.isCurrent ? 'page' : undefined}
+                  href={entry.href}
+                  style="cursor: pointer; user-select: none; display: flex; align-items: center; width: 100%; height: 20px;"
+                >
+                  {entry.label}
+                </ds-button>
               )}
             </li>
           );
@@ -72,6 +71,31 @@ const { sidebar } = Astro.locals.starlightRoute;
     </details>
   ))}
 
+  <!-- Spacer to push version control to bottom -->
+  <div style="flex: 1;"></div>
+
+  <!-- Version Control Section -->
+  <a style="
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 20px;
+    href="https://github.com/jo4712/ds-one"
+  ">
+    <ds-button blank no-background href="https://github.com/jo4712/ds-one" style="--button-color: rgba(255,255,255,0.85); display: flex; align-items: center; gap: 0.5rem;">
+      <span style="display: block;">
+        <svg width="18" height="18" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M49,8C25.3,8,6,27.3,6,51c0,19.1,12.4,35.3,29.6,41c2.2,0.4,3-1,3-2.2
+            c0-1.1,0-4.5,0-8.2c-12,2.6-14.5-5.2-14.5-5.2c-2-5.2-4.8-6.6-4.8-6.6c-3.9-2.6,0.3-2.5,0.3-2.5c4.3,0.3,6.6,4.4,6.6,4.4
+            c3.8,6.6,10,4.7,12.4,3.6c0.4-2.8,1.5-4.7,2.7-5.8c-9.6-1.1-19.6-4.8-19.6-21.3c0-4.7,1.7-8.5,4.3-11.6c-0.4-1.1-1.9-5.3,0.4-11
+            c0,0,3.6-1.1,11.8,4.4c3.4-1,7.1-1.5,10.8-1.5s7.4,0.5,10.8,1.5c8.2-5.5,11.8-4.4,11.8-4.4c2.3,5.8,0.8,9.9,0.4,11
+            c2.7,3.1,4.3,7,4.3,11.6c0,16.6-10.1,20.2-19.7,21.3c1.6,1.4,3,4.1,3,8.2c0,5.8,0,10.5,0,11.9c0,1.2,0.8,2.6,3,2.2
+            C79.6,86.3,92,70.1,92,51C92,27.3,72.7,8,49,8z" fill="#fff"/>
+        </svg>
+      </span>
+    </ds-button>
+    <ds-button style="--button-color: #F1F1F1; font-size: 0.875rem;">{pkg.version}</ds-button>
+  </a>
 
 </nav>
 <style>
@@ -79,18 +103,34 @@ const { sidebar } = Astro.locals.starlightRoute;
     display: none;
   }
 
-  details[open] summary button-v1 {
+  details[open] summary ds-button {
     color: #F1F1F1 !important;
   }
 
-  /* First two groups always have 20px padding */
+  /* First two groups have 20px indentation */
   ul[data-first-two="true"] {
-    padding-left: 20px !important;
+    padding-left: 20px;
   }
 
-  /* Remove padding-left for lists with variant buttons (Components section) */
-  ul:has(button-v1[variant]) {
+  /* Remove padding-left for lists with variant buttons (Components section and beyond) */
+  ul:has(ds-button[variant]) {
     padding-left: 0 !important;
   }
+  
 </style>
 
+<script>
+  const nav = document.getElementById('sidebar-nav');
+  if (nav) {
+    // Handle navigation for buttons with href
+    const navButtons = nav.querySelectorAll('ds-button[href]');
+    navButtons.forEach((button) => {
+      button.addEventListener('click', (e) => {
+        const href = button.getAttribute('href');
+        if (href) {
+          window.location.href = href;
+        }
+      });
+    });
+  }
+</script>

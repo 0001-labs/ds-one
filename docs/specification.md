@@ -86,19 +86,19 @@ The design system uses standard [ISO 639-1 language codes](https://www.w3schools
 ### 1. NPM Installation
 
 ```bash
-npm install ds-one
+npm install ds-one@alpha
 ```
 
 ### 2. Bun Installation
 
 ```bash
-bun add ds-one
+bun add ds-one@alpha
 ```
 
 ### 3. Yarn Installation
 
 ```bash
-yarn add ds-one
+yarn add ds-one@alpha
 ```
 
 ### 4. CDN Installation
@@ -107,18 +107,18 @@ yarn add ds-one
 
 ```html
 <script type="module">
-  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.esm.js";
-  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/one.css";
+  import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/index.esm.js";
+  import "https://cdn.jsdelivr.net/npm/ds-one@alpha/1%20Root/one.css";
 </script>
 ```
 
 #### UMD (Universal)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/index.umd.js"></script>
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/1%20Root/one.css"
+  href="https://cdn.jsdelivr.net/npm/ds-one@alpha/1%20Root/one.css"
 />
 ```
 
@@ -126,8 +126,8 @@ yarn add ds-one
 
 ```html
 <script type="module">
-  import "https://cdn.skypack.dev/ds-one@0.1.0-beta";
-  import "https://cdn.skypack.dev/ds-one@0.1.0-beta/1%20Root/one.css";
+  import "https://cdn.skypack.dev/ds-one@alpha";
+  import "https://cdn.skypack.dev/ds-one@alpha/1%20Root/one.css";
 </script>
 ```
 
@@ -146,7 +146,7 @@ ds-one/
 │   │   ├── dev.css
 │   │   └── fonts/
 │   ├── 2-core/              # Core components
-│   │   ├── button-v1.ts
+│   │   ├── ds-button.ts
 │   │   ├── text-v1.ts
 │   │   └── ...
 │   ├── 3-unit/              # Composite components
@@ -242,10 +242,10 @@ document.body.innerHTML = `
     <div
       style="grid-area: projects; display: flex; gap: var(--1)"
     >
-      <button-v1 variant="primary" key="getStarted">
+      <ds-button variant="primary" key="getStarted">
         Get Started
-      </button-v1>
-      <button-v1 variant="secondary">Learn more</button-v1>
+      </ds-button>
+      <ds-button variant="secondary">Learn more</ds-button>
     </div>
   </ds-layout>
 `;
@@ -255,13 +255,13 @@ document.body.innerHTML = `
 
 ```javascript
 // Import specific components
-import "ds-one/components/button-v1";
+import "ds-one/components/ds-button";
 import "ds-one/components/text-v1";
 import "ds-one/styles";
 
 // Use imported components
 document.body.innerHTML = `
-  <button-v1 variant="primary">Click me</button-v1>
+  <ds-button variant="primary">Click me</ds-button>
   <text-v1 variant="body">Hello World</text-v1>
 `;
 ```
@@ -311,15 +311,12 @@ document.body.append(layout);
 <script type="module" src="https://cdn.jsdelivr.net/npm/ds-one"></script>
 
 <!-- Specific version -->
-<script
-  type="module"
-  src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta"
-></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/ds-one@alpha"></script>
 
 <!-- Specific file -->
 <script
   type="module"
-  src="https://cdn.jsdelivr.net/npm/ds-one@0.1.0-beta/dist/components/button-v1.js"
+  src="https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/components/ds-button.js"
 ></script>
 ```
 
@@ -330,13 +327,10 @@ document.body.append(layout);
 <script src="https://unpkg.com/ds-one"></script>
 
 <!-- Specific version -->
-<script src="https://unpkg.com/ds-one@0.1.0-beta"></script>
+<script src="https://unpkg.com/ds-one@alpha"></script>
 
 <!-- Styles -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/ds-one@0.1.0-beta/1-root/one.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/ds-one@alpha/1-root/one.css" />
 ```
 
 ### Internationalization with CDN
@@ -370,12 +364,12 @@ If none are found, the system falls back to bundled translations.
     <!-- Import CSS stylesheet -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/DS1/1-root/one.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
     />
 
     <!-- Import DS one bundle - will auto-load keys.json, tekst.json, etc. -->
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
@@ -387,9 +381,9 @@ If none are found, the system falls back to bundled translations.
     <text-v1 key="description"></text-v1>
 
     <!-- Works in buttons too -->
-    <button-v1 variant="primary">
+    <ds-button variant="primary">
       <text-v1 key="getStarted"></text-v1>
-    </button-v1>
+    </ds-button>
   </body>
 </html>
 ```
@@ -399,7 +393,7 @@ If none are found, the system falls back to bundled translations.
 ```html
 <!-- For a file named 230984324u023.json or my-custom-name.json -->
 <script type="module" data-ds-one-translations="230984324u023.json">
-  import "https://cdn.jsdelivr.net/npm/ds-one@0.1.9-beta.3/dist/ds-one.bundle.min.js";
+  import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
 </script>
 ```
 
@@ -462,9 +456,9 @@ All `<text-v1>` components with a `key` attribute automatically update when the 
 <text-v1 key="footerCopyright"></text-v1>
 
 <!-- Works inside other components too -->
-<button-v1 variant="primary">
+<ds-button variant="primary">
   <text-v1 key="submitButton"></text-v1>
-</button-v1>
+</ds-button>
 ```
 
 #### Complete Example
@@ -518,11 +512,11 @@ my-website/
 
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.1.8/DS1/1-root/one.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
     />
 
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.1.8/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
@@ -534,11 +528,11 @@ my-website/
 
     <!-- Navigation - all text updates on language change -->
     <nav>
-      <button-v1 href="index.html"><text-v1 key="home"></text-v1></button-v1>
-      <button-v1 href="about.html"><text-v1 key="about"></text-v1></button-v1>
-      <button-v1 href="contact.html"
+      <ds-button href="index.html"><text-v1 key="home"></text-v1></ds-button>
+      <ds-button href="about.html"><text-v1 key="about"></text-v1></ds-button>
+      <ds-button href="contact.html"
         ><text-v1 key="contact"></text-v1
-      ></button-v1>
+      ></ds-button>
     </nav>
 
     <!-- Content -->
@@ -593,7 +587,7 @@ See the complete working example in `examples/project-cdn/`.
 // Global component declarations
 declare global {
   interface HTMLElementTagNameMap {
-    "button-v1": Button;
+    "ds-button": Button;
     "text-v1": Text;
     "cycle-v1": Cycle;
     "icon-v1": Icon;
@@ -680,8 +674,8 @@ For older browsers, include polyfills:
 <!-- Components loaded on demand -->
 <script type="module">
   // Load components as needed
-  if (document.querySelector("button-v1")) {
-    import("ds-one/components/button-v1");
+  if (document.querySelector("ds-button")) {
+    import("ds-one/components/ds-button");
   }
 </script>
 ```
@@ -717,7 +711,7 @@ bun link
 bun link ds-one
 
 # Test installation
-bun add ds-one
+bun add ds-one@alpha
 ```
 
 ## Publishing Process
@@ -771,11 +765,11 @@ bun run release:beta
 
 ```javascript
 // Before (local development)
-import "./DS1/2-core/button-v1.ts";
+import "./DS1/2-core/ds-button.ts";
 import "./DS1/1-root/one.css";
 
 // After (NPM package)
-import "ds-one/components/button-v1";
+import "ds-one/components/ds-button";
 import "ds-one/styles";
 ```
 
@@ -808,7 +802,7 @@ bun outdated ds-one
 window.DS_ONE_DEBUG = true;
 
 // Check component registration
-console.log(customElements.get("button-v1"));
+console.log(customElements.get("ds-button"));
 ```
 
 ## Documentation Strategy

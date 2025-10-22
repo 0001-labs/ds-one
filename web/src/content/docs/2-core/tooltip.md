@@ -55,9 +55,9 @@ The `tooltip-v1` component displays additional information when hovering over an
 ### In Buttons
 
 ```html
-<button-v1>
+<ds-button>
   <tooltip-v1 text="Save your changes"> Save </tooltip-v1>
-</button-v1>
+</ds-button>
 ```
 
 ## Accessibility

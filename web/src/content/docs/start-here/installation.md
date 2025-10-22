@@ -85,5 +85,5 @@ import "ds-one/styles";
 
 ## Next Steps
 
-- [Quick Start Guide](/getting-started/quick-start/) - Learn the basics
+- [Quick Start Guide](/start-here/quick-start/) - Learn the basics
 - [Components](/2-core/button/) - Explore available components

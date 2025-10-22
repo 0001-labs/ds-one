@@ -42,33 +42,33 @@ export default defineConfig({
         {
           label: "Start Here",
           items: [
-            { label: "Introduction", slug: "getting-started/installation" },
-            { label: "Manual Setup", slug: "getting-started/quick-start" },
+            { label: "Introduction", slug: "" },
+            { label: "Manual Setup", slug: "start-here/quick-start" },
           ],
         },
         {
           label: "Built-ins",
           items: [
-            { label: "i18n", slug: "built-in/i18n" },
-            { label: "Theming", slug: "built-in/theming" },
-            { label: "Mobile Detection", slug: "built-in/mobile-detection" },
+            { label: "i18n", slug: "built-ins/i18n" },
+            { label: "Theming", slug: "built-ins/theming" },
+            { label: "Mobile Detection", slug: "built-ins/mobile-detection" },
           ],
         },
         {
           label: "1 Root",
           items: [
-            { label: "css", slug: "1-root/css" },
+            { label: "Styling", slug: "1-root/styling" },
             { label: "Fonts", slug: "1-root/fonts" },
           ],
         },
         {
           label: "2 Core",
           items: [
-            { label: "Button", slug: "components/button" },
-            { label: "Text", slug: "components/text" },
-            { label: "Link", slug: "components/link" },
-            { label: "Icon", slug: "components/icon" },
-            { label: "Tooltip", slug: "components/tooltip" },
+            { label: "Button", slug: "2-core/button" },
+            { label: "Text", slug: "2-core/text" },
+            { label: "Link", slug: "2-core/link" },
+            { label: "Icon", slug: "2-core/icon" },
+            { label: "Tooltip", slug: "2-core/tooltip" },
           ],
         },
         {

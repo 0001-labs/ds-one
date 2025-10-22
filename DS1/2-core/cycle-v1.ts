@@ -10,7 +10,7 @@ import type { LanguageCode } from "../utils/language";
 import { currentTheme, setTheme } from "../utils/theme";
 import type { ThemeType } from "../utils/theme";
 import { saveSettings } from "../utils/settings";
-import "./button-v1";
+import "./ds-button";
 import "./icon-v1";
 
 // Accent color utilities
@@ -648,7 +648,7 @@ export class Cycle extends LitElement {
             ? "justify-content: center;"
             : ""}"
         >
-          <button-v1
+          <ds-button
             variant=${this.variant || "primary"}
             ?disabled=${this.disabled}
             @click=${this.handleButtonClick}
@@ -659,7 +659,7 @@ export class Cycle extends LitElement {
                   >${this.getValueDisplay(this.currentValue)}</span
                 >`
               : html`<span>${this.getValueDisplay(this.currentValue)}</span>`}
-          </button-v1>
+          </ds-button>
           ${this.type === "accent-color"
             ? html`
                 <div

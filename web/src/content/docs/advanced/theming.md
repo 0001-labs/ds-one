@@ -40,7 +40,7 @@ DS One automatically detects and responds to system dark/light mode preferences.
 
 ```css
 :root {
-  --font-family: 'GT America', system-ui, sans-serif;
+  --font-family: "GT America", system-ui, sans-serif;
   --font-size-base: 16px;
   --line-height: 1.5;
 }
@@ -77,7 +77,7 @@ DS One components automatically adapt to dark mode:
 ### Button Variants
 
 ```css
-button-v1[variant="primary"] {
+ds-button[variant="primary"] {
   --button-background: var(--accent-color);
   --button-text: white;
 }
@@ -89,7 +89,7 @@ Each page or component can have its own accent color:
 
 ```html
 <div style="--accent-color: #ff6b6b;">
-  <button-v1 variant="primary">Red Button</button-v1>
+  <ds-button variant="primary">Red Button</ds-button>
 </div>
 ```
 
@@ -101,7 +101,7 @@ Each page or component can have its own accent color:
 :root {
   /* Primary brand color */
   --accent-color: #6366f1;
-  
+
   /* Secondary colors */
   --color-success: #10b981;
   --color-warning: #f59e0b;
@@ -112,10 +112,10 @@ Each page or component can have its own accent color:
 ### Custom Font
 
 ```css
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 :root {
-  --font-family: 'Inter', sans-serif;
+  --font-family: "Inter", sans-serif;
 }
 ```
 
@@ -125,4 +125,3 @@ Each page or component can have its own accent color:
 2. Use semantic variable names
 3. Test in both light and dark modes
 4. Maintain sufficient contrast ratios for accessibility
-
