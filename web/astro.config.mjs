@@ -40,15 +40,14 @@ export default defineConfig({
       ],
       sidebar: [
         {
-          label: "Getting Started",
+          label: "Start Here",
           items: [
-            { label: "Installation", slug: "getting-started/installation" },
-            { label: "Quick Start", slug: "getting-started/quick-start" },
-            { label: "Live Demo", slug: "demo" },
+            { label: "Introduction", slug: "getting-started/installation" },
+            { label: "Manual Setup", slug: "getting-started/quick-start" },
           ],
         },
         {
-          label: "Built in",
+          label: "Built-ins",
           items: [
             { label: "i18n", slug: "built-in/i18n" },
             { label: "Theming", slug: "built-in/theming" },
@@ -56,7 +55,14 @@ export default defineConfig({
           ],
         },
         {
-          label: "Components",
+          label: "1 Root",
+          items: [
+            { label: "css", slug: "1-root/css" },
+            { label: "Fonts", slug: "1-root/fonts" },
+          ],
+        },
+        {
+          label: "2 Core",
           items: [
             { label: "Button", slug: "components/button" },
             { label: "Text", slug: "components/text" },
@@ -66,10 +72,19 @@ export default defineConfig({
           ],
         },
         {
-          label: "Advanced",
+          label: "3 Unit",
           items: [
-            { label: "Theming", slug: "advanced/theming" },
-            { label: "Internationalization", slug: "advanced/i18n" },
+            { label: "Navigation", slug: "3-unit/navigation" },
+            { label: "List", slug: "3-unit/list" },
+            { label: "Panel", slug: "3-unit/panel" },
+            { label: "Card", slug: "3-unit/card" },
+          ],
+        },
+        {
+          label: "4 Page",
+          items: [
+            { label: "Layout", slug: "4-page/layout" },
+            { label: "Grid", slug: "4-page/grid" },
           ],
         },
       ],

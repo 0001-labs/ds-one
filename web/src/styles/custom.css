@@ -72,12 +72,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-size: 36px;
+  color: #ffffff;
+  var(--typeface-default);
 }
 
 /* Main content area */
 .main-pane {
   padding: 2rem;
+  background: #171717;
 }
 
 /* Sidebar backdrop on mobile */

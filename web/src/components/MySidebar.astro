@@ -40,7 +40,7 @@ const { sidebar } = Astro.locals.starlightRoute;
         gap: 0px;
        
 
-      ">
+      " data-first-two={groupIndex < 2}>
         {group.entries.map((entry) => {
           const isFirstTwo = groupIndex < 2;
           return (
@@ -79,9 +79,18 @@ const { sidebar } = Astro.locals.starlightRoute;
     display: none;
   }
 
-
   details[open] summary button-v1 {
     color: #F1F1F1 !important;
+  }
+
+  /* First two groups always have 20px padding */
+  ul[data-first-two="true"] {
+    padding-left: 20px !important;
+  }
+
+  /* Remove padding-left for lists with variant buttons (Components section) */
+  ul:has(button-v1[variant]) {
+    padding-left: 0 !important;
   }
 </style>
 
