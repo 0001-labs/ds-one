@@ -8,6 +8,12 @@ export class Button extends LitElement {
   static properties = {
     variant: { type: String, reflect: true },
     disabled: { type: Boolean, reflect: true },
+    bold: { type: Boolean, reflect: true },
+    "no-background": {
+      type: Boolean,
+      reflect: true,
+      attribute: "no-background",
+    },
     notionKey: { type: String, attribute: "notion-key" },
     key: { type: String },
     fallback: { type: String },
@@ -21,6 +27,8 @@ export class Button extends LitElement {
   // Public properties
   declare variant: string;
   declare disabled: boolean;
+  declare bold: boolean;
+  declare "no-background": boolean;
   declare notionKey: string | null;
   declare key: string;
   declare fallback: string;
@@ -36,6 +44,8 @@ export class Button extends LitElement {
     super();
     this.variant = "title";
     this.disabled = false;
+    this.bold = false;
+    this["no-background"] = false;
     this.notionKey = null;
     this.key = "";
     this.fallback = "";
@@ -51,15 +61,10 @@ export class Button extends LitElement {
       height: calc(var(--08) * var(--scaling-factor));
       border: none;
       cursor: pointer;
-      font-size: calc(13px * var(--scaling-factor));
+      font-size: calc(var(--type-size-default) * var(--scaling-factor));
       padding: 0 calc(1px * var(--scaling-factor));
       color: var(--black);
-      font-family: var(
-        --typeface,
-        "GT-America-Standard-Regular",
-        Arial,
-        sans-serif
-      );
+      font-family: var(--typeface);
     }
 
     button.title {
@@ -77,6 +82,23 @@ export class Button extends LitElement {
     button.secondary {
       background-color: var(--slate-light);
       font-family: var(--typeface);
+    }
+
+    button[bold] {
+      font-weight: var(--type-weight-bold);
+      font-family: var(--typeface-medium);
+    }
+
+    button[no-background] {
+      background-color: transparent;
+      padding: 0;
+      color: var(--button-color, inherit);
+    }
+
+    button[no-background][bold] {
+      font-weight: var(--type-weight-bold);
+      font-family: var(--typeface-medium);
+      color: var(--button-color, inherit);
     }
 
     .loading {
@@ -126,6 +148,8 @@ export class Button extends LitElement {
       <button
         class=${this.variant}
         ?disabled=${this.disabled}
+        ?bold=${this.bold}
+        ?no-background=${this["no-background"]}
         @click=${this._handleClick}
       >
         ${this._notionText ? this._notionText : html`<slot></slot>`}

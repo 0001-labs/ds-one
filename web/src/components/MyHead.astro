@@ -1,0 +1,33 @@
+---
+// Import the default Starlight Head component
+import Default from '@astrojs/starlight/components/Head.astro';
+// Import the CSS directly so Astro can process it
+import '../../../DS1/1-root/one.css';
+
+// Determine if we're in development mode
+const isDev = import.meta.env.DEV;
+const jsPath = isDev ? '/@fs/Users/joachim/ds-one/dist/ds-one.bundle.js' : 'https://cdn.jsdelivr.net/npm/ds-one@beta/dist/ds-one.bundle.js';
+---
+
+<!-- Include default Starlight head elements -->
+<Default><slot /></Default>
+
+<!-- Load DS one bundle from local build in dev, from CDN in production -->
+<script
+  type="module"
+  src={jsPath}
+></script>
+
+<!-- Optional: Add DS one initialization script -->
+<script is:inline>
+  // DS one is now available globally on all pages
+  console.log('DS one loaded' + (import.meta.env.DEV ? ' from local bundle' : ' from CDN'));
+</script>
+
+<style>
+  /* Ensure DS one components work well with Starlight */
+  :root {
+    /* DS one accent color matches our theme */
+    --accent-color: #72FF3D;
+  }
+</style>

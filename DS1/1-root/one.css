@@ -23,14 +23,16 @@ input {
 
   /* ezo-type */
   --typeface: "GT-America-Standard-Regular";
+  --typeface-medium: "GT-America-Standard-Medium";
   --typeface-japanese: "Noto Sans JP";
   --typeface-mono: "Iosevka";
-  --type-size-default: calc(13px * var(--scaling-factor));
+  --type-size-default: calc(14px * var(--scaling-factor));
   --type-size-small: calc(10px * var(--scaling-factor));
   --type-weight-default: 500;
   --type-lineheight-default: calc(15px * var(--scaling-factor));
   --type-size-heading: calc(15px * var(--scaling-factor));
-  --type-weight-bold: 600;
+  --type-weight-bold: 500;
+
   --type-size-japanese-default: calc(12px * var(--scaling-factor));
   --type-size-japanese-heading: calc(14px * var(--scaling-factor));
   --type-lineheight-japanese-default: calc(17px * var(--scaling-factor));
@@ -111,6 +113,12 @@ html {
 @font-face {
   font-family: GT-America-Standard-Regular;
   src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GT-America-Standard-Medium;
+  src: url("./fonts/GT-America-Standard-Medium.woff2") format("woff2");
   font-display: swap;
 }
 

@@ -28,7 +28,11 @@ export default defineConfig({
         // Override the default Sidebar component
         Sidebar: "./src/components/MySidebar.astro",
         // Override the default Head component to load DS one from CDN
-        Head: "./src/components/CustomHead.astro",
+        Head: "./src/components/MyHead.astro",
+        // Override the default Header component
+        Header: "./src/components/MyHeader.astro",
+        // Override the default PageFrame to use our custom layout
+        PageFrame: "./src/layouts/Layout.astro",
       },
       customCss: [
         // Custom CSS file

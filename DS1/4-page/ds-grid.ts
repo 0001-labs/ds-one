@@ -22,12 +22,14 @@ export class Grid extends LitElement {
       margin-top: 0.5px;
       margin-left: 0px;
       display: grid;
+      width: 100%;
+      height: 100%;
       z-index: -10;
-      grid-template-columns: repeat(19, 79px);
-      grid-template-rows: repeat(500, 19px);
+      grid-template-columns: repeat(auto-fill, 19px);
+      grid-template-rows: repeat(auto-fill, 19px);
       gap: 1px;
-      row-rule: 1px solid #00000012;
-      column-rule: 1px solid #00000012;
+      row-rule: 1px solid rgba(215, 215, 215, 0.05);
+      column-rule: 1px solid rgba(238, 238, 238, 0.05);
       outline: 1px solid #100101e7;
       position: absolute;
       top: 0;

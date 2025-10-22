@@ -4,62 +4,70 @@ const { sidebar } = Astro.locals.starlightRoute;
 ---
 
 <nav style="
-  padding: 1rem;
+  padding: 40px;
   background: #1F1F1F;
   height: 100%;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 ">
   {sidebar.map((group, groupIndex) => (
-    <details open style="margin-bottom: 1rem; display: flex; flex-direction: column; gap: 10px">
+    <details open style="display: flex; flex-direction: column;">
       <summary style="
         cursor: pointer;
         list-style: none;
         user-select: none;
         display: flex;
-        flex-direction: column;
-        gap: 70px;
+        padding: 4px 0;
+        align-items: center;
+        width: 100%;
+        height: 20px;
       ">
-        {group.label}
+        <button-v1 
+          bold 
+          no-background
+        >
+          {group.label}
+        </button-v1>
       </summary>
       
       <ul style="
         list-style: none;
+        display: flex;
+        flex-direction: column;
+        padding-left: 20px;
+        gap: 0px;
+       
+
       ">
-        {group.entries.map((entry) => (
-          <li style="margin: 0;">
-            {groupIndex < 2 ? (
-              <a 
-                href={entry.href}
-                aria-current={entry.isCurrent ? 'page' : undefined}
-                style={`
-                  display: block;
-                  padding: 0.5rem 0.75rem;
-                  color: ${entry.isCurrent ? 'lightgreen' : 'rgba(255, 255, 255, 0.85)'};
-                  text-decoration: none;
-                `}
-              >
-                {entry.label}
-              </a>
-            ) : (
-              <a href={entry.href} style="text-decoration: none; display: block;">
-                <button-v1
-                  variant={entry.isCurrent ? 'primary' : 'secondary'}
-                  aria-current={entry.isCurrent ? 'page' : undefined}
-                  style={`
-                    width: 100%;
-                    text-align: left;
-                    font-size: 0.9375rem;
-                    border: none;
-                    padding-left: ${entry.isCurrent ? '0.6875rem' : '0.75rem'};
-                    cursor: pointer;
-                  `}
-                >
-                  {entry.label}
-                </button-v1>
-              </a>
-            )}
-          </li>
-        ))}
+        {group.entries.map((entry) => {
+          const isFirstTwo = groupIndex < 2;
+          return (
+            <li style=" height: 20px;">
+              {isFirstTwo ? (
+                <a href={entry.href}">
+                  <button-v1
+                    no-background
+                    aria-current={entry.isCurrent ? 'page' : undefined}
+                    style={`--button-color: ${entry.isCurrent ? 'var(--accent-color)' : 'rgba(255, 255, 255, 0.85)'}; width: 100%; text-align: left; cursor: pointer; transition: color 0.2s ease;`}
+                  >
+                    {entry.label}
+                  </button-v1>
+                </a>
+              ) : (
+                <a href={entry.href} style="text-decoration: none; display: block; display: flex; gap: 4px;">
+                  <button-v1
+                    variant={entry.isCurrent ? 'primary' : 'secondary'}
+                    aria-current={entry.isCurrent ? 'page' : undefined}
+                  >
+                    {entry.label}
+                  </button-v1>
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </details>
   ))}
@@ -72,8 +80,8 @@ const { sidebar } = Astro.locals.starlightRoute;
   }
 
 
-  details[open] summary {
-    color: #FFF !important;
+  details[open] summary button-v1 {
+    color: #F1F1F1 !important;
   }
 </style>
 
