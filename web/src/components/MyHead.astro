@@ -6,22 +6,56 @@ import '../../../DS1/1-root/one.css';
 
 // Determine if we're in development mode
 const isDev = import.meta.env.DEV;
-const jsPath = isDev ? '/@fs/Users/Jo4712/ds-one/dist/ds-one.bundle.js' : 'https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.js';
+const jsPath = isDev ? '/@fs/Users/joachim/ds-one/dist/ds-one.bundle.js' : 'https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.js';
 ---
 
 <!-- Include default Starlight head elements -->
 <Default><slot /></Default>
 
-<!-- Load DS one bundle from local build in dev, from CDN in production -->
-<script
-  type="module"
-  src={jsPath}
-></script>
+<!-- Pre-load translations and then load DS one bundle -->
+<script is:inline define:vars={{ jsPath }}>
+  // MUST load translations before DS one bundle initializes
+  (async function() {
+    try {
+      const response = await fetch('/translations.json');
+      const translations = await response.json();
+      
+      // Make translations available to DS one BEFORE loading bundle
+      window.DS_ONE_TRANSLATIONS = translations;
 
-<!-- Optional: Add DS one initialization script -->
-<script is:inline>
-  // DS one is now available globally on all pages
-  console.log('DS one loaded' + (import.meta.env.DEV ? ' from local bundle' : ' from CDN'));
+      const availableLanguages = Object.keys(translations);
+      console.log('[App] Translations pre-loaded:', availableLanguages.length, 'languages');
+
+      // NOW load DS one bundle after translations are ready
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = jsPath;
+      script.addEventListener('load', () => {
+        window.dispatchEvent(new CustomEvent('translations-ready', {
+          detail: { languages: availableLanguages }
+        }));
+      }, { once: true });
+      script.addEventListener('error', () => {
+        window.dispatchEvent(new CustomEvent('translations-ready', {
+          detail: { languages: availableLanguages }
+        }));
+      }, { once: true });
+      document.head.appendChild(script);
+    } catch (error) {
+      console.error('[App] Failed to pre-load translations:', error);
+      
+      // Load DS one anyway even if translations fail
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = jsPath;
+      script.addEventListener('load', () => {
+        window.dispatchEvent(new CustomEvent('translations-ready', {
+          detail: { languages: [] }
+        }));
+      }, { once: true });
+      document.head.appendChild(script);
+    }
+  })();
 </script>
 
 <style>

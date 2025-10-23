@@ -1,0 +1,12 @@
+---
+interface Props {
+  id?: string;
+  [key: string]: any;
+}
+
+const { id, ...rest } = Astro.props;
+---
+
+<text-v1 variant="heading" id={id} {...rest}>
+  <slot />
+</text-v1>

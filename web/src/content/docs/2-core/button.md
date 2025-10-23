@@ -3,8 +3,6 @@ title: Button Component
 description: Interactive button component with multiple variants
 ---
 
-## Overview
-
 The `ds-button` component provides a customizable button with multiple visual variants.
 
 ## Basic Usage

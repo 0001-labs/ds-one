@@ -3,8 +3,6 @@ title: Tooltip Component
 description: Contextual tooltip component for additional information
 ---
 
-## Overview
-
 The `tooltip-v1` component displays additional information when hovering over an element.
 
 ## Basic Usage

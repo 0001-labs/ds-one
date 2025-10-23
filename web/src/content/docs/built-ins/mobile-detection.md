@@ -3,8 +3,6 @@ title: Mobile Detection
 description: Built-in device detection in DS one
 ---
 
-## Overview
-
 DS one includes automatic mobile and device detection, allowing your components to adapt to different screen sizes and device capabilities.
 
 ## Device Detection

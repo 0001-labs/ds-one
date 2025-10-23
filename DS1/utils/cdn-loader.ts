@@ -176,6 +176,17 @@ export async function loadExternalTranslations(): Promise<boolean> {
     return false;
   }
 
+  // Check if translations are already loaded (e.g., by the application)
+  if (
+    window.DS_ONE_TRANSLATIONS &&
+    Object.keys(window.DS_ONE_TRANSLATIONS).length > 0
+  ) {
+    console.log(
+      `[DS one] Translations already loaded (${Object.keys(window.DS_ONE_TRANSLATIONS).length} languages), skipping auto-load`
+    );
+    return true;
+  }
+
   const sources = resolveTranslationSources();
 
   for (const source of sources) {

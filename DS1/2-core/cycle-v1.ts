@@ -649,7 +649,10 @@ export class Cycle extends LitElement {
             : ""}"
         >
           <ds-button
-            variant=${this.variant || "primary"}
+            variant=${this.variant ||
+            (this.type === "language" || this.type === "theme"
+              ? "secondary"
+              : "primary")}
             ?disabled=${this.disabled}
             @click=${this.handleButtonClick}
           >

@@ -3,8 +3,6 @@ title: Theming
 description: Customize the look and feel of DS One components
 ---
 
-## Overview
-
 DS One uses CSS custom properties (variables) for theming, making it easy to customize colors, spacing, and other design tokens.
 
 ## Color System

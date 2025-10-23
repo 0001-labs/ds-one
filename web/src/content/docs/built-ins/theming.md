@@ -3,8 +3,6 @@ title: Theming
 description: Built-in theming system in DS one
 ---
 
-## Overview
-
 DS one uses CSS custom properties for theming, allowing you to customize colors and styles without modifying component code.
 
 ## Quick Customization

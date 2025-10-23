@@ -3,8 +3,6 @@ title: Icon Component
 description: SVG icon component with a comprehensive icon set
 ---
 
-## Overview
-
 The `icon-v1` component provides access to a comprehensive set of SVG icons.
 
 ## Basic Usage

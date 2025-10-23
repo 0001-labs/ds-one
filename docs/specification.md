@@ -2,8 +2,6 @@
 
 > Complete specification for publishing and distributing DS one as an NPM package with multiple installation methods
 
-## Overview
-
 This document outlines the complete specification for publishing DS one as a distributable NPM package, including installation methods, file structure, build process, and usage patterns.
 
 ## Supported Languages

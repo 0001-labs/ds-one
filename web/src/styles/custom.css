@@ -36,7 +36,6 @@
     rgba(118, 75, 162, 0.1) 100%
   );
   border-radius: 1rem;
-  padding: 2rem;
 }
 
 /* Code blocks */
@@ -79,8 +78,8 @@ h6 {
 
 /* Main content area */
 .main-pane {
-  padding: 2rem;
   background: #171717;
+  padding: 40px;
 }
 
 /* Sidebar backdrop on mobile */
@@ -116,6 +115,38 @@ nav::-webkit-scrollbar-thumb:hover {
 
 .sl-link-button:hover {
   transform: translateY(-1px);
+}
+
+.content-panel {
+  border-top-width: 0px;
+  padding: 0px;
+}
+
+h1#_top {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  max-height: 40px;
+  margin: 0 0 40px 0;
+}
+
+right-sidebar {
+  margin-top: 100px !important;
+  z-index: 100;
+  position: relative;
+}
+
+/* Header z-index */
+header {
+  z-index: 200;
+  position: relative;
+}
+
+/* Ensure content stays below header and sidebar */
+.main-pane,
+.content-panel {
+  z-index: 1;
+  position: relative;
 }
 
 /* Table styles */

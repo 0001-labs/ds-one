@@ -3,8 +3,6 @@ title: Text Component
 description: Typography component for displaying text content
 ---
 
-## Overview
-
 The `text-v1` component provides consistent typography styles across your application.
 
 ## Basic Usage

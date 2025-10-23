@@ -83,7 +83,7 @@ export class Button extends LitElement {
     }
 
     button.secondary {
-      background-color: var(--slate-light);
+      background-color: light-dark(var(--slate-light), var(--white));
       font-family: var(--typeface);
     }
 

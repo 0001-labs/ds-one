@@ -3,8 +3,6 @@ title: Quick Start
 description: Get up and running with DS one in minutes
 ---
 
-## Your First DS one Page
-
 Create a simple HTML page using DS one components:
 
 ```html

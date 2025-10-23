@@ -32,7 +32,6 @@ customElements.define(
 
       .markdown-header {
         padding-bottom: 1rem;
-        border-bottom: 2px solid #eee;
       }
 
       .markdown-title {
@@ -81,7 +80,6 @@ customElements.define(
       .markdown-content h4,
       .markdown-content h5,
       .markdown-content h6 {
-        margin-top: 2rem;
         margin-bottom: 1rem;
         font-weight: 600;
         line-height: 1.3;
@@ -159,7 +157,6 @@ customElements.define(
       .markdown-content td {
         padding: 0.75rem;
         text-align: left;
-        border-bottom: 1px solid #ddd;
       }
 
       .markdown-content th {
@@ -179,14 +176,7 @@ customElements.define(
       .markdown-content img {
         max-width: 100%;
         height: auto;
-        border-radius: 5px;
         margin: 1rem 0;
-      }
-
-      .markdown-content hr {
-        border: none;
-        border-top: 1px solid #eee;
-        margin: 2rem 0;
       }
     `;
 

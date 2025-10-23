@@ -33,6 +33,8 @@ export default defineConfig({
         Header: "./src/components/MyHeader.astro",
         // Override the default PageFrame to use our custom layout
         PageFrame: "./src/layouts/Layout.astro",
+        // Override h1 to use ds-one text component
+        h1: "./src/components/Heading.astro",
       },
       customCss: [
         // Custom CSS file

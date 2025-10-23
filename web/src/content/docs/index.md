@@ -3,8 +3,6 @@ title: Introduction
 description: Learn how to install and use DS one in your project
 ---
 
-## Installation Methods
-
 DS one can be installed via package managers or loaded directly from a CDN.
 
 ### Package Manager

@@ -3,8 +3,6 @@ title: Link Component
 description: Navigation link component with automatic scroll position preservation
 ---
 
-## Overview
-
 The `link-v1` component provides navigation links with built-in support for internal routing and scroll position preservation.
 
 ## Basic Usage
@@ -29,11 +27,11 @@ Internal links automatically preserve scroll position when navigating:
 
 ## Attributes
 
-| Attribute | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `href` | `string` | - | URL to navigate to |
+| Attribute  | Type      | Default | Description                                                    |
+| ---------- | --------- | ------- | -------------------------------------------------------------- |
+| `href`     | `string`  | -       | URL to navigate to                                             |
 | `internal` | `boolean` | `false` | Whether this is an internal link (enables scroll preservation) |
-| `target` | `string` | - | Link target (`_blank`, `_self`, etc.) |
+| `target`   | `string`  | -       | Link target (`_blank`, `_self`, etc.)                          |
 
 ## Scroll Position Preservation
 
@@ -63,4 +61,3 @@ DS One automatically preserves scroll position when navigating between pages usi
   Documentation
 </link-v1>
 ```
-

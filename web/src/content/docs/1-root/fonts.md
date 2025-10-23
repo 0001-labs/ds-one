@@ -3,8 +3,6 @@ title: Fonts
 description: Learn about the fonts used in DS one
 ---
 
-# Fonts
-
 DS one uses carefully selected fonts to maintain consistency across the design system.
 
 ## Typography

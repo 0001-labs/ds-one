@@ -69,31 +69,27 @@ import Search from '@astrojs/starlight/components/Search.astro';
     display: flex;
     align-items: center;
     gap: 1rem;
+    padding-right: 40px;
     min-width: fit-content;
   ">
-    <!-- Language Toggle -->
-    <ds-button
-      no-background
-      style="--button-color: #CDCDCD; font-size: 0.875rem; cursor: pointer; transition: color 0.2s ease;"
-    >
-      EN
-    </ds-button>
+    <!-- Language Toggle using DS one cycle component -->
+    <div style="display: flex; align-items: center; pointer-events: all;">
+      <cycle-v1 type="language" variant="secondary"></cycle-v1>
+    </div>
 
     <!-- Theme Toggle -->
     <ds-button
       no-background
+      key="theme"
+      default-text="Theme"
       style="--button-color: #CDCDCD; font-size: 0.875rem; cursor: pointer; transition: color 0.2s ease;"
     >
-      Dark
+      Theme
     </ds-button>
   </div>
 </header>
 
 <style>
-  header {
-    font-family: 'GT-America-Standard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-
   /* Style the search component to match the design */
   :global(.custom-search) {
     width: 300px;
