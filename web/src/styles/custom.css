@@ -72,13 +72,13 @@ h4,
 h5,
 h6 {
   font-size: 36px;
-  color: #ffffff;
-  var(--typeface-default);
+  color: var(--ds1-docs-header-text);
+  font-family: var(--typeface);
 }
 
 /* Main content area */
 .main-pane {
-  background: #171717;
+  background: var(--ds1-docs-content-bg);
   padding: 40px;
 }
 

@@ -18,7 +18,7 @@ const { title } = Astro.props;
     <title>{title || 'DS One'}</title>
     <MyHead />
   </head>
-  <body style="margin: 0; padding: 0; background: #1F1F1F; color: #F1F1F1;">
+  <body style="margin: 0; padding: 0; background: var(--ds1-docs-sidebar-bg); color: var(--ds1-docs-header-text);">
     <ds-grid align="left"></ds-grid>
     <!-- Header -->
     
@@ -33,7 +33,7 @@ const { title } = Astro.props;
       <!-- Sidebar -->
       <div style="
         width: 280.5px;
-        border-right: 1px solid #000000;
+        border-right: 1px solid var(--ds1-docs-header-border);
         overflow-y: auto;
       ">
         <MySidebar />
@@ -42,8 +42,8 @@ const { title } = Astro.props;
        <div style="
         width: 20px;
         height: 100%;
-        background: #1F1F1F;
-        border-right: 1px solid #000000;
+        background: var(--ds1-docs-sidebar-bg);
+        border-right: 1px solid var(--ds1-docs-header-border);
       ">
 
       </div>
@@ -66,8 +66,8 @@ const { title } = Astro.props;
       html, body {
         margin: 0;
         padding: 0;
-        background: #1F1F1F;
-        color: #F1F1F1;
+        background: var(--ds1-docs-sidebar-bg);
+        color: var(--ds1-docs-header-text);
       }
 
       /* Scrollbar styling */
@@ -81,12 +81,12 @@ const { title } = Astro.props;
       }
 
       ::-webkit-scrollbar-thumb {
-        background: #3a3a3a;
+        background: light-dark(#c0c0c0, #3a3a3a);
         border-radius: 4px;
       }
 
       ::-webkit-scrollbar-thumb:hover {
-        background: #4a4a4a;
+        background: light-dark(#a0a0a0, #4a4a4a);
       }
     </style>
   </body>

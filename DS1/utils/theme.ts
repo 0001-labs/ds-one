@@ -2,14 +2,22 @@ import { signal } from "@lit-labs/signals";
 
 export type ThemeType = "light" | "dark";
 
-const storedTheme =
-  typeof window !== "undefined"
-    ? window.localStorage?.getItem("ds-one:theme") ?? undefined
-    : undefined;
+function getInitialTheme(): ThemeType {
+  if (typeof window === "undefined") {
+    return "light";
+  }
 
-export const currentTheme = signal<ThemeType>(
-  (storedTheme as ThemeType | undefined) || "light"
-);
+  const storedTheme = window.localStorage?.getItem("ds-one:theme");
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  // Check system preference
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return prefersDark ? "dark" : "light";
+}
+
+export const currentTheme = signal<ThemeType>(getInitialTheme());
 
 export function setTheme(theme: ThemeType): void {
   if (theme === currentTheme.get()) {
@@ -34,5 +42,15 @@ export function setTheme(theme: ThemeType): void {
     window.dispatchEvent(
       new CustomEvent("theme-changed", { detail: { theme } })
     );
+  }
+}
+
+// Initialize theme on load
+if (typeof window !== "undefined") {
+  const theme = currentTheme.get();
+  const root = window.document?.documentElement;
+  if (root) {
+    root.classList.remove("light-theme", "dark-theme");
+    root.classList.add(`${theme}-theme`);
   }
 }

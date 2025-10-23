@@ -21,6 +21,17 @@ input {
   /* accent color - defaults to blue but can be changed by user */
   --accent-color: var(--light-green);
 
+  /* DS1 Documentation Colors */
+  --ds1-docs-header-bg: light-dark(#f5f5f5, #232323);
+  --ds1-docs-header-border: light-dark(#e0e0e0, #000000);
+  --ds1-docs-header-text: light-dark(#2a2a2a, #f1f1f1);
+  --ds1-docs-header-text-secondary: light-dark(#666666, #cdcdcd);
+  --ds1-docs-accent-green: #72ff3d;
+  --ds1-docs-sidebar-bg: light-dark(#fafafa, #1f1f1f);
+  --ds1-docs-content-bg: light-dark(#ffffff, #171717);
+  --ds1-docs-search-bg: light-dark(#f0f0f0, #171717);
+  --ds1-docs-divider: light-dark(#e0e0e0, #000000);
+
   /* ezo-type */
   --typeface: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
@@ -69,15 +80,23 @@ input {
 
   /* ezo-button */
   --button-background-color-primary: var(--accent-color);
-  --button-background-color-secondary: var(--slate-light);
+  --button-background-color-secondary: light-dark(
+    var(--slate-light),
+    var(--slate-dark)
+  );
+  --button-text-color: light-dark(var(--black), var(--white));
+  --button-text-color-secondary: light-dark(
+    var(--slate-dark),
+    var(--slate-light)
+  );
 
   /* ezo-text-color */
-  --text-color-primary: var(--black), var(--white);
-  --text-color-dimmed: var(--slate-light);
+  --text-color-primary: light-dark(var(--black), var(--white));
+  --text-color-dimmed: light-dark(var(--slate), var(--slate-light));
 
   /* ezo-icon */
-  --icon-background: var(--slate-light);
-  --icon-color: var(--black);
+  --icon-background: light-dark(var(--slate-light), var(--slate-dark));
+  --icon-color: light-dark(var(--black), var(--white));
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -86,14 +105,22 @@ input {
   color-scheme: light dark;
 }
 
+:root.light-theme {
+  color-scheme: light;
+}
+
+:root.dark-theme {
+  color-scheme: dark;
+}
+
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not(.light-theme):not(.dark-theme) {
     color-scheme: light;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light-theme):not(.dark-theme) {
     color-scheme: dark;
   }
 }
@@ -166,7 +193,7 @@ html {
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
   outline: var(--outline-stroke);
-  background-color: var(--white), var(--black);
+  background-color: light-dark(var(--white), var(--black));
 }
 
 .matrix__row-header {
@@ -180,7 +207,7 @@ html {
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
   outline: var(--outline-stroke);
-  background-color: rgb(220 241 213), var(--white);
+  background-color: light-dark(rgb(220 241 213), var(--slate-dark));
 }
 
 .mobile .matrix__row-header {
@@ -197,7 +224,7 @@ html {
 .matrix__row-content {
   display: flex;
   align-items: center;
-  background-color: #dbe4ee, var(--white);
+  background-color: light-dark(#dbe4ee, var(--slate-dark));
 }
 
 .matrix__row-content--dragging {
@@ -212,9 +239,7 @@ html {
   height: var(--item-height);
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
-  outline:
-    calc(var(--outline-stroke) * var(--scaling-factor)) solid var(--black),
-    var(--white);
+  outline: var(--outline-stroke);
 }
 
 .matrix__row-item {
@@ -224,9 +249,7 @@ html {
   width: var(--item-width);
   height: var(--item-height);
   margin-right: var(--margin-correction);
-  outline:
-    calc(var(--outline-stroke) * var(--scaling-factor)) solid var(--black),
-    var(--white);
+  outline: var(--outline-stroke);
 }
 
 .board__container {
@@ -324,8 +347,8 @@ html {
   margin-top: var(--margin-correction);
   margin-right: var(--margin-correction);
   outline: var(--outline-stroke);
-  background-color: var(--white);
-  color: light-dark(var(--black), var(--black));
+  background-color: light-dark(var(--white), var(--slate-dark));
+  color: var(--text-color-primary);
 }
 
 .mobile .card {
@@ -346,9 +369,9 @@ html {
   z-index: 99;
   margin-bottom: 2px;
   padding-left: calc(3px * var(--scaling-factor));
-  color: #2a2a2a;
-  outline: 1px solid light-dark(var(--black), var(--black));
-  background-color: var(--apple-green);
+  color: var(--text-color-primary);
+  outline: var(--outline-stroke);
+  background-color: var(--accent-color);
 }
 
 .item-container {

@@ -24,19 +24,20 @@ export class Grid extends LitElement {
       display: grid;
       width: 100%;
       height: 100%;
-      z-index: -10;
       grid-template-columns: repeat(auto-fill, 19px);
       grid-template-rows: repeat(auto-fill, 19px);
       gap: 1px;
-      row-rule: 1px solid rgba(215, 215, 215, 0.022);
-      column-rule: 1px solid rgba(238, 238, 238, 0.022);
-      outline: 1px solid #100101e7;
+      row-rule: 1px solid
+        light-dark(rgba(0, 0, 0, 0.03), rgba(215, 215, 215, 0.022));
+      column-rule: 1px solid
+        light-dark(rgba(0, 0, 0, 0.03), rgba(238, 238, 238, 0.022));
+      outline: 1px solid light-dark(rgba(0, 0, 0, 0.15), #100101e7);
       position: absolute;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
       pointer-events: none;
-      z-index: 1;
+      z-index: 300;
     }
 
     :host([align="left"]) {

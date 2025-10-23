@@ -66,24 +66,25 @@ export class Button extends LitElement {
       cursor: pointer;
       font-size: calc(var(--type-size-default) * var(--scaling-factor));
       padding: 0 calc(1px * var(--scaling-factor));
-      color: var(--black);
+      color: var(--button-text-color);
       font-family: var(--typeface);
     }
 
     button.title {
-      background-color: var(--slate-light);
-      color: var(--black);
+      background-color: var(--button-background-color-secondary);
+      color: var(--button-text-color);
     }
 
     button.primary {
       background-color: var(--accent-color);
-      color: var(--black);
+      color: var(--button-text-color);
       text-decoration-line: none;
       font-family: var(--typeface);
     }
 
     button.secondary {
-      background-color: light-dark(var(--slate-light), var(--white));
+      background-color: var(--button-background-color-secondary);
+      color: var(--button-text-color);
       font-family: var(--typeface);
     }
 
@@ -96,13 +97,13 @@ export class Button extends LitElement {
       background-color: transparent;
       max-height: var(--1);
       padding: 0;
-      color: var(--button-color, inherit);
+      color: var(--button-color, var(--button-text-color-secondary));
     }
 
     button[no-background][bold] {
       font-weight: var(--type-weight-bold);
       font-family: var(--typeface-medium);
-      color: var(--button-color, inherit);
+      color: var(--button-color, var(--button-text-color-secondary));
     }
 
     .loading {

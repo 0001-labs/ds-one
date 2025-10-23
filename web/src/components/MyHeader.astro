@@ -4,8 +4,8 @@ import Search from '@astrojs/starlight/components/Search.astro';
 ---
 
 <header style="
-  background: #232323;
-  border-bottom: 1px solid black;
+  background: var(--ds1-docs-header-bg);
+  border-bottom: 1px solid var(--ds1-docs-header-border);
   display: flex;
   align-items: center;
   height: 80.5px;
@@ -18,14 +18,14 @@ import Search from '@astrojs/starlight/components/Search.astro';
     height: 81px;
     width: 280.5px;
     padding: 40px;
-    border-right: 1px black solid;
+    border-right: 1px var(--ds1-docs-header-border) solid;
   ">
     <div style="
       height: 40px;
       display: flex;
       font-family: 'GT-America-Standard-Regular', sans-serif;
       font-size: 32px;
-      color: #F1F1F1;
+      color: var(--ds1-docs-header-text);
       gap: 11px;
       flex-direction: row;
       align-items: baseline;
@@ -38,7 +38,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
       display: flex;
       width: 16px;
       height: 16px;
-      background: #72FF3D;
+      background: var(--ds1-docs-accent-green);
       
     "></div>
     </div>
@@ -48,7 +48,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
   <div style="
     width: 20px;
     height: 80.5px;
-    border-right: 1px black solid;
+    border-right: 1px var(--ds1-docs-header-border) solid;
   ">
   </div>
 
@@ -77,15 +77,8 @@ import Search from '@astrojs/starlight/components/Search.astro';
       <cycle-v1 type="language" variant="secondary"></cycle-v1>
     </div>
 
-    <!-- Theme Toggle -->
-    <ds-button
-      no-background
-      key="theme"
-      default-text="Theme"
-      style="--button-color: #CDCDCD; font-size: 0.875rem; cursor: pointer; transition: color 0.2s ease;"
-    >
-      Theme
-    </ds-button>
+    <!-- Theme Toggle using DS one cycle component -->
+    <cycle-v1 type="theme" variant="secondary"></cycle-v1>
   </div>
 </header>
 
@@ -101,10 +94,10 @@ import Search from '@astrojs/starlight/components/Search.astro';
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #171717;
+    background: var(--ds1-docs-search-bg);
     border: none;
     border-radius: 4px;
-    color: #CDCDCD;
+    color: var(--ds1-docs-header-text-secondary);
     cursor: pointer;
     font-size: 0.875rem;
     font-family: 'GT-America-Standard-Regular', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -112,7 +105,7 @@ import Search from '@astrojs/starlight/components/Search.astro';
   }
 
   :global(.custom-search button[data-open-modal]:hover) {
-    color: #F1F1F1;
+    color: var(--ds1-docs-header-text);
   }
 
   :global(.custom-search button[data-open-modal]:focus) {
