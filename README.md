@@ -6,7 +6,7 @@ Build modern UIs with web components!
 
 [![npm version](https://badge.fury.io/js/ds-one.svg)](https://badge.fury.io/js/ds-one)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.1.11--alpha.0-orange.svg)](https://github.com/Jo4712/ds-one)
+[![Version](https://img.shields.io/badge/version-0.1.11--alpha.1-orange.svg)](https://github.com/Jo4712/ds-one)
 
 **DS one** is a modern design system that provides a comprehensive set of reusable UI components built with Web Components. Think "Material Design meets Web Standards"—a simple, accessible component library that works with any framework or vanilla JavaScript.
 
@@ -27,7 +27,7 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.1.11-alpha.0`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.1.11-alpha.1`. Use `@alpha` tag to install.
 
 ### Basic Usage
 

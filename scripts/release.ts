@@ -1,37 +1,45 @@
 #!/usr/bin/env bun
 // Simple Bun release helper: bumps version in root package.json and optionally commits/tags
-import { $ } from 'bun';
-import * as fs from 'node:fs';
-import * as path from 'node:path';
+import { $ } from "bun";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
-type BumpType = 'patch' | 'minor' | 'major' | 'prerelease';
+type BumpType = "patch" | "minor" | "major" | "prerelease";
 
 function readJson(file: string) {
-  return JSON.parse(fs.readFileSync(file, 'utf8')) as Record<string, any>;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as Record<string, any>;
 }
 
 function writeJson(file: string, data: unknown) {
-  fs.writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
+  fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n");
 }
 
-function bumpSemver(version: string, type: BumpType, preid = 'alpha'): string {
+function bumpSemver(version: string, type: BumpType, preid = "alpha"): string {
   // Basic semver bump supporting pre-release. For complex cases prefer semver lib.
   const pre = /-(.*)$/.exec(version)?.[1] ?? null;
-  const [major, minor, patch] = version.replace(/-.*/, '').split('.').map((n) => parseInt(n, 10));
+  const [major, minor, patch] = version
+    .replace(/-.*/, "")
+    .split(".")
+    .map((n) => parseInt(n, 10));
   if (Number.isNaN(major) || Number.isNaN(minor) || Number.isNaN(patch)) {
     throw new Error(`Invalid version: ${version}`);
   }
 
-  let nextMajor = major, nextMinor = minor, nextPatch = patch;
+  let nextMajor = major,
+    nextMinor = minor,
+    nextPatch = patch;
   let nextPre: string | null = null;
 
-  if (type === 'major') {
-    nextMajor += 1; nextMinor = 0; nextPatch = 0;
-  } else if (type === 'minor') {
-    nextMinor += 1; nextPatch = 0;
-  } else if (type === 'patch') {
+  if (type === "major") {
+    nextMajor += 1;
+    nextMinor = 0;
+    nextPatch = 0;
+  } else if (type === "minor") {
+    nextMinor += 1;
+    nextPatch = 0;
+  } else if (type === "patch") {
     nextPatch += 1;
-  } else if (type === 'prerelease') {
+  } else if (type === "prerelease") {
     // If already pre, increment numeric suffix or append .0
     if (pre && pre.startsWith(preid)) {
       const m = new RegExp(`^${preid}(?:\\.(\\d+))?$`).exec(pre);
@@ -46,18 +54,20 @@ function bumpSemver(version: string, type: BumpType, preid = 'alpha'): string {
 
 async function main() {
   const args = process.argv.slice(2);
-  const type = (args[0] as BumpType) || 'patch';
-  const preidArg = args.find((a) => a.startsWith('--preid='));
-  const preid = preidArg ? preidArg.split('=')[1] : 'alpha';
-  const noGit = args.includes('--no-git');
-  const push = args.includes('--push');
+  const type = (args[0] as BumpType) || "patch";
+  const preidArg = args.find((a) => a.startsWith("--preid="));
+  const preid = preidArg ? preidArg.split("=")[1] : "alpha";
+  const noGit = args.includes("--no-git");
+  const push = args.includes("--push");
 
-  if (!['patch', 'minor', 'major', 'prerelease'].includes(type)) {
-    console.error('Usage: bun run scripts/release.ts <patch|minor|major|prerelease> [--preid=alpha] [--no-git] [--push]');
+  if (!["patch", "minor", "major", "prerelease"].includes(type)) {
+    console.error(
+      "Usage: bun run scripts/release.ts <patch|minor|major|prerelease> [--preid=alpha] [--no-git] [--push]"
+    );
     process.exit(1);
   }
 
-  const pkgPath = path.resolve(process.cwd(), 'package.json');
+  const pkgPath = path.resolve(process.cwd(), "package.json");
   const pkg = readJson(pkgPath);
   const current = pkg.version as string;
   const next = bumpSemver(current, type, preid);
@@ -66,8 +76,47 @@ async function main() {
   writeJson(pkgPath, pkg);
   console.log(`Version bumped: ${current} -> ${next}`);
 
+  // Update version in README.md
+  const readmePath = path.resolve(process.cwd(), "README.md");
+  if (fs.existsSync(readmePath)) {
+    let readme = fs.readFileSync(readmePath, "utf8");
+    // Update badge version
+    readme = readme.replace(
+      /version-[\d\.]+-(?:alpha|beta|rc)\.[\d]+-orange/g,
+      `version-${next}-orange`
+    );
+    // Update version text
+    readme = readme.replace(
+      /version `[\d\.]+-(?:alpha|beta|rc)\.[\d]+`/g,
+      `version \`${next}\``
+    );
+    fs.writeFileSync(readmePath, readme, "utf8");
+    console.log(`Updated README.md`);
+  }
+
+  // Update version in docs/npm-publishing.md
+  const docsPath = path.resolve(process.cwd(), "docs/npm-publishing.md");
+  if (fs.existsSync(docsPath)) {
+    let docs = fs.readFileSync(docsPath, "utf8");
+    docs = docs.replace(
+      /ds-one@[\d\.]+-(?:alpha|beta|rc)\.[\d]+/g,
+      `ds-one@${next}`
+    );
+    fs.writeFileSync(docsPath, docs, "utf8");
+    console.log(`Updated docs/npm-publishing.md`);
+  }
+
+  // Update version in web/package.json (docs site)
+  const webPkgPath = path.resolve(process.cwd(), "web/package.json");
+  if (fs.existsSync(webPkgPath)) {
+    const webPkg = readJson(webPkgPath);
+    webPkg.version = next;
+    writeJson(webPkgPath, webPkg);
+    console.log(`Updated web/package.json`);
+  }
+
   if (!noGit) {
-    await $`git add package.json`;
+    await $`git add package.json README.md docs/npm-publishing.md web/package.json`;
     await $`git commit -m ${`release: v${next}`}`.nothrow();
     await $`git tag -a v${next} -m ${`release: v${next}`}`.nothrow();
     if (push) {
@@ -81,5 +130,3 @@ main().catch((err) => {
   console.error(err);
   process.exit(1);
 });
-
-
