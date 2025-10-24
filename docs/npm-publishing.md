@@ -72,7 +72,7 @@ bun add ds-one@alpha
 npm install ds-one@alpha
 
 # Install specific version
-bun add ds-one@0.1.11-alpha.1
+bun add ds-one@0.1.11-alpha.3
 ```
 
 ## Usage in Another Project
@@ -86,7 +86,7 @@ import "ds-one/styles";
 // All components are now registered
 document.body.innerHTML = `
   <ds-button variant="primary">Click me</ds-button>
-  <text-v1 variant="heading">Hello World</text-v1>
+  <ds-text variant="heading">Hello World</ds-text>
 `;
 ```
 
@@ -94,7 +94,7 @@ document.body.innerHTML = `
 
 ```javascript
 import "ds-one/components/ds-button";
-import "ds-one/components/text-v1";
+import "ds-one/components/ds-text";
 import "ds-one/styles";
 ```
 

@@ -27,7 +27,7 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.1.11-alpha.1`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.1.11-alpha.3`. Use `@alpha` tag to install.
 
 ### Basic Usage
 
@@ -45,12 +45,12 @@ yarn add ds-one@alpha
     ></script>
     <script
       type="module"
-      src="node_modules/design-system-one/2 Core/text-v1.ts"
+      src="node_modules/design-system-one/2 Core/ds-text.ts"
     ></script>
   </head>
   <body>
     <ds-button variant="primary" key="welcomeButton">Get Started</ds-button>
-    <text-v1 variant="heading" key="mainHeading">Welcome to DS one</text-v1>
+    <ds-text variant="heading" key="mainHeading">Welcome to DS one</ds-text>
   </body>
 </html>
 ```
@@ -96,7 +96,7 @@ Try DS one in your browser: **[dsone.dev](https://dsone.dev)** (documentation sl
 
 ### Completed Features
 
-- ✅ Core component library (ds-button, text-v1, icon-v1, etc.)
+- ✅ Core component library (ds-button, ds-text, icon-v1, etc.)
 - ✅ Theming system with accent color support
 - ✅ Internationalization with language keys
 - ✅ Responsive design with mobile scaling
