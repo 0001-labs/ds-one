@@ -47,7 +47,7 @@ export class SingleNav extends LitElement {
 
     return html`
       <a href="${href}">
-        <text-v1 key="${navConfig.key}"></text-v1>
+        <ds-text key="${navConfig.key}"></ds-text>
         <icon-v1 type="right"></icon-v1>
       </a>
     `;

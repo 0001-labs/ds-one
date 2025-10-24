@@ -22,7 +22,7 @@ export class Grid extends LitElement {
       margin-top: 0.5px !important;
       margin-left: 0.5px !important;
       display: grid;
-      width: 100%;
+      width: 1440px;
       height: 100%;
       grid-template-columns: repeat(auto-fill, 19px);
       grid-template-rows: repeat(auto-fill, 19px);
@@ -32,7 +32,7 @@ export class Grid extends LitElement {
       column-rule: 1px solid
         light-dark(rgba(0, 0, 0, 0.03), rgba(238, 238, 238, 0.022));
       outline: 1px solid light-dark(rgba(0, 0, 0, 0.15), #100101e7);
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -51,8 +51,9 @@ export class Grid extends LitElement {
     }
 
     :host([align="right"]) {
-      left: 100%;
-      transform: translateX(-100%);
+      left: auto;
+      right: 0;
+      transform: none;
     }
   `;
 

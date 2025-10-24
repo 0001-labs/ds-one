@@ -4,7 +4,7 @@ import { getText } from "../utils/language";
 /**
  * A component for displaying text from translations
  *
- * @element text-v1
+ * @element ds-text
  * @prop {string} key - The translation key to use
  * @prop {string} defaultValue - Default value if translation is not found
  * @prop {string} fallback - Optional fallback text if translation is not found (deprecated, use defaultValue)
@@ -35,7 +35,7 @@ export class Text extends LitElement {
     // Create bound event handlers for proper cleanup
     this.boundHandlers = {
       languageChanged: (() => {
-        console.log("Language changed event received in text-v1");
+        console.log("Language changed event received in ds-text");
         this._loadText();
       }) as EventListener,
     };
@@ -112,10 +112,10 @@ export class Text extends LitElement {
   }
 }
 
-customElements.define("text-v1", Text);
+customElements.define("ds-text", Text);
 
 declare global {
   interface HTMLElementTagNameMap {
-    "text-v1": Text;
+    "ds-text": Text;
   }
 }

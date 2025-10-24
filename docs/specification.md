@@ -145,7 +145,7 @@ ds-one/
 │   │   └── fonts/
 │   ├── 2-core/              # Core components
 │   │   ├── ds-button.ts
-│   │   ├── text-v1.ts
+│   │   ├── ds-text.ts
 │   │   └── ...
 │   ├── 3-unit/              # Composite components
 │   │   ├── list-v1.ts
@@ -230,13 +230,13 @@ import "ds-one/styles";
 // Components are auto-registered
 document.body.innerHTML = `
   <ds-layout mode="portfolio" align="center">
-    <text-v1
+    <ds-text
       style="grid-area: title"
       variant="heading"
       key="welcomeTitle"
     >
       Welcome
-    </text-v1>
+    </ds-text>
     <div
       style="grid-area: projects; display: flex; gap: var(--1)"
     >
@@ -254,13 +254,13 @@ document.body.innerHTML = `
 ```javascript
 // Import specific components
 import "ds-one/components/ds-button";
-import "ds-one/components/text-v1";
+import "ds-one/components/ds-text";
 import "ds-one/styles";
 
 // Use imported components
 document.body.innerHTML = `
   <ds-button variant="primary">Click me</ds-button>
-  <text-v1 variant="body">Hello World</text-v1>
+  <ds-text variant="body">Hello World</ds-text>
 `;
 ```
 
@@ -375,12 +375,12 @@ If none are found, the system falls back to bundled translations.
     <cycle-v1 type="language"></cycle-v1>
 
     <!-- Text components with translation keys -->
-    <text-v1 key="welcome"></text-v1>
-    <text-v1 key="description"></text-v1>
+    <ds-text key="welcome"></ds-text>
+    <ds-text key="description"></ds-text>
 
     <!-- Works in buttons too -->
     <ds-button variant="primary">
-      <text-v1 key="getStarted"></text-v1>
+      <ds-text key="getStarted"></ds-text>
     </ds-button>
   </body>
 </html>
@@ -445,17 +445,17 @@ Language labels are generated automatically using `Intl.DisplayNames` (when avai
 
 #### Auto-Updating Components
 
-All `<text-v1>` components with a `key` attribute automatically update when the user changes language. No page reload required.
+All `<ds-text>` components with a `key` attribute automatically update when the user changes language. No page reload required.
 
 ```html
 <!-- These all update automatically when language changes -->
-<text-v1 key="siteTitle"></text-v1>
-<text-v1 key="welcomeMessage"></text-v1>
-<text-v1 key="footerCopyright"></text-v1>
+<ds-text key="siteTitle"></ds-text>
+<ds-text key="welcomeMessage"></ds-text>
+<ds-text key="footerCopyright"></ds-text>
 
 <!-- Works inside other components too -->
 <ds-button variant="primary">
-  <text-v1 key="submitButton"></text-v1>
+  <ds-text key="submitButton"></ds-text>
 </ds-button>
 ```
 
@@ -520,22 +520,22 @@ my-website/
   <body>
     <!-- Header with language selector -->
     <header>
-      <text-v1 key="welcome"></text-v1>
+      <ds-text key="welcome"></ds-text>
       <cycle-v1 type="language"></cycle-v1>
     </header>
 
     <!-- Navigation - all text updates on language change -->
     <nav>
-      <ds-button href="index.html"><text-v1 key="home"></text-v1></ds-button>
-      <ds-button href="about.html"><text-v1 key="about"></text-v1></ds-button>
+      <ds-button href="index.html"><ds-text key="home"></ds-text></ds-button>
+      <ds-button href="about.html"><ds-text key="about"></ds-text></ds-button>
       <ds-button href="contact.html"
-        ><text-v1 key="contact"></text-v1
+        ><ds-text key="contact"></ds-text
       ></ds-button>
     </nav>
 
     <!-- Content -->
     <main>
-      <text-v1 key="description"></text-v1>
+      <ds-text key="description"></ds-text>
     </main>
   </body>
 </html>
@@ -548,7 +548,7 @@ my-website/
 3. **Component Initialization**: The `cycle-v1` component populates with available languages
 4. **User Selection**: User clicks the language cycle to change languages
 5. **Event Broadcasting**: A `language-changed` event is dispatched
-6. **Automatic Updates**: All `text-v1` components listen for the event and update their content
+6. **Automatic Updates**: All `ds-text` components listen for the event and update their content
 7. **Persistence**: The selected language is saved to localStorage
 
 #### Benefits
@@ -586,7 +586,7 @@ See the complete working example in `examples/project-cdn/`.
 declare global {
   interface HTMLElementTagNameMap {
     "ds-button": Button;
-    "text-v1": Text;
+    "ds-text": Text;
     "cycle-v1": Cycle;
     "icon-v1": Icon;
     "tooltip-v1": Tooltip;

@@ -29,10 +29,10 @@ Create a simple HTML page using DS one components:
       </header-v1>
 
       <main>
-        <text-v1 variant="heading">Welcome to DS one</text-v1>
-        <text-v1 variant="body">
+        <ds-text variant="heading">Welcome to DS one</ds-text>
+        <ds-text variant="body">
           A modern design system built with TypeScript and Lit.
-        </text-v1>
+        </ds-text>
 
         <ds-button variant="primary">Get Started</ds-button>
         <ds-button variant="secondary">Learn More</ds-button>
@@ -55,9 +55,9 @@ Create a simple HTML page using DS one components:
 ### Text
 
 ```html
-<text-v1 variant="heading">This is a heading</text-v1>
-<text-v1 variant="body">This is body text</text-v1>
-<text-v1 variant="small">This is small text</text-v1>
+<ds-text variant="heading">This is a heading</ds-text>
+<ds-text variant="body">This is body text</ds-text>
+<ds-text variant="small">This is small text</ds-text>
 ```
 
 ### Link
@@ -88,8 +88,8 @@ DS one includes built-in internationalization:
   setLanguage("en");
 </script>
 
-<text-v1 data-key="greeting"></text-v1>
-<text-v1 data-key="welcome"></text-v1>
+<ds-text data-key="greeting"></ds-text>
+<ds-text data-key="welcome"></ds-text>
 ```
 
 ## Next Steps

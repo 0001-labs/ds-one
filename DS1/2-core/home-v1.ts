@@ -86,7 +86,7 @@ export class Home extends LitElement {
     }
 
     /* Inner text spacing without affecting the 80px outer width */
-    .home > text-v1 {
+    .home > ds-text {
       padding: 0 calc(var(--1) * 0.15 * var(--scaling-factor));
       box-sizing: border-box;
       height: 100%;
@@ -152,7 +152,7 @@ export class Home extends LitElement {
         @click="${this._navigateHome}"
         @keydown="${this._onKeyDown}"
       >
-        <text-v1 key="home"></text-v1>
+        <ds-text key="home"></ds-text>
       </div>
     `;
   }

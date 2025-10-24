@@ -35,6 +35,7 @@ input {
   /* ezo-type */
   --typeface: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
+  --typeface-compressed: "GT-America-Compressed-Regular";
   --typeface-japanese: "Noto Sans JP";
   --typeface-mono: "Iosevka";
   --type-size-default: calc(14px * var(--scaling-factor));
@@ -146,6 +147,12 @@ html {
 @font-face {
   font-family: GT-America-Standard-Medium;
   src: url("./fonts/GT-America-Standard-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: GT-America-Compressed-Regular;
+  src: url("./fonts/GT-America-Compressed-Regular.woff2") format("woff2");
   font-display: swap;
 }
 

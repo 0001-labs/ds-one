@@ -75,7 +75,7 @@ import "ds-one";
 
 // Or import specific components
 import "ds-one/DS1/2-core/ds-button";
-import "ds-one/DS1/2-core/text-v1";
+import "ds-one/DS1/2-core/ds-text";
 
 // Import styles
 import "ds-one/styles";

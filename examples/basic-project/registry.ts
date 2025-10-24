@@ -8,7 +8,7 @@ import "../../DS1/4-page/ds-grid";
 import "../../DS1/4-page/ds-layout";
 
 // Core components
-import "../../DS1/2-core/text-v1";
+import "../../DS1/2-core/ds-text";
 import "../../DS1/2-core/ds-button";
 import "../../DS1/2-core/cycle-v1";
 import "../../DS1/2-core/link-v1";

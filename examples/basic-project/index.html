@@ -19,31 +19,31 @@
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout mode="portfolio">
+    <ds-layout debug>
       <!-- Title -->
       <div style="grid-area: square">
-        <text-v1
+        <ds-text
           key="siteTitle"
           style="font-size: var(--text-2xl); font-weight: bold"
-        ></text-v1>
+        ></ds-text>
       </div>
 
       <!-- Navigation -->
       <div style="grid-area: nav">
         <ds-button variant="primary" href="index.html">
-          <text-v1 key="home"></text-v1>
+          <ds-text key="home"></ds-text>
         </ds-button>
         <ds-button variant="secondary" href="about.html">
-          <text-v1 key="about"></text-v1>
+          <ds-text key="about"></ds-text>
         </ds-button>
         <ds-button variant="secondary" href="contact.html">
-          <text-v1 key="contact"></text-v1>
+          <ds-text key="contact"></ds-text>
         </ds-button>
       </div>
 
       <!-- Main content -->
       <div style="grid-area: projects">
-        <text-v1
+        <ds-text
           key="welcome"
           style="
             font-size: var(--text-xl);
@@ -51,19 +51,19 @@
             display: block;
             margin-bottom: var(--1);
           "
-        ></text-v1>
-        <text-v1
+        ></ds-text>
+        <ds-text
           key="description"
           style="display: block; margin-bottom: var(--2)"
-        ></text-v1>
+        ></ds-text>
         <ds-button variant="primary">
-          <text-v1 key="learnMore"></text-v1>
+          <ds-text key="learnMore"></ds-text>
         </ds-button>
       </div>
 
       <!-- Footer -->
       <div style="grid-area: footer">
-        <text-v1 key="copyright"></text-v1>
+        <ds-text key="copyright"></ds-text>
         <cycle-v1 type="language"></cycle-v1>
       </div>
     </ds-layout>

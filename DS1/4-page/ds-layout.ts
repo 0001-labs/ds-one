@@ -39,7 +39,7 @@ export class Layout extends LitElement {
         ". footer ."
         ". . .";
       min-height: 600px;
-      background-color: rgba(235, 231, 231, 0.44);
+      background-color: rgba(165, 165, 165, 0.03);
       position: relative;
       width: 100%;
       max-width: 640px;
@@ -73,10 +73,6 @@ export class Layout extends LitElement {
     :host([align="right"]) {
       margin: 0 0 0 auto;
       justify-self: end;
-    }
-
-    :host([mode="debug"]) {
-      background-color: rgba(200, 114, 114, 0.1);
     }
 
     .debug-overlay {
@@ -127,7 +123,6 @@ export class Layout extends LitElement {
       font-size: 10px;
       font-weight: var(--type-weight-default);
       font-family: var(--typeface);
-      background-color: var(--slate);
       color: var(--black);
       border: 1px solid red;
       opacity: 1;
@@ -135,53 +130,39 @@ export class Layout extends LitElement {
 
     .debug-square {
       grid-area: square;
-      background-color: rgba(255, 0, 0, 0.2);
     }
 
     .debug-title {
       grid-area: title;
-      background-color: rgba(0, 255, 0, 0.2);
     }
 
     .debug-header {
       grid-area: header;
-      background-color: rgba(0, 0, 255, 0.2);
       border-color: #0000ff;
     }
 
     .debug-projects {
       grid-area: projects;
-      background-color: rgba(255, 255, 0, 0.2);
       border-color: #ffff00;
     }
 
     .debug-bio {
       grid-area: bio;
-      background-color: rgba(255, 0, 255, 0.2);
       border-color: #ff00ff;
     }
 
     .debug-nav {
       grid-area: nav;
-      background-color: rgba(0, 255, 255, 0.2);
       border-color: #00ffff;
     }
 
     .debug-footer {
       grid-area: footer;
-      background-color: rgba(255, 165, 0, 0.2);
       border-color: #ffa500;
-    }
-
-    .debug-header {
-      grid-area: header;
-      background-color: rgba(0, 0, 255, 0.2);
-      border-color: #0000ff;
     }
 
     .debug-content {
       grid-area: content;
-      background-color: rgba(21, 169, 21, 0.57);
       border-color: rgba(71, 231, 71, 0.63);
     }
   `;

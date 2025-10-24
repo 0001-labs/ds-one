@@ -80,14 +80,14 @@ export class DoubleNav extends LitElement {
         ? html`
             <a href="${this.previous}" class="nav-previous">
               <icon-v1 type="left"></icon-v1>
-              <text-v1>${this.previousText || "Previous"}</text-v1>
+              <ds-text>${this.previousText || "Previous"}</ds-text>
             </a>
           `
         : html`<div></div>`}
       ${this.next
         ? html`
             <a href="${this.next}" class="nav-next">
-              <text-v1>${this.nextText || "Next"}</text-v1>
+              <ds-text>${this.nextText || "Next"}</ds-text>
               <icon-v1 type="right"></icon-v1>
             </a>
           `
