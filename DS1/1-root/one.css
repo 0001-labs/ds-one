@@ -1,3 +1,5 @@
+/* version 0.1.11-alpha.6 */
+
 input {
   padding: 0;
 }
@@ -32,7 +34,7 @@ input {
   --ds1-docs-search-bg: light-dark(#f0f0f0, #171717);
   --ds1-docs-divider: light-dark(#e0e0e0, #000000);
 
-  /* ezo-type */
+  /* typefaces */
   --typeface: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
   --typeface-compressed: "GT-America-Compressed-Regular";
