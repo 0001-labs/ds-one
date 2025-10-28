@@ -27,7 +27,7 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.1.11-alpha.7`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.1.11-alpha.9`. Use `@alpha` tag to install.
 
 ### Basic Usage
 
