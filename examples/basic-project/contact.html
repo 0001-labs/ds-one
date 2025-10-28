@@ -8,12 +8,27 @@
     <!-- Import DS one styles -->
     <link rel="stylesheet" href="../../DS1/1-root/one.css" />
 
-    <!-- Import DS one bundle -->
-    <script type="module" src="../../dist/ds-one.bundle.js"></script>
-
     <!-- Load translations -->
     <script>
       window.DS_ONE_TRANSLATIONS_FILE = "./translations.json";
+    </script>
+
+    <!-- Import DS one components directly from source -->
+    <script type="module">
+      // Import utilities first
+      import "../../DS1/0-face/2025-04-23-device.ts";
+      import "../../DS1/utils/cdn-loader.ts";
+      import "../../DS1/utils/language.ts";
+      import "../../DS1/utils/theme.ts";
+
+      // Import components
+      import "../../DS1/4-page/ds-grid.ts";
+      import "../../DS1/4-page/ds-layout.ts";
+      import "../../DS1/2-core/ds-text.ts";
+      import "../../DS1/2-core/ds-button.ts";
+      import "../../DS1/2-core/cycle-v1.ts";
+
+      console.log("DS one components loaded from unbundled source");
     </script>
   </head>
   <body>

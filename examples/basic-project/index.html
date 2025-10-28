@@ -8,64 +8,162 @@
     <!-- Import DS one styles -->
     <link rel="stylesheet" href="../../DS1/1-root/one.css" />
 
-    <!-- Import DS one bundle -->
-    <script type="module" src="../../dist/ds-one.bundle.js"></script>
-
     <!-- Load translations -->
     <script>
       window.DS_ONE_TRANSLATIONS_FILE = "./translations.json";
+    </script>
+
+    <!-- Import DS one components directly from source -->
+    <script type="module">
+      // Import utilities first
+      import "../../DS1/0-face/2025-04-23-device.ts";
+      import "../../DS1/utils/cdn-loader.ts";
+      import "../../DS1/utils/language.ts";
+      import "../../DS1/utils/theme.ts";
+
+      // Import components
+      import "../../DS1/4-page/ds-grid.ts";
+      import "../../DS1/4-page/ds-layout.ts";
+      import "../../DS1/2-core/ds-text.ts";
+      import "../../DS1/2-core/ds-button.ts";
+      import "../../DS1/2-core/cycle-v1.ts";
+
+      console.log("DS one components loaded from unbundled source");
+
+      // Debug: Check scaling factor after load
+      setTimeout(() => {
+        const scalingFactorMobile = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--scaling-factor-mobile");
+        const scalingFactor = getComputedStyle(
+          document.documentElement
+        ).getPropertyValue("--scaling-factor");
+        console.log(`[DEBUG] --scaling-factor-mobile: ${scalingFactorMobile}`);
+        console.log(`[DEBUG] --scaling-factor: ${scalingFactor}`);
+      }, 500);
     </script>
   </head>
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout debug>
-      <!-- Title -->
-      <div style="grid-area: square">
-        <ds-text
-          key="siteTitle"
-          style="font-size: var(--text-2xl); font-weight: bold"
-        ></ds-text>
-      </div>
-
-      <!-- Navigation -->
-      <div style="grid-area: nav">
-        <ds-button variant="primary" href="index.html">
-          <ds-text key="home"></ds-text>
-        </ds-button>
-        <ds-button variant="secondary" href="about.html">
-          <ds-text key="about"></ds-text>
-        </ds-button>
-        <ds-button variant="secondary" href="contact.html">
-          <ds-text key="contact"></ds-text>
-        </ds-button>
-      </div>
-
-      <!-- Main content -->
-      <div style="grid-area: projects">
-        <ds-text
-          key="welcome"
+     <div style="display: flex; flex-direction: column;">
+      
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div
           style="
-            font-size: var(--text-xl);
-            font-weight: bold;
-            display: block;
-            margin-bottom: var(--1);
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(50, 48, 124, 0.516);
           "
-        ></ds-text>
-        <ds-text
-          key="description"
-          style="display: block; margin-bottom: var(--2)"
-        ></ds-text>
-        <ds-button variant="primary">
-          <ds-text key="learnMore"></ds-text>
-        </ds-button>
-      </div>
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(89, 13, 229, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(31, 229, 13, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(50, 48, 124, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(89, 13, 229, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(31, 229, 13, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(50, 48, 124, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(89, 13, 229, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(31, 229, 13, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(50, 48, 124, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(89, 13, 229, 0.516);
+          "
+        ></div>
+        <div
+          style="
+            display: flex;
+            width: calc(20px * var(--scaling-factor));
+            height: calc(20px * var(--scaling-factor));
+            background-color: rgba(31, 229, 13, 0.516);
+          "
+        ></div>
+        <div
+        style="
+          display: flex;
+          width: calc(20px * var(--scaling-factor));
+          height: calc(20px * var(--scaling-factor));
+          background-color: rgba(89, 13, 229, 0.516);
+        "
+      ></div>
+      <div
+        style="
+          display: flex;
+          width: calc(20px * var(--scaling-factor));
+          height: calc(20px * var(--scaling-factor));
+          background-color: rgba(31, 229, 13, 0.516);
+        "
+      ></div>
 
-      <!-- Footer -->
-      <div style="grid-area: footer">
-        <ds-text key="copyright"></ds-text>
-        <cycle-v1 type="language"></cycle-v1>
       </div>
-    </ds-layout>
+     </div>
+    </div> 
   </body>
 </html>

@@ -124,13 +124,16 @@ async function fetchTranslationFile(
   source: string
 ): Promise<TranslationMap | null> {
   try {
+    console.log(`[DS one] Attempting to fetch translations from: ${source}`);
     const response = await fetch(source);
 
     if (!response.ok) {
+      console.log(`[DS one] Failed to fetch ${source} (${response.status})`);
       return null;
     }
 
     const translations = await response.json();
+    console.log(`[DS one] Successfully fetched JSON from ${source}`);
 
     if (!validateTranslationMap(translations)) {
       console.warn(
@@ -145,12 +148,14 @@ async function fetchTranslationFile(
       return null;
     }
 
+    console.log(`[DS one] Valid translations found: ${languages.join(", ")}`);
     return translations;
   } catch (error) {
     if (
       error instanceof TypeError &&
       error.message.includes("Failed to fetch")
     ) {
+      console.log(`[DS one] Network error fetching ${source}`);
       return null;
     }
 

@@ -1,1 +1,41 @@
-{}
+{
+  "en": {
+    "language": "Language",
+    "theme": "Theme",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "welcome": "Welcome",
+    "description": "Description",
+    "learnMore": "Learn More",
+    "copyright": "© 2025",
+    "siteTitle": "Site Title",
+    "downloadCV": "Download CV"
+  },
+  "da": {
+    "language": "Sprog",
+    "theme": "Tema",
+    "home": "Hjem",
+    "about": "Om",
+    "contact": "Kontakt",
+    "welcome": "Velkommen",
+    "description": "Beskrivelse",
+    "learnMore": "Lær Mere",
+    "copyright": "© 2025",
+    "siteTitle": "Site Titel",
+    "downloadCV": "Download CV"
+  },
+  "ja": {
+    "language": "言語",
+    "theme": "テーマ",
+    "home": "ホーム",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "welcome": "ようこそ",
+    "description": "説明",
+    "learnMore": "詳細を見る",
+    "copyright": "© 2025",
+    "siteTitle": "サイトタイトル",
+    "downloadCV": "CVをダウンロード"
+  }
+}

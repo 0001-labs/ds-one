@@ -1,6 +1,9 @@
 // DS one - Main entry point for all components
 // Export all components for easy importing
 
+// Initialize device detection (will auto-detect and log on load)
+import "./0-face/2025-04-23-device";
+
 // Initialize CDN loader (will auto-load external translations if available)
 import "./utils/cdn-loader";
 
@@ -42,3 +45,6 @@ export * from "./utils/viewMode";
 export * from "./utils/settings";
 export * from "./utils/pricing";
 export * from "./utils/scroll";
+
+// Device detection
+export * from "./0-face/2025-04-23-device";

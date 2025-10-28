@@ -1,4 +1,4 @@
-/* version 0.1.11-alpha.7 */
+/* version 0.1.11-alpha.8 */
 
 input {
   padding: 0;
@@ -57,7 +57,7 @@ input {
   --type-lineheight-book: 15px;
 
   /* ezo-scaling-factor */
-  --scaling-factor: round(var(--scaling-factor-mobile), 1);
+  --scaling-factor: var(--scaling-factor-mobile);
   --scaling-factor-mobile: 1;
 
   /* size */
@@ -156,6 +156,11 @@ html {
   font-family: GT-America-Compressed-Regular;
   src: url("./fonts/GT-America-Compressed-Regular.woff2") format("woff2");
   font-display: swap;
+}
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .matrix__board {
