@@ -57,8 +57,15 @@ export function getDeviceInfo(): DeviceInfo {
   const touchPoints = (nav && nav.maxTouchPoints) || 0;
   const isTouchCapable = touchPoints > 1;
 
-  const screenWidth = win?.innerWidth || 0;
-  const screenHeight = win?.innerHeight || 0;
+  // Use clientWidth instead of innerWidth to exclude scrollbars
+  const screenWidth =
+    typeof document !== "undefined"
+      ? document.documentElement.clientWidth
+      : win?.innerWidth || 0;
+  const screenHeight =
+    typeof document !== "undefined"
+      ? document.documentElement.clientHeight
+      : win?.innerHeight || 0;
   const isTablet = isMobile && Math.min(screenWidth, screenHeight) >= 600;
 
   return {
@@ -135,4 +142,13 @@ if (typeof window !== "undefined") {
     // DOM is already ready
     initDeviceDetection();
   }
+
+  // Recalculate on resize (debounced)
+  let resizeTimeout: any;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      initDeviceDetection();
+    }, 100);
+  });
 }
