@@ -4,9 +4,9 @@ Build modern UIs with web components!
 
 > A component-based design system built with TypeScript and LitElement that provides reusable UI components with built-in theming, internationalization, and accessibility features.
 
-[![npm version](https://badge.fury.io/js/ds-one.svg)](https://badge.fury.io/js/ds-one)
+[![npm version](https://img.shields.io/npm/v/ds-one/alpha.svg)](https://www.npmjs.com/package/ds-one)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.1.11--alpha.1-orange.svg)](https://github.com/Jo4712/ds-one)
+[![Version](https://img.shields.io/badge/version-0.1.11--alpha.17-orange.svg)](https://github.com/0001-labs/ds-one)
 
 **DS one** is a modern design system that provides a comprehensive set of reusable UI components built with Web Components. Think "Material Design meets Web Standards"—a simple, accessible component library that works with any framework or vanilla JavaScript.
 
@@ -27,30 +27,27 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.1.11-alpha.13`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.1.12`. Use `@alpha` tag to install.
 
-### Basic Usage
+### Basic Usage (CDN)
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Load DS one CSS -->
     <link
       rel="stylesheet"
-      href="node_modules/design-system-one/1 Root/one.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
     />
-    <script
-      type="module"
-      src="node_modules/design-system-one/2 Core/ds-button.ts"
-    ></script>
-    <script
-      type="module"
-      src="node_modules/design-system-one/2 Core/ds-text.ts"
-    ></script>
+    <!-- Load DS one components -->
+    <script type="module">
+      import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
+    </script>
   </head>
   <body>
-    <ds-button variant="primary" key="welcomeButton">Get Started</ds-button>
-    <ds-text variant="heading" key="mainHeading">Welcome to DS one</ds-text>
+    <ds-button variant="primary">Get Started</ds-button>
+    <ds-text key="welcome">Welcome to DS one</ds-text>
   </body>
 </html>
 ```
@@ -90,7 +87,7 @@ Try DS one in your browser: **[dsone.dev](https://dsone.dev)** (documentation sl
 - **[Internationalization](./docs/i18n.md)** - Language keys and Notion CMS setup
 - **[Examples](./docs/examples.md)** - Usage examples and patterns
 
-## Current Status: v0.1.11-alpha.0
+## Current Status: v0.1.12
 
 **⚠️ Alpha Release**: This is an early alpha version. The API may change as we refine the components and architecture.
 
@@ -167,7 +164,7 @@ DS one/
 
 ```bash
 # Clone the repository
-git clone https://github.com/Jo4712/ds-one.git
+git clone https://github.com/0001-labs/ds-one.git
 cd ds-one
 
 # Install dependencies
@@ -186,21 +183,23 @@ bun run build
 ### Release Process
 
 ```bash
-# Create a new release
-bun run release:patch    # 0.1.11-alpha.0 → 0.1.12-alpha.0
-bun run release:minor    # 0.1.11-alpha.0 → 0.2.0-alpha.0
-bun run release:major    # 0.1.11-alpha.0 → 1.0.0
-bun run release:beta     # 0.1.11-alpha.0 → 0.2.0-beta.0
+# Create a new alpha release (recommended for now)
+bun run release:pre:alpha  # Bumps alpha version (e.g., 0.1.12 → 0.1.12)
+
+# Other release commands (for future use)
+bun run release:patch      # For patch releases
+bun run release:minor      # For minor releases
+bun run release:major      # For major releases
 ```
 
 ## License
 
-MIT © [DS one](https://github.com/Jo4712/ds-one)
+MIT © [DS one](https://github.com/0001-labs/ds-one)
 
 ## 🔗 Links
 
 - **[Website](https://dsone.dev)** - Official website (slugs to be decided)
-- **[GitHub](https://github.com/Jo4712/ds-one)** - Source code and issues
+- **[GitHub](https://github.com/0001-labs/ds-one)** - Source code and issues
 - **[NPM Package](https://www.npmjs.com/package/ds-one)** - Install with `@alpha` tag
 - **[CDN](https://cdn.jsdelivr.net/npm/ds-one@alpha/)** - Direct browser usage
 

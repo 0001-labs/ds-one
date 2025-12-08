@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// Simple Bun release helper: bumps version in root package.json and optionally commits/tags
+// Simple Bun release helper: bumps version across all files and optionally commits/tags
 import { $ } from "bun";
 import * as fs from "node:fs";
 import * as path from "node:path";
@@ -52,6 +52,19 @@ function bumpSemver(version: string, type: BumpType, preid = "alpha"): string {
   return `${nextMajor}.${nextMinor}.${nextPatch}`;
 }
 
+function updateCssVersion(cssPath: string, version: string): boolean {
+  if (!fs.existsSync(cssPath)) return false;
+  let css = fs.readFileSync(cssPath, "utf8");
+  // Replace existing version comment or add one at the top
+  if (css.startsWith("/* version ")) {
+    css = css.replace(/^\/\* version [^\*]+\*\//, `/* version ${version} */`);
+  } else {
+    css = `/* version ${version} */\n\n${css}`;
+  }
+  fs.writeFileSync(cssPath, css, "utf8");
+  return true;
+}
+
 async function main() {
   const args = process.argv.slice(2);
   const type = (args[0] as BumpType) || "patch";
@@ -74,24 +87,46 @@ async function main() {
 
   pkg.version = next;
   writeJson(pkgPath, pkg);
-  console.log(`Version bumped: ${current} -> ${next}`);
+  console.log(`✓ Version bumped: ${current} -> ${next}`);
+
+  // Update version in CSS file (DS1/1-root/one.css)
+  const cssPath = path.resolve(process.cwd(), "DS1/1-root/one.css");
+  if (updateCssVersion(cssPath, next)) {
+    console.log(`✓ Updated DS1/1-root/one.css`);
+  }
 
   // Update version in README.md
   const readmePath = path.resolve(process.cwd(), "README.md");
   if (fs.existsSync(readmePath)) {
     let readme = fs.readFileSync(readmePath, "utf8");
-    // Update badge version
+    // Update badge version (matches patterns like version-0.1.11-alpha.13-orange)
     readme = readme.replace(
-      /version-[\d\.]+-(?:alpha|beta|rc)\.[\d]+-orange/g,
+      /version-[\d\.]+(-(?:alpha|beta|rc)\.[\d]+)?-orange/g,
       `version-${next}-orange`
     );
-    // Update version text
+    // Update version text (matches patterns like v0.1.11-alpha.0 or 0.1.11-alpha.13)
     readme = readme.replace(
-      /version `[\d\.]+-(?:alpha|beta|rc)\.[\d]+`/g,
-      `version \`${next}\``
+      /v?[\d\.]+(-(?:alpha|beta|rc)\.[\d]+)/g,
+      (match) => {
+        // Only replace if it looks like our version pattern (has prerelease tag)
+        if (/-(?:alpha|beta|rc)\.\d+/.test(match)) {
+          return match.startsWith("v") ? `v${next}` : next;
+        }
+        return match;
+      }
+    );
+    // Update "Current Status" version header
+    readme = readme.replace(
+      /## Current Status: v[\d\.]+(-(?:alpha|beta|rc)\.[\d]+)?/g,
+      `## Current Status: v${next}`
+    );
+    // Update "Note: Currently published as alpha version" text
+    readme = readme.replace(
+      /alpha version `[\d\.]+(-(?:alpha|beta|rc)\.[\d]+)?`/g,
+      `alpha version \`${next}\``
     );
     fs.writeFileSync(readmePath, readme, "utf8");
-    console.log(`Updated README.md`);
+    console.log(`✓ Updated README.md`);
   }
 
   // Update version in docs/npm-publishing.md
@@ -99,11 +134,11 @@ async function main() {
   if (fs.existsSync(docsPath)) {
     let docs = fs.readFileSync(docsPath, "utf8");
     docs = docs.replace(
-      /ds-one@[\d\.]+-(?:alpha|beta|rc)\.[\d]+/g,
+      /ds-one@[\d\.]+(-(?:alpha|beta|rc)\.[\d]+)?/g,
       `ds-one@${next}`
     );
     fs.writeFileSync(docsPath, docs, "utf8");
-    console.log(`Updated docs/npm-publishing.md`);
+    console.log(`✓ Updated docs/npm-publishing.md`);
   }
 
   // Update version in web/package.json (docs site)
@@ -112,16 +147,20 @@ async function main() {
     const webPkg = readJson(webPkgPath);
     webPkg.version = next;
     writeJson(webPkgPath, webPkg);
-    console.log(`Updated web/package.json`);
+    console.log(`✓ Updated web/package.json`);
   }
 
+  console.log(`\n🎉 All files updated to version ${next}`);
+
   if (!noGit) {
-    await $`git add package.json README.md docs/npm-publishing.md web/package.json`;
+    await $`git add package.json README.md docs/npm-publishing.md web/package.json DS1/1-root/one.css`;
     await $`git commit -m ${`release: v${next}`}`.nothrow();
     await $`git tag -a v${next} -m ${`release: v${next}`}`.nothrow();
+    console.log(`\n✓ Git commit and tag created`);
     if (push) {
       await $`git push`;
       await $`git push --tags`;
+      console.log(`✓ Pushed to remote`);
     }
   }
 }
