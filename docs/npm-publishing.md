@@ -72,7 +72,7 @@ bun add ds-one@alpha
 npm install ds-one@alpha
 
 # Install specific version
-bun add ds-one@0.1.12
+bun add ds-one@0.2.0-alpha.1
 ```
 
 ## Usage in Another Project
