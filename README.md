@@ -26,7 +26,7 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.2.0-alpha.1`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.2.0-alpha.2`. Use `@alpha` tag to install.
 
 ### Basic Usage (CDN)
 
@@ -86,13 +86,13 @@ Try DS one in your browser: **[dsone.dev](https://dsone.dev)** (documentation sl
 - **[Internationalization](./docs/i18n.md)** - Language keys and Notion CMS setup
 - **[Examples](./docs/examples.md)** - Usage examples and patterns
 
-## Current Status: v0.2.0-alpha.1
+## Current Status: v0.2.0-alpha.2
 
 **⚠️ Alpha Release**: This is an early alpha version. The API may change as we refine the components and architecture.
 
 ### Completed Features
 
-- ✅ Core component library (ds-button, ds-text, icon-v1, etc.)
+- ✅ Core component library (ds-button, ds-text, ds-icon, etc.)
 - ✅ Theming system with accent color support
 - ✅ Internationalization with language keys
 - ✅ Responsive design with mobile scaling
@@ -183,7 +183,7 @@ bun run build
 
 ```bash
 # Create a new alpha release (recommended for now)
-bun run release:pre:alpha  # Bumps alpha version (e.g., 0.2.0-alpha.1 → 0.2.0-alpha.2)
+bun run release:pre:alpha  # Bumps alpha version (e.g., 0.2.0-alpha.2 → 0.2.0-alpha.2)
 
 # Other release commands (for future use)
 bun run release:patch      # For patch releases
