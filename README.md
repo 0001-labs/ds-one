@@ -6,7 +6,6 @@ Build modern UIs with web components!
 
 [![npm version](https://img.shields.io/npm/v/ds-one/alpha.svg)](https://www.npmjs.com/package/ds-one)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.1.11--alpha.17-orange.svg)](https://github.com/0001-labs/ds-one)
 
 **DS one** is a modern design system that provides a comprehensive set of reusable UI components built with Web Components. Think "Material Design meets Web Standards"—a simple, accessible component library that works with any framework or vanilla JavaScript.
 
@@ -27,7 +26,7 @@ npm install ds-one@alpha
 yarn add ds-one@alpha
 ```
 
-**Note**: Currently published as alpha version `0.1.12`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.2.0-alpha.1`. Use `@alpha` tag to install.
 
 ### Basic Usage (CDN)
 
@@ -87,7 +86,7 @@ Try DS one in your browser: **[dsone.dev](https://dsone.dev)** (documentation sl
 - **[Internationalization](./docs/i18n.md)** - Language keys and Notion CMS setup
 - **[Examples](./docs/examples.md)** - Usage examples and patterns
 
-## Current Status: v0.1.12
+## Current Status: v0.2.0-alpha.1
 
 **⚠️ Alpha Release**: This is an early alpha version. The API may change as we refine the components and architecture.
 
@@ -184,7 +183,7 @@ bun run build
 
 ```bash
 # Create a new alpha release (recommended for now)
-bun run release:pre:alpha  # Bumps alpha version (e.g., 0.1.12 → 0.1.12)
+bun run release:pre:alpha  # Bumps alpha version (e.g., 0.2.0-alpha.1 → 0.2.0-alpha.2)
 
 # Other release commands (for future use)
 bun run release:patch      # For patch releases
