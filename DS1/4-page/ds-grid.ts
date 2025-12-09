@@ -2,7 +2,7 @@
 // Simple grid layout component
 
 import { LitElement, html, css } from "lit";
-import { detectMobileDevice } from "../0-face/2025-04-23-device";
+import { detectMobileDevice } from "../0-face/device";
 
 declare global {
   interface CustomElementRegistry {
