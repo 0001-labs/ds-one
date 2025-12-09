@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { getText } from "../utils/language";
+import { getText } from "../0-face/i18n";
 
 /**
  * A component for displaying text from translations

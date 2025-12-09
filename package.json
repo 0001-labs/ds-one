@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.2.0-alpha.3",
+  "version": "0.2.5-alpha.2",
   "description": "A component-based design system built with TypeScript and LitElement that provides reusable UI components with built-in theming, internationalization, and accessibility features.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -40,7 +40,7 @@
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
     "test": "bun test",
-    "clean": "rm -rf node_modules web/node_modules",
+    "clean": "rm -rf node_modules web/node_modules dist",
     "release:patch": "bun run scripts/release.ts patch",
     "release:minor": "bun run scripts/release.ts minor",
     "release:major": "bun run scripts/release.ts major",

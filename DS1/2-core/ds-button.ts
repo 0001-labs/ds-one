@@ -2,7 +2,7 @@
 // Core button component
 
 import { LitElement, html, css, type PropertyValues } from "lit";
-import { getText, currentLanguage } from "../utils/language";
+import { getText, currentLanguage } from "../0-face/i18n";
 
 export class Button extends LitElement {
   static properties = {

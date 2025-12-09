@@ -3,22 +3,19 @@
 
 import "../../DS1/1-root/one.css";
 
-// Import all components from DS one
-import "../../DS1/4-page/ds-grid";
-import "../../DS1/4-page/ds-layout";
-
-// Core components
+// 2-core
 import "../../DS1/2-core/ds-text";
 import "../../DS1/2-core/ds-button";
-import "../../DS1/2-core/cycle-v1";
-import "../../DS1/2-core/link-v1";
-import "../../DS1/2-core/title-v1";
-import "../../DS1/2-core/icon-v1";
+import "../../DS1/2-core/ds-cycle";
+import "../../DS1/2-core/ds-icon";
 
-// Unit components
+// 3-unit
 import "../../DS1/3-unit/ds-table";
-import "../../DS1/3-unit/list-v1";
-import "../../DS1/3-unit/panel-v1";
-import "../../DS1/3-unit/row-v1";
+import "../../DS1/3-unit/ds-list";
+import "../../DS1/3-unit/ds-row";
+
+// 4-page
+import "../../DS1/4-page/ds-grid";
+import "../../DS1/4-page/ds-layout";
 
 console.log("DS one components loaded from local files");

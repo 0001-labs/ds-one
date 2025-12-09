@@ -1,50 +1,52 @@
-// DS one - Main entry point for all components
-// Export all components for easy importing
+/**
+ * DS one - Main entry point for all components
+ *
+ * This module initializes core utilities and exports all design system components
+ * organized by layer: 0-face (foundation), 2-core (components), 3-unit (composites), 4-page (layouts)
+ */
+
+// ============================================================================
+// Initialization (side-effect imports)
+// ============================================================================
 
 // Initialize device detection (will auto-detect and log on load)
-import "./0-face/2025-04-23-device";
+import "./0-face/device";
 
-// Initialize CDN loader (will auto-load external translations if available)
-import "./utils/cdn-loader";
+// Initialize language utilities (will auto-load external translations if available)
+import "./0-face/i18n";
 
-// Core components
+// ============================================================================
+// 0-face: Foundation & Utilities
+// ============================================================================
+
+export * from "./0-face/device";
+export * from "./0-face/i18n";
+export * from "./0-face/preferences";
+export * from "./0-face/pricing";
+export * from "./0-face/theme";
+
+// ============================================================================
+// 2-core: Core Components
+// ============================================================================
+
 export * from "./2-core/ds-button";
+export * from "./2-core/ds-cycle";
+export * from "./2-core/ds-icon";
 export * from "./2-core/ds-text";
-export * from "./2-core/icon-v1";
-export * from "./2-core/link-v1";
-export * from "./2-core/cycle-v1";
-export * from "./2-core/tooltip-v1";
-export * from "./2-core/price-v1";
-export * from "./2-core/markdown-v1";
-export * from "./2-core/home-v1";
-export * from "./2-core/year-v1";
-export * from "./2-core/title-v1";
-export * from "./2-core/header-v1";
-export * from "./2-core/attributes-v1";
-export * from "./2-core/downloadcv-v1";
-export * from "./2-core/article-v1";
-export * from "./2-core/viewtoggle-v1";
-export * from "./2-core/squarecircle-v1";
+export * from "./2-core/ds-tooltip";
+export * from "./2-core/ds-date";
 
-// Unit components
-export * from "./3-unit/list-v1";
-export * from "./3-unit/panel-v1";
-export * from "./3-unit/row-v1";
-export * from "./3-unit/singlenav-v1";
-export * from "./3-unit/doublenav-v1";
+// ============================================================================
+// 3-unit: Composite Components
+// ============================================================================
+
+export * from "./3-unit/ds-list";
+export * from "./3-unit/ds-row";
 export * from "./3-unit/ds-table";
 
-// Page components
+// ============================================================================
+// 4-page: Layout Components
+// ============================================================================
+
 export * from "./4-page/ds-grid";
 export * from "./4-page/ds-layout";
-
-// Utilities
-export * from "./utils/language";
-export * from "./utils/theme";
-export * from "./utils/viewMode";
-export * from "./utils/settings";
-export * from "./utils/pricing";
-export * from "./utils/scroll";
-
-// Device detection
-export * from "./0-face/2025-04-23-device";
