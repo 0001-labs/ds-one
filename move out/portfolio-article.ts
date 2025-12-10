@@ -138,8 +138,8 @@ export class PortfolioArticle extends LitElement {
       word-break: break-word;
       hyphens: auto;
       color: light-dark(var(--black), var(--white));
-      line-height: calc(20px * var(--scaling-factor));
-      padding: calc(2px * var(--scaling-factor));
+      line-height: calc(20px * var(--sf));
+      padding: calc(2px * var(--sf));
     }
 
     .container {
@@ -153,7 +153,7 @@ export class PortfolioArticle extends LitElement {
       width: 100%;
       overflow: hidden;
       display: block;
-      margin-bottom: calc(8px * var(--scaling-factor));
+      margin-bottom: calc(8px * var(--sf));
     }
 
     .fade-in {
@@ -187,8 +187,8 @@ export class PortfolioArticle extends LitElement {
       color: inherit;
       cursor: pointer;
       font-family: var(--typeface);
-      font-size: calc(14px * var(--scaling-factor));
-      margin-bottom: calc(8px * var(--scaling-factor));
+      font-size: calc(14px * var(--sf));
+      margin-bottom: calc(8px * var(--sf));
       padding: 0;
       text-decoration: underline;
     }

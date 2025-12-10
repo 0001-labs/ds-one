@@ -44,10 +44,16 @@ export class Text extends LitElement {
   static styles = css`
     :host {
       display: inline;
-    }
-
-    .loading {
-      opacity: 0.6;
+      font-family: var(--typeface);
+      font-size: calc(var(--type-size-default) * var(--scaling-factor));
+      font-weight: var(--type-weight-default);
+      line-height: calc(var(--type-lineheight-default) * var(--scaling-factor));
+      letter-spacing: calc(
+        var(--type-letterspacing-default) * var(--scaling-factor)
+      );
+      text-align: var(--text-align-default);
+      text-transform: var(--text-transform-default);
+      text-decoration: var(--text-decoration-default);
     }
   `;
 

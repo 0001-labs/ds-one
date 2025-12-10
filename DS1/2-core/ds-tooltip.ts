@@ -79,10 +79,10 @@ export class Tooltip extends LitElement {
       position: absolute;
       left: 50%;
       bottom: 100%;
-      transform: translate(-50%, calc(-2px * var(--scaling-factor)));
+      transform: translate(-50%, calc(-2px * var(--sf)));
       z-index: 1000;
       pointer-events: none;
-      height: calc(var(--08) * var(--scaling-factor));
+      height: calc(var(--08) * var(--sf));
       opacity: 0;
       transition:
         opacity 120ms ease,
@@ -91,7 +91,7 @@ export class Tooltip extends LitElement {
       color: light-dark(var(--white), var(--black));
       border-radius: 0;
       font-size: var(--type-size-default);
-      padding: 0px calc(1px * var(--scaling-factor));
+      padding: 0px calc(1px * var(--sf));
       font-family: var(
         --typeface,
         -apple-system,

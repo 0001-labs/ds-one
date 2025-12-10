@@ -3,31 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic Project - About</title>
+    <title>Bundled Project - Contact</title>
 
-    <!-- Import DS one styles -->
+    <!-- Import CSS from local -->
     <link rel="stylesheet" href="../../DS1/1-root/one.css" />
 
-    <!-- Load translations -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./translations.json";
-    </script>
-
-    <!-- Import DS one components directly from source -->
+    <!-- Import DS one bundle from local dist -->
     <script type="module">
-      // Import utilities first
-      import "../../DS1/0-face/2025-04-23-device.ts";
-      import "../../DS1/0-face/i18n.ts";
-      import "../../DS1/0-face/theme.ts";
-
-      // Import components
-      import "../../DS1/4-page/ds-grid.ts";
-      import "../../DS1/4-page/ds-layout.ts";
-      import "../../DS1/2-core/ds-text.ts";
-      import "../../DS1/2-core/ds-button.ts";
-      import "../../DS1/2-core/ds-cycle.ts";
-
-      console.log("DS one components loaded from unbundled source");
+      import "../../dist/ds-one.bundle.js";
     </script>
   </head>
   <body>
@@ -47,10 +30,10 @@
         <ds-button variant="secondary" href="index.html">
           <ds-text key="home"></ds-text>
         </ds-button>
-        <ds-button variant="primary" href="about.html">
+        <ds-button variant="secondary" href="about.html">
           <ds-text key="about"></ds-text>
         </ds-button>
-        <ds-button variant="secondary" href="contact.html">
+        <ds-button variant="primary" href="contact.html">
           <ds-text key="contact"></ds-text>
         </ds-button>
       </div>
@@ -58,7 +41,7 @@
       <!-- Main content -->
       <div style="grid-area: projects">
         <ds-text
-          key="aboutTitle"
+          key="contactTitle"
           style="
             font-size: var(--text-xl);
             font-weight: bold;
@@ -67,7 +50,7 @@
           "
         ></ds-text>
         <ds-text
-          key="aboutDescription"
+          key="contactDescription"
           style="display: block; margin-bottom: var(--2)"
         ></ds-text>
       </div>
@@ -80,3 +63,4 @@
     </ds-layout>
   </body>
 </html>
+

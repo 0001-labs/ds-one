@@ -16,6 +16,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true
   },
-  "include": ["DS1/**/*", "move out/portfolio-doublenav.ts", "move out/portfolio-panel.ts", "move out/portfolio-singlenav.ts"],
-  "exclude": ["node_modules", "dist", "examples"]
+  "include": ["DS1/**/*"],
+  "exclude": ["node_modules", "dist", "examples", "move out"]
 }

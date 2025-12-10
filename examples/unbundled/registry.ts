@@ -1,5 +1,10 @@
-// Unified registry - imports all DS one components
-// This file loads the design system locally from the DS1 folder
+// 0-face
+
+import "../../DS1/0-face/device";
+import "../../DS1/0-face/i18n";
+import "../../DS1/0-face/theme";
+
+// 1-root
 
 import "../../DS1/1-root/one.css";
 
@@ -17,5 +22,3 @@ import "../../DS1/3-unit/ds-row";
 // 4-page
 import "../../DS1/4-page/ds-grid";
 import "../../DS1/4-page/ds-layout";
-
-console.log("DS one components loaded from local files");

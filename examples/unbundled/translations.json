@@ -1,5 +1,13 @@
 {
   "en": {
+    "light": "Light",
+    "dark": "Dark",
+    "theme": "Theme",
+    "banner": "Banner",
+    "header": "Header",
+    "main": "Main",
+    "footer": "Footer",
+    "language": "Language",
     "siteTitle": "Basic Project",
     "welcome": "Welcome to Basic Project",
     "description": "This project loads the DS one design system locally from TypeScript files. Perfect for development and customization.",
@@ -14,6 +22,14 @@
     "copyright": "© 2025 DS one - Local Development"
   },
   "da": {
+    "light": "Lys",
+    "dark": "Mørk",
+    "theme": "Tema",
+    "banner": "Banner",
+    "header": "Hoved",
+    "main": "Hovedindhold",
+    "footer": "Fod",
+    "language": "Sprog",
     "siteTitle": "Basis Projekt",
     "welcome": "Velkommen til Basis Projekt",
     "description": "Dette projekt indlæser DS one designsystemet lokalt fra TypeScript-filer. Perfekt til udvikling og tilpasning.",
@@ -28,6 +44,14 @@
     "copyright": "© 2025 DS one - Lokal Udvikling"
   },
   "ja": {
+    "light": "ライト",
+    "dark": "ダーク",
+    "theme": "テーマ",
+    "banner": "バナー",
+    "header": "ヘッダー",
+    "main": "メインコンテンツ",
+    "footer": "フッター",
+    "language": "言語",
     "siteTitle": "基本プロジェクト",
     "welcome": "基本プロジェクトへようこそ",
     "description": "このプロジェクトは、TypeScriptファイルからローカルにDS oneデザインシステムを読み込みます。開発とカスタマイズに最適です。",
@@ -42,6 +66,14 @@
     "copyright": "© 2025 DS one - ローカル開発"
   },
   "de": {
+    "light": "Hell",
+    "dark": "Dunkel",
+    "theme": "Thema",
+    "banner": "Banner",
+    "header": "Header",
+    "main": "Main",
+    "footer": "Fuss",
+    "language": "Sprache",
     "siteTitle": "Basis Projekt",
     "welcome": "Willkommen beim Basis Projekt",
     "description": "Dieses Projekt lädt das DS one Designsystem lokal aus TypeScript-Dateien. Perfekt für Entwicklung und Anpassung.",

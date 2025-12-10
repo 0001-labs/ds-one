@@ -579,7 +579,9 @@ export function translate(key: string): string {
     return translationData[defaultLanguage][key];
   }
 
-  console.warn(`[translate] No translation found for key "${key}"`);
+  console.warn(
+    `[DS one (Internationalization)] No translation found for key "${key}"`
+  );
   return key;
 }
 

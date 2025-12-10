@@ -93,9 +93,14 @@ export function initDeviceDetection(): DeviceInfo {
     const actualWidth = deviceInfo.screenWidth;
     const scalingFactor = actualWidth / designWidth;
 
-    // Set CSS custom property for scaling
+    // Set CSS custom property for scaling on html element
     document.documentElement.style.setProperty(
-      "--scaling-factor-mobile",
+      "--sf",
+      scalingFactor.toFixed(3)
+    );
+    // Also set --sf for backwards compatibility
+    document.documentElement.style.setProperty(
+      "--sf",
       scalingFactor.toFixed(3)
     );
 
@@ -105,10 +110,9 @@ export function initDeviceDetection(): DeviceInfo {
   } else {
     // Desktop - no scaling
     if (typeof document !== "undefined") {
-      document.documentElement.style.setProperty(
-        "--scaling-factor-mobile",
-        "1"
-      );
+      document.documentElement.style.setProperty("--sf", "1");
+      // Also set --sf for backwards compatibility
+      document.documentElement.style.setProperty("--sf", "1");
     }
     console.log(
       `[DS one] Desktop device detected (${deviceInfo.screenWidth}x${deviceInfo.screenHeight})`

@@ -39,7 +39,7 @@ export class Title extends LitElement {
   static styles = css`
     :host {
       display: flex;
-      padding: calc(2px * var(--scaling-factor));
+      padding: calc(2px * var(--sf));
       align-items: flex-start;
     }
 
@@ -48,7 +48,7 @@ export class Title extends LitElement {
       place-content: center;
       font-family: var(--typeface);
       color: light-dark(var(--black), var(--white));
-      font-size: calc(36px * var(--scaling-factor));
+      font-size: calc(36px * var(--sf));
       font-weight: 500;
       align-items: center;
       letter-spacing: -0.72px;

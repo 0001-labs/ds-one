@@ -3,11 +3,11 @@ import { LitElement, html, css } from "lit";
 /**
  * A component for single navigation links
  *
- * @element singlenav-v1
+ * @element portfolio-singlenav
  * @prop {string} type - Type of navigation: "projects" or "work"
  * @prop {string} to - Optional custom destination URL
  */
-export class SingleNav extends LitElement {
+export class PortfolioSingleNav extends LitElement {
   static get properties() {
     return {
       type: { type: String, reflect: true },
@@ -48,7 +48,7 @@ export class SingleNav extends LitElement {
     return html`
       <a href="${href}">
         <ds-text key="${navConfig.key}"></ds-text>
-        <icon-v1 type="right"></icon-v1>
+        <ds-icon type="right"></ds-icon>
       </a>
     `;
   }
@@ -69,10 +69,10 @@ export class SingleNav extends LitElement {
   }
 }
 
-customElements.define("singlenav-v1", SingleNav);
+customElements.define("portfolio-singlenav", PortfolioSingleNav);
 
 declare global {
   interface HTMLElementTagNameMap {
-    "singlenav-v1": SingleNav;
+    "portfolio-singlenav": PortfolioSingleNav;
   }
 }
