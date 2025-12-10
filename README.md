@@ -1,19 +1,12 @@
-# DS one
+# DS one (0.2.5-alpha.8)
 
-Build modern UIs with web components!
+A plug and play design system
 
-> A component-based design system built with TypeScript and LitElement that provides reusable UI components with built-in theming, internationalization, and accessibility features.
+> A component-based design system built with Lit that provides reusable UI components with built-in theming, internationalization, and accessibility features.
 
-[![npm version](https://img.shields.io/npm/v/ds-one/alpha.svg)](https://www.npmjs.com/package/ds-one)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+**DS one** is a comprehensive modern design system that provides a set of reusable UI components built with Web Components via Lit. Available via CDN or npm.
 
-**DS one** is a modern design system that provides a comprehensive set of reusable UI components built with Web Components. Think "Material Design meets Web Standards"—a simple, accessible component library that works with any framework or vanilla JavaScript.
-
-**📦 Now available on NPM!** Install with `bun add ds-one@alpha` and start building today.
-
-## 🚀 Quick Start
-
-### Install
+## Installation
 
 ```bash
 # Using bun (recommended)
@@ -24,171 +17,92 @@ npm install ds-one@alpha
 
 # Using yarn
 yarn add ds-one@alpha
+
 ```
 
-**Note**: Currently published as alpha version `0.2.5-alpha.3`. Use `@alpha` tag to install.
+**Note**: Currently published as alpha version `0.2.5-alpha.8`
 
-### Basic Usage (CDN)
+## Quick Start
+
+### CDN Usage
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Load DS one CSS -->
+    <!-- CSS -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
     />
-    <!-- Load DS one components -->
+    <!-- Bundle -->
     <script type="module">
       import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
-    <ds-button variant="primary">Get Started</ds-button>
-    <ds-text key="welcome">Welcome to DS one</ds-text>
+    <ds-button variant="primary" key="getStarted"></ds-button>
+    <ds-text key="welcome"></ds-text>
   </body>
 </html>
 ```
 
-### Online demo
+### NPM Usage
 
-Try DS one in your browser: **[dsone.dev](https://dsone.dev)** (documentation slugs to be decided)
-
-## ✨ Features
-
-### Core Components
-
-- **Web Components**: Built with LitElement for maximum compatibility
-- **TypeScript support**: Full type definitions and IntelliSense
-- **Accessibility**: ARIA support and keyboard navigation built-in
-- **Responsive design**: Mobile-first with scaling factors
-- **Theme system**: CSS custom properties for easy customization
-
-### Internationalization
-
-- **Language keys**: All text via camelCase keys for full i18n
-- **Notion CMS integration**: Dynamic content management
-- **Fallback support**: Graceful degradation when translations missing
-- **Multi-language**: Built-in language switching
-
-### Developer Experience
-
-- **Zero dependencies**: Pure Web Components, no framework required
-- **Fast loading**: Optimized bundle size and tree-shaking
-- **Hot reload**: Live updates in development
-- **Comprehensive testing**: Full test coverage
+```tsx
+import "ds-one/styles";
+import "ds-one";
+```
 
 ## Documentation
 
-- **[Component Reference](./docs/components.md)** - Complete component API documentation
-- **[Theming Guide](./docs/theming.md)** - Customization and accent colors
-- **[Internationalization](./docs/i18n.md)** - Language keys and Notion CMS setup
-- **[Examples](./docs/examples.md)** - Usage examples and patterns
+See the full documentation for DS one at: [**dsone.dev**](https://dsone.dev/)
 
-## Current Status: v0.2.5-alpha.3
+## Features
 
-**⚠️ Alpha Release**: This is an early alpha version. The API may change as we refine the components and architecture.
+### Internationalization
+
+- **Language keys**: Add a `translations.json` to your project and everything is translatable with the cycle type language button
+- **Multi-language**: Automatically switches language based on browser language settings
+
+### Core Components
+
+- **Web Components**: Built with Lit for maximum compatibility
+- **Responsive design**: Mobile-first approach with scaling factor
+- **Theme system**: CSS custom properties for easy customization
 
 ### Completed Features
 
 - ✅ Core component library (ds-button, ds-text, ds-icon, etc.)
-- ✅ Theming system with accent color support
+- ✅ Theming system with accent colors
 - ✅ Internationalization with language keys
 - ✅ Responsive design with mobile scaling
-- ✅ TypeScript definitions and type safety
-- ✅ Accessibility features and ARIA support
 - ✅ CDN delivery via jsDelivr
 - ✅ NPM package published
 
 ### In Progress
 
-- 🚧 Component naming standardization (ds-\* prefix)
-- 🚧 Enhanced theming documentation
-- 🚧 Component testing suite
-- 🚧 Documentation site refinement
-- 🚧 Additional component variants and states
-
-### Planned for Beta
-
-- 📋 Stable API and naming conventions
-- 📋 Comprehensive documentation with examples
-- 📋 Form components (input, select, checkbox, etc.)
-- 📋 Navigation components
-- 📋 Animation system
-- 📋 Design tokens documentation
+- 🚧 Documentation site
+- 🚧 Additional component variants and states defined in Figma
 
 ## Architecture
 
 ```
 DS one/
-├── DS1/
-│   ├── 0-face/       # Device and language detection
-│   ├── 1-root/       # Core styles, fonts, and design tokens
-│   ├── 2-core/       # Core components (buttons, text, etc.)
-│   ├── 3-unit/       # Composite components
-│   ├── 4-page/       # Page-level components
-│   ├── x-utils/      # Shared utilities (language, theme, etc.)
-│   └── x-icon/       # SVG icon library
 ├── dist/             # Built files for NPM
+├── DS1/
+│   ├── 0-face/       # Utilities for device detection, internationalization,
+│   │                 # localStorage preferences, pricing and theme
+│   ├── 1-root/       # Core styles, fonts, and design tokens
+│   │                 # (everything as CSS variables)
+│   ├── 2-core/       # Core components (banner, buttons, text, cycle,
+│   │                 # date, icon, input, tooltip)
+│   ├── 3-unit/       # Composite components (list, row, table)
+│   ├── 4-page/       # Page-level components for layout (layout, grid)
+│   └── x-icon/       # SVG icon library
 ├── examples/         # HTML examples
 └── docs/             # Documentation
-```
 
-## Roadmap
-
-### v0.2.0-beta (Target: Q2 2025)
-
-- [ ] Finalize component naming (ds-\* prefix for all components)
-- [ ] Complete core component set
-- [ ] Enhanced theming system
-- [ ] Component testing suite
-- [ ] Comprehensive documentation
-
-### v0.5.0 (Target: Q3 2025)
-
-- [ ] Advanced components (forms, navigation, data display)
-- [ ] Animation system
-- [ ] Design tokens
-- [ ] Figma integration
-
-### v1.0.0 (Production - Target: Q4 2025)
-
-- [ ] Complete feature set
-- [ ] Production-ready tooling
-- [ ] Long-term API stability
-- [ ] Performance optimizations
-
-### Development Setup
-
-```bash
-# Clone the repository
-git clone https://github.com/0001-labs/ds-one.git
-cd ds-one
-
-# Install dependencies
-bun install
-
-# Run tests
-bun test
-
-# Start development server
-bun run dev
-
-# Build components
-bun run build
-```
-
-### Release Process
-
-```bash
-# Create a new alpha release (recommended for now)
-bun run release:pre:alpha  # Bumps alpha version (e.g., 0.2.5-alpha.3 → 0.2.5-alpha.3)
-
-# Other release commands (for future use)
-bun run release:patch      # For patch releases
-bun run release:minor      # For minor releases
-bun run release:major      # For major releases
 ```
 
 ## License
@@ -197,11 +111,7 @@ MIT © [DS one](https://github.com/0001-labs/ds-one)
 
 ## 🔗 Links
 
-- **[Website](https://dsone.dev)** - Official website (slugs to be decided)
-- **[GitHub](https://github.com/0001-labs/ds-one)** - Source code and issues
-- **[NPM Package](https://www.npmjs.com/package/ds-one)** - Install with `@alpha` tag
-- **[CDN](https://cdn.jsdelivr.net/npm/ds-one@alpha/)** - Direct browser usage
-
----
-
-**DS one** - _Build modern UIs with web components that work everywhere._
+- [**Website**](https://dsone.dev/) - Official website
+- [**GitHub**](https://github.com/0001-labs/ds-one) - Source code and issues
+- [**NPM Package**](https://www.npmjs.com/package/ds-one) - Install with `@alpha` tag
+- [**CDN**](https://cdn.jsdelivr.net/npm/ds-one@alpha/) - Direct browser usage

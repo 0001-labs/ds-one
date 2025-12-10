@@ -1,7 +1,7 @@
 {
-  "name": "web",
+  "name": "website",
   "type": "module",
-  "version": "0.2.0-alpha.3",
+  "version": "0.4.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
