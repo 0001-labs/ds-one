@@ -40,15 +40,15 @@ export class PortfolioDoubleNav extends LitElement {
     :host {
       display: flex;
       justify-content: space-between;
-      gap: calc(5px * var(--scaling-factor));
-      padding: calc(2px * var(--scaling-factor));
+      gap: calc(5px * var(--sf));
+      padding: calc(2px * var(--sf));
       align-items: center;
     }
 
     a {
       display: inline-flex;
       align-items: center;
-      gap: calc(5px * var(--scaling-factor));
+      gap: calc(5px * var(--sf));
       text-decoration: none;
       color: inherit;
     }

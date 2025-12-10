@@ -14,21 +14,29 @@
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout mode="company">
+    <ds-layout debug mode="company">
       <ds-text style="grid-area: header" key="DS one Examples"></ds-text>
       <!-- Content -->
       <ds-button
         style="grid-area: content"
         variant="primary"
-        href="/examples/basic-project/"
+        href="/examples/unbundled/"
       >
-        Open this Basic Project button
+        Open Unbundled Project
       </ds-button>
 
       <ds-button
         style="grid-area: footer"
         variant="primary"
-        href="/examples/cdn-project/"
+        href="/examples/bundled/"
+      >
+        Open Bundled Project
+      </ds-button>
+
+      <ds-button
+        style="grid-area: sidebar"
+        variant="secondary"
+        href="/examples/cdn/"
       >
         Open CDN Project
       </ds-button>

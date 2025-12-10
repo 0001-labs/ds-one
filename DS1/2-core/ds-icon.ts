@@ -26,8 +26,8 @@ export class Icon extends LitElement {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: calc(16px * var(--scaling-factor));
-      height: calc(16px * var(--scaling-factor));
+      width: calc(16px * var(--sf));
+      height: calc(16px * var(--sf));
     }
 
     svg {
@@ -44,8 +44,8 @@ export class Icon extends LitElement {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: calc(16px * var(--scaling-factor));
-      height: calc(16px * var(--scaling-factor));
+      width: calc(16px * var(--sf));
+      height: calc(16px * var(--sf));
     }
 
     /* Notes style color variable for future implementation */

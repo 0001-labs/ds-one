@@ -12,6 +12,7 @@ import type { ThemeType } from "../0-face/theme";
 import { savePreferences } from "../0-face/preferences";
 import "./ds-button";
 import "./ds-icon";
+import "./ds-text";
 
 // Accent color utilities
 const saveAccentColor = (color: string) => {
@@ -641,7 +642,19 @@ export class Cycle extends LitElement {
     return html`
       <div class="cycle-container">
         ${this.type !== "icon-only"
-          ? html`<span class="cycle-label">${this.label}</span>`
+          ? html`${this.type === "language"
+              ? html`<ds-text
+                  key="language"
+                  default-value="Language"
+                  class="cycle-label"
+                ></ds-text>`
+              : this.type === "theme"
+                ? html`<ds-text
+                    key="theme"
+                    default-value="Theme"
+                    class="cycle-label"
+                  ></ds-text>`
+                : html`<span class="cycle-label">${this.label}</span>`}`
           : ""}
         <div
           style="display: flex; align-items: center; ${this.type === "icon-only"

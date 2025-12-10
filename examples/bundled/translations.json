@@ -1,0 +1,73 @@
+{
+  "en": {
+    "siteTitle": "Bundled Project",
+    "welcome": "Welcome to Bundled Project",
+    "description": "This project loads the DS one design system from the local bundled version. Perfect for development and testing with the bundled build.",
+    "aboutTitle": "About Bundled Delivery",
+    "aboutDescription": "This project demonstrates loading DS one components from the local bundled build. All components are bundled into a single file, providing a simple way to include the entire design system in your project.",
+    "contactTitle": "Ready to Develop",
+    "contactDescription": "Bundled projects use the local build files, making it easy to test changes and develop with the full design system without external dependencies.",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "learnMore": "Get Started",
+    "copyright": "© 2025 DS one - Bundled Delivery"
+  },
+  "da": {
+    "siteTitle": "Bundlet Projekt",
+    "welcome": "Velkommen til Bundlet Projekt",
+    "description": "Dette projekt indlæser DS one designsystemet fra den lokale bundlede version. Perfekt til udvikling og test med den bundlede build.",
+    "aboutTitle": "Om Bundlet Levering",
+    "aboutDescription": "Dette projekt demonstrerer indlæsning af DS one-komponenter fra den lokale bundlede build. Alle komponenter er bundtet i en enkelt fil, hvilket giver en simpel måde at inkludere hele designsystemet i dit projekt.",
+    "contactTitle": "Klar til Udvikling",
+    "contactDescription": "Bundlede projekter bruger de lokale build-filer, hvilket gør det nemt at teste ændringer og udvikle med hele designsystemet uden eksterne afhængigheder.",
+    "home": "Hjem",
+    "about": "Om",
+    "contact": "Kontakt",
+    "learnMore": "Kom I Gang",
+    "copyright": "© 2025 DS one - Bundlet Levering"
+  },
+  "ja": {
+    "siteTitle": "バンドルプロジェクト",
+    "welcome": "バンドルプロジェクトへようこそ",
+    "description": "このプロジェクトは、ローカルのバンドルバージョンからDS oneデザインシステムを読み込みます。バンドルビルドでの開発とテストに最適です。",
+    "aboutTitle": "バンドル配信について",
+    "aboutDescription": "このプロジェクトは、ローカルのバンドルビルドからDS oneコンポーネントをロードする方法を示します。すべてのコンポーネントは1つのファイルにバンドルされており、プロジェクトにデザインシステム全体を含める簡単な方法を提供します。",
+    "contactTitle": "開発準備完了",
+    "contactDescription": "バンドルプロジェクトはローカルビルドファイルを使用するため、外部依存関係なしで変更をテストし、完全なデザインシステムで開発することが容易になります。",
+    "home": "ホーム",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "learnMore": "始める",
+    "copyright": "© 2025 DS one - バンドル配信"
+  },
+  "de": {
+    "siteTitle": "Bündel-Projekt",
+    "welcome": "Willkommen beim Bündel-Projekt",
+    "description": "Dieses Projekt lädt das DS one Designsystem von der lokalen gebündelten Version. Perfekt für Entwicklung und Tests mit dem gebündelten Build.",
+    "aboutTitle": "Über Bündel-Bereitstellung",
+    "aboutDescription": "Dieses Projekt demonstriert das Laden von DS one-Komponenten aus dem lokalen gebündelten Build. Alle Komponenten sind in einer einzigen Datei gebündelt, was eine einfache Möglichkeit bietet, das gesamte Designsystem in Ihr Projekt einzubinden.",
+    "contactTitle": "Bereit zur Entwicklung",
+    "contactDescription": "Gebündelte Projekte verwenden die lokalen Build-Dateien, was es einfach macht, Änderungen zu testen und mit dem vollständigen Designsystem ohne externe Abhängigkeiten zu entwickeln.",
+    "home": "Startseite",
+    "about": "Über",
+    "contact": "Kontakt",
+    "learnMore": "Loslegen",
+    "copyright": "© 2025 DS one - Bündel-Bereitstellung"
+  },
+  "es": {
+    "siteTitle": "Proyecto Bundled",
+    "welcome": "Bienvenido al Proyecto Bundled",
+    "description": "Este proyecto carga el sistema de diseño DS one desde la versión bundled local. Perfecto para desarrollo y pruebas con la build bundled.",
+    "aboutTitle": "Acerca de la Entrega Bundled",
+    "aboutDescription": "Este proyecto muestra cómo cargar componentes DS one desde la build bundled local. Todos los componentes se agrupan en un solo archivo, lo que proporciona una forma simple de incluir todo el sistema de diseño en su proyecto.",
+    "contactTitle": "Listo para Desarrollar",
+    "contactDescription": "Los proyectos bundled usan los archivos de build locales, lo que facilita probar cambios y desarrollar con el sistema de diseño completo sin dependencias externas.",
+    "home": "Inicio",
+    "about": "Acerca de",
+    "contact": "Contacto",
+    "learnMore": "Comenzar",
+    "copyright": "© 2025 DS one - Entrega Bundled"
+  }
+}
+

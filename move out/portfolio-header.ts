@@ -29,7 +29,7 @@ export class PortfolioHeader extends LitElement {
   static styles = css`
     :host {
       display: flex;
-      padding: calc(2px * var(--scaling-factor));
+      padding: calc(2px * var(--sf));
       align-items: flex-start;
       width: 100%;
     }
@@ -41,7 +41,7 @@ export class PortfolioHeader extends LitElement {
       color: light-dark(var(--black), var(--white));
       align-items: center;
       font-weight: 500;
-      font-size: calc(14px * var(--scaling-factor));
+      font-size: calc(14px * var(--sf));
       margin: 0;
       width: 100%;
     }
@@ -79,4 +79,3 @@ declare global {
     "portfolio-header": PortfolioHeader;
   }
 }
-

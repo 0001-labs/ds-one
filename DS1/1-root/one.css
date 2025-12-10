@@ -1,4 +1,4 @@
-/* version 0.2.5-alpha.2 */
+/* version 0.2.5-alpha.5 */
 
 input {
   padding: 0;
@@ -20,9 +20,6 @@ input {
   --orange: #fec20d;
   --yellow: #ffff00;
 
-  /* accent color - defaults to blue but can be changed by user */
-  --accent-color: var(--light-green);
-
   /* DS1 Documentation Colors */
   --ds1-docs-header-bg: light-dark(#f5f5f5, #232323);
   --ds1-docs-header-border: light-dark(#e0e0e0, #000000);
@@ -34,46 +31,58 @@ input {
   --ds1-docs-search-bg: light-dark(#f0f0f0, #171717);
   --ds1-docs-divider: light-dark(#e0e0e0, #000000);
 
+  /* 4-page component colors */
+
+  /* ds-grid color */
+  --grid-color: light-dark(var(--grid-color-light), var(--grid-color-dark));
+  --grid-color-light: var(--slate);
+  --grid-color-dark: var(--white);
+
+  /* ds-layout colors */
+
+  --layout-color: light-dark(
+    var(--layout-color-light),
+    var(--layout-color-dark)
+  );
+
   /* typefaces */
   --typeface: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
   --typeface-compressed: "GT-America-Compressed-Regular";
   --typeface-japanese: "Noto Sans JP";
   --typeface-mono: "Iosevka";
-  --type-size-default: calc(14px * var(--scaling-factor));
-  --type-size-small: calc(10px * var(--scaling-factor));
+
+  --type-size-default: calc(14px * var(--sf));
+  --type-size-small: calc(10px * var(--sf));
   --type-weight-default: 500;
-  --type-lineheight-default: calc(15px * var(--scaling-factor));
-  --type-size-heading: calc(15px * var(--scaling-factor));
+  --type-lineheight-default: calc(15px * var(--sf));
+  --type-size-heading: calc(15px * var(--sf));
   --type-weight-bold: 500;
 
-  --type-size-japanese-default: calc(12px * var(--scaling-factor));
-  --type-size-japanese-heading: calc(14px * var(--scaling-factor));
-  --type-lineheight-japanese-default: calc(17px * var(--scaling-factor));
+  --type-size-japanese-default: calc(12px * var(--sf));
+  --type-size-japanese-heading: calc(14px * var(--sf));
+  --type-lineheight-japanese-default: calc(17px * var(--sf));
   --type-weight-product: var(--type-weight-bold);
   --type-weight-heading: var(--type-weight-bold);
   --type-size-book: 9px;
   --type-weight-book: 400;
   --type-lineheight-book: 15px;
 
-  /* ezo-scaling-factor */
-  --scaling-factor: var(--scaling-factor-mobile);
-  --scaling-factor-mobile: 1;
-
   /* size */
   --outline-stroke: 1px solid light-dark(var(--black), var(--slate-dark));
-  --outline-stroke-mobile: calc(1px * var(--scaling-factor)) solid
+  --outline-stroke-mobile: calc(1px * var(--sf)) solid
     light-dark(var(--black), var(--slate-dark));
-  --item-width: calc(79px * var(--scaling-factor));
-  --item-height: calc(19px * var(--scaling-factor));
-  --margin-correction: calc(1px * var(--scaling-factor));
+  --item-width: calc(79px * var(--sf));
+  --item-height: calc(19px * var(--sf));
+  --margin-correction: calc(1px * var(--sf));
 
-  /* sizes */
+  /* SIZING */
 
   /* main unit */
   --1: 20px;
   /* bigger sizes */
   --2: calc(var(--1) * 2);
+  --3: calc(var(--1) * 3);
   --4: calc(var(--1) * 4);
 
   /* smaller sizes */
@@ -81,7 +90,7 @@ input {
   --025: calc(var(--1) * 0.25);
   --08: calc(var(--1) * 0.8);
 
-  /* ezo-button */
+  /* button */
   --button-background-color-primary: var(--accent-color);
   --button-background-color-secondary: light-dark(
     var(--slate-light),
@@ -93,11 +102,11 @@ input {
     var(--slate-light)
   );
 
-  /* ezo-text-color */
+  /* text-color */
   --text-color-primary: light-dark(var(--black), var(--white));
   --text-color-dimmed: light-dark(var(--slate), var(--slate-light));
 
-  /* ezo-icon */
+  /* icon colors */
   --icon-background: light-dark(var(--slate-light), var(--slate-dark));
   --icon-color: light-dark(var(--black), var(--white));
 
@@ -132,14 +141,6 @@ input {
   navigation: auto;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
-html {
-  scrollbar-width: none;
-}
-
 @font-face {
   font-family: GT-America-Standard-Regular;
   src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
@@ -165,15 +166,15 @@ body {
 
 .matrix__board {
   position: relative;
-  top: calc(21.5px * var(--scaling-factor));
-  left: calc(-20px * var(--scaling-factor));
+  top: calc(21.5px * var(--sf));
+  left: calc(-20px * var(--sf));
+  width: calc(240px * var(--sf));
   display: flex;
-  width: calc(240px * var(--scaling-factor));
 }
 
 .matrix__board--vertical {
   position: relative;
-  left: calc(20.5px * var(--scaling-factor));
+  left: calc(20.5px * var(--sf));
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -181,8 +182,8 @@ body {
 
 .matrix__board--horizontal {
   position: relative;
-  top: calc(19.5px * var(--scaling-factor));
-  left: calc(-239.5px * var(--scaling-factor));
+  top: calc(19.5px * var(--sf));
+  left: calc(-239.5px * var(--sf));
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -212,11 +213,11 @@ body {
 
 .matrix__row-header {
   position: relative;
-  top: calc(0.5px * var(--scaling-factor));
+  top: calc(0.5px * var(--sf));
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(19px * var(--scaling-factor));
+  width: calc(19px * var(--sf));
   height: var(--item-height);
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
@@ -268,13 +269,13 @@ body {
 
 .board__container {
   position: relative;
-  top: calc(0.5px * var(--scaling-factor));
+  top: calc(0.5px * var(--sf));
 }
 
 .board {
   position: relative;
-  top: calc(0.5px * var(--scaling-factor));
-  left: calc(0.5px * var(--scaling-factor));
+  top: calc(0.5px * var(--sf));
+  left: calc(0.5px * var(--sf));
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -339,14 +340,13 @@ body {
 .header {
   display: flex;
   justify-content: center;
-  width: calc(var(--item-width) * var(--scaling-factor));
-  height: calc(var(--item-height) * var(--scaling-factor));
+  width: calc(var(--item-width) * var(--sf));
+  height: calc(var(--item-height) * var(--sf));
 }
 
 .header.dragging {
-  outline: calc(var(--outline-stroke) * var(--scaling-factor)) solid
-    var(--black);
-  outline-offset: calc(var(--outline-stroke-offset) * var(--scaling-factor));
+  outline: calc(var(--outline-stroke) * var(--sf)) solid var(--black);
+  outline-offset: calc(var(--outline-stroke-offset) * var(--sf));
   background-color: var(--white);
 }
 
@@ -382,7 +382,7 @@ body {
   margin-top: 1px;
   z-index: 99;
   margin-bottom: 2px;
-  padding-left: calc(3px * var(--scaling-factor));
+  padding-left: calc(3px * var(--sf));
   color: var(--text-color-primary);
   outline: var(--outline-stroke);
   background-color: var(--accent-color);
@@ -398,7 +398,7 @@ body {
 }
 
 .item-container.mobile {
-  margin-left: calc(0.25px * var(--scaling-factor));
+  margin-left: calc(0.25px * var(--sf));
 }
 
 .group-children {
@@ -417,7 +417,7 @@ body {
   align-items: center;
   justify-content: start;
   width: var(--item-width);
-  padding-left: calc(5px * var(--scaling-factor));
+  padding-left: calc(5px * var(--sf));
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -443,22 +443,4 @@ tr {
 
 td {
   text-align: left;
-}
-
-.layout-grid {
-  margin-top: 0.5px;
-  margin-left: -0px;
-  display: grid;
-  z-index: -10;
-  grid-template-columns: repeat(19, 79px);
-  grid-template-rows: repeat(500, 19px);
-  gap: 1px;
-  row-rule: 1px solid #00000012;
-  column-rule: 1px solid #00000012;
-  outline: 1px solid #100101e7;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  pointer-events: none;
 }

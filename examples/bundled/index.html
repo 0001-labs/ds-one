@@ -3,37 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basic Project - Contact</title>
+    <title>Bundled Project - Home</title>
 
-    <!-- Import DS one styles -->
+    <!-- Import CSS from local -->
     <link rel="stylesheet" href="../../DS1/1-root/one.css" />
 
-    <!-- Load translations -->
-    <script>
-      window.DS_ONE_TRANSLATIONS_FILE = "./translations.json";
-    </script>
-
-    <!-- Import DS one components directly from source -->
+    <!-- Import DS one bundle from local dist -->
     <script type="module">
-      // Import utilities first
-      import "../../DS1/0-face/2025-04-23-device.ts";
-      import "../../DS1/0-face/i18n.ts";
-      import "../../DS1/0-face/theme.ts";
-
-      // Import components
-      import "../../DS1/4-page/ds-grid.ts";
-      import "../../DS1/4-page/ds-layout.ts";
-      import "../../DS1/2-core/ds-text.ts";
-      import "../../DS1/2-core/ds-button.ts";
-      import "../../DS1/2-core/ds-cycle.ts";
-
-      console.log("DS one components loaded from unbundled source");
+      import "../../dist/ds-one.bundle.js";
     </script>
   </head>
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout debug>
+    <ds-layout mode="portfolio">
       <!-- Title -->
       <div style="grid-area: title">
         <ds-text
@@ -44,13 +27,13 @@
 
       <!-- Navigation -->
       <div style="grid-area: nav">
-        <ds-button variant="secondary" href="index.html">
+        <ds-button variant="primary" href="index.html">
           <ds-text key="home"></ds-text>
         </ds-button>
         <ds-button variant="secondary" href="about.html">
           <ds-text key="about"></ds-text>
         </ds-button>
-        <ds-button variant="primary" href="contact.html">
+        <ds-button variant="secondary" href="contact.html">
           <ds-text key="contact"></ds-text>
         </ds-button>
       </div>
@@ -58,7 +41,7 @@
       <!-- Main content -->
       <div style="grid-area: projects">
         <ds-text
-          key="contactTitle"
+          key="welcome"
           style="
             font-size: var(--text-xl);
             font-weight: bold;
@@ -67,9 +50,12 @@
           "
         ></ds-text>
         <ds-text
-          key="contactDescription"
+          key="description"
           style="display: block; margin-bottom: var(--2)"
         ></ds-text>
+        <ds-button variant="primary">
+          <ds-text key="learnMore"></ds-text>
+        </ds-button>
       </div>
 
       <!-- Footer -->

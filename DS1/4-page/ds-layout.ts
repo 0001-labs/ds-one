@@ -17,13 +17,18 @@ export class Layout extends LitElement {
     debug: { type: Boolean },
   };
 
-  mode?: string;
+  mode: string = "portfolio";
   align?: string;
   debug?: boolean;
 
   static styles = css`
     :host {
       display: grid;
+      position: relative;
+      width: 100%;
+    }
+
+    :host([mode="portfolio"]) {
       grid-template-columns: 120px 480px 40px;
       grid-template-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
       grid-template-areas:
@@ -40,8 +45,6 @@ export class Layout extends LitElement {
         ". . .";
       min-height: 600px;
       background-color: rgba(165, 165, 165, 0.03);
-      position: relative;
-      width: 100%;
       max-width: 640px;
       margin: 0 auto;
     }
@@ -75,6 +78,29 @@ export class Layout extends LitElement {
       justify-self: end;
     }
 
+    /* App mode - Base */
+    :host([mode="app"]) {
+      grid-template-columns: 1fr;
+      grid-template-rows: calc(var(--1) * var(--sf)) 20px 1fr auto;
+      grid-template-areas:
+        "banner"
+        "main"
+        "footer";
+      min-height: 100vh;
+      background-color: transparent;
+      width: 100%;
+      margin: 0 auto;
+      gap: 0;
+    }
+
+    /* App mode - with scaling factor */
+    :host([mode="app"]) {
+      max-width: calc(400px * var(--sf, 1));
+      padding: calc(60px * var(--sf, 1)) calc(28px * var(--sf, 1))
+        calc(9.751px * var(--sf, 1));
+      gap: calc(28px * var(--sf, 1));
+    }
+
     .debug-overlay {
       position: absolute;
       margin-left: -1px;
@@ -87,6 +113,9 @@ export class Layout extends LitElement {
       display: grid;
       font-size: 18px;
       font-weight: bold;
+    }
+
+    :host([mode="portfolio"]) .debug-overlay {
       grid-template-columns: 120px 480px;
       grid-template-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
       grid-template-areas:
@@ -158,39 +187,115 @@ export class Layout extends LitElement {
 
     .debug-footer {
       grid-area: footer;
-      border-color: #ffa500;
+      border-color: rgb(24, 147, 73);
+      background-color: rgba(127, 123, 11, 0.1);
     }
 
     .debug-content {
       grid-area: content;
       border-color: rgba(71, 231, 71, 0.63);
     }
+
+    :host([mode="app"]) .debug-overlay {
+      grid-template-columns: 1fr;
+      grid-template-rows:
+        calc(var(--1) * var(--sf))
+        calc(var(--2) * var(--sf))
+        calc(var(--4) * var(--sf))
+        calc(var(--1) * var(--sf));
+      grid-template-areas:
+        "banner"
+        "header"
+        "main"
+        "footer";
+    }
+
+    .debug-banner {
+      grid-area: banner;
+      border-color: #daed09;
+    }
+
+    .debug-header {
+      grid-area: header;
+      border-color: #0000ff;
+      background-color: rgba(127, 123, 11, 0.5);
+    }
+
+    .debug-main {
+      grid-area: main;
+      border-color: #0000ff;
+    }
+
+    .debug-footer-app {
+      grid-area: footer;
+      border-color: #ffa500;
+    }
   `;
 
   render() {
     const isDebug = this.debug || this.mode === "debug";
+    const isPortfolio = this.mode === "portfolio";
     const isCompany = this.mode === "company";
+    const isApp = this.mode === "app";
 
     return html`
       <slot></slot>
       ${isDebug
         ? html`
             <div class="debug-overlay">
-              ${isCompany
+              ${isApp
                 ? html`
-                    <div class="debug-area debug-header">header</div>
-                    <div class="debug-area debug-content">content</div>
-                    <div class="debug-area debug-footer">footer</div>
+                    <div class="debug-area debug-banner">
+                      <ds-text key="banner">banner</ds-text>
+                    </div>
+                    <div class="debug-area debug-header">
+                      <ds-text key="header">header</ds-text>
+                    </div>
+
+                    <div class="debug-area debug-main">
+                      <ds-text key="main">main</ds-text>
+                    </div>
+                    <div class="debug-area debug-footer-app">
+                      <ds-text key="footer">footer</ds-text>
+                    </div>
                   `
-                : html`
-                    <div class="debug-area debug-square">square</div>
-                    <div class="debug-area debug-title">title</div>
-                    <div class="debug-area debug-header">header</div>
-                    <div class="debug-area debug-projects">projects</div>
-                    <div class="debug-area debug-bio">bio</div>
-                    <div class="debug-area debug-nav">nav</div>
-                    <div class="debug-area debug-footer">footer</div>
-                  `}
+                : isCompany
+                  ? html`
+                      <div class="debug-area debug-header">
+                        <ds-text key="header">header</ds-text>
+                      </div>
+                      <div class="debug-area debug-content">
+                        <ds-text key="content">content</ds-text>
+                      </div>
+                      <div class="debug-area debug-footer">
+                        <ds-text key="footer">footer</ds-text>
+                      </div>
+                    `
+                  : isPortfolio
+                    ? html`
+                        <div class="debug-area debug-square">
+                          <ds-text key="square">square</ds-text>
+                        </div>
+                        <div class="debug-area debug-title">
+                          <ds-text key="title">title</ds-text>
+                        </div>
+                        <div class="debug-area debug-header">
+                          <ds-text key="header">header</ds-text>
+                        </div>
+                        <div class="debug-area debug-projects">
+                          <ds-text key="projects">projects</ds-text>
+                        </div>
+                        <div class="debug-area debug-bio">
+                          <ds-text key="bio">bio</ds-text>
+                        </div>
+                        <div class="debug-area debug-nav">
+                          <ds-text key="nav">nav</ds-text>
+                        </div>
+                        <div class="debug-area debug-footer">
+                          <ds-text key="footer">footer</ds-text>
+                        </div>
+                      `
+                    : ""}
             </div>
           `
         : ""}

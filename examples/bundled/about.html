@@ -3,23 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CDN Project - Home</title>
+    <title>Bundled Project - About</title>
 
-    <!-- Import CSS from CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@alpha/DS1/1-root/one.css"
-    />
+    <!-- Import CSS from local -->
+    <link rel="stylesheet" href="../../DS1/1-root/one.css" />
 
-    <!-- Import DS one bundle from CDN -->
+    <!-- Import DS one bundle from local dist -->
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@alpha/dist/ds-one.bundle.min.js";
+      import "../../dist/ds-one.bundle.js";
     </script>
   </head>
   <body>
     <ds-grid align="center"></ds-grid>
 
-    <ds-layout mode="portfolio">
+    <ds-layout debug>
       <!-- Title -->
       <div style="grid-area: title">
         <ds-text
@@ -30,10 +27,10 @@
 
       <!-- Navigation -->
       <div style="grid-area: nav">
-        <ds-button variant="primary" href="index.html">
+        <ds-button variant="secondary" href="index.html">
           <ds-text key="home"></ds-text>
         </ds-button>
-        <ds-button variant="secondary" href="about.html">
+        <ds-button variant="primary" href="about.html">
           <ds-text key="about"></ds-text>
         </ds-button>
         <ds-button variant="secondary" href="contact.html">
@@ -44,7 +41,7 @@
       <!-- Main content -->
       <div style="grid-area: projects">
         <ds-text
-          key="welcome"
+          key="aboutTitle"
           style="
             font-size: var(--text-xl);
             font-weight: bold;
@@ -53,12 +50,9 @@
           "
         ></ds-text>
         <ds-text
-          key="description"
+          key="aboutDescription"
           style="display: block; margin-bottom: var(--2)"
         ></ds-text>
-        <ds-button variant="primary">
-          <ds-text key="learnMore"></ds-text>
-        </ds-button>
       </div>
 
       <!-- Footer -->

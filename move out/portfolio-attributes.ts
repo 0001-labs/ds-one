@@ -31,24 +31,24 @@ export class PortfolioAttributes extends LitElement {
     :host {
       display: flex;
       flex-direction: row;
-      gap: calc(16px * var(--scaling-factor));
+      gap: calc(16px * var(--sf));
       align-items: flex-start;
     }
 
     .attribute-row {
       display: inline-flex;
-      height: calc(20px * var(--scaling-factor));
-      padding: 0px calc(2px * var(--scaling-factor));
+      height: calc(20px * var(--sf));
+      padding: 0px calc(2px * var(--sf));
       align-items: flex-start;
-      gap: calc(5px * var(--scaling-factor));
+      gap: calc(5px * var(--sf));
       font-family: var(--typeface);
-      font-size: calc(14px * var(--scaling-factor));
+      font-size: calc(14px * var(--sf));
       color: light-dark(var(--slate), var(--slate-dark));
     }
 
     .status-indicator {
-      width: calc(8px * var(--scaling-factor));
-      height: calc(8px * var(--scaling-factor));
+      width: calc(8px * var(--sf));
+      height: calc(8px * var(--sf));
       display: inline-block;
       transition:
         background 0.2s,

@@ -1,6 +1,6 @@
 {
   "name": "ds-one",
-  "version": "0.2.5-alpha.2",
+  "version": "0.2.5-alpha.5",
   "description": "A component-based design system built with TypeScript and LitElement that provides reusable UI components with built-in theming, internationalization, and accessibility features.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -27,7 +27,7 @@
     "dist/**/*.js"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "bun run build:bundle",
     "build:bundle": "bunx tsc && bunx esbuild dist/index.js --bundle --format=esm --outfile=dist/ds-one.bundle.js --sourcemap --platform=browser --target=es2020 && bunx esbuild dist/index.js --bundle --format=esm --outfile=dist/ds-one.bundle.min.js --minify --sourcemap --platform=browser --target=es2020",
     "build:types": "tsc --noEmit",
@@ -47,10 +47,10 @@
     "release:pre:alpha": "bun run scripts/release.ts prerelease --preid=alpha",
     "release:pre:beta": "bun run scripts/release.ts prerelease --preid=beta",
     "release:pre:rc": "bun run scripts/release.ts prerelease --preid=rc",
-    "docs:dev": "cd web && bun run dev",
-    "docs:build": "cd web && bun run build",
-    "docs:preview": "cd web && bun run preview",
-    "docs:deploy": "cd web && bun run deploy"
+    "docs:dev": "cd website && bun run dev",
+    "docs:build": "cd website && bun run build",
+    "docs:preview": "cd website && bun run preview",
+    "docs:deploy": "cd website && bun run deploy"
   },
   "keywords": [
     "design-system",
@@ -71,6 +71,7 @@
     "eslint": "^8.0.0",
     "playwright": "^1.56.0",
     "prettier": "^3.0.0",
+    "terser": "^5.44.1",
     "typescript": "^5.0.0",
     "vite": "^7.1.9"
   },

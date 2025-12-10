@@ -41,8 +41,8 @@ export class PortfolioSquareCircle extends LitElement {
     :host {
       background-color: light-dark(var(--black), var(--white));
       display: block;
-      width: calc(120px * var(--scaling-factor));
-      height: calc(120px * var(--scaling-factor));
+      width: calc(120px * var(--sf));
+      height: calc(120px * var(--sf));
       cursor: pointer;
       pointer-events: auto;
       position: relative;
