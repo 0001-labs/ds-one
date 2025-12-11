@@ -104,6 +104,10 @@ export function initDeviceDetection(): DeviceInfo {
       scalingFactor.toFixed(3)
     );
 
+    // Add .mobile class to html element for CSS targeting
+    document.documentElement.classList.add("mobile");
+    document.documentElement.classList.remove("desktop");
+
     console.log(
       `[DS one] Mobile device detected - ${deviceInfo.deviceType} (${deviceInfo.screenWidth}x${deviceInfo.screenHeight}), scaling factor: ${scalingFactor.toFixed(2)}`
     );
@@ -113,6 +117,10 @@ export function initDeviceDetection(): DeviceInfo {
       document.documentElement.style.setProperty("--sf", "1");
       // Also set --sf for backwards compatibility
       document.documentElement.style.setProperty("--sf", "1");
+
+      // Add .desktop class and remove .mobile class
+      document.documentElement.classList.add("desktop");
+      document.documentElement.classList.remove("mobile");
     }
     console.log(
       `[DS one] Desktop device detected (${deviceInfo.screenWidth}x${deviceInfo.screenHeight})`

@@ -1,4 +1,4 @@
-/* version 0.2.5-alpha.12 */
+/* version 0.2.5-alpha.13 */
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200");
 
@@ -54,8 +54,13 @@ input {
   --typeface-regular: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
   --typeface-compressed: "GT-America-Compressed-Regular";
-  --typeface-regular-jp: "Noto Sans JP";
   --typeface-mono: "Iosevka";
+
+  /* language specific typefaces */
+
+  --typeface-regular-jp: "Noto Sans JP";
+
+  /* typefaces sizes and weight */
 
   --type-size-default: calc(14px * var(--sf));
   --type-size-small: calc(10px * var(--sf));
@@ -73,6 +78,35 @@ input {
   --type-weight-book: 400;
   --type-lineheight-book: 15px;
 
+  /* ----------------------------------------------------------
+   SIZING SCALE
+   - Define a base unit ( --1 ) and derive all other sizes
+   - Larger sizes are simple multipliers (×2, ×3, ×4)
+   - Smaller sizes use fractional multipliers (0.1, 0.25, 0.8)
+   ---------------------------------------------------------- */
+
+  --01: calc(var(--1) * 0.1);
+  --025: calc(var(--1) * 0.25);
+  --05: calc(var(--1) * 0.5);
+  --08: calc(var(--1) * 0.8);
+  --1: 20px; /* SET BASE UNIT HERE FOR EXAMPLE 20px */
+  --2: calc(var(--1) * 2);
+  --3: calc(var(--1) * 3);
+  --4: calc(var(--1) * 4);
+  --8: calc(var(--1) * 8);
+
+  /* Semantic sizing units */
+
+  --tenth: var(--01);
+  --quarter: var(--025);
+  --half: var(--05);
+  --eight-tenth: var(--08);
+  --unit: var(--1);
+  --double: var(--2);
+  --triple: var(--3);
+  --quad: var(--4);
+  --oct: var(--8);
+
   /* size */
   --outline-stroke: 1px solid light-dark(var(--black), var(--slate-dark));
   --outline-stroke-mobile: calc(1px * var(--sf)) solid
@@ -80,20 +114,6 @@ input {
   --item-width: calc(79px * var(--sf));
   --item-height: calc(19px * var(--sf));
   --margin-correction: calc(1px * var(--sf));
-
-  /* SIZING */
-
-  /* main unit */
-  --1: 20px;
-  /* bigger sizes */
-  --2: calc(var(--1) * 2);
-  --3: calc(var(--1) * 3);
-  --4: calc(var(--1) * 4);
-
-  /* smaller sizes */
-  --01: calc(var(--1) * 0.1);
-  --025: calc(var(--1) * 0.25);
-  --08: calc(var(--1) * 0.8);
 
   /* button */
   --button-background-color-primary: var(--accent-color);
