@@ -20,7 +20,7 @@ const saveAccentColor = (color: string) => {
 };
 
 const getAccentColor = (): string => {
-  return localStorage.getItem("accentColor") || "--blue"; // Default color if none set
+  return localStorage.getItem("accentColor") || "--sharp-blue"; // Default color if none set
 };
 
 const applyAccentColor = () => {
@@ -170,12 +170,12 @@ export class Cycle extends LitElement {
     } else if (this.type === "accent-color") {
       // Set up accent color cycling
       this.values = [
-        "--light-green",
-        "--green",
-        "--light-blue",
-        "--blue",
+        "--apple-green",
+        "--every-green",
+        "--zenith-blue",
+        "--sharp-blue",
         "--pink",
-        "--red",
+        "--tuned-red",
         "--orange",
         "--yellow",
       ];
@@ -528,16 +528,32 @@ export class Cycle extends LitElement {
     return value;
   }
 
+  getColorKey(colorVar: string): string {
+    // Map CSS variables to language keys
+    const colorMap: { [key: string]: string } = {
+      "--tuned-red": "red",
+      "--orange": "orange",
+      "--yellow": "yellow",
+      "--apple-green": "appleGreen",
+      "--every-green": "green",
+      "--zenith-blue": "lightBlue",
+      "--sharp-blue": "blue",
+      "--pink": "pink",
+    };
+
+    return colorMap[colorVar] || colorVar.replace("--", "").replace("-", " ");
+  }
+
   getColorName(colorVar: string): string {
     // Map CSS variables to language keys
     const colorMap: { [key: string]: string } = {
-      "--red": "red",
+      "--tuned-red": "red",
       "--orange": "orange",
       "--yellow": "yellow",
-      "--light-green": "lightGreen",
-      "--green": "green",
-      "--light-blue": "lightBlue",
-      "--blue": "blue",
+      "--apple-green": "appleGreen",
+      "--every-green": "green",
+      "--zenith-blue": "lightBlue",
+      "--sharp-blue": "blue",
       "--pink": "pink",
     };
 
@@ -674,7 +690,30 @@ export class Cycle extends LitElement {
                   style="display: inline-flex; align-items: center; gap: var(--025)"
                   >${this.getValueDisplay(this.currentValue)}</span
                 >`
-              : html`<span>${this.getValueDisplay(this.currentValue)}</span>`}
+              : this.type === "language"
+                ? html`<ds-text
+                    default-value=${this.getValueDisplay(this.currentValue)}
+                  ></ds-text>`
+                : this.type === "theme"
+                  ? html`<ds-text
+                      key=${this.currentValue}
+                      default-value=${this.currentValue}
+                    ></ds-text>`
+                  : this.type === "accent-color"
+                    ? html`<ds-text
+                        key=${this.getColorKey(this.currentValue)}
+                        default-value=${this.getColorName(this.currentValue)}
+                      ></ds-text>`
+                    : this.type === "page-style"
+                      ? html`<ds-text
+                          key=${this.currentValue}
+                          default-value=${this.currentValue}
+                        ></ds-text>`
+                      : html`<ds-text
+                          default-value=${this.getValueDisplay(
+                            this.currentValue
+                          )}
+                        ></ds-text>`}
           </ds-button>
           ${this.type === "accent-color"
             ? html`

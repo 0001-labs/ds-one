@@ -36,7 +36,7 @@ export class PortfolioLink extends LitElement {
   static styles = css`
     :host {
       display: inline;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
     }
 
     a {

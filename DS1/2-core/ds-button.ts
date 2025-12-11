@@ -1,8 +1,8 @@
 // ds-button.ts
 // Core button component
 
-import { LitElement, html, css, type PropertyValues } from "lit";
-import { getText, currentLanguage } from "../0-face/i18n";
+import { LitElement, html, css } from "lit";
+import "./ds-text";
 
 export class Button extends LitElement {
   static properties = {
@@ -21,7 +21,6 @@ export class Button extends LitElement {
     defaultText: { type: String, attribute: "default-text" },
     href: { type: String },
     _loading: { type: Boolean, state: true },
-    _text: { type: String, state: true },
   };
 
   // Public properties
@@ -38,7 +37,6 @@ export class Button extends LitElement {
 
   // Private state
   declare _loading: boolean;
-  declare _text: string | null;
 
   constructor() {
     super();
@@ -53,18 +51,17 @@ export class Button extends LitElement {
     this.defaultText = "";
     this.href = "";
     this._loading = false;
-    this._text = null;
   }
 
   static styles = css`
     button {
-      max-height: calc(var(--08) * var(--scaling-factor));
+      max-height: calc(var(--08) * var(--sf));
       border: none;
       cursor: pointer;
-      font-size: calc(var(--type-size-default) * var(--scaling-factor));
-      padding: 0 calc(1px * var(--scaling-factor));
+      font-size: calc(var(--type-size-default) * var(--sf));
+      padding: 0 calc(1px * var(--sf));
       color: var(--button-text-color);
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
     }
 
     button.title {
@@ -76,13 +73,13 @@ export class Button extends LitElement {
       background-color: var(--accent-color);
       color: var(--button-text-color);
       text-decoration-line: none;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
     }
 
     button.secondary {
       background-color: var(--button-background-color-secondary);
       color: var(--button-text-color);
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
     }
 
     button[bold] {
@@ -110,42 +107,11 @@ export class Button extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this._updateText();
-
-    // Listen for language changes
-    window.addEventListener("language-changed", this._handleLanguageChange);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener("language-changed", this._handleLanguageChange);
-  }
-
-  _handleLanguageChange = () => {
-    this._updateText();
-  };
-
-  updated(changedProps: PropertyValues) {
-    super.updated(changedProps);
-
-    if (changedProps.has("key") || changedProps.has("defaultText")) {
-      this._updateText();
-    }
-  }
-
-  /**
-   * Update text from translations (synchronous like Portfolio)
-   */
-  private _updateText() {
-    if (this.key) {
-      this._text = getText(this.key);
-    } else {
-      this._text = this.defaultText || this.fallback || null;
-    }
-    this.requestUpdate();
   }
 
   render() {
+    const hasTextProps = this.key || this.defaultText || this.fallback;
+
     return html`
       <button
         class=${this.variant}
@@ -154,7 +120,13 @@ export class Button extends LitElement {
         ?no-background=${this["no-background"]}
         @click=${this._handleClick}
       >
-        ${this._text ? this._text : html`<slot></slot>`}
+        ${hasTextProps
+          ? html`<ds-text
+              .key=${this.key}
+              .defaultValue=${this.defaultText}
+              .fallback=${this.fallback}
+            ></ds-text>`
+          : html`<slot></slot>`}
       </button>
     `;
   }

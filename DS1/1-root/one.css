@@ -1,35 +1,47 @@
-/* version 0.2.5-alpha.9 */
+/* version 0.2.5-alpha.12 */
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200");
+
+@font-face {
+  font-family: GT-America-Standard-Regular;
+  src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: GT-America-Standard-Medium;
+  src: url("./fonts/GT-America-Standard-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: GT-America-Compressed-Regular;
+  src: url("./fonts/GT-America-Compressed-Regular.woff2") format("woff2");
+}
 
 input {
   padding: 0;
 }
 
 :root {
-  /* colors */
+  /* DS one colors */
+
+  /* Base/[color]  */
+
   --black: #2a2a2a;
   --white: rgb(255 255 255);
   --slate: #bdbdbd;
   --slate-light: #e6e6e6;
   --slate-dark: #3c3c3c;
-  --light-green: #99ff73;
-  --green: #979441;
-  --light-blue: #ccccff;
-  --blue: #594dff;
-  --pink: #f5aad1;
-  --red: #ff5f5f;
-  --orange: #fec20d;
-  --yellow: #ffff00;
 
-  /* DS1 Documentation Colors */
-  --ds1-docs-header-bg: light-dark(#f5f5f5, #232323);
-  --ds1-docs-header-border: light-dark(#e0e0e0, #000000);
-  --ds1-docs-header-text: light-dark(#2a2a2a, #f1f1f1);
-  --ds1-docs-header-text-secondary: light-dark(#666666, #cdcdcd);
-  --ds1-docs-accent-green: #72ff3d;
-  --ds1-docs-sidebar-bg: light-dark(#fafafa, #1f1f1f);
-  --ds1-docs-content-bg: light-dark(#ffffff, #171717);
-  --ds1-docs-search-bg: light-dark(#f0f0f0, #171717);
-  --ds1-docs-divider: light-dark(#e0e0e0, #000000);
+  /* Accent/[color]  */
+  --tuned-red: #ff5f5f;
+  --pink: #f5aad1;
+  --sharp-blue: #594dff;
+  --zenith-blue: #ccccff;
+  --every-green: #979441;
+  --apple-green: #99ff73;
+  --chartreuse-green: #ccff4d;
+  --yellow: #eaff00;
+  --orange: #fec20d;
 
   /* 4-page component colors */
 
@@ -38,18 +50,11 @@ input {
   --grid-color-light: var(--slate);
   --grid-color-dark: var(--white);
 
-  /* ds-layout colors */
-
-  --layout-color: light-dark(
-    var(--layout-color-light),
-    var(--layout-color-dark)
-  );
-
   /* typefaces */
-  --typeface: "GT-America-Standard-Regular";
+  --typeface-regular: "GT-America-Standard-Regular";
   --typeface-medium: "GT-America-Standard-Medium";
   --typeface-compressed: "GT-America-Compressed-Regular";
-  --typeface-japanese: "Noto Sans JP";
+  --typeface-regular-jp: "Noto Sans JP";
   --typeface-mono: "Iosevka";
 
   --type-size-default: calc(14px * var(--sf));
@@ -139,24 +144,6 @@ input {
 
 @view-transition {
   navigation: auto;
-}
-
-@font-face {
-  font-family: GT-America-Standard-Regular;
-  src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: GT-America-Standard-Medium;
-  src: url("./fonts/GT-America-Standard-Medium.woff2") format("woff2");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: GT-America-Compressed-Regular;
-  src: url("./fonts/GT-America-Compressed-Regular.woff2") format("woff2");
-  font-display: swap;
 }
 
 body {
@@ -438,7 +425,7 @@ table {
 }
 
 tr {
-  background-color: var(--light-green);
+  background-color: var(--apple-green);
 }
 
 td {

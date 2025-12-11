@@ -37,7 +37,7 @@ export class PortfolioHeader extends LitElement {
     h2 {
       display: flex;
       place-content: center;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       color: light-dark(var(--black), var(--white));
       align-items: center;
       font-weight: 500;

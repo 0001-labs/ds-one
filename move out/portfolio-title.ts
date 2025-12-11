@@ -46,7 +46,7 @@ export class Title extends LitElement {
     h1 {
       display: block;
       place-content: center;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       color: light-dark(var(--black), var(--white));
       font-size: calc(36px * var(--sf));
       font-weight: 500;

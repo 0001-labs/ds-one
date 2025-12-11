@@ -151,7 +151,7 @@ export class Layout extends LitElement {
       justify-content: center;
       font-size: 10px;
       font-weight: var(--type-weight-default);
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       color: var(--black);
       border: 1px solid red;
       opacity: 1;

@@ -9,7 +9,7 @@ export class DateComponent extends LitElement {
   static styles = css`
     :host {
       display: inline;
-      font-family: var(--typeface, var(--typeface-regular));
+      font-family: var(--typeface-regular, var(--typeface-regular-regular));
       font-size: inherit;
       color: inherit;
     }
@@ -28,4 +28,3 @@ declare global {
     "ds-date": DateComponent;
   }
 }
-

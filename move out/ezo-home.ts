@@ -58,10 +58,8 @@ export class Home extends LitElement {
       position: relative;
       display: flex; /* expand hover zone horizontally */
       width: 100%; /* take the whole row width of the app container */
-      height: calc(
-        var(--1) * var(--scaling-factor)
-      ); /* provide hover zone under the tab */
-      font-family: var(--typeface);
+      height: calc(var(--1) * var(--sf)); /* provide hover zone under the tab */
+      font-family: var(--typeface-regular);
       overflow: hidden; /* hide the part above the host */
     }
 
@@ -74,9 +72,9 @@ export class Home extends LitElement {
     .home {
       position: absolute;
       left: 0;
-      width: calc(var(--4) * var(--scaling-factor));
-      height: calc(var(--1) * var(--scaling-factor));
-      margin: 0 calc(var(--1) * var(--scaling-factor));
+      width: calc(var(--4) * var(--sf));
+      height: calc(var(--1) * var(--sf));
+      margin: 0 calc(var(--1) * var(--sf));
       display: flex;
       align-items: center;
       background: var(--accent-color);
@@ -87,7 +85,7 @@ export class Home extends LitElement {
 
     /* Inner text spacing without affecting the 80px outer width */
     .home > ds-text {
-      padding: 0 calc(var(--1) * 0.15 * var(--scaling-factor));
+      padding: 0 calc(var(--1) * 0.15 * var(--sf));
       box-sizing: border-box;
       height: 100%;
       display: inline-flex;
@@ -165,4 +163,3 @@ declare global {
     "ds-home": Home;
   }
 }
-
