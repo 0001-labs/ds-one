@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { translate, getNotionText } from "../0-face/i18n";
+import { translate } from "../0-face/i18n";
 
 export class Tooltip extends LitElement {
   static properties = {
@@ -152,7 +152,7 @@ export class Tooltip extends LitElement {
     }
   }
 
-  async _loadText(): Promise<void> {
+  _loadText(): void {
     if (!this.key) {
       this._text = this.defaultValue || "";
       this.requestUpdate();
@@ -160,12 +160,6 @@ export class Tooltip extends LitElement {
     }
 
     try {
-      const notionText = await getNotionText(this.key);
-      if (notionText) {
-        this._text = notionText;
-        this.requestUpdate();
-        return;
-      }
       const t = translate(this.key);
       this._text = t && t !== this.key ? t : this.defaultValue || this.key;
     } catch (err) {

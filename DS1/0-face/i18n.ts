@@ -15,15 +15,15 @@ let translationKeys: TranslationMap = {};
 // Primary language list – prioritise the 10 requested languages when cycling
 const LANGUAGE_PRIORITY_ORDER = [
   "da",
-  "nb",
-  "sv",
-  "pt",
-  "es",
-  "zh",
-  "ko",
-  "ja",
-  "en",
   "de",
+  "en",
+  "es",
+  "fr",
+  "it",
+  "ja",
+  "pt",
+  "sv",
+  "zh",
 ] as const;
 
 const LANGUAGE_PRIORITY_LOOKUP = new Map<string, number>(
@@ -34,27 +34,27 @@ const LANGUAGE_PRIORITY_LOOKUP = new Map<string, number>(
 const FALLBACK_LANGUAGE_NAMES: Record<string, string> = {
   da: "Danish",
   "da-dk": "Danish",
-  nb: "Norwegian",
-  "nb-no": "Norwegian",
-  sv: "Swedish",
-  "sv-se": "Swedish",
   de: "German",
   "de-de": "German",
   en: "English",
   "en-us": "English",
-  pt: "Portuguese",
-  "pt-pt": "Portuguese",
-  "pt-br": "Portuguese (Brazil)",
   es: "Spanish",
   "es-es": "Spanish",
-  "es-mx": "Spanish (Mexico)",
-  zh: "Chinese",
-  "zh-hans": "Chinese (Simplified)",
-  "zh-hant": "Chinese (Traditional)",
+  fr: "French",
+  "fr-fr": "French",
+  it: "Italian",
+  "it-it": "Italian",
   ja: "Japanese",
   "ja-jp": "Japanese",
-  ko: "Korean",
-  "ko-kr": "Korean",
+  pt: "Portuguese",
+  "pt-pt": "Portuguese",
+  sv: "Swedish",
+  "sv-se": "Swedish",
+  zh: "Chinese",
+  "zh-cn": "Chinese",
+  "zh-tw": "Chinese",
+  "zh-hans": "Chinese",
+  "zh-hant": "Chinese",
 };
 
 const DISPLAY_NAME_CACHE = new Map<string, Intl.DisplayNames>();
@@ -263,9 +263,6 @@ function getTranslationData(): TranslationMap {
 // Cached translation data - use getter to always get fresh data
 let translationData = getTranslationData();
 
-type NotionCache = Map<string, string>;
-
-const notionStore = new Map<LanguageCode, NotionCache>();
 const defaultLanguage: LanguageCode = "en";
 
 function extractPrimarySubtag(code: LanguageCode): string {
@@ -409,33 +406,30 @@ export function getLanguageDisplayName(
 const BROWSER_LANGUAGE_PREFERENCES: Record<string, LanguageCode> = {
   da: "da",
   "da-dk": "da",
-  no: "nb",
-  nb: "nb",
-  "nb-no": "nb",
-  nn: "nn",
-  "nn-no": "nn",
-  sv: "sv",
-  "sv-se": "sv",
-  pt: "pt",
-  "pt-pt": "pt",
-  "pt-br": "pt",
+  de: "de",
+  "de-de": "de",
+  en: "en",
+  "en-us": "en",
+  "en-gb": "en",
   es: "es",
   "es-es": "es",
   "es-mx": "es",
+  fr: "fr",
+  "fr-fr": "fr",
+  it: "it",
+  "it-it": "it",
+  ja: "ja",
+  "ja-jp": "ja",
+  pt: "pt",
+  "pt-pt": "pt",
+  "pt-br": "pt",
+  sv: "sv",
+  "sv-se": "sv",
   zh: "zh",
   "zh-cn": "zh",
   "zh-hans": "zh",
   "zh-tw": "zh",
   "zh-hant": "zh",
-  ko: "ko",
-  "ko-kr": "ko",
-  ja: "ja",
-  "ja-jp": "ja",
-  en: "en",
-  "en-us": "en",
-  "en-gb": "en",
-  de: "de",
-  "de-de": "de",
 };
 
 function resolvePreferredLanguage(languageTag: string): LanguageCode | null {
@@ -532,7 +526,6 @@ if (typeof window !== "undefined") {
 
     // Dispatch that translations are loaded
     window.dispatchEvent(new CustomEvent("translations-loaded"));
-    (window as any).notionDataLoaded = true;
 
     // Dispatch language-changed to update all components
     const currentLang = currentLanguage.value;
@@ -551,7 +544,6 @@ if (typeof window !== "undefined") {
 setTimeout(() => {
   // Since we directly imported the data, just dispatch the events
   window.dispatchEvent(new CustomEvent("translations-loaded"));
-  (window as any).notionDataLoaded = true;
 
   // Also dispatch language-changed with the current language
   const currentLang = currentLanguage.value;
@@ -612,51 +604,6 @@ export function hasTranslation(
 // Get text - synchronous version for components
 export function getText(key: string): string {
   return translate(key);
-}
-
-// Get text from translation data (async for compatibility)
-export async function getNotionText(
-  key: string,
-  language: LanguageCode = currentLanguage.value
-): Promise<string | null> {
-  if (!key) {
-    return null;
-  }
-
-  if (!translationData || !translationData[language]) {
-    return null;
-  }
-
-  const text = translationData[language][key];
-  if (text) {
-    return text;
-  }
-
-  // Fallback to English
-  if (language !== defaultLanguage && translationData[defaultLanguage]?.[key]) {
-    return translationData[defaultLanguage][key];
-  }
-
-  return null;
-}
-
-// Store Notion text (for dynamic updates)
-export function setNotionText(
-  key: string,
-  value: string,
-  language: LanguageCode = currentLanguage.value
-): void {
-  if (!key) return;
-
-  const bucket = getLanguageBucket(language);
-  bucket.set(key, value);
-}
-
-function getLanguageBucket(language: LanguageCode): NotionCache {
-  if (!notionStore.has(language)) {
-    notionStore.set(language, new Map());
-  }
-  return notionStore.get(language)!;
 }
 
 // Get available languages - dynamically detect from loaded data

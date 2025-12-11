@@ -15,14 +15,13 @@ export class Button extends LitElement {
       attribute: "no-background",
     },
     blank: { type: Boolean, reflect: true },
-    notionKey: { type: String, attribute: "notion-key" },
     key: { type: String },
     fallback: { type: String },
     language: { type: String },
     defaultText: { type: String, attribute: "default-text" },
     href: { type: String },
     _loading: { type: Boolean, state: true },
-    _notionText: { type: String, state: true },
+    _text: { type: String, state: true },
   };
 
   // Public properties
@@ -31,7 +30,6 @@ export class Button extends LitElement {
   declare bold: boolean;
   declare "no-background": boolean;
   declare blank: boolean;
-  declare notionKey: string | null;
   declare key: string;
   declare fallback: string;
   declare language: string;
@@ -40,7 +38,7 @@ export class Button extends LitElement {
 
   // Private state
   declare _loading: boolean;
-  declare _notionText: string | null;
+  declare _text: string | null;
 
   constructor() {
     super();
@@ -49,14 +47,13 @@ export class Button extends LitElement {
     this.bold = false;
     this["no-background"] = false;
     this.blank = false;
-    this.notionKey = null;
     this.key = "";
     this.fallback = "";
     this.language = "en-US";
     this.defaultText = "";
     this.href = "";
     this._loading = false;
-    this._notionText = null;
+    this._text = null;
   }
 
   static styles = css`
@@ -141,9 +138,9 @@ export class Button extends LitElement {
    */
   private _updateText() {
     if (this.key) {
-      this._notionText = getText(this.key);
+      this._text = getText(this.key);
     } else {
-      this._notionText = this.defaultText || this.fallback || null;
+      this._text = this.defaultText || this.fallback || null;
     }
     this.requestUpdate();
   }
@@ -157,7 +154,7 @@ export class Button extends LitElement {
         ?no-background=${this["no-background"]}
         @click=${this._handleClick}
       >
-        ${this._notionText ? this._notionText : html`<slot></slot>`}
+        ${this._text ? this._text : html`<slot></slot>`}
       </button>
     `;
   }

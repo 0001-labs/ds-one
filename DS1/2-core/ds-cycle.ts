@@ -186,9 +186,6 @@ export class Cycle extends LitElement {
 
       // Apply the accent color to ensure it's active
       applyAccentColor();
-
-      // Set label
-      this.label = this.getLabel();
     } else if (this.type === "notes-style-medium") {
       // Set up notes style medium cycling
       this.values = ["default", "big", "gallery"];
@@ -272,9 +269,6 @@ export class Cycle extends LitElement {
 
       // Apply the accent color to ensure it's active
       applyAccentColor();
-
-      // Update label
-      this.label = this.getLabel();
     } else if (this.type === "notes-style-medium") {
       // Get current notes style medium
       const currentNotesStyle = getNotesStyleMedium();
@@ -495,8 +489,8 @@ export class Cycle extends LitElement {
     } else if (this.type === "theme") {
       // Try to get translated theme name
       if (this.translationsReady) {
-        const translatedName = translate(`themes.${value}`);
-        if (translatedName && translatedName !== `themes.${value}`) {
+        const translatedName = translate(value);
+        if (translatedName && translatedName !== value) {
           return translatedName;
         }
       }
@@ -654,7 +648,13 @@ export class Cycle extends LitElement {
                     default-value="Theme"
                     class="cycle-label"
                   ></ds-text>`
-                : html`<span class="cycle-label">${this.label}</span>`}`
+                : this.type === "accent-color"
+                  ? html`<ds-text
+                      key="accentColor"
+                      default-value="Accent color"
+                      class="cycle-label"
+                    ></ds-text>`
+                  : html`<span class="cycle-label">${this.label}</span>`}`
           : ""}
         <div
           style="display: flex; align-items: center; ${this.type === "icon-only"
