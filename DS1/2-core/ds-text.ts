@@ -1,5 +1,5 @@
 import { LitElement, html, css } from "lit";
-import { getText } from "../0-face/i18n";
+import { getText, currentLanguage } from "../0-face/i18n";
 
 /**
  * A component for displaying text from translations
@@ -23,6 +23,7 @@ export class Text extends LitElement {
   declare defaultValue: string;
   declare fallback: string;
   declare _text: string;
+  declare _currentLanguage: string;
   private boundHandlers: { languageChanged: EventListener };
 
   constructor() {
@@ -31,12 +32,16 @@ export class Text extends LitElement {
     this.defaultValue = "";
     this.fallback = "";
     this._text = "";
+    this._currentLanguage = currentLanguage.value;
 
     // Create bound event handlers for proper cleanup
     this.boundHandlers = {
       languageChanged: (() => {
         console.log("Language changed event received in ds-text");
+        this._currentLanguage = currentLanguage.value;
+        this._updateLanguageAttribute();
         this._loadText();
+        this.requestUpdate();
       }) as EventListener,
     };
   }
@@ -44,21 +49,25 @@ export class Text extends LitElement {
   static styles = css`
     :host {
       display: inline;
-      font-family: var(--typeface);
-      font-size: calc(var(--type-size-default) * var(--scaling-factor));
+      font-family: var(--typeface-regular);
+      font-size: calc(var(--type-size-default) * var(--sf));
       font-weight: var(--type-weight-default);
-      line-height: calc(var(--type-lineheight-default) * var(--scaling-factor));
-      letter-spacing: calc(
-        var(--type-letterspacing-default) * var(--scaling-factor)
-      );
+      line-height: calc(var(--type-lineheight-default) * var(--sf));
+      letter-spacing: calc(var(--type-letterspacing-default) * var(--sf));
       text-align: var(--text-align-default);
       text-transform: var(--text-transform-default);
       text-decoration: var(--text-decoration-default);
+    }
+
+    :host([data-language="ja"]) {
+      font-family: var(--typeface-regular-jp);
     }
   `;
 
   connectedCallback() {
     super.connectedCallback();
+    this._currentLanguage = currentLanguage.value;
+    this._updateLanguageAttribute();
     this._loadText();
 
     // Listen for language changes
@@ -97,9 +106,22 @@ export class Text extends LitElement {
     }
   }
 
+  _updateLanguageAttribute() {
+    const lang = this._currentLanguage || currentLanguage.value;
+    // Check if language is Japanese (handles "ja", "ja-JP", etc.)
+    const primaryLang = lang?.toLowerCase().split(/[-_]/)[0] || "";
+    if (primaryLang === "ja") {
+      this.setAttribute("data-language", "ja");
+    } else {
+      this.removeAttribute("data-language");
+    }
+  }
+
   _loadText() {
     if (!this.key) {
       this._text = this.defaultValue || this.fallback || "";
+      this._updateLanguageAttribute();
+      this.requestUpdate();
       return;
     }
 
@@ -110,6 +132,7 @@ export class Text extends LitElement {
       console.error("Error loading text for key:", this.key, error);
       this._text = this.defaultValue || this.fallback || this.key;
     }
+    this._updateLanguageAttribute();
     this.requestUpdate();
   }
 

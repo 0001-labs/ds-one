@@ -141,19 +141,10 @@ async function main() {
     console.log(`✓ Updated docs/npm-publishing.md`);
   }
 
-  // Update version in web/package.json (docs site)
-  const webPkgPath = path.resolve(process.cwd(), "web/package.json");
-  if (fs.existsSync(webPkgPath)) {
-    const webPkg = readJson(webPkgPath);
-    webPkg.version = next;
-    writeJson(webPkgPath, webPkg);
-    console.log(`✓ Updated web/package.json`);
-  }
-
   console.log(`\n🎉 All files updated to version ${next}`);
 
   if (!noGit) {
-    await $`git add package.json README.md docs/npm-publishing.md web/package.json DS1/1-root/one.css`;
+    await $`git add package.json README.md docs/npm-publishing.md DS1/1-root/one.css`;
     await $`git commit -m ${`release: v${next}`}`.nothrow();
     await $`git tag -a v${next} -m ${`release: v${next}`}`.nothrow();
     console.log(`\n✓ Git commit and tag created`);

@@ -41,7 +41,7 @@ export class PortfolioAttributes extends LitElement {
       padding: 0px calc(2px * var(--sf));
       align-items: flex-start;
       gap: calc(5px * var(--sf));
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       font-size: calc(14px * var(--sf));
       color: light-dark(var(--slate), var(--slate-dark));
     }

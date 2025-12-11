@@ -132,7 +132,7 @@ export class PortfolioArticle extends LitElement {
   static styles = css`
     :host {
       display: block;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       overflow-wrap: break-word;
       word-wrap: break-word;
       word-break: break-word;
@@ -186,7 +186,7 @@ export class PortfolioArticle extends LitElement {
       border: none;
       color: inherit;
       cursor: pointer;
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       font-size: calc(14px * var(--sf));
       margin-bottom: calc(8px * var(--sf));
       padding: 0;

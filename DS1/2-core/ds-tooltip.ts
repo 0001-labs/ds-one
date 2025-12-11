@@ -93,7 +93,7 @@ export class Tooltip extends LitElement {
       font-size: var(--type-size-default);
       padding: 0px calc(1px * var(--sf));
       font-family: var(
-        --typeface,
+        --typeface-regular,
         -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",

@@ -59,8 +59,8 @@ export class DsTable extends LitElement {
       display: flex;
       align-items: center;
       justify-content: left;
-      padding:  0 2px;
-      font-family: var(--typeface);
+      padding: 0 2px;
+      font-family: var(--typeface-regular);
       font-size: var(--type-size-default);
       font-weight: var(--type-weight-default);
       line-height: var(--type-lineheight-default);
@@ -74,10 +74,10 @@ export class DsTable extends LitElement {
       display: flex;
       align-items: center;
       justify-content: left;
-    
+
       outline: 1px solid var(--black);
 
-      font-family: var(--typeface);
+      font-family: var(--typeface-regular);
       font-size: var(--type-size-default);
       font-weight: var(--type-weight-default);
       line-height: var(--type-lineheight-default);
@@ -86,7 +86,7 @@ export class DsTable extends LitElement {
     }
 
     .status-cell {
-      background-color: var(--light-green);
+      background-color: var(--apple-green);
     }
 
     .product-cell {
@@ -117,7 +117,6 @@ export class DsTable extends LitElement {
     return html`
       <div class="table-container">
         <div class="table-header">
-        
           <div class="header-cell product-cell">Product</div>
           <div class="header-cell users-cell">Users</div>
           <div class="header-cell retention-cell">Retention</div>

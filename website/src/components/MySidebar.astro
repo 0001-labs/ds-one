@@ -1,6 +1,5 @@
 ---
 // Get the sidebar data from Starlight
-import pkg from '../../../package.json' assert { type: 'json' };
 // No need for githubUrl, SVG will be inlined directly
 const { sidebar } = Astro.locals.starlightRoute;
 
@@ -133,7 +132,7 @@ const entryTranslationKeys: Record<string, string> = {
       </div>
      
     </ds-button>
-    <ds-button style="display:flex; color: var(--button-text-color); white-space: nowrap;">{pkg.version}</ds-button>
+    <ds-button style="display:flex; color: var(--button-text-color); white-space: nowrap;">0.2.5-alpha.12</ds-button>
   </div>
 </nav>
 <style>
