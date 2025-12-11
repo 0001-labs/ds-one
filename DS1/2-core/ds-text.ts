@@ -50,7 +50,7 @@ export class Text extends LitElement {
     :host {
       display: inline;
       font-family: var(--typeface-regular);
-      font-size: calc(var(--type-size-default) * var(--sf));
+      font-size: var(--type-size-default);
       font-weight: var(--type-weight-default);
       line-height: calc(var(--type-lineheight-default) * var(--sf));
       letter-spacing: calc(var(--type-letterspacing-default) * var(--sf));

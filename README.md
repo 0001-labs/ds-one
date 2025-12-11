@@ -1,4 +1,4 @@
-# DS one (0.2.5-alpha.12)
+# DS one (0.2.5-alpha.13)
 
 A plug and play design system
 
@@ -20,7 +20,7 @@ yarn add ds-one@alpha
 
 ```
 
-**Note**: Currently published as alpha version `0.2.5-alpha.12`
+**Note**: Currently published as alpha version `0.2.5-alpha.13`
 
 ## Quick Start
 

@@ -58,8 +58,7 @@ export class Button extends LitElement {
       max-height: calc(var(--08) * var(--sf));
       border: none;
       cursor: pointer;
-      font-size: calc(var(--type-size-default) * var(--sf));
-      padding: 0 calc(1px * var(--sf));
+      padding: 0 calc(2px * var(--sf));
       color: var(--button-text-color);
       font-family: var(--typeface-regular);
     }

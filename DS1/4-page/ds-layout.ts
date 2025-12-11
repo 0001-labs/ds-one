@@ -1,5 +1,5 @@
 // ds-layout.ts
-// Simple grid layout component with debug mode
+// Simple grid layout component with view mode
 
 import { LitElement, html, css } from "lit";
 
@@ -14,12 +14,12 @@ export class Layout extends LitElement {
   static properties = {
     mode: { type: String },
     align: { type: String },
-    debug: { type: Boolean },
+    view: { type: Boolean },
   };
 
   mode: string = "portfolio";
   align?: string;
-  debug?: boolean;
+  view?: boolean;
 
   static styles = css`
     :host {
@@ -29,79 +29,103 @@ export class Layout extends LitElement {
     }
 
     :host([mode="portfolio"]) {
-      grid-template-columns: 120px 480px 40px;
-      grid-template-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
-      grid-template-areas:
-        "square . ."
-        ". title ."
-        ". header ."
-        ". projects ."
-        ". . ."
-        ". bio ."
-        ". . ."
-        ". nav ."
-        ". . ."
-        ". footer ."
-        ". . .";
+      --portfolio-cols: 120px 480px 40px;
+      --portfolio-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
+      --portfolio-areas: "square . ." ". title ." ". header ." ". projects ."
+        ". . ." ". bio ." ". . ." ". nav ." ". . ." ". footer ." ". . .";
+      --portfolio-overlay-cols: 120px 480px;
+      --portfolio-overlay-areas: "square ." ". title" ". header" ". projects"
+        ". ." ". bio" ". ." ". nav" ". ." ". footer" ". .";
+      grid-template-columns: var(--portfolio-cols);
+      grid-template-rows: var(--portfolio-rows);
+      grid-template-areas: var(--portfolio-areas);
       min-height: 600px;
       background-color: rgba(165, 165, 165, 0.03);
       max-width: 640px;
-      margin: 0 auto;
+      margin: 0;
+    }
+
+    :host([mode="portfolio"]) .view-overlay {
+      grid-template-columns: var(--portfolio-overlay-cols);
+      grid-template-rows: var(--portfolio-rows);
+      grid-template-areas: var(--portfolio-overlay-areas);
     }
 
     :host([mode="company"]) {
-      grid-template-columns: auto 400px auto;
-      grid-template-rows: 80px 20px 20px 120px 20px 120px;
-      grid-template-areas:
-        ". . ."
-        ". header ."
-        ". . ."
-        ". content ."
-        ". . ."
+      --company-cols: auto 400px auto;
+      --company-rows: 80px 20px 20px 120px 20px 120px;
+      --company-areas: ". . ." ". header ." ". . ." ". content ." ". . ."
         ". footer .";
+      grid-template-columns: var(--company-cols);
+      grid-template-rows: var(--company-rows);
+      grid-template-areas: var(--company-areas);
       gap: 0;
       max-width: 100%;
     }
 
-    :host([align="left"]) {
+    :host([mode="company"]) .view-overlay {
+      grid-template-columns: var(--company-cols);
+      grid-template-rows: var(--company-rows);
+      grid-template-areas: var(--company-areas);
+      gap: 0;
+    }
+
+    :host([align="left"]),
+    :host([mode="portfolio"][align="left"]),
+    :host([mode="company"][align="left"]),
+    :host([mode="app"][align="left"]) {
       margin: 0;
       justify-self: start;
     }
 
-    :host([align="center"]) {
+    :host([align="center"]),
+    :host([mode="portfolio"][align="center"]),
+    :host([mode="company"][align="center"]),
+    :host([mode="app"][align="center"]) {
       margin: 0 auto;
       justify-self: center;
     }
 
-    :host([align="right"]) {
+    :host([align="right"]),
+    :host([mode="portfolio"][align="right"]),
+    :host([mode="company"][align="right"]),
+    :host([mode="app"][align="right"]) {
       margin: 0 0 0 auto;
       justify-self: end;
     }
 
     /* App mode - Base */
     :host([mode="app"]) {
-      grid-template-columns: 1fr;
-      grid-template-rows: calc(var(--1) * var(--sf)) 20px 1fr auto;
-      grid-template-areas:
-        "banner"
-        "main"
-        "footer";
+      --app-cols: calc(var(--double) * var(--sf));
+      --app-rows: calc(var(--unit) * var(--sf)) calc(var(--2) * var(--sf))
+        calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--unit) * var(--sf));
+      --app-areas: "1" "." "2" "." "3";
+      --app-overlay-cols: calc(var(--oct) * var(--sf));
+      --app-overlay-rows: calc(var(--unit) * var(--sf))
+        calc(var(--double) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--unit) * var(--sf));
+      --app-overlay-areas: "banner" "." "header" "." "main" "." "footer";
+      grid-template-columns: var(--app-cols);
+      grid-template-rows: var(--app-rows);
+      grid-template-areas: var(--app-areas);
       min-height: 100vh;
       background-color: transparent;
       width: 100%;
-      margin: 0 auto;
       gap: 0;
-    }
-
-    /* App mode - with scaling factor */
-    :host([mode="app"]) {
       max-width: calc(400px * var(--sf, 1));
       padding: calc(60px * var(--sf, 1)) calc(28px * var(--sf, 1))
         calc(9.751px * var(--sf, 1));
       gap: calc(28px * var(--sf, 1));
     }
 
-    .debug-overlay {
+    :host([mode="app"]) .view-overlay {
+      grid-template-columns: var(--app-overlay-cols);
+      grid-template-rows: var(--app-overlay-rows);
+      grid-template-areas: var(--app-overlay-areas);
+    }
+
+    .view-overlay {
       position: absolute;
       margin-left: -1px;
       top: 0;
@@ -115,37 +139,7 @@ export class Layout extends LitElement {
       font-weight: bold;
     }
 
-    :host([mode="portfolio"]) .debug-overlay {
-      grid-template-columns: 120px 480px;
-      grid-template-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
-      grid-template-areas:
-        "square ."
-        ". title"
-        ". header"
-        ". projects"
-        ". ."
-        ". bio"
-        ". ."
-        ". nav"
-        ". ."
-        ". footer"
-        ". .";
-    }
-
-    :host([mode="company"]) .debug-overlay {
-      grid-template-columns: auto 400px auto;
-      grid-template-rows: 80px 20px 20px 120px 20px 120px;
-      grid-template-areas:
-        ". . ."
-        ". header ."
-        ". . ."
-        ". content ."
-        ". . ."
-        ". footer .";
-      gap: 0;
-    }
-
-    .debug-area {
+    .view-area {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -153,145 +147,156 @@ export class Layout extends LitElement {
       font-weight: var(--type-weight-default);
       font-family: var(--typeface-regular);
       color: var(--black);
-      border: 1px solid red;
+      border: 1px solid;
       opacity: 1;
     }
 
-    .debug-square {
+    :host([mode="portfolio"]) .view-area:nth-of-type(1) {
+      border-color: var(--tuned-red);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(2) {
+      border-color: var(--sharp-blue);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(3) {
+      border-color: var(--yellow);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(4) {
+      border-color: var(--apple-green);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(5) {
+      border-color: var(--pink);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(6) {
+      border-color: var(--orange);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(7) {
+      border-color: var(--zenith-blue);
+    }
+
+    :host([mode="company"]) .view-area:nth-of-type(1) {
+      border-color: var(--tuned-red);
+    }
+    :host([mode="company"]) .view-area:nth-of-type(2) {
+      border-color: var(--sharp-blue);
+    }
+    :host([mode="company"]) .view-area:nth-of-type(3) {
+      border-color: var(--yellow);
+    }
+
+    :host([mode="app"]) .view-area:nth-of-type(1) {
+      border-color: var(--tuned-red);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(2) {
+      border-color: var(--sharp-blue);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(3) {
+      border-color: var(--yellow);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(4) {
+      border-color: var(--apple-green);
+    }
+
+    .view-square {
       grid-area: square;
     }
 
-    .debug-title {
+    .view-title {
       grid-area: title;
     }
 
-    .debug-header {
+    .view-header {
       grid-area: header;
-      border-color: #0000ff;
     }
 
-    .debug-projects {
+    .view-projects {
       grid-area: projects;
-      border-color: #ffff00;
     }
 
-    .debug-bio {
+    .view-bio {
       grid-area: bio;
-      border-color: #ff00ff;
     }
 
-    .debug-nav {
+    .view-nav {
       grid-area: nav;
-      border-color: #00ffff;
     }
 
-    .debug-footer {
+    .view-footer {
       grid-area: footer;
-      border-color: rgb(24, 147, 73);
-      background-color: rgba(127, 123, 11, 0.1);
     }
 
-    .debug-content {
+    .view-content {
       grid-area: content;
-      border-color: rgba(71, 231, 71, 0.63);
     }
 
-    :host([mode="app"]) .debug-overlay {
-      grid-template-columns: 1fr;
-      grid-template-rows:
-        calc(var(--1) * var(--sf))
-        calc(var(--2) * var(--sf))
-        calc(var(--4) * var(--sf))
-        calc(var(--1) * var(--sf));
-      grid-template-areas:
-        "banner"
-        "header"
-        "main"
-        "footer";
-    }
-
-    .debug-banner {
+    .view-banner {
       grid-area: banner;
-      border-color: #daed09;
     }
 
-    .debug-header {
-      grid-area: header;
-      border-color: #0000ff;
-      background-color: rgba(127, 123, 11, 0.5);
-    }
-
-    .debug-main {
+    .view-main {
       grid-area: main;
-      border-color: #0000ff;
-    }
-
-    .debug-footer-app {
-      grid-area: footer;
-      border-color: #ffa500;
     }
   `;
 
   render() {
-    const isDebug = this.debug || this.mode === "debug";
+    const isView = this.view || this.mode === "view";
     const isPortfolio = this.mode === "portfolio";
     const isCompany = this.mode === "company";
     const isApp = this.mode === "app";
 
     return html`
       <slot></slot>
-      ${isDebug
+      ${isView
         ? html`
-            <div class="debug-overlay">
+            <div class="view-overlay">
               ${isApp
                 ? html`
-                    <div class="debug-area debug-banner">
+                    <div class="view-area view-banner">
                       <ds-text key="banner">banner</ds-text>
                     </div>
-                    <div class="debug-area debug-header">
+                    <div class="view-area view-header">
                       <ds-text key="header">header</ds-text>
                     </div>
 
-                    <div class="debug-area debug-main">
+                    <div class="view-area view-main">
                       <ds-text key="main">main</ds-text>
                     </div>
-                    <div class="debug-area debug-footer-app">
+                    <div class="view-area view-footer">
                       <ds-text key="footer">footer</ds-text>
                     </div>
                   `
                 : isCompany
                   ? html`
-                      <div class="debug-area debug-header">
+                      <div class="view-area view-header">
                         <ds-text key="header">header</ds-text>
                       </div>
-                      <div class="debug-area debug-content">
+                      <div class="view-area view-content">
                         <ds-text key="content">content</ds-text>
                       </div>
-                      <div class="debug-area debug-footer">
+                      <div class="view-area view-footer">
                         <ds-text key="footer">footer</ds-text>
                       </div>
                     `
                   : isPortfolio
                     ? html`
-                        <div class="debug-area debug-square">
+                        <div class="view-area view-square">
                           <ds-text key="square">square</ds-text>
                         </div>
-                        <div class="debug-area debug-title">
+                        <div class="view-area view-title">
                           <ds-text key="title">title</ds-text>
                         </div>
-                        <div class="debug-area debug-header">
+                        <div class="view-area view-header">
                           <ds-text key="header">header</ds-text>
                         </div>
-                        <div class="debug-area debug-projects">
+                        <div class="view-area view-projects">
                           <ds-text key="projects">projects</ds-text>
                         </div>
-                        <div class="debug-area debug-bio">
+                        <div class="view-area view-bio">
                           <ds-text key="bio">bio</ds-text>
                         </div>
-                        <div class="debug-area debug-nav">
+                        <div class="view-area view-nav">
                           <ds-text key="nav">nav</ds-text>
                         </div>
-                        <div class="debug-area debug-footer">
+                        <div class="view-area view-footer">
                           <ds-text key="footer">footer</ds-text>
                         </div>
                       `
