@@ -20,13 +20,44 @@
   </head>
 
   <body>
-    <ds-grid align="left"></ds-grid>
-    <ds-layout mode="app"> </ds-layout>
-
     <ds-container>
-      <ds-button variant="secondary" href="about.html">
-        <ds-text key="about"></ds-text>
-      </ds-button>
+      <!-- 4 Page Components -->
+      <ds-grid align="left"></ds-grid>
+      <ds-banner
+        style="grid-area: banner"
+        variant="warning"
+        text-key="banner.beta"
+        action-key="banner.report"
+        version="0.2.0-alpha.2"
+        mailto="joachim@ezo.gs"
+        subject-key="banner.subject"
+        describe-key="banner.describe"
+        app-version-key="banner.appVersion"
+      ></ds-banner>
+      <ds-layout light align="center" mode="app">
+        <!-- banner - fixed at top -->
+
+        <!-- header -->
+        <ds-row type="fill" style="grid-area: header">
+          <ds-text key="welcome"></ds-text>
+          <ds-button variant="secondary" key="signIn" href="contact.html">
+          </ds-button>
+        </ds-row>
+
+        <!-- main -->
+
+        <!-- footer -->
+        <div style="grid-area: footer">
+          <ds-row type="fill">
+            <ds-text key="language" default-value="Language"></ds-text>
+            <ds-cycle type="language"></ds-cycle>
+          </ds-row>
+          <ds-row type="fill">
+            <ds-text key="theme" default-value="Theme"></ds-text>
+            <ds-cycle type="theme"></ds-cycle>
+          </ds-row>
+        </div>
+      </ds-layout>
     </ds-container>
   </body>
 </html>

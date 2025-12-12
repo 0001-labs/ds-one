@@ -32,7 +32,7 @@ export class Grid extends LitElement {
       gap: 1px;
       row-rule: calc(1px * var(--sf)) solid var(--grid-color);
       column-rule: calc(1px * var(--sf)) solid var(--grid-color);
-      outline: calc(1px * var(--sf)) solid var(--yellow);
+      outline: calc(1px * var(--sf)) solid light-dark(var(--sharp-blue), var(--yellow));
       position: fixed;
       top: 0;
       left: 50%;

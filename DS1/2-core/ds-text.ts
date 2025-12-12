@@ -62,6 +62,17 @@ export class Text extends LitElement {
     :host([data-language="ja"]) {
       font-family: var(--typeface-regular-jp);
     }
+
+    :host([data-language="zh"]),
+    :host([data-language="zh-hant"]) {
+      font-family: var(--typeface-regular-zh-hant);
+      font-weight: 800;
+    }
+
+    :host([data-language="zh-hans"]) {
+      font-family: var(--typeface-regular-zh-hans);
+      font-weight: 800;
+    }
   `;
 
   connectedCallback() {
@@ -108,13 +119,32 @@ export class Text extends LitElement {
 
   _updateLanguageAttribute() {
     const lang = this._currentLanguage || currentLanguage.value;
-    // Check if language is Japanese (handles "ja", "ja-JP", etc.)
-    const primaryLang = lang?.toLowerCase().split(/[-_]/)[0] || "";
+    // Handles "ja", "ja-JP", "zh-Hant", "zh-Hans", etc.
+    const parts = (lang || "").toLowerCase().split(/[-_]/).filter(Boolean);
+    const primaryLang = parts[0] || "";
+
     if (primaryLang === "ja") {
       this.setAttribute("data-language", "ja");
-    } else {
-      this.removeAttribute("data-language");
+      return;
     }
+
+    if (primaryLang === "zh") {
+      // Prefer explicit script; otherwise infer from common regions.
+      const hasHans =
+        parts.includes("hans") || parts.includes("cn") || parts.includes("sg");
+      const hasHant =
+        parts.includes("hant") ||
+        parts.includes("tw") ||
+        parts.includes("hk") ||
+        parts.includes("mo");
+
+      if (hasHans) this.setAttribute("data-language", "zh-hans");
+      else if (hasHant) this.setAttribute("data-language", "zh-hant");
+      else this.setAttribute("data-language", "zh");
+      return;
+    }
+
+    this.removeAttribute("data-language");
   }
 
   _loadText() {

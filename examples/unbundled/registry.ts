@@ -12,7 +12,9 @@ import "../../DS1/1-root/one.css";
 import "../../DS1/2-core/ds-text";
 import "../../DS1/2-core/ds-button";
 import "../../DS1/2-core/ds-cycle";
+import "../../DS1/2-core/ds-gap";
 import "../../DS1/2-core/ds-icon";
+import "../../DS1/2-core/ds-banner";
 
 // 3-unit
 import "../../DS1/3-unit/ds-table";

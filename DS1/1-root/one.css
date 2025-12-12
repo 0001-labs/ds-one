@@ -1,6 +1,8 @@
-/* version 0.2.5-alpha.13 */
+/* version 0.2.5-alpha.18 */
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@800");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@800");
 
 @font-face {
   font-family: GT-America-Standard-Regular;
@@ -26,11 +28,12 @@ input {
 
   /* Base/[color]  */
 
-  --black: #2a2a2a;
   --white: rgb(255 255 255);
-  --slate: #bdbdbd;
+  --light-grey: #e8e8e8;
+  --slate: #1e1e1e;
   --slate-light: #e6e6e6;
   --slate-dark: #3c3c3c;
+  --black: #2a2a2a;
 
   /* Accent/[color]  */
   --tuned-red: #ff5f5f;
@@ -42,6 +45,8 @@ input {
   --chartreuse-green: #ccff4d;
   --yellow: #eaff00;
   --orange: #fec20d;
+
+  --accent-color: var(--apple-green);
 
   /* 4-page component colors */
 
@@ -59,6 +64,9 @@ input {
   /* language specific typefaces */
 
   --typeface-regular-jp: "Noto Sans JP";
+  --typeface-regular-zh-hans: "Noto Sans SC";
+  --typeface-regular-zh-hant: "Noto Sans TC";
+  --typeface-regular-zh: var(--typeface-regular-zh-hant);
 
   /* typefaces sizes and weight */
 
@@ -94,6 +102,7 @@ input {
   --3: calc(var(--1) * 3);
   --4: calc(var(--1) * 4);
   --8: calc(var(--1) * 8);
+  --12: calc(var(--1) * 12);
 
   /* Semantic sizing units */
 
@@ -106,6 +115,7 @@ input {
   --triple: var(--3);
   --quad: var(--4);
   --oct: var(--8);
+  --dozen: var(--12);
 
   /* size */
   --outline-stroke: 1px solid light-dark(var(--black), var(--slate-dark));
