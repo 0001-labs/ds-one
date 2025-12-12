@@ -55,7 +55,6 @@ export class Cycle extends LitElement {
     return {
       type: { type: String },
       values: { type: Array },
-      label: { type: String },
       currentValue: { type: String, state: true }, // Make this a private state property
       translationsReady: { type: Boolean, state: true }, // Track if translations are loaded
       disabled: { type: Boolean, state: true },
@@ -64,15 +63,24 @@ export class Cycle extends LitElement {
   }
 
   static styles = css`
-    .cycle-container {
-      display: flex;
-      justify-content: space-between;
-      gap: var(--025);
-      width: 100%;
+    :host {
+      display: inline-flex;
+      align-items: center;
     }
 
-    .cycle-label {
-      color: var(--text-color-primary);
+    .cycle {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--025);
+    }
+
+    .color-preview {
+      width: var(--05);
+      height: var(--05);
+      border-radius: 999px;
+      border: 1px solid
+        color-mix(in srgb, var(--text-color-primary) 20%, transparent);
+      flex: 0 0 auto;
     }
   `;
 
@@ -80,7 +88,6 @@ export class Cycle extends LitElement {
   // These are just for TypeScript and don't create shadowing fields
   declare type: string;
   declare values: string[];
-  declare label: string;
   declare currentValue: string;
   declare translationsReady: boolean;
   declare disabled: boolean;
@@ -102,7 +109,6 @@ export class Cycle extends LitElement {
     // Initialize properties with default values
     this.type = "";
     this.values = [];
-    this.label = "";
     this.currentValue = "";
     this.translationsReady = false;
     this.disabled = false;
@@ -154,9 +160,6 @@ export class Cycle extends LitElement {
       const availableLanguages = getAvailableLanguagesSync();
       this.values = availableLanguages;
       this.currentValue = currentLanguage.value;
-
-      // Set label
-      this.label = this.getLabel();
     } else if (this.type === "theme") {
       // Set up theme cycling
       this.values = ["light", "dark"];
@@ -164,9 +167,6 @@ export class Cycle extends LitElement {
       // Set initial value based on current theme
       const currentThemeValue = currentTheme.get();
       this.currentValue = currentThemeValue;
-
-      // Set label
-      this.label = this.getLabel();
     } else if (this.type === "accent-color") {
       // Set up accent color cycling
       this.values = [
@@ -197,9 +197,6 @@ export class Cycle extends LitElement {
       // Check if this should be disabled based on note behavior
       const currentPageStyle = getPageStyle();
       this.disabled = currentPageStyle === "note";
-
-      // Set label
-      this.label = this.getLabel();
     } else if (this.type === "page-style") {
       // Set up page style cycling
       this.values = ["note", "page"];
@@ -207,18 +204,12 @@ export class Cycle extends LitElement {
       // Set initial value based on current page style
       const currentPageStyle = getPageStyle();
       this.currentValue = currentPageStyle;
-
-      // Set label
-      this.label = this.getLabel();
     } else if (this.type === "icon-only") {
       // Set up icon-only cycling (no label)
       this.values = ["note", "page"];
 
       // Set initial value
       this.currentValue = this.values[0];
-
-      // No label for icon-only type
-      this.label = "";
     }
 
     // Request update to re-render with new values
@@ -252,16 +243,10 @@ export class Cycle extends LitElement {
       // Get current language
       const currentLang = currentLanguage.value;
       this.currentValue = currentLang;
-
-      // Update label
-      this.label = this.getLabel();
     } else if (this.type === "theme") {
       // Get current theme
       const currentThemeValue = currentTheme.get();
       this.currentValue = currentThemeValue;
-
-      // Update label
-      this.label = this.getLabel();
     } else if (this.type === "accent-color") {
       // Get current accent color
       const currentAccentColor = getAccentColor();
@@ -277,23 +262,14 @@ export class Cycle extends LitElement {
       // Check if this should be disabled based on note behavior
       const currentPageStyle = getPageStyle();
       this.disabled = currentPageStyle === "note";
-
-      // Update label
-      this.label = this.getLabel();
     } else if (this.type === "page-style") {
       // Get current page style
       const currentPageStyle = getPageStyle();
       this.currentValue = currentPageStyle;
-
-      // Update label
-      this.label = this.getLabel();
     } else if (this.type === "icon-only") {
       // Get current page style for icon-only
       const currentPageStyle = getPageStyle();
       this.currentValue = currentPageStyle;
-
-      // Update label
-      this.label = "";
     }
 
     this.requestUpdate();
@@ -463,9 +439,6 @@ export class Cycle extends LitElement {
       // Save preferences
       savePreferences({ pageStyle: newIconOnlyValue });
 
-      // No label update for icon-only type
-      this.label = "";
-
       // Dispatch page style change event
       window.dispatchEvent(
         new CustomEvent("page-style-changed", {
@@ -473,9 +446,6 @@ export class Cycle extends LitElement {
         })
       );
     }
-
-    // Update label
-    this.label = this.getLabel();
 
     // Request update to re-render
     this.requestUpdate();
@@ -584,146 +554,54 @@ export class Cycle extends LitElement {
     return html`<span>${style}</span>`;
   }
 
-  getLabel(): string {
-    if (this.type === "language") {
-      // Try to get translated label
-      if (this.translationsReady) {
-        const translatedLabel = translate("language");
-        if (translatedLabel && translatedLabel !== "language") {
-          return translatedLabel;
-        }
-      }
-
-      // Fall back to English
-      return "Language";
-    } else if (this.type === "theme") {
-      // Try to get translated label
-      if (this.translationsReady) {
-        const translatedLabel = translate("theme");
-        if (translatedLabel && translatedLabel !== "theme") {
-          return translatedLabel;
-        }
-      }
-
-      // Fall back to English
-      return "Theme";
-    } else if (this.type === "accent-color") {
-      // Try to get translated label
-      if (this.translationsReady) {
-        const translatedLabel = translate("accentColor");
-        if (translatedLabel && translatedLabel !== "accentColor") {
-          return translatedLabel;
-        }
-      }
-
-      // Fall back to English
-      return "Accent Color";
-    } else if (this.type === "notes-style-medium") {
-      // Try to get translated label
-      if (this.translationsReady) {
-        const translatedLabel = translate("notesStyle");
-        if (translatedLabel && translatedLabel !== "notesStyle") {
-          return translatedLabel;
-        }
-      }
-
-      // Fall back to English
-      return "Notes Style";
-    } else if (this.type === "page-style") {
-      // Try to get translated label
-      if (this.translationsReady) {
-        const translatedLabel = translate("clickingItem");
-        if (translatedLabel && translatedLabel !== "clickingItem") {
-          return translatedLabel;
-        }
-      }
-
-      // Fall back to English
-      return "Clic";
-    } else if (this.type === "icon-only") {
-      // No label for icon-only type
-      return "";
-    }
-
-    return this.label;
-  }
-
   render() {
     return html`
-      <div class="cycle-container">
-        ${this.type !== "icon-only"
-          ? html`${this.type === "language"
+      <div class="cycle">
+        <ds-button
+          variant=${this.variant ||
+          (this.type === "language" || this.type === "theme"
+            ? "secondary"
+            : "primary")}
+          ?disabled=${this.disabled}
+          @click=${this.handleButtonClick}
+        >
+          ${this.type === "notes-style-medium" || this.type === "icon-only"
+            ? html`<span
+                style="display: inline-flex; align-items: center; gap: var(--025)"
+                >${this.getValueDisplay(this.currentValue)}</span
+              >`
+            : this.type === "language"
               ? html`<ds-text
-                  key="language"
-                  default-value="Language"
-                  class="cycle-label"
+                  default-value=${this.getValueDisplay(this.currentValue)}
                 ></ds-text>`
               : this.type === "theme"
                 ? html`<ds-text
-                    key="theme"
-                    default-value="Theme"
-                    class="cycle-label"
+                    key=${this.currentValue}
+                    default-value=${this.currentValue}
                   ></ds-text>`
                 : this.type === "accent-color"
                   ? html`<ds-text
-                      key="accentColor"
-                      default-value="Accent color"
-                      class="cycle-label"
+                      key=${this.getColorKey(this.currentValue)}
+                      default-value=${this.getColorName(this.currentValue)}
                     ></ds-text>`
-                  : html`<span class="cycle-label">${this.label}</span>`}`
-          : ""}
-        <div
-          style="display: flex; align-items: center; ${this.type === "icon-only"
-            ? "justify-content: center;"
-            : ""}"
-        >
-          <ds-button
-            variant=${this.variant ||
-            (this.type === "language" || this.type === "theme"
-              ? "secondary"
-              : "primary")}
-            ?disabled=${this.disabled}
-            @click=${this.handleButtonClick}
-          >
-            ${this.type === "notes-style-medium" || this.type === "icon-only"
-              ? html`<span
-                  style="display: inline-flex; align-items: center; gap: var(--025)"
-                  >${this.getValueDisplay(this.currentValue)}</span
-                >`
-              : this.type === "language"
-                ? html`<ds-text
-                    default-value=${this.getValueDisplay(this.currentValue)}
-                  ></ds-text>`
-                : this.type === "theme"
-                  ? html`<ds-text
-                      key=${this.currentValue}
-                      default-value=${this.currentValue}
-                    ></ds-text>`
-                  : this.type === "accent-color"
+                  : this.type === "page-style"
                     ? html`<ds-text
-                        key=${this.getColorKey(this.currentValue)}
-                        default-value=${this.getColorName(this.currentValue)}
+                        key=${this.currentValue}
+                        default-value=${this.currentValue}
                       ></ds-text>`
-                    : this.type === "page-style"
-                      ? html`<ds-text
-                          key=${this.currentValue}
-                          default-value=${this.currentValue}
-                        ></ds-text>`
-                      : html`<ds-text
-                          default-value=${this.getValueDisplay(
-                            this.currentValue
-                          )}
-                        ></ds-text>`}
-          </ds-button>
-          ${this.type === "accent-color"
-            ? html`
-                <div
-                  class="color-preview"
-                  style="background-color: var(${this.currentValue})"
-                ></div>
-              `
-            : ""}
-        </div>
+                    : html`<ds-text
+                        default-value=${this.getValueDisplay(this.currentValue)}
+                      ></ds-text>`}
+        </ds-button>
+
+        ${this.type === "accent-color"
+          ? html`
+              <div
+                class="color-preview"
+                style="background-color: var(${this.currentValue})"
+              ></div>
+            `
+          : ""}
       </div>
     `;
   }

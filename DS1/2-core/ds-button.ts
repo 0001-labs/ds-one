@@ -56,9 +56,12 @@ export class Button extends LitElement {
   static styles = css`
     button {
       max-height: calc(var(--08) * var(--sf));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border: none;
       cursor: pointer;
-      padding: 0 calc(2px * var(--sf));
+      padding: 0 calc(0.5px * var(--sf));
       color: var(--button-text-color);
       font-family: var(--typeface-regular);
     }
@@ -79,6 +82,19 @@ export class Button extends LitElement {
       background-color: var(--button-background-color-secondary);
       color: var(--button-text-color);
       font-family: var(--typeface-regular);
+    }
+
+    button.text {
+      background-color: transparent;
+      color: var(--button-color, var(--button-text-color));
+      font-family: var(--typeface-regular);
+      padding: 0;
+      text-decoration: none;
+    }
+
+    button.text:hover {
+      opacity: 0.8;
+      text-decoration: none;
     }
 
     button[bold] {

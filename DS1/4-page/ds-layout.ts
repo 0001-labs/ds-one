@@ -28,6 +28,10 @@ export class Layout extends LitElement {
       width: 100%;
     }
 
+    slot {
+      display: contents;
+    }
+
     :host([mode="portfolio"]) {
       --portfolio-cols: 120px 480px 40px;
       --portfolio-rows: 120px 120px 60px 180px 60px 120px 60px 20px 120px 120px;
@@ -96,27 +100,28 @@ export class Layout extends LitElement {
 
     /* App mode - Base */
     :host([mode="app"]) {
-      --app-cols: calc(var(--double) * var(--sf));
-      --app-rows: calc(var(--unit) * var(--sf)) calc(var(--2) * var(--sf))
-        calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
-        calc(var(--unit) * var(--sf));
-      --app-areas: "1" "." "2" "." "3";
-      --app-overlay-cols: calc(var(--oct) * var(--sf));
+      --app-cols: 100%;
+      --app-rows: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--unit) * var(--sf)) calc(var(--double) * var(--sf))
+        calc(var(--dozen) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--quad) * var(--sf)) calc(var(--double) * var(--sf));
+      --app-areas: "banner" "." "header" "." "main" "page-dots" "." "footer";
+      --app-overlay-cols: 100%;
       --app-overlay-rows: calc(var(--unit) * var(--sf))
-        calc(var(--double) * var(--sf)) calc(var(--unit) * var(--sf))
-        calc(var(--unit) * var(--sf));
-      --app-overlay-areas: "banner" "." "header" "." "main" "." "footer";
+        calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--double) * var(--sf)) calc(var(--dozen) * var(--sf))
+        calc(var(--unit) * var(--sf)) calc(var(--quad) * var(--sf))
+        calc(var(--double) * var(--sf));
+      --app-overlay-areas: "banner" "." "header" "." "main" "page-dots" "."
+        "footer";
       grid-template-columns: var(--app-cols);
       grid-template-rows: var(--app-rows);
       grid-template-areas: var(--app-areas);
       min-height: 100vh;
       background-color: transparent;
-      width: 100%;
-      gap: 0;
-      max-width: calc(400px * var(--sf, 1));
-      padding: calc(60px * var(--sf, 1)) calc(28px * var(--sf, 1))
-        calc(9.751px * var(--sf, 1));
-      gap: calc(28px * var(--sf, 1));
+      width: calc(240px * var(--sf, 1));
+      max-width: calc(240px * var(--sf, 1));
+      margin: 0 auto;
     }
 
     :host([mode="app"]) .view-overlay {
@@ -135,24 +140,27 @@ export class Layout extends LitElement {
       pointer-events: none;
       z-index: 1000;
       display: grid;
-      font-size: 18px;
-      font-weight: bold;
     }
 
     .view-area {
       display: flex;
+      width: calc(240px * var(--sf, 1));
+      height: 100%;
       align-items: center;
       justify-content: center;
-      font-size: 10px;
-      font-weight: var(--type-weight-default);
       font-family: var(--typeface-regular);
-      color: var(--black);
-      border: 1px solid;
+      font-size: calc(var(--type-size-default) * var(--05));
+      color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
+      background-color: color-mix(
+        in srgb,
+        var(--accent-color) 25%,
+        transparent
+      );
       opacity: 1;
     }
 
     :host([mode="portfolio"]) .view-area:nth-of-type(1) {
-      border-color: var(--tuned-red);
+      background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
     }
     :host([mode="portfolio"]) .view-area:nth-of-type(2) {
       border-color: var(--sharp-blue);
@@ -184,16 +192,19 @@ export class Layout extends LitElement {
     }
 
     :host([mode="app"]) .view-area:nth-of-type(1) {
-      border-color: var(--tuned-red);
+      background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
     }
     :host([mode="app"]) .view-area:nth-of-type(2) {
-      border-color: var(--sharp-blue);
+      background-color: color-mix(in srgb, var(--sharp-blue) 25%, transparent);
     }
     :host([mode="app"]) .view-area:nth-of-type(3) {
-      border-color: var(--yellow);
+      background-color: color-mix(in srgb, var(--yellow) 25%, transparent);
     }
     :host([mode="app"]) .view-area:nth-of-type(4) {
-      border-color: var(--apple-green);
+      background-color: color-mix(in srgb, var(--apple-green) 25%, transparent);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(5) {
+      background-color: color-mix(in srgb, var(--pink) 25%, transparent);
     }
 
     .view-square {
@@ -235,6 +246,10 @@ export class Layout extends LitElement {
     .view-main {
       grid-area: main;
     }
+
+    .view-page-dots {
+      grid-area: page-dots;
+    }
   `;
 
   render() {
@@ -256,9 +271,11 @@ export class Layout extends LitElement {
                     <div class="view-area view-header">
                       <ds-text key="header">header</ds-text>
                     </div>
-
                     <div class="view-area view-main">
                       <ds-text key="main">main</ds-text>
+                    </div>
+                    <div class="view-area view-page-dots">
+                      <ds-text key="page-dots">page-dots</ds-text>
                     </div>
                     <div class="view-area view-footer">
                       <ds-text key="footer">footer</ds-text>
