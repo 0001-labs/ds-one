@@ -3,94 +3,167 @@
 import Search from '@astrojs/starlight/components/Search.astro';
 ---
 
-<header style="
-  background: var(--ds1-docs-header-bg);
-  border-bottom: 1px solid var(--ds1-docs-header-border);
-  display: flex;
-  align-items: center;
-  height: 80.5px;
-  
-">
+<header class="site-header">
+  <!-- Mobile Menu Button -->
+  <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="Toggle navigation menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
   <!-- Left: Logo -->
-  <div style="
-    display: flex;
-    align-items: center;
-    height: 81px;
-    width: 280.5px;
-    padding: 40px;
-    border-right: 1px var(--ds1-docs-header-border) solid;
-  ">
-    <div style="
-      height: 40px;
-      display: flex;
-      font-family: 'GT-America-Standard-Regular', sans-serif;
-      font-size: 32px;
-      color: var(--ds1-docs-header-text);
-      gap: 11px;
-      flex-direction: row;
-      align-items: baseline;
-      letter-spacing: -4%;
-      margin-bottom: 14px;
-
-    ">
-      DS one
-      <div style="
-      display: flex;
-      width: 16px;
-      height: 16px;
-      background: var(--ds1-docs-accent-green);
-      
-    "></div>
-    </div>
-    
+  <div class="header-logo">
+    <a href="/" class="logo-link">
+      <span class="logo-text">DS one</span>
+      <span class="logo-dot"></span>
+    </a>
   </div>
 
-  <div style="
-    width: 20px;
-    height: 80.5px;
-    border-right: 1px var(--ds1-docs-header-border) solid;
-  ">
-  </div>
+  <div class="header-divider"></div>
 
   <!-- Center: Search -->
-  <div style="
-    flex: 1;
-    display: flex;
-    align-items: center;
-    margin-top: 0.5px
-    padding: 20px;
-    padding-left: 39.5px;
-  ">
+  <div class="header-search">
     <Search class="custom-search" />
   </div>
 
   <!-- Right: Actions -->
-  <div style="
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-right: 40px;
-    min-width: fit-content;
-  ">
+  <div class="header-actions">
     <!-- Language Toggle using DS one cycle component -->
-    <div style="display: flex; align-items: center; pointer-events: all;">
+    <div class="action-item">
       <ds-cycle type="language" variant="secondary"></ds-cycle>
     </div>
 
     <!-- Theme Toggle using DS one cycle component -->
-    <ds-cycle type="theme" variant="secondary"></ds-cycle>
+    <div class="action-item">
+      <ds-cycle type="theme" variant="secondary"></ds-cycle>
+    </div>
   </div>
 </header>
 
 <style>
-  /* Style the search component to match the design */
+  .site-header {
+    background: var(--ds1-docs-header-bg);
+    border-bottom: 1px solid var(--ds1-docs-header-border);
+    display: flex;
+    align-items: center;
+    height: 60px;
+    position: relative;
+  }
+
+  /* Mobile menu button - hidden by default */
+  .mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-left: 8px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--ds1-docs-header-text);
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-menu-btn:hover {
+    background: var(--ds1-docs-search-bg);
+  }
+
+  .mobile-menu-btn .close-icon {
+    display: none;
+  }
+
+  .mobile-menu-btn.active .hamburger-icon {
+    display: none;
+  }
+
+  .mobile-menu-btn.active .close-icon {
+    display: block;
+  }
+
+  /* Logo section */
+  .header-logo {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 280.5px;
+    padding: 0 40px;
+    border-right: 1px solid var(--ds1-docs-header-border);
+    flex-shrink: 0;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: baseline;
+    gap: 11px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .logo-text {
+    font-family: 'GT-America-Standard-Regular', sans-serif;
+    font-size: 32px;
+    color: var(--ds1-docs-header-text);
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+
+  .logo-dot {
+    display: flex;
+    width: 16px;
+    height: 16px;
+    background: var(--ds1-docs-accent-green);
+    flex-shrink: 0;
+  }
+
+  /* Header divider */
+  .header-divider {
+    width: 20px;
+    height: 60px;
+    border-right: 1px solid var(--ds1-docs-header-border);
+    flex-shrink: 0;
+  }
+
+  /* Search section */
+  .header-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0 20px 0 40px;
+    min-width: 0;
+  }
+
+  /* Actions section */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 40px;
+    flex-shrink: 0;
+  }
+
+  .action-item {
+    display: flex;
+    align-items: center;
+  }
+
+  /* Style the search component */
   :global(.custom-search) {
-    width: 300px;
+    width: 100%;
     max-width: 300px;
   }
 
   :global(.custom-search button[data-open-modal]) {
-    width: 300px;
+    width: 100%;
+    max-width: 300px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -120,4 +193,112 @@ import Search from '@astrojs/starlight/components/Search.astro';
     width: 16px;
     height: 16px;
   }
+
+  /* Tablet Responsive Styles */
+  @media (max-width: 1024px) {
+    .header-logo {
+      width: auto;
+      padding: 0 20px;
+    }
+
+    .header-divider {
+      width: 15px;
+    }
+
+    .header-search {
+      padding: 0 15px;
+    }
+
+    .header-actions {
+      padding-right: 20px;
+      gap: 0.5rem;
+    }
+  }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 768px) {
+    .site-header {
+      height: 60px;
+      padding: 0 8px;
+      gap: 8px;
+    }
+
+    .mobile-menu-btn {
+      display: flex;
+    }
+
+    .header-logo {
+      width: auto;
+      padding: 0;
+      border-right: none;
+      flex: 0 0 auto;
+    }
+
+    .logo-text {
+      font-size: 24px;
+    }
+
+    .logo-dot {
+      width: 12px;
+      height: 12px;
+    }
+
+    .header-divider {
+      display: none;
+    }
+
+    .header-search {
+      flex: 1;
+      padding: 0 8px;
+      min-width: 0;
+    }
+
+    :global(.custom-search) {
+      width: 100%;
+      max-width: none;
+    }
+
+    :global(.custom-search button[data-open-modal]) {
+      width: 100%;
+      max-width: none;
+      padding: 8px 12px;
+    }
+
+    .header-actions {
+      padding-right: 8px;
+      gap: 4px;
+    }
+
+    /* Hide language toggle on very small screens */
+    @media (max-width: 480px) {
+      .header-actions .action-item:first-child {
+        display: none;
+      }
+    }
+  }
 </style>
+
+<script is:inline>
+  // Toggle button state when sidebar opens/closes
+  document.addEventListener('DOMContentLoaded', function() {
+    const menuButton = document.getElementById('mobile-menu-btn');
+    const sidebar = document.getElementById('sidebar');
+
+    // Create a MutationObserver to watch for class changes on sidebar
+    if (sidebar && menuButton) {
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'class') {
+            if (sidebar.classList.contains('open')) {
+              menuButton.classList.add('active');
+            } else {
+              menuButton.classList.remove('active');
+            }
+          }
+        });
+      });
+
+      observer.observe(sidebar, { attributes: true });
+    }
+  });
+</script>
