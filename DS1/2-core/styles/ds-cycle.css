@@ -1,0 +1,21 @@
+/* ds-cycle.css */
+/* Cycle component styles for cycling through options */
+
+:host {
+  display: inline-flex;
+  align-items: center;
+}
+
+.cycle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--025);
+}
+
+.color-preview {
+  width: var(--05);
+  height: var(--05);
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--text-color-primary) 20%, transparent);
+  flex: 0 0 auto;
+}

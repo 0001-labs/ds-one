@@ -1,0 +1,29 @@
+/* ds-text.css */
+/* Text component styles for displaying translations */
+
+:host {
+  display: inline;
+  font-family: var(--typeface-regular);
+  font-size: var(--type-size-default);
+  font-weight: var(--type-weight-default);
+  line-height: calc(var(--type-lineheight-default) * var(--sf));
+  letter-spacing: calc(var(--type-letterspacing-default) * var(--sf));
+  text-align: var(--text-align-default);
+  text-transform: var(--text-transform-default);
+  text-decoration: var(--text-decoration-default);
+}
+
+:host([data-language="ja"]) {
+  font-family: var(--typeface-regular-jp);
+}
+
+:host([data-language="zh"]),
+:host([data-language="zh-hant"]) {
+  font-family: var(--typeface-regular-zh-hant);
+  font-weight: 800;
+}
+
+:host([data-language="zh-hans"]) {
+  font-family: var(--typeface-regular-zh-hans);
+  font-weight: 800;
+}

@@ -1,0 +1,49 @@
+/* ds-tooltip.css */
+/* Tooltip component styles */
+
+:host {
+  position: relative;
+  display: inline-block;
+}
+
+.slot-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translate(-50%, calc(-2px * var(--sf)));
+  z-index: 1000;
+  pointer-events: none;
+  height: calc(var(--08) * var(--sf));
+  opacity: 0;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+  background-color: light-dark(var(--black), var(--white));
+  color: light-dark(var(--white), var(--black));
+  border-radius: 0;
+  font-size: var(--type-size-default);
+  padding: 0px calc(1px * var(--sf));
+  font-family: var(
+    --typeface-regular,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif
+  );
+  font-weight: 500;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+.bubble.visible {
+  opacity: 1;
+}
