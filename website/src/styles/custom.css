@@ -93,6 +93,13 @@ h6 {
   padding: 40px;
 }
 
+/* Mobile responsive content padding */
+@media (max-width: 768px) {
+  .main-pane {
+    padding: 20px;
+  }
+}
+
 /* Sidebar backdrop on mobile */
 @media (max-width: 50rem) {
   [aria-label="Main"] {
@@ -172,4 +179,54 @@ table {
   padding: 0.2em 0.4em;
   border-radius: 0.25rem;
   font-size: 0.9em;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  h1#_top {
+    height: auto;
+    max-height: none;
+    margin: 0 0 20px 0;
+    font-size: 28px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 24px;
+  }
+
+  right-sidebar {
+    margin-top: 40px !important;
+  }
+
+  .sidebar-content {
+    width: 100%;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .sidebar-content {
+    width: 100%;
+  }
+}
+
+/* Prevent body scroll when mobile menu is open */
+body.sidebar-open {
+  overflow: hidden;
+}
+
+/* Smooth transitions for responsive layout */
+@media (prefers-reduced-motion: no-preference) {
+  .sidebar,
+  .sidebar-overlay {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-overlay {
+    transition: none;
+  }
 }

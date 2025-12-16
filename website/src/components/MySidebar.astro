@@ -34,93 +34,79 @@ const entryTranslationKeys: Record<string, string> = {
 };
 ---
 
-<nav id="sidebar-nav" style="
-  padding: 40px;
-  background: var(--ds1-docs-sidebar-bg);
-  height: 100%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-">
-{sidebar.map((group, groupIndex) => {
-    const groupKey = groupTranslationKeys[group.label];
-    return (
-      <details open style="display: flex; flex-direction: column;">
-        <summary style="
-          cursor: pointer;
-          list-style: none;
-          user-select: none;
-          display: flex;
-          align-items: center;
-          width: 100%;
-          height: 20px;
-        ">
-          <ds-button 
-            bold 
-            no-background
-            key={groupKey}
-            default-text={group.label}
-            style="pointer-events: none;"
-          >
-            {group.label}
-          </ds-button>
-        </summary>
-        
-        <ul style="
-          list-style: none;
-          display: flex;
-          flex-direction: column;
-          align-items: left;
-        " data-first-three={groupIndex < 3}>
-          {group.entries.map((entry) => {
-            const isFirstThree = groupIndex < 3;
-            const entryKey = entryTranslationKeys[entry.label];
-            return (
-              <li style={`height: 20px; display: flex; align-items: center;${isFirstThree ? ' padding-bottom: 6px;' : ''}`}>
-                {isFirstThree ? (
-                  <ds-button
-                    no-background
-                    key={entryKey}
-                    default-text={entry.label}
-                    aria-current={entry.isCurrent ? 'page' : undefined}
-                    href={entry.href}
-                    style={`--button-color: ${entry.isCurrent ? 'var(--accent-color)' : 'var(--button-text-color-secondary)'}; width: 100%; text-align: left; height: 20px;`}
-                  >
-                    {entry.label}
-                  </ds-button>
-                ) : (
-                  <ds-button
-                    variant={entry.isCurrent ? 'primary' : 'secondary'}
-                    key={entryKey}
-                    default-text={entry.label}
-                    aria-current={entry.isCurrent ? 'page' : undefined}
-                    href={entry.href}
-                    style="cursor: pointer; user-select: none; display: flex; align-items: center; width: 100%; height: 20px;"
-                  >
-                    {entry.label}
-                  </ds-button>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </details>
-    );
-  })}
+<nav id="sidebar-nav" class="sidebar-nav">
+  <!-- Mobile close button -->
+  <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close navigation menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+    </svg>
+  </button>
+
+  <div class="sidebar-content">
+    {sidebar.map((group, groupIndex) => {
+      const groupKey = groupTranslationKeys[group.label];
+      return (
+        <details open class="sidebar-group">
+          <summary class="sidebar-group-summary">
+            <ds-button 
+              bold 
+              no-background
+              key={groupKey}
+              default-text={group.label}
+              style="pointer-events: none;"
+            >
+              {group.label}
+            </ds-button>
+          </summary>
+          
+          <ul class="sidebar-entries" data-first-three={groupIndex < 3}>
+            {group.entries.map((entry) => {
+              const isFirstThree = groupIndex < 3;
+              const entryKey = entryTranslationKeys[entry.label];
+              return (
+                <li class={`sidebar-entry ${isFirstThree ? 'first-three' : ''}`}>
+                  {isFirstThree ? (
+                    <ds-button
+                      no-background
+                      key={entryKey}
+                      default-text={entry.label}
+                      aria-current={entry.isCurrent ? 'page' : undefined}
+                      href={entry.href}
+                      class="sidebar-link"
+                      style={`--button-color: ${entry.isCurrent ? 'var(--accent-color)' : 'var(--button-text-color-secondary)'}; width: 100%; text-align: left; height: 20px;`}
+                    >
+                      {entry.label}
+                    </ds-button>
+                  ) : (
+                    <ds-button
+                      variant={entry.isCurrent ? 'primary' : 'secondary'}
+                      key={entryKey}
+                      default-text={entry.label}
+                      aria-current={entry.isCurrent ? 'page' : undefined}
+                      href={entry.href}
+                      class="sidebar-link"
+                      style="cursor: pointer; user-select: none; display: flex; align-items: center; width: 100%; height: 20px;"
+                    >
+                      {entry.label}
+                    </ds-button>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      );
+    })}
+  </div>
 
   <!-- Spacer to push version control to bottom -->
-  <div style="flex: 1;"></div>
+  <div class="sidebar-spacer"></div>
 
   <!-- Version Control Section -->
-  <div style="
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    max-height: 20px;
-  ">
-    <ds-button blank no-background href="https://github.com/jo4712/ds-one" style="--button-color: var(--button-text-color-secondary); display: flex; flex-direction: row; align-items: center; gap: 10px;">
-      <div style="display: flex; padding-right: 10px;">
+  <div class="sidebar-footer">
+    <ds-button blank no-background href="https://github.com/jo4712/ds-one" class="github-link">
+      <div class="github-icon-wrapper">
         <svg width="18" height="18" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M49,8C25.3,8,6,27.3,6,51c0,19.1,12.4,35.3,29.6,41c2.2,0.4,3-1,3-2.2
             c0-1.1,0-4.5,0-8.2c-12,2.6-14.5-5.2-14.5-5.2c-2-5.2-4.8-6.6-4.8-6.6c-3.9-2.6,0.3-2.5,0.3-2.5c4.3,0.3,6.6,4.4,6.6,4.4
@@ -130,44 +116,209 @@ const entryTranslationKeys: Record<string, string> = {
             C79.6,86.3,92,70.1,92,51C92,27.3,72.7,8,49,8z" fill="currentColor"/>
         </svg>
       </div>
-     
     </ds-button>
-    <ds-button style="display:flex; color: var(--button-text-color); white-space: nowrap;">0.2.5-alpha.18</ds-button>
+    <ds-button class="version-badge">0.2.5-alpha.18</ds-button>
   </div>
 </nav>
+
 <style>
-  summary::-webkit-details-marker {
+  .sidebar-nav {
+    padding: 40px;
+    background: var(--ds1-docs-sidebar-bg);
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Mobile close button - hidden by default */
+  .sidebar-close-btn {
+    display: none;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--ds1-docs-header-text);
+    cursor: pointer;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+    z-index: 10;
+  }
+
+  .sidebar-close-btn:hover {
+    background: var(--ds1-docs-search-bg);
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sidebar-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-group-summary {
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+  }
+
+  .sidebar-group-summary::-webkit-details-marker {
     display: none;
   }
 
-  details[open] summary ds-button {
+  details[open] .sidebar-group-summary ds-button {
     color: var(--button-text-color) !important;
   }
 
-  /* Reset default list padding */
-  ul {
+  .sidebar-entries {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
     padding-left: 0;
+    margin: 0;
   }
 
-  /* First three groups have 20px indentation */
-  ul[data-first-three="true"] {
+  .sidebar-entries[data-first-three="true"] {
     padding-left: 20px;
   }
-  
+
+  .sidebar-entry {
+    height: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  .sidebar-entry.first-three {
+    padding-bottom: 6px;
+  }
+
+  .sidebar-spacer {
+    flex: 1;
+  }
+
+  .sidebar-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    max-height: 20px;
+  }
+
+  .github-link {
+    --button-color: var(--button-text-color-secondary);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .github-icon-wrapper {
+    display: flex;
+    padding-right: 10px;
+  }
+
+  .version-badge {
+    display: flex;
+    color: var(--button-text-color);
+    white-space: nowrap;
+  }
+
+  /* Mobile Responsive Styles */
+  @media (max-width: 768px) {
+    .sidebar-nav {
+      padding: 60px 24px 24px 24px;
+      position: relative;
+    }
+
+    .sidebar-close-btn {
+      display: flex;
+    }
+
+    .sidebar-content {
+      gap: 16px;
+    }
+
+    .sidebar-entries {
+      gap: 4px;
+    }
+
+    .sidebar-entry {
+      height: 32px;
+      min-height: 32px;
+    }
+
+    .sidebar-entry.first-three {
+      padding-bottom: 4px;
+    }
+
+    .sidebar-footer {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--ds1-docs-header-border);
+    }
+  }
+
+  /* Touch-friendly tap targets on mobile */
+  @media (max-width: 768px) and (pointer: coarse) {
+    .sidebar-entry {
+      height: 44px;
+      min-height: 44px;
+    }
+
+    .sidebar-group-summary {
+      height: 44px;
+      min-height: 44px;
+    }
+  }
 </style>
 
-<script>
-  const nav = document.getElementById('sidebar-nav');
-  if (nav) {
-    // Handle navigation for buttons with href
-    const navButtons = nav.querySelectorAll('ds-button[href]');
-    navButtons.forEach((button) => {
-      button.addEventListener('click', (e) => {
-        const href = button.getAttribute('href');
-        if (href) {
-          window.location.href = href;
-        }
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.getElementById('sidebar-nav');
+    const sidebar = document.getElementById('sidebar');
+    const closeBtn = document.getElementById('sidebar-close-btn');
+    const overlay = document.getElementById('sidebar-overlay');
+    const menuButton = document.getElementById('mobile-menu-btn');
+
+    function closeSidebar() {
+      sidebar?.classList.remove('open');
+      overlay?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close button click
+    closeBtn?.addEventListener('click', closeSidebar);
+
+    if (nav) {
+      // Handle navigation for buttons with href
+      const navButtons = nav.querySelectorAll('ds-button[href]');
+      navButtons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+          const href = button.getAttribute('href');
+          if (href) {
+            // Close sidebar on mobile before navigating
+            if (window.innerWidth <= 768) {
+              closeSidebar();
+            }
+            window.location.href = href;
+          }
+        });
       });
-    });
-  }
+    }
+  });
 </script>
