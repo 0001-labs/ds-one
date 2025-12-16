@@ -1,0 +1,30 @@
+/* ds-icon.css */
+/* Icon component styles */
+
+:host {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(16px * var(--sf));
+  height: calc(16px * var(--sf));
+  /* Notes style color variable for future implementation */
+  --notes-style-color: #ffb6b9;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--icon-color, currentColor);
+}
+
+path {
+  fill: var(--icon-color, currentColor);
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(16px * var(--sf));
+  height: calc(16px * var(--sf));
+}
