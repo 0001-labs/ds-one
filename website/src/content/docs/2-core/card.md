@@ -5,6 +5,10 @@ description: Container component for displaying content in a styled box
 
 The `ds-card` component provides a container for displaying content in a styled, contained box.
 
+## Flexible Content
+
+`ds-card` is a **flexible container** that can hold any content. Use it to wrap and style any combination of components, text, images, or HTML elements.
+
 ## Basic Usage
 
 ```html

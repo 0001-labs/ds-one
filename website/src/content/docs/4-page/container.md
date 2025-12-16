@@ -5,6 +5,10 @@ description: Page container with responsive width constraints
 
 The `ds-container` component provides a centered container with responsive width constraints for page content.
 
+## Flexible Content
+
+`ds-container` is a **flexible layout component** that can hold any content. Use it to wrap page sections, cards, grids, or any combination of components.
+
 ## Basic Usage
 
 ```html

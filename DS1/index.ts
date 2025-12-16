@@ -35,7 +35,6 @@ export * from "./2-core/ds-button";
 export * from "./2-core/ds-card";
 export * from "./2-core/ds-cycle";
 export * from "./2-core/ds-date";
-export * from "./2-core/ds-form";
 export * from "./2-core/ds-gap";
 export * from "./2-core/ds-icon";
 export * from "./2-core/ds-input";
@@ -46,8 +45,9 @@ export * from "./2-core/ds-tooltip";
 // 3-unit: Composite Components
 // ============================================================================
 
-export * from "./3-unit/ds-list";
 export * from "./3-unit/ds-accordion";
+export * from "./3-unit/ds-form";
+export * from "./3-unit/ds-list";
 export * from "./3-unit/ds-row";
 export * from "./3-unit/ds-table";
 

@@ -5,6 +5,10 @@ description: Data table component for displaying structured information
 
 The `ds-table` component provides a styled data table for displaying structured information.
 
+## Flexible Content
+
+Table cells can contain any content - text, components, buttons, icons, or any combination. Use `ds-button`, `ds-icon`, `ds-text`, or any other component inside table cells.
+
 ## Basic Usage
 
 ```html

@@ -5,6 +5,12 @@ description: Fixed notification banner for alerts and messages
 
 The `ds-banner` component provides a fixed notification banner for displaying alerts, warnings, or informational messages.
 
+## Component Dependencies
+
+`ds-banner` uses the following components internally:
+- **`ds-text`** - For rendering banner text and action labels with i18n support
+- **`ds-button`** - For action buttons (optional)
+
 ## Basic Usage
 
 ```html
