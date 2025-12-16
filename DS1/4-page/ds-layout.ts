@@ -77,7 +77,9 @@ export class Layout extends LitElement {
     :host([align="left"]),
     :host([mode="portfolio"][align="left"]),
     :host([mode="company"][align="left"]),
-    :host([mode="app"][align="left"]) {
+    :host([mode="app"][align="left"]),
+    :host([mode="list"][align="left"]),
+    :host([mode="home"][align="left"]) {
       margin: 0;
       justify-self: start;
     }
@@ -85,7 +87,9 @@ export class Layout extends LitElement {
     :host([align="center"]),
     :host([mode="portfolio"][align="center"]),
     :host([mode="company"][align="center"]),
-    :host([mode="app"][align="center"]) {
+    :host([mode="app"][align="center"]),
+    :host([mode="list"][align="center"]),
+    :host([mode="home"][align="center"]) {
       margin: 0 auto;
       justify-self: center;
     }
@@ -93,7 +97,9 @@ export class Layout extends LitElement {
     :host([align="right"]),
     :host([mode="portfolio"][align="right"]),
     :host([mode="company"][align="right"]),
-    :host([mode="app"][align="right"]) {
+    :host([mode="app"][align="right"]),
+    :host([mode="list"][align="right"]),
+    :host([mode="home"][align="right"]) {
       margin: 0 0 0 auto;
       justify-self: end;
     }
@@ -101,22 +107,10 @@ export class Layout extends LitElement {
     /* App mode - Base */
     :host([mode="app"]) {
       --app-cols: 100%;
-      --app-rows: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
-        calc(var(--unit) * var(--sf)) calc(var(--double) * var(--sf))
-        calc(var(--dozen) * var(--sf)) calc(var(--unit) * var(--sf))
-        calc(var(--quad) * var(--sf)) calc(var(--double) * var(--sf));
-      --app-areas: "banner" "." "header" "." "main" "page-dots" "." "footer";
       --app-overlay-cols: 100%;
-      --app-overlay-rows: calc(var(--unit) * var(--sf))
-        calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
-        calc(var(--double) * var(--sf)) calc(var(--dozen) * var(--sf))
-        calc(var(--unit) * var(--sf)) calc(var(--quad) * var(--sf))
-        calc(var(--double) * var(--sf));
-      --app-overlay-areas: "banner" "." "header" "." "main" "page-dots" "."
-        "footer";
       grid-template-columns: var(--app-cols);
-      grid-template-rows: var(--app-rows);
-      grid-template-areas: var(--app-areas);
+      grid-template-rows: var(--app-layout);
+      grid-template-areas: var(--app-layout-areas);
       min-height: 100vh;
       background-color: transparent;
       width: calc(240px * var(--sf, 1));
@@ -126,8 +120,58 @@ export class Layout extends LitElement {
 
     :host([mode="app"]) .view-overlay {
       grid-template-columns: var(--app-overlay-cols);
-      grid-template-rows: var(--app-overlay-rows);
-      grid-template-areas: var(--app-overlay-areas);
+      grid-template-rows: var(--app-layout);
+      grid-template-areas: var(--app-layout-areas);
+    }
+
+    /* List mode - Base */
+    :host([mode="list"]) {
+      --list-cols: 100%;
+      --list-rows: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--unit) * var(--sf)) calc(var(--twenty) * var(--sf));
+      --list-areas: "banner" "." "header" "board";
+      --list-overlay-cols: 100%;
+      --list-overlay-rows: calc(var(--unit) * var(--sf))
+        calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+        calc(var(--twenty) * var(--sf));
+      --list-overlay-areas: "banner" "." "header" "board";
+      grid-template-columns: var(--list-cols);
+      grid-template-rows: var(--list-rows);
+      grid-template-areas: var(--list-areas);
+      min-height: 100vh;
+      background-color: transparent;
+      width: calc(240px * var(--sf, 1));
+      max-width: calc(240px * var(--sf, 1));
+      margin: 0 auto;
+    }
+
+    :host([mode="list"]) .view-overlay {
+      grid-template-columns: var(--list-overlay-cols);
+      grid-template-rows: var(--list-overlay-rows);
+      grid-template-areas: var(--list-overlay-areas);
+    }
+
+    /* Home mode - Base */
+    :host([mode="home"]) {
+      --home-cols: 100%;
+      --home-areas: "banner" "." "header" "." "message" "lists" "." "footer";
+      --home-overlay-cols: 100%;
+      --home-overlay-areas: "banner" "." "header" "." "message" "lists" "."
+        "footer";
+      grid-template-columns: var(--home-cols);
+      grid-template-rows: var(--home-layout);
+      grid-template-areas: var(--home-areas);
+      min-height: 100vh;
+      background-color: transparent;
+      width: calc(240px * var(--sf, 1));
+      max-width: calc(240px * var(--sf, 1));
+      margin: 0 auto;
+    }
+
+    :host([mode="home"]) .view-overlay {
+      grid-template-columns: var(--home-overlay-cols);
+      grid-template-rows: var(--home-layout);
+      grid-template-areas: var(--home-overlay-areas);
     }
 
     .view-overlay {
@@ -157,54 +201,332 @@ export class Layout extends LitElement {
         transparent
       );
       opacity: 1;
+      position: relative;
+    }
+
+    .grid-area-label {
+      position: absolute;
+      top: calc(-20px * var(--sf, 1));
+      left: 0;
+      height: calc(20px * var(--sf, 1));
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 calc(4px * var(--sf, 1));
+      border-radius: calc(2px * var(--sf, 1));
+      z-index: 10000;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* Banner label stays inside the area (first item) */
+    :host([mode="app"]) .view-area.view-banner .grid-area-label,
+    :host([mode="list"]) .view-area.view-banner .grid-area-label,
+    :host([mode="home"]) .view-area.view-banner .grid-area-label,
+    :host([mode="company"]) .view-area.view-header .grid-area-label,
+    :host([mode="portfolio"]) .view-area.view-square .grid-area-label {
+      top: 0;
+    }
+
+    .grid-area-label ds-text {
+      font-size: calc(11px * var(--sf, 1));
+      line-height: 1;
+      color: white;
+      text-transform: lowercase;
     }
 
     :host([mode="portfolio"]) .view-area:nth-of-type(1) {
       background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
     }
+    :host([mode="portfolio"]) .view-area:nth-of-type(1) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 0%,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 100%
+        );
+    }
     :host([mode="portfolio"]) .view-area:nth-of-type(2) {
       border-color: var(--sharp-blue);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(2) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 100%
+        );
     }
     :host([mode="portfolio"]) .view-area:nth-of-type(3) {
       border-color: var(--yellow);
     }
+    :host([mode="portfolio"]) .view-area:nth-of-type(3) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--yellow) 70%, black) 0%,
+          color-mix(in srgb, var(--yellow) 70%, black) 100%
+        );
+    }
     :host([mode="portfolio"]) .view-area:nth-of-type(4) {
       border-color: var(--apple-green);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(4) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--apple-green) 70%, black) 0%,
+          color-mix(in srgb, var(--apple-green) 70%, black) 100%
+        );
     }
     :host([mode="portfolio"]) .view-area:nth-of-type(5) {
       border-color: var(--pink);
     }
+    :host([mode="portfolio"]) .view-area:nth-of-type(5) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--pink) 70%, black) 0%,
+          color-mix(in srgb, var(--pink) 70%, black) 100%
+        );
+    }
     :host([mode="portfolio"]) .view-area:nth-of-type(6) {
       border-color: var(--orange);
     }
+    :host([mode="portfolio"]) .view-area:nth-of-type(6) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--orange) 70%, black) 0%,
+          color-mix(in srgb, var(--orange) 70%, black) 100%
+        );
+    }
     :host([mode="portfolio"]) .view-area:nth-of-type(7) {
       border-color: var(--zenith-blue);
+    }
+    :host([mode="portfolio"]) .view-area:nth-of-type(7) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--zenith-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--zenith-blue) 70%, black) 100%
+        );
     }
 
     :host([mode="company"]) .view-area:nth-of-type(1) {
       border-color: var(--tuned-red);
     }
+    :host([mode="company"]) .view-area:nth-of-type(1) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 0%,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 100%
+        );
+    }
     :host([mode="company"]) .view-area:nth-of-type(2) {
       border-color: var(--sharp-blue);
     }
+    :host([mode="company"]) .view-area:nth-of-type(2) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 100%
+        );
+    }
     :host([mode="company"]) .view-area:nth-of-type(3) {
       border-color: var(--yellow);
+    }
+    :host([mode="company"]) .view-area:nth-of-type(3) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--yellow) 70%, black) 0%,
+          color-mix(in srgb, var(--yellow) 70%, black) 100%
+        );
     }
 
     :host([mode="app"]) .view-area:nth-of-type(1) {
       background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
     }
+    :host([mode="app"]) .view-area:nth-of-type(1) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 0%,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 100%
+        );
+    }
     :host([mode="app"]) .view-area:nth-of-type(2) {
       background-color: color-mix(in srgb, var(--sharp-blue) 25%, transparent);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(2) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 100%
+        );
     }
     :host([mode="app"]) .view-area:nth-of-type(3) {
       background-color: color-mix(in srgb, var(--yellow) 25%, transparent);
     }
+    :host([mode="app"]) .view-area:nth-of-type(3) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--yellow) 70%, black) 0%,
+          color-mix(in srgb, var(--yellow) 70%, black) 100%
+        );
+    }
     :host([mode="app"]) .view-area:nth-of-type(4) {
       background-color: color-mix(in srgb, var(--apple-green) 25%, transparent);
     }
+    :host([mode="app"]) .view-area:nth-of-type(4) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--apple-green) 70%, black) 0%,
+          color-mix(in srgb, var(--apple-green) 70%, black) 100%
+        );
+    }
     :host([mode="app"]) .view-area:nth-of-type(5) {
       background-color: color-mix(in srgb, var(--pink) 25%, transparent);
+    }
+    :host([mode="app"]) .view-area:nth-of-type(5) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--pink) 70%, black) 0%,
+          color-mix(in srgb, var(--pink) 70%, black) 100%
+        );
+    }
+
+    :host([mode="list"]) .view-area:nth-of-type(1) {
+      background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
+    }
+    :host([mode="list"]) .view-area:nth-of-type(1) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 0%,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 100%
+        );
+    }
+    :host([mode="list"]) .view-area:nth-of-type(2) {
+      background-color: color-mix(in srgb, var(--sharp-blue) 25%, transparent);
+    }
+    :host([mode="list"]) .view-area:nth-of-type(2) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 100%
+        );
+    }
+    :host([mode="list"]) .view-area:nth-of-type(3) {
+      background-color: color-mix(in srgb, var(--yellow) 25%, transparent);
+    }
+    :host([mode="list"]) .view-area:nth-of-type(3) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--yellow) 70%, black) 0%,
+          color-mix(in srgb, var(--yellow) 70%, black) 100%
+        );
+    }
+    :host([mode="list"]) .view-area:nth-of-type(4) {
+      background-color: color-mix(in srgb, var(--apple-green) 25%, transparent);
+    }
+    :host([mode="list"]) .view-area:nth-of-type(4) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--apple-green) 70%, black) 0%,
+          color-mix(in srgb, var(--apple-green) 70%, black) 100%
+        );
+    }
+
+    :host([mode="home"]) .view-area:nth-of-type(1) {
+      background-color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
+    }
+    :host([mode="home"]) .view-area:nth-of-type(1) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 0%,
+          color-mix(in srgb, var(--tuned-red) 70%, black) 100%
+        );
+    }
+    :host([mode="home"]) .view-area:nth-of-type(2) {
+      background-color: color-mix(in srgb, var(--sharp-blue) 25%, transparent);
+    }
+    :host([mode="home"]) .view-area:nth-of-type(2) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 0%,
+          color-mix(in srgb, var(--sharp-blue) 70%, black) 100%
+        );
+    }
+    :host([mode="home"]) .view-area:nth-of-type(3) {
+      background-color: color-mix(in srgb, var(--yellow) 25%, transparent);
+    }
+    :host([mode="home"]) .view-area:nth-of-type(3) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--yellow) 70%, black) 0%,
+          color-mix(in srgb, var(--yellow) 70%, black) 100%
+        );
+    }
+    :host([mode="home"]) .view-area:nth-of-type(4) {
+      background-color: color-mix(in srgb, var(--apple-green) 25%, transparent);
+    }
+    :host([mode="home"]) .view-area:nth-of-type(4) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--apple-green) 70%, black) 0%,
+          color-mix(in srgb, var(--apple-green) 70%, black) 100%
+        );
+    }
+    :host([mode="home"]) .view-area:nth-of-type(5) {
+      background-color: color-mix(in srgb, var(--pink) 25%, transparent);
+    }
+    :host([mode="home"]) .view-area:nth-of-type(5) .grid-area-label {
+      background-image:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.2) 100%),
+        linear-gradient(
+          90deg,
+          color-mix(in srgb, var(--pink) 70%, black) 0%,
+          color-mix(in srgb, var(--pink) 70%, black) 100%
+        );
     }
 
     .view-square {
@@ -250,6 +572,18 @@ export class Layout extends LitElement {
     .view-page-dots {
       grid-area: page-dots;
     }
+
+    .view-board {
+      grid-area: board;
+    }
+
+    .view-message {
+      grid-area: message;
+    }
+
+    .view-lists {
+      grid-area: lists;
+    }
   `;
 
   render() {
@@ -257,67 +591,196 @@ export class Layout extends LitElement {
     const isPortfolio = this.mode === "portfolio";
     const isCompany = this.mode === "company";
     const isApp = this.mode === "app";
+    const isList = this.mode === "list";
+    const isHome = this.mode === "home";
 
     return html`
       <slot></slot>
       ${isView
         ? html`
             <div class="view-overlay">
-              ${isApp
+              ${isHome
                 ? html`
                     <div class="view-area view-banner">
-                      <ds-text key="banner">banner</ds-text>
+                      <div class="grid-area-label">
+                        <ds-text key="banner" default-value="banner"></ds-text>
+                      </div>
                     </div>
                     <div class="view-area view-header">
-                      <ds-text key="header">header</ds-text>
+                      <div class="grid-area-label">
+                        <ds-text key="header" default-value="header"></ds-text>
+                      </div>
                     </div>
-                    <div class="view-area view-main">
-                      <ds-text key="main">main</ds-text>
+                    <div class="view-area view-message">
+                      <div class="grid-area-label">
+                        <ds-text
+                          key="message"
+                          default-value="message"
+                        ></ds-text>
+                      </div>
                     </div>
-                    <div class="view-area view-page-dots">
-                      <ds-text key="page-dots">page-dots</ds-text>
+                    <div class="view-area view-lists">
+                      <div class="grid-area-label">
+                        <ds-text key="lists" default-value="lists"></ds-text>
+                      </div>
                     </div>
                     <div class="view-area view-footer">
-                      <ds-text key="footer">footer</ds-text>
+                      <div class="grid-area-label">
+                        <ds-text key="footer" default-value="footer"></ds-text>
+                      </div>
                     </div>
                   `
-                : isCompany
+                : isList
                   ? html`
+                      <div class="view-area view-banner">
+                        <div class="grid-area-label">
+                          <ds-text
+                            key="banner"
+                            default-value="banner"
+                          ></ds-text>
+                        </div>
+                      </div>
                       <div class="view-area view-header">
-                        <ds-text key="header">header</ds-text>
+                        <div class="grid-area-label">
+                          <ds-text
+                            key="header"
+                            default-value="header"
+                          ></ds-text>
+                        </div>
                       </div>
-                      <div class="view-area view-content">
-                        <ds-text key="content">content</ds-text>
-                      </div>
-                      <div class="view-area view-footer">
-                        <ds-text key="footer">footer</ds-text>
+                      <div class="view-area view-board">
+                        <div class="grid-area-label">
+                          <ds-text key="board" default-value="board"></ds-text>
+                        </div>
                       </div>
                     `
-                  : isPortfolio
+                  : isApp
                     ? html`
-                        <div class="view-area view-square">
-                          <ds-text key="square">square</ds-text>
-                        </div>
-                        <div class="view-area view-title">
-                          <ds-text key="title">title</ds-text>
+                        <div class="view-area view-banner">
+                          <div class="grid-area-label">
+                            <ds-text
+                              key="banner"
+                              default-value="banner"
+                            ></ds-text>
+                          </div>
                         </div>
                         <div class="view-area view-header">
-                          <ds-text key="header">header</ds-text>
+                          <div class="grid-area-label">
+                            <ds-text
+                              key="header"
+                              default-value="header"
+                            ></ds-text>
+                          </div>
                         </div>
-                        <div class="view-area view-projects">
-                          <ds-text key="projects">projects</ds-text>
+                        <div class="view-area view-main">
+                          <div class="grid-area-label">
+                            <ds-text key="main" default-value="main"></ds-text>
+                          </div>
                         </div>
-                        <div class="view-area view-bio">
-                          <ds-text key="bio">bio</ds-text>
-                        </div>
-                        <div class="view-area view-nav">
-                          <ds-text key="nav">nav</ds-text>
+                        <div class="view-area view-page-dots">
+                          <div class="grid-area-label">
+                            <ds-text
+                              key="pageDots"
+                              default-value="page-dots"
+                            ></ds-text>
+                          </div>
                         </div>
                         <div class="view-area view-footer">
-                          <ds-text key="footer">footer</ds-text>
+                          <div class="grid-area-label">
+                            <ds-text
+                              key="footer"
+                              default-value="footer"
+                            ></ds-text>
+                          </div>
                         </div>
                       `
-                    : ""}
+                    : isCompany
+                      ? html`
+                          <div class="view-area view-header">
+                            <div class="grid-area-label">
+                              <ds-text
+                                key="header"
+                                default-value="header"
+                              ></ds-text>
+                            </div>
+                          </div>
+                          <div class="view-area view-content">
+                            <div class="grid-area-label">
+                              <ds-text
+                                key="content"
+                                default-value="content"
+                              ></ds-text>
+                            </div>
+                          </div>
+                          <div class="view-area view-footer">
+                            <div class="grid-area-label">
+                              <ds-text
+                                key="footer"
+                                default-value="footer"
+                              ></ds-text>
+                            </div>
+                          </div>
+                        `
+                      : isPortfolio
+                        ? html`
+                            <div class="view-area view-square">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="square"
+                                  default-value="square"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-title">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="title"
+                                  default-value="title"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-header">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="header"
+                                  default-value="header"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-projects">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="projects"
+                                  default-value="projects"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-bio">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="bio"
+                                  default-value="bio"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-nav">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="nav"
+                                  default-value="nav"
+                                ></ds-text>
+                              </div>
+                            </div>
+                            <div class="view-area view-footer">
+                              <div class="grid-area-label">
+                                <ds-text
+                                  key="footer"
+                                  default-value="footer"
+                                ></ds-text>
+                              </div>
+                            </div>
+                          `
+                        : ""}
             </div>
           `
         : ""}

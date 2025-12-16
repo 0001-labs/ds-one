@@ -17,7 +17,7 @@ export class Container extends LitElement {
       width: 100%;
       max-width: 100%;
       flex-direction: column;
-      background-color: var(--background-color);
+      background-color: var(--background);
       box-sizing: border-box;
     }
 

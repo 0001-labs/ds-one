@@ -48,7 +48,7 @@ DS One automatically preserves scroll position when navigating between pages usi
 ### Open in New Tab
 
 ```html
-<ds-link href="https://github.com/jo4712/ds-one" target="_blank">
+<ds-link href="https://github.com/0001-labs/ds-one" target="_blank">
   View on GitHub
 </ds-link>
 ```

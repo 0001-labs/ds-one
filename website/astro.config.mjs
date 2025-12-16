@@ -21,7 +21,7 @@ export default defineConfig({
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/jo4712/ds-one",
+          href: "https://github.com/0001-labs/ds-one",
         },
       ],
       components: {

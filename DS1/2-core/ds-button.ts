@@ -66,7 +66,20 @@ export class Button extends LitElement {
       font-family: var(--typeface-regular);
     }
 
+    button:hover,
+    button:focus,
+    button:active {
+      opacity: 1;
+    }
+
     button.title {
+      background-color: var(--button-background-color-secondary);
+      color: var(--button-text-color);
+    }
+
+    button.title:hover,
+    button.title:focus,
+    button.title:active {
       background-color: var(--button-background-color-secondary);
       color: var(--button-text-color);
     }
@@ -78,10 +91,24 @@ export class Button extends LitElement {
       font-family: var(--typeface-regular);
     }
 
+    button.primary:hover,
+    button.primary:focus,
+    button.primary:active {
+      background-color: var(--accent-color);
+      color: var(--button-text-color);
+    }
+
     button.secondary {
       background-color: var(--button-background-color-secondary);
       color: var(--button-text-color);
       font-family: var(--typeface-regular);
+    }
+
+    button.secondary:hover,
+    button.secondary:focus,
+    button.secondary:active {
+      background-color: var(--button-background-color-secondary);
+      color: var(--button-text-color);
     }
 
     button.text {
@@ -92,9 +119,11 @@ export class Button extends LitElement {
       text-decoration: none;
     }
 
-    button.text:hover {
-      opacity: 0.8;
-      text-decoration: none;
+    button.text:hover,
+    button.text:focus,
+    button.text:active {
+      background-color: transparent;
+      color: var(--button-color, var(--button-text-color));
     }
 
     button[bold] {
@@ -109,9 +138,23 @@ export class Button extends LitElement {
       color: var(--button-color, var(--button-text-color-secondary));
     }
 
+    button[no-background]:hover,
+    button[no-background]:focus,
+    button[no-background]:active {
+      background-color: transparent;
+      color: var(--button-color, var(--button-text-color-secondary));
+    }
+
     button[no-background][bold] {
       font-weight: var(--type-weight-bold);
       font-family: var(--typeface-medium);
+      color: var(--button-color, var(--button-text-color-secondary));
+    }
+
+    button[no-background][bold]:hover,
+    button[no-background][bold]:focus,
+    button[no-background][bold]:active {
+      background-color: transparent;
       color: var(--button-color, var(--button-text-color-secondary));
     }
 

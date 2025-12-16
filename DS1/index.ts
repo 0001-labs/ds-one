@@ -34,9 +34,11 @@ export * from "./2-core/ds-banner";
 export * from "./2-core/ds-cycle";
 export * from "./2-core/ds-gap";
 export * from "./2-core/ds-icon";
+export * from "./2-core/ds-input";
 export * from "./2-core/ds-text";
 export * from "./2-core/ds-tooltip";
 export * from "./2-core/ds-date";
+export * from "./2-core/ds-pagedots";
 
 // ============================================================================
 // 3-unit: Composite Components
