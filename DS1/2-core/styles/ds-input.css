@@ -1,0 +1,6 @@
+/* ds-input.css */
+/* Input component styles */
+
+:host {
+  display: inline-block;
+}

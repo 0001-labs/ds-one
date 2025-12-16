@@ -1,0 +1,46 @@
+/* ds-accordion.css */
+/* Accordion component styles using native <details>/<summary> */
+
+:host {
+  display: block;
+  width: calc(240px * var(--sf));
+  color: var(--text-color-primary);
+}
+
+details {
+  width: 100%;
+}
+
+summary {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.summaryRow {
+  width: 100%;
+}
+
+ds-icon.chevron {
+  transform: rotate(0deg);
+  transition: transform 140ms ease;
+}
+
+details[open] ds-icon.chevron {
+  transform: rotate(180deg);
+}
+
+.detailsBody {
+  padding-top: calc(var(--half) * var(--sf));
+}
+
+.detailsText {
+  display: block;
+  white-space: normal;
+  text-align: left;
+}
