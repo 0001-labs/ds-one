@@ -1,0 +1,9 @@
+/* ds-list.css */
+/* List component styles for displaying a list of items */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}

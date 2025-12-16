@@ -1,0 +1,77 @@
+/* ds-banner.css */
+/* Fixed banner component styles for notifications/alerts */
+
+:host {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: calc(var(--unit) * var(--sf, 1));
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 calc(var(--unit) * var(--sf, 1));
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+:host([variant="warning"]) {
+  background-color: color-mix(in srgb, var(--yellow) 50%, transparent);
+  --banner-text-color: color-mix(in srgb, var(--black) 50%, transparent);
+  --banner-action-color: var(--slate);
+}
+
+:host([variant="info"]) {
+  background-color: rgba(var(--sharp-blue-rgb, 0, 122, 255), 0.7);
+  --banner-text-color: var(--white, #fff);
+  --banner-action-color: var(--white, #fff);
+}
+
+:host([variant="success"]) {
+  background-color: rgba(var(--apple-green-rgb, 52, 199, 89), 0.7);
+  --banner-text-color: var(--white, #fff);
+  --banner-action-color: var(--white, #fff);
+}
+
+:host([variant="error"]) {
+  background-color: rgba(var(--tuned-red-rgb, 255, 59, 48), 0.7);
+  --banner-text-color: var(--white, #fff);
+  --banner-action-color: var(--slate, #1e1e1e);
+}
+
+.text-wrapper {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.text-wrapper ds-text,
+.text-wrapper .version {
+  color: var(--banner-text-color);
+}
+
+.action-wrapper {
+  font-size: calc(12px * var(--sf, 1));
+}
+
+.action-wrapper a {
+  color: var(--banner-action-color);
+  text-decoration: none;
+  font-family: var(--typeface-regular);
+  font-size: calc(12px * var(--sf, 1));
+  cursor: pointer;
+  pointer-events: auto;
+  display: inline-block;
+}
+
+.action-wrapper a:hover {
+  opacity: 0.8;
+}
+
+.action-wrapper ds-text {
+  color: var(--banner-action-color);
+  font-family: var(--typeface-regular);
+  font-size: calc(12px * var(--sf, 1));
+  pointer-events: none;
+}
