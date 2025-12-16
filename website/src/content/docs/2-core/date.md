@@ -1,56 +1,69 @@
 ---
 title: Date Component
-description: Simple component for displaying the current year
+description: Date display and formatting component
 ---
 
-The `ds-date` component displays the current year, commonly used in footers and copyright notices.
+The `ds-date` component provides formatted date display with localization support.
 
 ## Basic Usage
 
 ```html
-<ds-date></ds-date>
+<ds-date value="2024-01-15"></ds-date>
 ```
 
-This will display the current year (e.g., "2024").
+## Formats
 
-## Examples
-
-### Copyright Notice
+### Short Date
 
 ```html
-<p>© <ds-date></ds-date> Your Company Name</p>
+<ds-date value="2024-01-15" format="short"></ds-date>
+<!-- Output: 1/15/24 -->
 ```
 
-Renders as: "© 2024 Your Company Name"
-
-### In Footer
+### Long Date
 
 ```html
-<footer>
-  <ds-text variant="small">
-    Copyright <ds-date></ds-date> All rights reserved
-  </ds-text>
-</footer>
+<ds-date value="2024-01-15" format="long"></ds-date>
+<!-- Output: January 15, 2024 -->
 ```
 
-### With Text
+### Relative Date
 
 ```html
-<ds-text variant="body">
-  Established in 2020, updated <ds-date></ds-date>
-</ds-text>
+<ds-date value="2024-01-15" format="relative"></ds-date>
+<!-- Output: 3 days ago -->
 ```
 
-## Styling
+## With Time
 
-The component inherits font family, size, and color from its parent element, making it easy to style consistently with surrounding text.
+```html
+<ds-date value="2024-01-15T14:30:00" show-time></ds-date>
+<!-- Output: January 15, 2024 at 2:30 PM -->
+```
 
 ## Attributes
 
-The `ds-date` component has no attributes. It automatically displays the current year based on the system date.
+| Attribute   | Type      | Default    | Description                                 |
+| ----------- | --------- | ---------- | ------------------------------------------- |
+| `value`     | `string`  | -          | Date value (ISO format or timestamp)        |
+| `format`    | `string`  | `'medium'` | Format: short, medium, long, relative       |
+| `show-time` | `boolean` | `false`    | Include time in output                      |
+| `locale`    | `string`  | -          | Override locale for formatting              |
 
-## Notes
+## Localization
 
-- The year is calculated at render time using `new Date().getFullYear()`
-- The component updates automatically when the page is reloaded
-- For static sites, the year will be correct for the year the page was generated
+The date component automatically uses the current language setting:
+
+```html
+<!-- With Japanese locale -->
+<ds-date value="2024-01-15" format="long"></ds-date>
+<!-- Output: 2024年1月15日 -->
+```
+
+## Relative Time Updates
+
+When using relative format, the display updates automatically:
+
+```html
+<ds-date value="2024-01-15" format="relative" live></ds-date>
+```

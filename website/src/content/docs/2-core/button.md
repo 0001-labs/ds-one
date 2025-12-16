@@ -5,6 +5,11 @@ description: Interactive button component with multiple variants
 
 The `ds-button` component provides a customizable button with multiple visual variants.
 
+## Component Dependencies
+
+`ds-button` can use the following components internally:
+- **`ds-text`** - When using `key` attribute for i18n support
+
 ## Basic Usage
 
 ```html

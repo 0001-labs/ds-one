@@ -7,6 +7,14 @@ description: Learn about list components in DS one
 
 List components organize and display collections of items in a structured format.
 
+## Flexible Content
+
+`ds-list` is a **flexible container** that can hold any content. Each list item can contain:
+- **`ds-text`** - For internationalized text
+- **`ds-icon`** - For visual indicators
+- **`ds-row`** - For horizontal layouts within items
+- Any other components or HTML elements
+
 ## Features
 
 The list components include:
@@ -17,3 +25,16 @@ The list components include:
 - List with icons and badges
 
 Lists help present information clearly and make content easy to scan.
+
+## Example with Components
+
+```html
+<ds-list>
+  <ds-list-item>
+    <ds-row type="fill">
+      <ds-icon name="check"></ds-icon>
+      <ds-text key="tasks.completed"></ds-text>
+    </ds-row>
+  </ds-list-item>
+</ds-list>
+```
