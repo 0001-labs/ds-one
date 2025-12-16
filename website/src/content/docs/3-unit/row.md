@@ -5,6 +5,10 @@ description: Horizontal layout component for arranging content
 
 The `ds-row` component provides a horizontal layout container for arranging content with flexible alignment options.
 
+## Flexible Content
+
+`ds-row` is a **flexible container** that can hold any content. It doesn't impose restrictions on what can be placed inside - use it to arrange any combination of components, text, or HTML elements horizontally.
+
 ## Basic Usage
 
 ```html

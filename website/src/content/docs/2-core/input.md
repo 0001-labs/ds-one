@@ -5,6 +5,11 @@ description: Text input component with validation and styling
 
 The `ds-input` component provides styled text inputs with validation support.
 
+## Component Dependencies
+
+`ds-input` uses the following components internally:
+- **`ds-text`** - For rendering labels and error messages with i18n support
+
 ## Basic Usage
 
 ```html

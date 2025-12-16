@@ -5,6 +5,13 @@ description: Expandable content sections using native details/summary
 
 The `ds-accordion` component provides expandable content sections using the native HTML `<details>` and `<summary>` elements.
 
+## Component Dependencies
+
+`ds-accordion` uses the following components internally:
+- **`ds-text`** - For rendering summary and details text with i18n support
+- **`ds-icon`** - For the chevron indicator
+- **`ds-row`** - For laying out the summary content
+
 ## Basic Usage
 
 ```html

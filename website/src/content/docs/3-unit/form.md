@@ -5,6 +5,15 @@ description: Form container with validation and submission handling
 
 The `ds-form` component provides a container for form elements with built-in validation and submission handling.
 
+## Flexible Content
+
+`ds-form` is a **flexible container** designed to hold form elements. It works with:
+- **`ds-input`** - Text inputs with labels
+- **`ds-button`** - Submit and action buttons
+- Any native HTML form elements
+
+The form automatically collects data from all named form elements inside it.
+
 ## Basic Usage
 
 ```html
