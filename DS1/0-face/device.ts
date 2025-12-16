@@ -164,3 +164,133 @@ if (typeof window !== "undefined") {
     }, 100);
   });
 }
+
+/**
+ * Disable double-tap to zoom in the browser (app-like behavior)
+ * Prevents all zoom gestures including double-tap and pinch-to-zoom
+ */
+export function applike(): void {
+  if (typeof document === "undefined" || typeof window === "undefined") {
+    return;
+  }
+
+  // Set viewport meta tag to prevent zoom - this is the most important step
+  let viewport = document.querySelector('meta[name="viewport"]');
+  if (!viewport) {
+    viewport = document.createElement("meta");
+    viewport.setAttribute("name", "viewport");
+    document.head.appendChild(viewport);
+  }
+  viewport.setAttribute(
+    "content",
+    "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  );
+
+  // Apply touch-action: pan-x pan-y globally to prevent zoom but allow panning
+  const style = document.createElement("style");
+  style.id = "ds-one-applike-style";
+  style.textContent = `
+    * {
+      touch-action: pan-x pan-y !important;
+      -ms-touch-action: pan-x pan-y !important;
+    }
+    html, body {
+      touch-action: pan-x pan-y !important;
+      -ms-touch-action: pan-x pan-y !important;
+    }
+  `;
+  // Remove existing style if present
+  const existingStyle = document.getElementById("ds-one-applike-style");
+  if (existingStyle) {
+    existingStyle.remove();
+  }
+  document.head.appendChild(style);
+
+  // Track touch events to prevent double-tap zoom
+  let lastTouchEnd = 0;
+  let touchStartTime = 0;
+
+  const preventZoom = (event: TouchEvent | WheelEvent | Event) => {
+    // Prevent pinch zoom (two fingers)
+    if (event instanceof TouchEvent) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
+      const now = Date.now();
+
+      if (event.type === "touchstart") {
+        // If touchstart happens within 300ms of last touchend, it's likely a double-tap
+        if (now - lastTouchEnd < 300) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        touchStartTime = now;
+      } else if (event.type === "touchend") {
+        const touchDuration = now - touchStartTime;
+        // If this is a quick tap (< 300ms) and happened soon after previous touchend, prevent it
+        if (touchDuration < 300 && now - lastTouchEnd < 300) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+        lastTouchEnd = now;
+      } else if (event.type === "touchmove") {
+        // Prevent any touchmove that might trigger zoom
+        if (event.touches.length > 1) {
+          event.preventDefault();
+          event.stopPropagation();
+          return;
+        }
+      }
+    }
+
+    // Prevent wheel zoom with ctrl/cmd key (common on trackpads)
+    if (event instanceof WheelEvent && (event.ctrlKey || event.metaKey)) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+  };
+
+  // Use capture phase to catch events earlier
+  const options = { passive: false, capture: true };
+
+  // Prevent all zoom gestures - use capture phase
+  document.addEventListener("touchstart", preventZoom, options);
+  document.addEventListener("touchmove", preventZoom, options);
+  document.addEventListener("touchend", preventZoom, options);
+  document.addEventListener("touchcancel", preventZoom, options);
+
+  // Prevent wheel zoom
+  document.addEventListener("wheel", preventZoom, options);
+
+  // Prevent gesture events (iOS Safari) - use capture phase
+  document.addEventListener(
+    "gesturestart",
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    options
+  );
+  document.addEventListener(
+    "gesturechange",
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    options
+  );
+  document.addEventListener(
+    "gestureend",
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    options
+  );
+}

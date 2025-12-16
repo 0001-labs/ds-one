@@ -49,6 +49,7 @@ export class Text extends LitElement {
   static styles = css`
     :host {
       display: inline;
+      color: var(--text-color);
       font-family: var(--typeface-regular);
       font-size: var(--type-size-default);
       font-weight: var(--type-weight-default);

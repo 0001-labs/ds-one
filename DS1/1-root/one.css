@@ -33,6 +33,7 @@ input {
   --slate: #1e1e1e;
   --slate-light: #e6e6e6;
   --slate-dark: #3c3c3c;
+  --stealth: #554455;
   --black: #2a2a2a;
 
   /* Accent/[color]  */
@@ -52,7 +53,7 @@ input {
 
   /* ds-grid color */
   --grid-color: light-dark(var(--grid-color-light), var(--grid-color-dark));
-  --grid-color-light: var(--slate);
+  --grid-color-light: #1e1e1e2b;
   --grid-color-dark: var(--white);
 
   /* typefaces */
@@ -103,6 +104,7 @@ input {
   --4: calc(var(--1) * 4);
   --8: calc(var(--1) * 8);
   --12: calc(var(--1) * 12);
+  --20: calc(var(--1) * 20);
 
   /* Semantic sizing units */
 
@@ -116,14 +118,49 @@ input {
   --quad: var(--4);
   --oct: var(--8);
   --dozen: var(--12);
+  --twenty: var(--20);
+
+  /* Layouts */
+
+  /* App layout (used for app) */
+  --app-layout: 
+
+
+  /* Home layout (used for lists) */ --home-layout: calc(
+      var(--unit) * var(--sf)
+    )
+    calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+    calc(var(--unit) * var(--sf)) calc(var(--oct) * var(--sf))
+    calc(var(--oct) * var(--sf)) calc(var(--quad) * var(--sf))
+    calc(var(--double) * var(--sf));
+  --home-layout-areas: "banner" "." "header" "." "message" "lists" "." "footer";
+
+  /* App layout */
+  --app-layout: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+    calc(var(--unit) * var(--sf)) calc(var(--double) * var(--sf))
+    calc(var(--dozen) * var(--sf)) calc(var(--unit) * var(--sf))
+    calc(var(--quad) * var(--sf)) calc(var(--double) * var(--sf));
+  --app-layout-areas: "banner" "." "header" "." "main" "page-dots" "." "footer";
 
   /* size */
-  --outline-stroke: 1px solid light-dark(var(--black), var(--slate-dark));
-  --outline-stroke-mobile: calc(1px * var(--sf)) solid
-    light-dark(var(--black), var(--slate-dark));
+  --outline-stroke: 1px solid var(--slate-light);
+  --outline-stroke-mobile: 2px solid var(--sharp-blue);
   --item-width: calc(79px * var(--sf));
   --item-height: calc(19px * var(--sf));
   --margin-correction: calc(1px * var(--sf));
+
+  --column-width: calc(var(--quad) * var(--sf));
+
+  --column-header-height: calc(var(--unit) * var(--sf));
+  --column-header-width: calc(var(--quad) * var(--sf));
+
+  /* ----------------------------------------------------------
+   SURFACE COLORS
+   - 
+   ---------------------------------------------------------- */
+
+  --background: light-dark(var(--white), var(--black));
+  --dialog-background: var(--background);
 
   /* button */
   --button-background-color-primary: var(--accent-color);
@@ -138,7 +175,7 @@ input {
   );
 
   /* text-color */
-  --text-color-primary: light-dark(var(--black), var(--white));
+  --text-color: light-dark(var(--black), var(--white));
   --text-color-dimmed: light-dark(var(--slate), var(--slate-light));
 
   /* icon colors */
@@ -183,7 +220,6 @@ body {
 
 .matrix__board {
   position: relative;
-  top: calc(21.5px * var(--sf));
   left: calc(-20px * var(--sf));
   width: calc(240px * var(--sf));
   display: flex;
@@ -224,26 +260,20 @@ body {
   height: var(--item-height);
   margin-right: var(--margin-correction);
   margin-bottom: var(--margin-correction);
-  outline: var(--outline-stroke);
   background-color: light-dark(var(--white), var(--black));
 }
 
 .matrix__row-header {
   position: relative;
-  top: calc(0.5px * var(--sf));
+  /* top: calc(0.5px * var(--sf)); */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(19px * var(--sf));
-  height: var(--item-height);
-  margin-right: var(--margin-correction);
-  margin-bottom: var(--margin-correction);
-  outline: var(--outline-stroke);
+  width: calc(var(--unit) * var(--sf));
+  height: calc(var(--unit) * var(--sf));
+  /* margin-right: var(--margin-correction);
+  margin-bottom: var(--margin-correction); */
   background-color: light-dark(rgb(220 241 213), var(--slate-dark));
-}
-
-.mobile .matrix__row-header {
-  outline: var(--outline-stroke-mobile);
 }
 
 .matrix__column-content {
