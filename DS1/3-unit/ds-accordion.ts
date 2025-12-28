@@ -1,84 +1,61 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
 import "../2-core/ds-text";
 import "../2-core/ds-icon";
 import "./ds-row";
+import styles from "./styles/ds-accordion.css?inline";
 
 /**
  * Native accordion using <details>/<summary> (no JS toggle logic).
  *
- * Usage:
- * <ds-accordion summary-key="howItBegan" details-key="designedInHokkaido"></ds-accordion>
+ * Usage (with translation text):
+ * <ds-accordion summary="How it began" details="Designed in Hokkaido"></ds-accordion>
+ *
+ * Usage (with slotted details content):
+ * <ds-accordion summary="How it began">
+ *   <div slot="details">Rich HTML content here</div>
+ * </ds-accordion>
  */
 export class Accordion extends LitElement {
   static properties = {
-    summaryKey: { type: String, attribute: "summary-key" },
-    detailsKey: { type: String, attribute: "details-key" },
+    summary: { type: String },
+    details: { type: String },
     open: { type: Boolean, reflect: true },
+    _hasSlottedContent: { type: Boolean, state: true },
   };
 
-  declare summaryKey: string;
-  declare detailsKey: string;
+  declare summary: string;
+  declare details: string;
   declare open: boolean;
+  declare _hasSlottedContent: boolean;
 
   constructor() {
     super();
-    this.summaryKey = "";
-    this.detailsKey = "";
+    this.summary = "";
+    this.details = "";
     this.open = false;
+    this._hasSlottedContent = false;
   }
 
-  static styles = css`
-    :host {
-      display: block;
-      width: calc(240px * var(--sf));
-      color: var(--text-color-primary);
-    }
+  static styles = unsafeCSS(styles);
 
-    details {
-      width: 100%;
-    }
-
-    summary {
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-      outline: none;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .summaryRow {
-      width: 100%;
-    }
-
-    ds-icon.chevron {
-      transform: rotate(0deg);
-      transition: transform 140ms ease;
-    }
-
-    details[open] ds-icon.chevron {
-      transform: rotate(180deg);
-    }
-
-    .detailsBody {
-      padding-top: calc(var(--half) * var(--sf));
-    }
-
-    .detailsText {
-      display: block;
-      white-space: normal;
-      text-align: left;
-    }
-  `;
+  private _handleSlotChange(e: Event) {
+    const slot = e.target as HTMLSlotElement;
+    const assignedNodes = slot.assignedNodes({ flatten: true });
+    // Filter out empty text nodes (whitespace only)
+    const hasContent = assignedNodes.some(
+      (node) =>
+        node.nodeType === Node.ELEMENT_NODE ||
+        (node.nodeType === Node.TEXT_NODE && node.textContent?.trim())
+    );
+    this._hasSlottedContent = hasContent;
+  }
 
   render() {
     return html`
       <details ?open=${this.open}>
         <summary>
-          <ds-row class="summaryRow" type="centered">
-            <ds-text .key=${this.summaryKey}></ds-text>
+          <ds-row class="summaryRow" centered>
+            <ds-text .text=${this.summary}></ds-text>
             <ds-icon class="chevron" aria-hidden="true">
               <svg
                 viewBox="0 0 10.157 8.219"
@@ -96,7 +73,13 @@ export class Accordion extends LitElement {
         </summary>
 
         <div class="detailsBody">
-          <ds-text class="detailsText" .key=${this.detailsKey}></ds-text>
+          <slot name="details" @slotchange=${this._handleSlotChange}></slot>
+          ${!this._hasSlottedContent
+            ? html`<ds-text
+                class="detailsText"
+                .text=${this.details}
+              ></ds-text>`
+            : ""}
         </div>
       </details>
     `;

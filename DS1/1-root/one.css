@@ -1,4 +1,4 @@
-/* version 0.2.5-alpha.18 */
+/* version 0.3.0-alpha.5 */
 
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@800");
@@ -30,6 +30,9 @@ input {
 
   --white: rgb(255 255 255);
   --light-grey: #e8e8e8;
+  --base-light-grey: #e8e8e8;
+  --base-darker-grey: #797979;
+  --base-slate: #1e1e1e;
   --slate: #1e1e1e;
   --slate-light: #e6e6e6;
   --slate-dark: #3c3c3c;
@@ -122,18 +125,11 @@ input {
 
   /* Layouts */
 
-  /* App layout (used for app) */
-  --app-layout: 
-
-
-  /* Home layout (used for lists) */ --home-layout: calc(
-      var(--unit) * var(--sf)
-    )
+  /* Home layout (used for lists) */
+  --home-layout: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
     calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
-    calc(var(--unit) * var(--sf)) calc(var(--oct) * var(--sf))
-    calc(var(--oct) * var(--sf)) calc(var(--quad) * var(--sf))
-    calc(var(--double) * var(--sf));
-  --home-layout-areas: "banner" "." "header" "." "message" "lists" "." "footer";
+    calc(var(--oct) * var(--sf));
+  --home-layout-areas: "banner" "." "header" "." "lists";
 
   /* App layout */
   --app-layout: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
@@ -141,6 +137,11 @@ input {
     calc(var(--dozen) * var(--sf)) calc(var(--unit) * var(--sf))
     calc(var(--quad) * var(--sf)) calc(var(--double) * var(--sf));
   --app-layout-areas: "banner" "." "header" "." "main" "page-dots" "." "footer";
+
+  /* Settings layout */
+  --settings-layout: calc(var(--unit) * var(--sf)) calc(var(--unit) * var(--sf))
+    1fr;
+  --settings-layout-areas: "banner" "." "settings";
 
   /* size */
   --outline-stroke: 1px solid var(--slate-light);
@@ -164,11 +165,9 @@ input {
 
   /* button */
   --button-background-color-primary: var(--accent-color);
-  --button-background-color-secondary: light-dark(
-    var(--slate-light),
-    var(--slate-dark)
-  );
+  --button-background-color-secondary: var(--white);
   --button-text-color: light-dark(var(--black), var(--white));
+  --button-text-color-on-light: var(--black);
   --button-text-color-secondary: light-dark(
     var(--slate-dark),
     var(--slate-light)

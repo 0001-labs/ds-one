@@ -52,7 +52,7 @@ const entryTranslationKeys: Record<string, string> = {
             <ds-button 
               bold 
               no-background
-              key={groupKey}
+              text={groupKey}
               default-text={group.label}
               style="pointer-events: none;"
             >
@@ -69,7 +69,7 @@ const entryTranslationKeys: Record<string, string> = {
                   {isFirstThree ? (
                     <ds-button
                       no-background
-                      key={entryKey}
+                      text={entryKey}
                       default-text={entry.label}
                       aria-current={entry.isCurrent ? 'page' : undefined}
                       href={entry.href}
@@ -81,7 +81,7 @@ const entryTranslationKeys: Record<string, string> = {
                   ) : (
                     <ds-button
                       variant={entry.isCurrent ? 'primary' : 'secondary'}
-                      key={entryKey}
+                      text={entryKey}
                       default-text={entry.label}
                       aria-current={entry.isCurrent ? 'page' : undefined}
                       href={entry.href}
@@ -117,7 +117,7 @@ const entryTranslationKeys: Record<string, string> = {
         </svg>
       </div>
     </ds-button>
-    <ds-button class="version-badge">0.2.5-alpha.18</ds-button>
+    <ds-button class="version-badge">0.3.0-alpha.5</ds-button>
   </div>
 </nav>
 

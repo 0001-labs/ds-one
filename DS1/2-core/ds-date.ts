@@ -1,4 +1,5 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
+import styles from "./styles/ds-date.css?inline";
 
 /**
  * A component for displaying the current year
@@ -6,14 +7,7 @@ import { LitElement, html, css } from "lit";
  * @element ds-date
  */
 export class DateComponent extends LitElement {
-  static styles = css`
-    :host {
-      display: inline;
-      font-family: var(--typeface-regular, var(--typeface-regular-regular));
-      font-size: inherit;
-      color: inherit;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   render() {
     const year = new Date().getFullYear();

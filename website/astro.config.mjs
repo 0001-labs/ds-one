@@ -53,7 +53,9 @@ export default defineConfig({
           items: [
             { label: "i18n", slug: "built-ins/i18n" },
             { label: "Theming", slug: "built-ins/theming" },
-            { label: "Mobile Detection", slug: "built-ins/mobile-detection" },
+            { label: "Device", slug: "built-ins/device" },
+            { label: "Preferences", slug: "built-ins/preferences" },
+            { label: "Pricing", slug: "built-ins/pricing" },
           ],
         },
         {
@@ -66,28 +68,54 @@ export default defineConfig({
         {
           label: "2 Core",
           items: [
+            { label: "Banner", slug: "2-core/banner" },
             { label: "Button", slug: "2-core/button" },
-            { label: "Text", slug: "2-core/text" },
-            { label: "Link", slug: "2-core/link" },
+            { label: "Card", slug: "2-core/card" },
+            { label: "Cycle", slug: "2-core/cycle" },
+            { label: "Date", slug: "2-core/date" },
+            { label: "Gap", slug: "2-core/gap" },
             { label: "Icon", slug: "2-core/icon" },
+            { label: "Input", slug: "2-core/input" },
+            { label: "Link", slug: "2-core/link" },
+            { label: "Text", slug: "2-core/text" },
             { label: "Tooltip", slug: "2-core/tooltip" },
           ],
         },
         {
           label: "3 Unit",
           items: [
-            { label: "Navigation", slug: "3-unit/navigation" },
-            { label: "List", slug: "3-unit/list" },
-            { label: "Panel", slug: "3-unit/panel" },
+            { label: "Accordion", slug: "3-unit/accordion" },
             { label: "Card", slug: "3-unit/card" },
+            { label: "Form", slug: "3-unit/form" },
+            { label: "List", slug: "3-unit/list" },
+            { label: "Navigation", slug: "3-unit/navigation" },
+            { label: "Panel", slug: "3-unit/panel" },
+            { label: "Row", slug: "3-unit/row" },
+            { label: "Table", slug: "3-unit/table" },
           ],
         },
         {
           label: "4 Page",
           items: [
-            { label: "Layout", slug: "4-page/layout" },
+            { label: "Container", slug: "4-page/container" },
             { label: "Grid", slug: "4-page/grid" },
+            { label: "Layout", slug: "4-page/layout" },
           ],
+        },
+        {
+          label: "Advanced",
+          items: [
+            { label: "i18n", slug: "advanced/i18n" },
+            { label: "Theming", slug: "advanced/theming" },
+            {
+              label: "UI Library Research",
+              slug: "advanced/ui-library-research",
+            },
+          ],
+        },
+        {
+          label: "Demo",
+          items: [{ label: "Interactive Demo", slug: "demo" }],
         },
       ],
     }),

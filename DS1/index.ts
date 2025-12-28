@@ -23,7 +23,6 @@ export * from "./0-face/device";
 export * from "./0-face/i18n";
 export * from "./0-face/preferences";
 export * from "./0-face/pricing";
-export * from "./0-face/scaling";
 export * from "./0-face/theme";
 
 // ============================================================================

@@ -2,15 +2,21 @@
 /* Text component styles for displaying translations */
 
 :host {
-  display: inline;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: calc(16px * var(--sf));
   font-family: var(--typeface-regular);
   font-size: var(--type-size-default);
   font-weight: var(--type-weight-default);
   line-height: calc(var(--type-lineheight-default) * var(--sf));
   letter-spacing: calc(var(--type-letterspacing-default) * var(--sf));
-  text-align: var(--text-align-default);
+  text-align: left;
   text-transform: var(--text-transform-default);
   text-decoration: var(--text-decoration-default);
+  vertical-align: middle;
+  white-space: nowrap;
+  color: inherit;
 }
 
 :host([data-language="ja"]) {
@@ -26,4 +32,8 @@
 :host([data-language="zh-hans"]) {
   font-family: var(--typeface-regular-zh-hans);
   font-weight: 800;
+}
+
+:host span {
+  color: inherit;
 }

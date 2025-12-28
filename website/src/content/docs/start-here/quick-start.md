@@ -69,7 +69,7 @@ Create a simple HTML page using DS one components:
 
 ## With Translation Support
 
-DS one includes built-in internationalization:
+DS one includes built-in internationalization. Use the `text` attribute (not `key`) to specify translation keys:
 
 ```html
 <script type="module">
@@ -88,8 +88,8 @@ DS one includes built-in internationalization:
   setLanguage("en");
 </script>
 
-<ds-text data-key="greeting"></ds-text>
-<ds-text data-key="welcome"></ds-text>
+<ds-text text="Greeting"></ds-text>
+<ds-text text="Welcome"></ds-text>
 ```
 
 ## Next Steps

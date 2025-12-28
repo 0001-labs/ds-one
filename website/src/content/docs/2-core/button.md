@@ -8,7 +8,8 @@ The `ds-button` component provides a customizable button with multiple visual va
 ## Component Dependencies
 
 `ds-button` can use the following components internally:
-- **`ds-text`** - When using `key` attribute for i18n support
+
+- **`ds-text`** - When using `text` attribute for i18n support
 
 ## Basic Usage
 

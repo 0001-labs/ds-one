@@ -16,8 +16,8 @@ The `ds-accordion` component provides expandable content sections using the nati
 
 ```html
 <ds-accordion
-  summary-key="faq.question1"
-  details-key="faq.answer1"
+  summary="FAQ Question 1"
+  details="FAQ Answer 1"
 ></ds-accordion>
 ```
 
@@ -25,8 +25,8 @@ The `ds-accordion` component provides expandable content sections using the nati
 
 ```html
 <ds-accordion
-  summary-key="section.title"
-  details-key="section.content"
+  summary="Section Title"
+  details="Section Content"
   open
 ></ds-accordion>
 ```
@@ -34,17 +34,17 @@ The `ds-accordion` component provides expandable content sections using the nati
 ## Multiple Accordions
 
 ```html
-<ds-accordion summary-key="faq.q1" details-key="faq.a1"></ds-accordion>
-<ds-accordion summary-key="faq.q2" details-key="faq.a2"></ds-accordion>
-<ds-accordion summary-key="faq.q3" details-key="faq.a3"></ds-accordion>
+<ds-accordion summary="FAQ Q1" details="FAQ A1"></ds-accordion>
+<ds-accordion summary="FAQ Q2" details="FAQ A2"></ds-accordion>
+<ds-accordion summary="FAQ Q3" details="FAQ A3"></ds-accordion>
 ```
 
 ## Attributes
 
 | Attribute     | Type      | Default | Description                          |
 | ------------- | --------- | ------- | ------------------------------------ |
-| `summary-key` | `string`  | -       | Translation key for summary text     |
-| `details-key` | `string`  | -       | Translation key for details content  |
+| `summary` | `string`  | -       | Translation text for summary text     |
+| `details` | `string`  | -       | Translation text for details content  |
 | `open`        | `boolean` | `false` | Whether accordion is initially open  |
 
 ## Styling
@@ -74,18 +74,18 @@ The accordion uses native `<details>` and `<summary>` elements, providing:
   <h2>Frequently Asked Questions</h2>
   
   <ds-accordion
-    summary-key="faq.howToStart"
-    details-key="faq.howToStartAnswer"
+    summary="How to Start"
+    details="How to Start Answer"
   ></ds-accordion>
   
   <ds-accordion
-    summary-key="faq.pricing"
-    details-key="faq.pricingAnswer"
+    summary="Pricing"
+    details="Pricing Answer"
   ></ds-accordion>
   
   <ds-accordion
-    summary-key="faq.support"
-    details-key="faq.supportAnswer"
+    summary="Support"
+    details="Support Answer"
   ></ds-accordion>
 </section>
 ```

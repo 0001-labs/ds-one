@@ -8,12 +8,12 @@
     <!-- Import CSS from CDN -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/ds-one@0.2.5-alpha.18/DS1/1-root/one.css"
+      href="https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.5/DS1/1-root/one.css"
     />
 
     <!-- Import DS one bundle from CDN -->
     <script type="module">
-      import "https://cdn.jsdelivr.net/npm/ds-one@0.2.5-alpha.18/dist/ds-one.bundle.min.js";
+      import "https://cdn.jsdelivr.net/npm/ds-one@0.3.0-alpha.5/dist/ds-one.bundle.min.js";
     </script>
   </head>
   <body>
@@ -23,28 +23,28 @@
       <!-- Title -->
       <div style="grid-area: title">
         <ds-text
-          key="siteTitle"
+          text="CDN Project"
           style="font-size: var(--text-2xl); font-weight: bold"
         ></ds-text>
       </div>
 
       <!-- Navigation -->
       <div style="grid-area: nav">
-        <ds-button variant="primary" href="index.html">
-          <ds-text key="home"></ds-text>
+        <ds-button primary href="index.html">
+          <ds-text text="Home"></ds-text>
         </ds-button>
-        <ds-button variant="secondary" href="about.html">
-          <ds-text key="about"></ds-text>
+        <ds-button secondary href="about.html">
+          <ds-text text="About"></ds-text>
         </ds-button>
-        <ds-button variant="secondary" href="contact.html">
-          <ds-text key="contact"></ds-text>
+        <ds-button secondary href="contact.html">
+          <ds-text text="Contact"></ds-text>
         </ds-button>
       </div>
 
       <!-- Main content -->
       <div style="grid-area: projects">
         <ds-text
-          key="welcome"
+          text="Welcome to CDN Project"
           style="
             font-size: var(--text-xl);
             font-weight: bold;
@@ -53,23 +53,23 @@
           "
         ></ds-text>
         <ds-text
-          key="description"
+          text="This project loads the DS one design system from a CDN. Perfect for quick prototyping and production deployments without build steps."
           style="display: block; margin-bottom: var(--2)"
         ></ds-text>
-        <ds-button variant="primary">
-          <ds-text key="learnMore"></ds-text>
+        <ds-button primary>
+          <ds-text text="Get Started"></ds-text>
         </ds-button>
       </div>
 
       <!-- Footer -->
       <div style="grid-area: footer">
-        <ds-text key="copyright"></ds-text>
-        <ds-row type="fill">
-          <ds-text key="language" default-value="Language"></ds-text>
+        <ds-text text="© 2025 DS one - CDN Delivery"></ds-text>
+        <ds-row fill>
+          <ds-text text="Language"></ds-text>
           <ds-cycle type="language"></ds-cycle>
         </ds-row>
-        <ds-row type="fill">
-          <ds-text key="theme" default-value="Theme"></ds-text>
+        <ds-row fill>
+          <ds-text text="Theme"></ds-text>
           <ds-cycle type="theme"></ds-cycle>
         </ds-row>
       </div>

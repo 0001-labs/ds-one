@@ -53,11 +53,11 @@ The `ds-input` component provides styled text inputs with validation support.
 ></ds-input>
 ```
 
-### With Translation Keys
+### With Translation Text
 
 ```html
 <ds-input
-  label-key="form.email.label"
+  label-text="Email Address"
   placeholder-key="form.email.placeholder"
   name="email"
 ></ds-input>
@@ -104,13 +104,13 @@ The `ds-input` component provides styled text inputs with validation support.
 | `placeholder`    | `string`  | -           | Placeholder text               |
 | `placeholder-key`| `string`  | -           | Translation key for placeholder|
 | `label`          | `string`  | -           | Label text                     |
-| `label-key`      | `string`  | -           | Translation key for label      |
+| `label-text`      | `string`  | -           | Translation text for label      |
 | `disabled`       | `boolean` | `false`     | Disable the input              |
 | `readonly`       | `boolean` | `false`     | Make input read-only           |
 | `required`       | `boolean` | `false`     | Mark as required               |
 | `variant`        | `string`  | `'default'` | Visual variant                 |
 | `error`          | `string`  | -           | Error message to display       |
-| `error-key`      | `string`  | -           | Translation key for error      |
+| `error-text`      | `string`  | -           | Translation text for error      |
 
 ## Events
 

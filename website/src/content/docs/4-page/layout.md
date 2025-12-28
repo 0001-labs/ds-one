@@ -32,7 +32,7 @@ Use layout components to establish consistent page structures across your applic
 ```html
 <ds-layout>
   <header slot="header">
-    <ds-banner text-key="app.announcement" variant="info"></ds-banner>
+    <ds-banner text="App Announcement" variant="info"></ds-banner>
   </header>
   <aside slot="sidebar">
     <ds-list>

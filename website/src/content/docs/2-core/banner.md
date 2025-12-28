@@ -14,7 +14,7 @@ The `ds-banner` component provides a fixed notification banner for displaying al
 ## Basic Usage
 
 ```html
-<ds-banner text-key="welcomeMessage" variant="info"></ds-banner>
+<ds-banner text="Welcome Message" variant="info"></ds-banner>
 ```
 
 ## Variants
@@ -22,33 +22,33 @@ The `ds-banner` component provides a fixed notification banner for displaying al
 ### Warning
 
 ```html
-<ds-banner text-key="warningMessage" variant="warning"></ds-banner>
+<ds-banner text="Warning Message" variant="warning"></ds-banner>
 ```
 
 ### Info
 
 ```html
-<ds-banner text-key="infoMessage" variant="info"></ds-banner>
+<ds-banner text="Info Message" variant="info"></ds-banner>
 ```
 
 ### Success
 
 ```html
-<ds-banner text-key="successMessage" variant="success"></ds-banner>
+<ds-banner text="Success Message" variant="success"></ds-banner>
 ```
 
 ### Error
 
 ```html
-<ds-banner text-key="errorMessage" variant="error"></ds-banner>
+<ds-banner text="Error Message" variant="error"></ds-banner>
 ```
 
 ## With Action
 
 ```html
 <ds-banner
-  text-key="issueReport"
-  action-key="contactUs"
+  text="Issue Report"
+  action="Contact Us"
   mailto="support@example.com"
   variant="warning"
 ></ds-banner>
@@ -58,12 +58,12 @@ The `ds-banner` component provides a fixed notification banner for displaying al
 
 | Attribute       | Type     | Default     | Description                              |
 | --------------- | -------- | ----------- | ---------------------------------------- |
-| `text-key`      | `string` | -           | Translation key for banner text          |
-| `action-key`    | `string` | -           | Translation key for action button        |
+| `text`      | `string` | -           | Translation text for banner text          |
+| `action`    | `string` | -           | Translation text for action button        |
 | `variant`       | `string` | `'warning'` | Banner style: warning, info, success, error |
 | `href`          | `string` | -           | Link URL for the action                  |
 | `mailto`        | `string` | -           | Email address for mailto link            |
-| `subject-key`   | `string` | -           | Translation key for email subject        |
+| `subject`   | `string` | -           | Translation text for email subject        |
 | `version`       | `string` | -           | Version number to display on click       |
 
 ## Events

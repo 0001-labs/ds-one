@@ -1,4 +1,4 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
 import {
   translate,
   currentLanguage,
@@ -13,6 +13,7 @@ import { savePreferences } from "../0-face/preferences";
 import "./ds-button";
 import "./ds-icon";
 import "./ds-text";
+import styles from "./styles/ds-cycle.css?inline";
 
 // Accent color utilities
 const saveAccentColor = (color: string) => {
@@ -62,27 +63,7 @@ export class Cycle extends LitElement {
     };
   }
 
-  static styles = css`
-    :host {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .cycle {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--025);
-    }
-
-    .color-preview {
-      width: var(--05);
-      height: var(--05);
-      border-radius: 999px;
-      border: 1px solid
-        color-mix(in srgb, var(--text-color-primary) 20%, transparent);
-      flex: 0 0 auto;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   // Add runtime properties using the any type
   // These are just for TypeScript and don't create shadowing fields
@@ -476,10 +457,10 @@ export class Cycle extends LitElement {
     } else if (this.type === "page-style") {
       // Return translated text for note behavior
       if (this.translationsReady) {
-        const translatedText = translate(value === "note" ? "note" : "page");
+        const translatedText = translate(value === "note" ? "Note" : "Page");
         if (
           translatedText &&
-          translatedText !== (value === "note" ? "note" : "page")
+          translatedText !== (value === "note" ? "Note" : "Page")
         ) {
           return translatedText;
         }
@@ -499,38 +480,38 @@ export class Cycle extends LitElement {
   }
 
   getColorKey(colorVar: string): string {
-    // Map CSS variables to language keys
+    // Map CSS variables to translation text keys
     const colorMap: { [key: string]: string } = {
-      "--tuned-red": "red",
-      "--orange": "orange",
-      "--yellow": "yellow",
-      "--apple-green": "appleGreen",
-      "--every-green": "green",
-      "--zenith-blue": "lightBlue",
-      "--sharp-blue": "blue",
-      "--pink": "pink",
+      "--tuned-red": "Red",
+      "--orange": "Orange",
+      "--yellow": "Yellow",
+      "--apple-green": "Apple green",
+      "--every-green": "Green",
+      "--zenith-blue": "Light blue",
+      "--sharp-blue": "Blue",
+      "--pink": "Pink",
     };
 
     return colorMap[colorVar] || colorVar.replace("--", "").replace("-", " ");
   }
 
   getColorName(colorVar: string): string {
-    // Map CSS variables to language keys
+    // Map CSS variables to translation text keys
     const colorMap: { [key: string]: string } = {
-      "--tuned-red": "red",
-      "--orange": "orange",
-      "--yellow": "yellow",
-      "--apple-green": "appleGreen",
-      "--every-green": "green",
-      "--zenith-blue": "lightBlue",
-      "--sharp-blue": "blue",
-      "--pink": "pink",
+      "--tuned-red": "Red",
+      "--orange": "Orange",
+      "--yellow": "Yellow",
+      "--apple-green": "Apple green",
+      "--every-green": "Green",
+      "--zenith-blue": "Light blue",
+      "--sharp-blue": "Blue",
+      "--pink": "Pink",
     };
 
-    const languageKey = colorMap[colorVar];
-    if (languageKey && this.translationsReady) {
-      const translatedName = translate(languageKey);
-      if (translatedName && translatedName !== languageKey) {
+    const translationText = colorMap[colorVar];
+    if (translationText && this.translationsReady) {
+      const translatedName = translate(translationText);
+      if (translatedName && translatedName !== translationText) {
         return translatedName;
       }
     }
@@ -558,10 +539,12 @@ export class Cycle extends LitElement {
     return html`
       <div class="cycle">
         <ds-button
-          variant=${this.variant ||
-          (this.type === "language" || this.type === "theme"
-            ? "secondary"
-            : "primary")}
+          variant=${this.type === "accent-color"
+            ? "primary"
+            : this.variant ||
+              (this.type === "language" || this.type === "theme"
+                ? "secondary"
+                : "primary")}
           ?disabled=${this.disabled}
           @click=${this.handleButtonClick}
         >
@@ -572,36 +555,24 @@ export class Cycle extends LitElement {
               >`
             : this.type === "language"
               ? html`<ds-text
-                  default-value=${this.getValueDisplay(this.currentValue)}
+                  text=${this.getValueDisplay(this.currentValue)}
                 ></ds-text>`
               : this.type === "theme"
                 ? html`<ds-text
-                    key=${this.currentValue}
-                    default-value=${this.currentValue}
+                    text=${this.currentValue === "light" ? "Light" : "Dark"}
                   ></ds-text>`
                 : this.type === "accent-color"
                   ? html`<ds-text
-                      key=${this.getColorKey(this.currentValue)}
-                      default-value=${this.getColorName(this.currentValue)}
+                      text=${this.getColorKey(this.currentValue)}
                     ></ds-text>`
                   : this.type === "page-style"
                     ? html`<ds-text
-                        key=${this.currentValue}
-                        default-value=${this.currentValue}
+                        text=${this.currentValue === "note" ? "Note" : "Page"}
                       ></ds-text>`
                     : html`<ds-text
-                        default-value=${this.getValueDisplay(this.currentValue)}
+                        text=${this.getValueDisplay(this.currentValue)}
                       ></ds-text>`}
         </ds-button>
-
-        ${this.type === "accent-color"
-          ? html`
-              <div
-                class="color-preview"
-                style="background-color: var(${this.currentValue})"
-              ></div>
-            `
-          : ""}
       </div>
     `;
   }

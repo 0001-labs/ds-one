@@ -5,26 +5,53 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: calc(16px * var(--sf));
-  height: calc(16px * var(--sf));
-  /* Notes style color variable for future implementation */
-  --notes-style-color: #ffb6b9;
+  width: calc(14px * var(--sf, 1));
+  height: calc(14px * var(--sf, 1));
+  /* Default: inherit text color (glyph variant) */
+  color: var(--icon-color, currentColor);
+  background: transparent;
 }
 
+/* --------------------------------------------------------
+   VARIANT: glyph (default)
+   No background, inherits text color. Behaves like text.
+   -------------------------------------------------------- */
+:host([variant="glyph"]),
+:host(:not([variant])) {
+  color: var(--icon-color, currentColor);
+  background: transparent;
+}
+
+/* --------------------------------------------------------
+   VARIANT: primary
+   Accent color background with contrasting icon color.
+   -------------------------------------------------------- */
+:host([variant="primary"]) {
+  color: var(--icon-color, var(--button-text-color, currentColor));
+  background: var(--accent-color);
+}
+
+/* --------------------------------------------------------
+   VARIANT: secondary
+   Subtle background with icon color.
+   -------------------------------------------------------- */
+:host([variant="secondary"]) {
+  color: var(--icon-color, var(--icon-color, currentColor));
+  background: var(
+    --icon-background,
+    light-dark(var(--slate-light, #e6e6e6), var(--slate-dark, #3c3c3c))
+  );
+}
+
+/* --------------------------------------------------------
+   SVG STYLING
+   -------------------------------------------------------- */
 svg {
-  width: 100%;
-  height: 100%;
-  fill: var(--icon-color, currentColor);
-}
-
-path {
-  fill: var(--icon-color, currentColor);
-}
-
-.icon-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: calc(16px * var(--sf));
-  height: calc(16px * var(--sf));
+  display: block;
+  width: calc(14px * var(--sf, 1));
+  height: calc(14px * var(--sf, 1));
+  /* 
+   * SVGs use fill="currentColor" or stroke="currentColor".
+   * They inherit the color from :host via currentColor.
+   */
 }

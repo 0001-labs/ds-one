@@ -1,15 +1,16 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
 import { translate } from "../0-face/i18n";
+import styles from "./styles/ds-tooltip.css?inline";
 
 export class Tooltip extends LitElement {
   static properties = {
-    key: { type: String, reflect: true },
+    text: { type: String, reflect: true },
     defaultValue: { type: String, reflect: true, attribute: "default-value" },
     _text: { state: true },
     _visible: { state: true },
   };
 
-  declare key: string;
+  declare text: string;
   declare defaultValue: string;
   private _text: string;
   private _visible: boolean;
@@ -27,7 +28,7 @@ export class Tooltip extends LitElement {
 
   constructor() {
     super();
-    this.key = "";
+    this.text = "";
     this.defaultValue = "";
     this._text = "";
     this._visible = false;
@@ -61,54 +62,7 @@ export class Tooltip extends LitElement {
     };
   }
 
-  static styles = css`
-    :host {
-      position: relative;
-      display: inline-block;
-    }
-
-    .slot-wrapper {
-      display: inline-flex;
-      align-items: center;
-    }
-
-    .bubble {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      left: 50%;
-      bottom: 100%;
-      transform: translate(-50%, calc(-2px * var(--sf)));
-      z-index: 1000;
-      pointer-events: none;
-      height: calc(var(--08) * var(--sf));
-      opacity: 0;
-      transition:
-        opacity 120ms ease,
-        transform 120ms ease;
-      background-color: light-dark(var(--black), var(--white));
-      color: light-dark(var(--white), var(--black));
-      border-radius: 0;
-      font-size: var(--type-size-default);
-      padding: 0px calc(1px * var(--sf));
-      font-family: var(
-        --typeface-regular,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        sans-serif
-      );
-      font-weight: 500;
-      white-space: nowrap;
-      min-width: max-content;
-    }
-
-    .bubble.visible {
-      opacity: 1;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -147,24 +101,24 @@ export class Tooltip extends LitElement {
   }
 
   updated(changed: Map<string, unknown>): void {
-    if (changed.has("key") || changed.has("defaultValue")) {
+    if (changed.has("text") || changed.has("defaultValue")) {
       this._loadText();
     }
   }
 
   _loadText(): void {
-    if (!this.key) {
+    if (!this.text) {
       this._text = this.defaultValue || "";
       this.requestUpdate();
       return;
     }
 
     try {
-      const t = translate(this.key);
-      this._text = t && t !== this.key ? t : this.defaultValue || this.key;
+      const t = translate(this.text);
+      this._text = t && t !== this.text ? t : this.defaultValue || this.text;
     } catch (err) {
-      console.error("ds-tooltip: error loading text for key", this.key, err);
-      this._text = this.defaultValue || this.key;
+      console.error("ds-tooltip: error loading text for text", this.text, err);
+      this._text = this.defaultValue || this.text;
     }
     this.requestUpdate();
   }

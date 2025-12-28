@@ -18,8 +18,8 @@ slot {
   --portfolio-areas: "square . ." ". title ." ". header ." ". projects ."
     ". . ." ". bio ." ". . ." ". nav ." ". . ." ". footer ." ". . .";
   --portfolio-overlay-cols: 120px 480px;
-  --portfolio-overlay-areas: "square ." ". title" ". header" ". projects"
-    ". ." ". bio" ". ." ". nav" ". ." ". footer" ". .";
+  --portfolio-overlay-areas: "square ." ". title" ". header" ". projects" ". ."
+    ". bio" ". ." ". nav" ". ." ". footer" ". .";
   grid-template-columns: var(--portfolio-cols);
   grid-template-rows: var(--portfolio-rows);
   grid-template-areas: var(--portfolio-areas);
@@ -94,8 +94,7 @@ slot {
     calc(var(--double) * var(--sf)) calc(var(--dozen) * var(--sf))
     calc(var(--unit) * var(--sf)) calc(var(--quad) * var(--sf))
     calc(var(--double) * var(--sf));
-  --app-overlay-areas: "banner" "." "header" "." "main" "page-dots" "."
-    "footer";
+  --app-overlay-areas: "banner" "." "header" "." "main" "page-dots" "." "footer";
   grid-template-columns: var(--app-cols);
   grid-template-rows: var(--app-rows);
   grid-template-areas: var(--app-areas);
@@ -134,11 +133,7 @@ slot {
   font-family: var(--typeface-regular);
   font-size: calc(var(--type-size-default) * var(--05));
   color: color-mix(in srgb, var(--tuned-red) 25%, transparent);
-  background-color: color-mix(
-    in srgb,
-    var(--accent-color) 25%,
-    transparent
-  );
+  background-color: color-mix(in srgb, var(--accent-color) 25%, transparent);
   opacity: 1;
 }
 

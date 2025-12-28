@@ -59,7 +59,7 @@ formatPrice(1234.56, 'EUR', 'fr-FR');
 Use with DS One components:
 
 ```html
-<ds-text default-value="$29.99"></ds-text>
+<ds-text text="$29.99"></ds-text>
 ```
 
 ## Configuration

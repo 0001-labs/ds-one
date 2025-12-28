@@ -1,7 +1,8 @@
 // ds-table.ts
 // Data table component
 
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
+import styles from "./styles/ds-table.css?inline";
 
 export interface TableRow {
   product: string;
@@ -28,90 +29,7 @@ export class DsTable extends LitElement {
     this.showStatus = true;
   }
 
-  static styles = css`
-    :host {
-      display: block;
-      width: 100%;
-    }
-
-    .table-container {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
-    .table-header {
-      display: grid;
-      grid-template-columns: 160px 80px 80px 80px;
-      height: 20px;
-      width: 400px;
-    }
-
-    .table-body {
-      display: grid;
-      grid-template-columns: 160px 80px 80px 80px;
-      border: 1px solid var(--black);
-      width: 400px;
-    }
-
-    .header-cell {
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: left;
-      padding: 0 2px;
-      font-family: var(--typeface-regular);
-      font-size: var(--type-size-default);
-      font-weight: var(--type-weight-default);
-      line-height: var(--type-lineheight-default);
-      color: var(--black);
-      letter-spacing: -0.26px;
-    }
-
-    .data-cell {
-      height: 20px;
-      margin-top: -1px;
-      display: flex;
-      align-items: center;
-      justify-content: left;
-
-      outline: 1px solid var(--black);
-
-      font-family: var(--typeface-regular);
-      font-size: var(--type-size-default);
-      font-weight: var(--type-weight-default);
-      line-height: var(--type-lineheight-default);
-      color: var(--black);
-      letter-spacing: -0.26px;
-    }
-
-    .status-cell {
-      background-color: var(--apple-green);
-    }
-
-    .product-cell {
-      text-align: left;
-      justify-content: flex-start;
-    }
-
-    .users-cell,
-    .retention-cell {
-      text-align: center;
-    }
-
-    .status-cell {
-      text-align: center;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 480px) {
-      .table-header,
-      .table-body {
-        width: 100%;
-        grid-template-columns: 1fr 60px 60px 60px;
-      }
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   render() {
     return html`

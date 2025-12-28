@@ -1,4 +1,4 @@
-# DS one (0.2.5-alpha.18)
+# DS one (0.3.0-alpha.5)
 
 A plug and play design system
 
@@ -20,7 +20,7 @@ yarn add ds-one@alpha
 
 ```
 
-**Note**: Currently published as alpha version `0.2.5-alpha.18`
+**Note**: Currently published as alpha version `0.3.0-alpha.5`
 
 ## Quick Start
 
@@ -41,8 +41,8 @@ yarn add ds-one@alpha
     </script>
   </head>
   <body>
-    <ds-button variant="primary" key="getStarted"></ds-button>
-    <ds-text key="welcome"></ds-text>
+    <ds-button variant="primary" text="Get Started"></ds-button>
+    <ds-text text="Welcome"></ds-text>
   </body>
 </html>
 ```

@@ -1,65 +1,62 @@
 /* ds-button.css */
 /* Core button component styles */
 
+:host {
+  display: inline-flex;
+  min-width: 0;
+  flex: 0 1 auto;
+  max-width: 100%;
+  overflow: hidden;
+}
+
 button {
   max-height: calc(var(--08) * var(--sf));
+  height: calc(var(--08) * var(--sf));
+  min-height: calc(var(--08) * var(--sf));
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   border: none;
   cursor: pointer;
-  padding: 0 calc(0.5px * var(--sf));
-  color: var(--button-text-color);
-  font-family: var(--typeface-regular);
-}
-
-button.title {
-  background-color: var(--button-background-color-secondary);
-  color: var(--button-text-color);
-}
-
-button.primary {
-  background-color: var(--accent-color);
-  color: var(--button-text-color);
-  text-decoration-line: none;
-  font-family: var(--typeface-regular);
-}
-
-button.secondary {
-  background-color: var(--button-background-color-secondary);
-  color: var(--button-text-color);
-  font-family: var(--typeface-regular);
-}
-
-button.text {
-  background-color: transparent;
+  padding: 0;
   color: var(--button-color, var(--button-text-color));
   font-family: var(--typeface-regular);
-  padding: 0;
-  text-decoration: none;
-}
-
-button.text:hover {
-  opacity: 0.8;
-  text-decoration: none;
-}
-
-button[bold] {
-  font-weight: var(--type-weight-bold);
-  font-family: var(--typeface-medium);
-}
-
-button[no-background] {
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Default to no-background when no variant is specified */
   background-color: transparent;
-  max-height: var(--1);
-  padding: 0;
-  color: var(--button-color, var(--button-text-color-secondary));
+  text-decoration: none;
 }
 
-button[no-background][bold] {
-  font-weight: var(--type-weight-bold);
-  font-family: var(--typeface-medium);
-  color: var(--button-color, var(--button-text-color-secondary));
+button ds-text,
+button ::slotted(*) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  text-align: left;
+  justify-content: flex-start;
+  color: inherit;
+}
+
+button[primary] {
+  background-color: var(--accent-color);
+  color: var(--button-text-color-on-light, var(--black));
+  text-decoration-line: none;
+  font-family: var(--typeface-regular);
+  padding: 0 calc(0.5px * var(--sf));
+}
+
+button[secondary] {
+  background-color: var(--button-background-color-secondary);
+  color: var(--button-text-color-on-light, var(--black));
+  font-family: var(--typeface-regular);
+  padding: 0 calc(0.5px * var(--sf));
 }
 
 .loading {

@@ -1,38 +1,29 @@
 // ds-button.ts
 // Core button component
 
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
 import "./ds-text";
+import styles from "./styles/ds-button.css?inline";
 
 export class Button extends LitElement {
   static properties = {
-    variant: { type: String, reflect: true },
+    primary: { type: Boolean, reflect: true },
+    secondary: { type: Boolean, reflect: true },
     disabled: { type: Boolean, reflect: true },
-    bold: { type: Boolean, reflect: true },
-    "no-background": {
-      type: Boolean,
-      reflect: true,
-      attribute: "no-background",
-    },
     blank: { type: Boolean, reflect: true },
-    key: { type: String },
-    fallback: { type: String },
     language: { type: String },
-    defaultText: { type: String, attribute: "default-text" },
+    text: { type: String },
     href: { type: String },
     _loading: { type: Boolean, state: true },
   };
 
   // Public properties
-  declare variant: string;
+  declare primary: boolean;
+  declare secondary: boolean;
   declare disabled: boolean;
-  declare bold: boolean;
-  declare "no-background": boolean;
   declare blank: boolean;
-  declare key: string;
-  declare fallback: string;
   declare language: string;
-  declare defaultText: string;
+  declare text: string;
   declare href: string;
 
   // Private state
@@ -40,150 +31,34 @@ export class Button extends LitElement {
 
   constructor() {
     super();
-    this.variant = "title";
+    this.primary = false; // Default to no-background (no attribute)
+    this.secondary = false;
     this.disabled = false;
-    this.bold = false;
-    this["no-background"] = false;
     this.blank = false;
-    this.key = "";
-    this.fallback = "";
     this.language = "en-US";
-    this.defaultText = "";
+    this.text = "";
     this.href = "";
     this._loading = false;
   }
 
-  static styles = css`
-    button {
-      max-height: calc(var(--08) * var(--sf));
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      cursor: pointer;
-      padding: 0 calc(0.5px * var(--sf));
-      color: var(--button-text-color);
-      font-family: var(--typeface-regular);
-    }
-
-    button:hover,
-    button:focus,
-    button:active {
-      opacity: 1;
-    }
-
-    button.title {
-      background-color: var(--button-background-color-secondary);
-      color: var(--button-text-color);
-    }
-
-    button.title:hover,
-    button.title:focus,
-    button.title:active {
-      background-color: var(--button-background-color-secondary);
-      color: var(--button-text-color);
-    }
-
-    button.primary {
-      background-color: var(--accent-color);
-      color: var(--button-text-color);
-      text-decoration-line: none;
-      font-family: var(--typeface-regular);
-    }
-
-    button.primary:hover,
-    button.primary:focus,
-    button.primary:active {
-      background-color: var(--accent-color);
-      color: var(--button-text-color);
-    }
-
-    button.secondary {
-      background-color: var(--button-background-color-secondary);
-      color: var(--button-text-color);
-      font-family: var(--typeface-regular);
-    }
-
-    button.secondary:hover,
-    button.secondary:focus,
-    button.secondary:active {
-      background-color: var(--button-background-color-secondary);
-      color: var(--button-text-color);
-    }
-
-    button.text {
-      background-color: transparent;
-      color: var(--button-color, var(--button-text-color));
-      font-family: var(--typeface-regular);
-      padding: 0;
-      text-decoration: none;
-    }
-
-    button.text:hover,
-    button.text:focus,
-    button.text:active {
-      background-color: transparent;
-      color: var(--button-color, var(--button-text-color));
-    }
-
-    button[bold] {
-      font-weight: var(--type-weight-bold);
-      font-family: var(--typeface-medium);
-    }
-
-    button[no-background] {
-      background-color: transparent;
-      max-height: var(--1);
-      padding: 0;
-      color: var(--button-color, var(--button-text-color-secondary));
-    }
-
-    button[no-background]:hover,
-    button[no-background]:focus,
-    button[no-background]:active {
-      background-color: transparent;
-      color: var(--button-color, var(--button-text-color-secondary));
-    }
-
-    button[no-background][bold] {
-      font-weight: var(--type-weight-bold);
-      font-family: var(--typeface-medium);
-      color: var(--button-color, var(--button-text-color-secondary));
-    }
-
-    button[no-background][bold]:hover,
-    button[no-background][bold]:focus,
-    button[no-background][bold]:active {
-      background-color: transparent;
-      color: var(--button-color, var(--button-text-color-secondary));
-    }
-
-    .loading {
-      opacity: 0.7;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   connectedCallback() {
     super.connectedCallback();
   }
 
   render() {
-    const hasTextProps = this.key || this.defaultText || this.fallback;
+    const hasTextProps = this.text;
 
     return html`
       <button
-        class=${this.variant}
+        ?primary=${this.primary}
+        ?secondary=${this.secondary}
         ?disabled=${this.disabled}
-        ?bold=${this.bold}
-        ?no-background=${this["no-background"]}
         @click=${this._handleClick}
       >
         ${hasTextProps
-          ? html`<ds-text
-              .key=${this.key}
-              .defaultValue=${this.defaultText}
-              .fallback=${this.fallback}
-            ></ds-text>`
+          ? html`<ds-text .text=${this.text}></ds-text>`
           : html`<slot></slot>`}
       </button>
     `;

@@ -1,21 +1,12 @@
-// ds-banner.ts
+// ds-list.ts
 // Unit component that
-// can be used to show a list of items consiting of compoentnts from core
+// can be used to show a list of items consisting of components from core
 
-
-
-
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
+import styles from "./styles/ds-list.css?inline";
 
 export class List extends LitElement {
-  static styles = css`
-    :host {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      width: 100%;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   render() {
     return html`<slot></slot>`;

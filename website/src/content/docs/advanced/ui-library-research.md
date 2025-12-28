@@ -1,3 +1,8 @@
+---
+title: "UI Library Research"
+description: "Research findings from analyzing Radix UI, Base UI, and Shadcn"
+---
+
 # UI Library Research: Radix UI, Base UI & Shadcn
 
 This document summarizes research findings from analyzing three major UI component libraries that could inform improvements to DS One. Each library offers different patterns and approaches that may be valuable for enhancing our design system.
@@ -6,11 +11,11 @@ This document summarizes research findings from analyzing three major UI compone
 
 ## Overview Comparison
 
-| Library | GitHub Stars | Approach | Framework |
-|---------|-------------|----------|-----------|
-| [Radix UI](https://github.com/radix-ui/primitives) | 18,304 | Unstyled primitives | React |
-| [Base UI](https://github.com/mui/base-ui) | 7,074 | Unstyled primitives (hooks + components) | React |
-| [Shadcn UI](https://github.com/shadcn-ui/ui) | 102,801 | Styled components (copy-paste) | React + Tailwind |
+| Library                                            | GitHub Stars | Approach                                 | Framework        |
+| -------------------------------------------------- | ------------ | ---------------------------------------- | ---------------- |
+| [Radix UI](https://github.com/radix-ui/primitives) | 18,304       | Unstyled primitives                      | React            |
+| [Base UI](https://github.com/mui/base-ui)          | 7,074        | Unstyled primitives (hooks + components) | React            |
+| [Shadcn UI](https://github.com/shadcn-ui/ui)       | 102,801      | Styled components (copy-paste)           | React + Tailwind |
 
 ---
 
@@ -23,6 +28,7 @@ This document summarizes research findings from analyzing three major UI compone
 ### Architecture Patterns
 
 #### Compound Components
+
 Radix uses a compound component pattern where complex components are composed of smaller, individually accessible parts:
 
 ```tsx
@@ -36,16 +42,18 @@ Radix uses a compound component pattern where complex components are composed of
 ```
 
 #### Context-Based State Management
+
 Uses React Context with scoped providers for sharing state between compound components:
 
 ```tsx
-const [createAccordionContext, createAccordionScope] = createContextScope(ACCORDION_NAME, [
-  createCollectionScope,
-  createCollapsibleScope,
-]);
+const [createAccordionContext, createAccordionScope] = createContextScope(
+  ACCORDION_NAME,
+  [createCollectionScope, createCollapsibleScope]
+);
 ```
 
 #### Key Utilities
+
 - **`createContextScope`** - Scoped context providers for component composition
 - **`useControllableState`** - Controlled/uncontrolled state management
 - **`composeEventHandlers`** - Event handler composition
@@ -53,6 +61,7 @@ const [createAccordionContext, createAccordionScope] = createContextScope(ACCORD
 - **`Primitive`** - Base element wrapper with `asChild` support for component polymorphism
 
 #### Component List (45+ primitives)
+
 - **Overlays:** Dialog, AlertDialog, Popover, Tooltip, HoverCard, ContextMenu, DropdownMenu
 - **Navigation:** NavigationMenu, Menubar, Tabs
 - **Form Controls:** Checkbox, RadioGroup, Select, Slider, Switch, Toggle, Form
@@ -88,11 +97,12 @@ const [createAccordionContext, createAccordionScope] = createContextScope(ACCORD
 ### Architecture Patterns
 
 #### Hooks + Components Pattern
+
 Base UI offers both headless hooks and unstyled components:
 
 ```tsx
 // Hook approach for maximum flexibility
-import { useButton } from '@base-ui/react/button';
+import { useButton } from "@base-ui/react/button";
 
 const { getButtonProps, buttonRef } = useButton({
   disabled,
@@ -101,12 +111,15 @@ const { getButtonProps, buttonRef } = useButton({
 });
 
 // Component approach for convenience
-import { Button } from '@base-ui/react/button';
+import { Button } from "@base-ui/react/button";
 
-<Button disabled focusableWhenDisabled>Click</Button>
+<Button disabled focusableWhenDisabled>
+  Click
+</Button>;
 ```
 
 #### Part-Based Component Structure
+
 Components are split into semantic parts in separate files:
 
 ```
@@ -123,6 +136,7 @@ Components are split into semantic parts in separate files:
 ```
 
 #### Key Utilities
+
 - **`useRenderElement`** - Unified render logic with state/ref/props merging
 - **`mergeProps`** - Prop merging with event handler composition
 - **`useControlled`** - Controlled/uncontrolled state (from MUI)
@@ -130,6 +144,7 @@ Components are split into semantic parts in separate files:
 - **`useIsoLayoutEffect`** - SSR-safe useLayoutEffect
 
 #### Component List (35+ components)
+
 - **Core:** Button, Checkbox, Field, Fieldset, Form, Input, Label, Switch
 - **Selection:** ComboBox, Menu, Select, Radio, Tabs, Autocomplete
 - **Display:** Accordion, Avatar, Collapsible, Meter, Progress, Separator
@@ -170,6 +185,7 @@ Components are split into semantic parts in separate files:
 ### Architecture Patterns
 
 #### Copy-Paste Distribution
+
 Components are meant to be copied into your codebase, not installed as dependencies:
 
 ```bash
@@ -177,12 +193,13 @@ npx shadcn@latest add button
 ```
 
 #### Built on Primitives
+
 Shadcn wraps Radix (previously) and Base UI (v4) primitives with styling:
 
 ```tsx
 // Shadcn button - thin wrapper with variants
-import { Button as ButtonPrimitive } from "@base-ui/react/button"
-import { cva, type VariantProps } from "class-variance-authority"
+import { Button as ButtonPrimitive } from "@base-ui/react/button";
+import { cva, type VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
   "cn-button inline-flex items-center justify-center...",
@@ -203,10 +220,11 @@ const buttonVariants = cva(
       },
     },
   }
-)
+);
 ```
 
 #### CSS Class Naming Convention
+
 Uses semantic `data-slot` attributes and class prefixes (`cn-*`) for styling hooks:
 
 ```tsx
@@ -217,6 +235,7 @@ Uses semantic `data-slot` attributes and class prefixes (`cn-*`) for styling hoo
 ```
 
 #### Component List (50+ components)
+
 - **Core:** Button, Input, Label, Textarea, Select, Checkbox, Radio, Switch, Slider
 - **Display:** Accordion, Alert, Avatar, Badge, Card, Carousel, Progress, Skeleton, Table
 - **Overlays:** Dialog, Drawer, Sheet, AlertDialog, Popover, Tooltip, HoverCard
@@ -248,6 +267,7 @@ Uses semantic `data-slot` attributes and class prefixes (`cn-*`) for styling hoo
 ### High Priority
 
 #### 1. Add Controllable State Pattern
+
 Implement a unified pattern for controlled/uncontrolled components across all interactive elements.
 
 ```typescript
@@ -262,11 +282,12 @@ function useControllableState<T>(options: {
 ```
 
 #### 2. Implement Compound Component Pattern for Complex Components
+
 Refactor `ds-accordion` to use a compound pattern:
 
 ```html
 <!-- Current -->
-<ds-accordion summary-key="title" details-key="content"></ds-accordion>
+<ds-accordion summary="Title" details="Content"></ds-accordion>
 
 <!-- Proposed -->
 <ds-accordion type="single">
@@ -278,24 +299,26 @@ Refactor `ds-accordion` to use a compound pattern:
 ```
 
 #### 3. Add Missing Core Components
+
 Based on common patterns across all three libraries:
 
-| Component | Priority | Rationale |
-|-----------|----------|-----------|
-| `ds-dialog` | High | Modal/dialog pattern is universal |
-| `ds-select` | High | Form selection component |
-| `ds-popover` | High | Positioning primitive for menus/tooltips |
-| `ds-checkbox` | Medium | Form control |
-| `ds-radio-group` | Medium | Form control |
-| `ds-switch` | Medium | Toggle alternative |
-| `ds-slider` | Medium | Range input |
-| `ds-tabs` | Medium | Content organization |
-| `ds-progress` | Low | Loading states |
-| `ds-separator` | Low | Visual divider |
+| Component        | Priority | Rationale                                |
+| ---------------- | -------- | ---------------------------------------- |
+| `ds-dialog`      | High     | Modal/dialog pattern is universal        |
+| `ds-select`      | High     | Form selection component                 |
+| `ds-popover`     | High     | Positioning primitive for menus/tooltips |
+| `ds-checkbox`    | Medium   | Form control                             |
+| `ds-radio-group` | Medium   | Form control                             |
+| `ds-switch`      | Medium   | Toggle alternative                       |
+| `ds-slider`      | Medium   | Range input                              |
+| `ds-tabs`        | Medium   | Content organization                     |
+| `ds-progress`    | Low      | Loading states                           |
+| `ds-separator`   | Low      | Visual divider                           |
 
 ### Medium Priority
 
 #### 4. Add `slot` Attribute Support for Polymorphism
+
 Allow components to render as different elements similar to Radix's `asChild`:
 
 ```html
@@ -309,6 +332,7 @@ Allow components to render as different elements similar to Radix's `asChild`:
 ```
 
 #### 5. Create Headless Hooks (Lit Reactive Controllers)
+
 Expose component logic as reactive controllers for custom implementations:
 
 ```typescript
@@ -317,15 +341,17 @@ class AccordionController implements ReactiveController {
   constructor(host: ReactiveControllerHost, options: AccordionOptions) {
     // Implementation
   }
-  
-  get isOpen(): boolean { }
-  toggle(): void { }
-  getItemProps(value: string): object { }
+
+  get isOpen(): boolean {}
+  toggle(): void {}
+  getItemProps(value: string): object {}
 }
 ```
 
 #### 6. Enhance Focus Management
+
 Add utilities for:
+
 - Focus trapping (for modals)
 - Roving tabindex (for lists/toolbars)
 - Focus restoration
@@ -333,6 +359,7 @@ Add utilities for:
 ### Low Priority
 
 #### 7. Add `data-slot` Attributes
+
 Enable external styling without deep CSS selectors:
 
 ```html
@@ -345,13 +372,14 @@ Enable external styling without deep CSS selectors:
 ```
 
 #### 8. Add Direction Provider
+
 Enhance i18n with RTL support:
 
 ```typescript
 // Add to theme system
-export const direction = signal<'ltr' | 'rtl'>('ltr');
+export const direction = signal<"ltr" | "rtl">("ltr");
 
-export function setDirection(dir: 'ltr' | 'rtl'): void {
+export function setDirection(dir: "ltr" | "rtl"): void {
   direction.set(dir);
   document.documentElement.dir = dir;
 }

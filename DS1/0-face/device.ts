@@ -1,5 +1,11 @@
-// 2025-04-23-device.ts
-// Device detection and context utilities
+// device.ts
+// Device detection, context utilities, and responsive scaling
+
+import { signal } from "@lit-labs/signals";
+
+// ============================================================================
+// Types
+// ============================================================================
 
 export type DeviceType = "mobile" | "tablet" | "desktop";
 
@@ -13,6 +19,36 @@ export interface DeviceInfo {
   screenWidth: number;
   screenHeight: number;
 }
+
+export type ScalingMode = "auto" | "fixed" | "fluid";
+
+export interface ScalingConfig {
+  mode: ScalingMode;
+  baseWidth: number;
+  minScale: number;
+  maxScale: number;
+}
+
+// ============================================================================
+// Configuration & Signals
+// ============================================================================
+
+const defaultScalingConfig: ScalingConfig = {
+  mode: "auto",
+  baseWidth: 280,
+  minScale: 0.75,
+  maxScale: 2.0,
+};
+
+/** Reactive scaling factor signal */
+export const scalingFactor = signal<number>(1);
+
+/** Current scaling configuration */
+export const scalingConfig = signal<ScalingConfig>(defaultScalingConfig);
+
+// ============================================================================
+// Device Detection
+// ============================================================================
 
 /**
  * Comprehensive mobile device detection
@@ -80,48 +116,148 @@ export function getDeviceInfo(): DeviceInfo {
   };
 }
 
+// ============================================================================
+// Scaling
+// ============================================================================
+
 /**
- * Initialize device detection and log to console
+ * Calculate the scaling factor based on viewport width
+ * @param viewportWidth - Current viewport width in pixels
+ * @param config - Scaling configuration
+ * @returns The calculated scaling factor
+ */
+export function calculateScalingFactor(
+  viewportWidth: number,
+  config: ScalingConfig = scalingConfig.get()
+): number {
+  if (config.mode === "fixed") {
+    return 1;
+  }
+
+  const rawScale = viewportWidth / config.baseWidth;
+  const clampedScale = Math.max(
+    config.minScale,
+    Math.min(config.maxScale, rawScale)
+  );
+
+  return Number(clampedScale.toFixed(3));
+}
+
+/**
+ * Set the scaling configuration
+ * @param config - Partial scaling configuration to apply
+ */
+export function setScalingConfig(config: Partial<ScalingConfig>): void {
+  const currentConfig = scalingConfig.get();
+  const newConfig = { ...currentConfig, ...config };
+  scalingConfig.set(newConfig);
+
+  // Recalculate scaling factor if in browser
+  if (typeof window !== "undefined") {
+    updateScalingFactor();
+  }
+}
+
+/**
+ * Update the scaling factor based on current viewport
+ * Desktop always uses factor 1; mobile uses computed factor
+ */
+export function updateScalingFactor(): void {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return;
+  }
+
+  const isMobile = detectMobileDevice();
+
+  // Desktop: always use factor 1
+  if (!isMobile) {
+    const factor = 1;
+    scalingFactor.set(factor);
+    document.documentElement.style.setProperty("--sf", factor.toString());
+    window.dispatchEvent(
+      new CustomEvent("scaling-changed", {
+        detail: { scalingFactor: factor, config: scalingConfig.get() },
+      })
+    );
+    return;
+  }
+
+  // Mobile: compute scaling based on viewport
+  const viewportWidth = document.documentElement.clientWidth;
+  const config = scalingConfig.get();
+  const newFactor = calculateScalingFactor(viewportWidth, config);
+
+  scalingFactor.set(newFactor);
+  document.documentElement.style.setProperty("--sf", newFactor.toString());
+
+  window.dispatchEvent(
+    new CustomEvent("scaling-changed", {
+      detail: { scalingFactor: newFactor, config },
+    })
+  );
+}
+
+/**
+ * Get the current scaling factor
+ * @returns The current scaling factor
+ */
+export function getScalingFactor(): number {
+  return scalingFactor.get();
+}
+
+/**
+ * Convert a design pixel value to scaled pixels
+ * @param designPx - The design pixel value (based on 280px width)
+ * @returns The scaled pixel value
+ */
+export function scale(designPx: number): number {
+  return designPx * scalingFactor.get();
+}
+
+/**
+ * Convert a scaled pixel value back to design pixels
+ * @param scaledPx - The scaled pixel value
+ * @returns The design pixel value
+ */
+export function unscale(scaledPx: number): number {
+  const factor = scalingFactor.get();
+  return factor === 0 ? scaledPx : scaledPx / factor;
+}
+
+// ============================================================================
+// Unified Initialization
+// ============================================================================
+
+/**
+ * Initialize device detection and scaling
+ * Sets CSS classes (.mobile/.desktop) and --sf custom property
  */
 export function initDeviceDetection(): DeviceInfo {
   const deviceInfo = getDeviceInfo();
 
-  // Calculate and set scaling factor for mobile
-  if (deviceInfo.isMobile && typeof document !== "undefined") {
-    // Design width: 280px (14 columns × 20px)
-    const designWidth = 280;
-    const actualWidth = deviceInfo.screenWidth;
-    const scalingFactor = actualWidth / designWidth;
+  if (typeof document === "undefined") {
+    return deviceInfo;
+  }
 
-    // Set CSS custom property for scaling on html element
-    document.documentElement.style.setProperty(
-      "--sf",
-      scalingFactor.toFixed(3)
-    );
-    // Also set --sf for backwards compatibility
-    document.documentElement.style.setProperty(
-      "--sf",
-      scalingFactor.toFixed(3)
-    );
-
-    // Add .mobile class to html element for CSS targeting
+  // Set device class on html element
+  if (deviceInfo.isMobile) {
     document.documentElement.classList.add("mobile");
     document.documentElement.classList.remove("desktop");
+  } else {
+    document.documentElement.classList.add("desktop");
+    document.documentElement.classList.remove("mobile");
+  }
 
+  // Update scaling factor (handles --sf CSS property)
+  updateScalingFactor();
+
+  // Log device info
+  const factor = scalingFactor.get();
+  if (deviceInfo.isMobile) {
     console.log(
-      `[DS one] Mobile device detected - ${deviceInfo.deviceType} (${deviceInfo.screenWidth}x${deviceInfo.screenHeight}), scaling factor: ${scalingFactor.toFixed(2)}`
+      `[DS one] Mobile device detected - ${deviceInfo.deviceType} (${deviceInfo.screenWidth}x${deviceInfo.screenHeight}), scaling factor: ${factor.toFixed(2)}`
     );
   } else {
-    // Desktop - no scaling
-    if (typeof document !== "undefined") {
-      document.documentElement.style.setProperty("--sf", "1");
-      // Also set --sf for backwards compatibility
-      document.documentElement.style.setProperty("--sf", "1");
-
-      // Add .desktop class and remove .mobile class
-      document.documentElement.classList.add("desktop");
-      document.documentElement.classList.remove("mobile");
-    }
     console.log(
       `[DS one] Desktop device detected (${deviceInfo.screenWidth}x${deviceInfo.screenHeight})`
     );
@@ -136,6 +272,7 @@ export function initDeviceDetection(): DeviceInfo {
       isDesktop: deviceInfo.isDesktop,
       isTouchCapable: deviceInfo.isTouchCapable,
       viewport: `${deviceInfo.screenWidth}x${deviceInfo.screenHeight}`,
+      scalingFactor: factor,
       userAgent: deviceInfo.userAgent,
     });
   }
@@ -155,15 +292,24 @@ if (typeof window !== "undefined") {
     initDeviceDetection();
   }
 
-  // Recalculate on resize (debounced)
-  let resizeTimeout: any;
+  // Single debounced resize handler for both device detection + scaling
+  let resizeTimeout: ReturnType<typeof setTimeout>;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
       initDeviceDetection();
     }, 100);
   });
+
+  // Also handle orientation change
+  window.addEventListener("orientationchange", () => {
+    setTimeout(initDeviceDetection, 100);
+  });
 }
+
+// ============================================================================
+// App-like Behavior
+// ============================================================================
 
 /**
  * Disable double-tap to zoom in the browser (app-like behavior)

@@ -3,17 +3,24 @@
 
 :host {
   display: flex;
+  flex-direction: row;
   align-items: end;
-  width: calc(240px * var(--sf));
 }
 
-:host([type="fill"]) {
+:host([fill]) {
   justify-content: space-between;
   height: calc(var(--1) * var(--sf));
+  width: 100%;
 }
 
-:host([type="centered"]) {
+:host([centered]) {
   justify-content: center;
+  height: calc(var(--1) * var(--sf));
+  gap: calc(var(--025) * var(--sf));
+}
+
+:host([end]) {
+  justify-content: flex-end;
   height: calc(var(--1) * var(--sf));
   gap: calc(var(--025) * var(--sf));
 }

@@ -10,6 +10,7 @@ List components organize and display collections of items in a structured format
 ## Flexible Content
 
 `ds-list` is a **flexible container** that can hold any content. Each list item can contain:
+
 - **`ds-text`** - For internationalized text
 - **`ds-icon`** - For visual indicators
 - **`ds-row`** - For horizontal layouts within items
@@ -31,9 +32,9 @@ Lists help present information clearly and make content easy to scan.
 ```html
 <ds-list>
   <ds-list-item>
-    <ds-row type="fill">
+    <ds-row fill>
       <ds-icon name="check"></ds-icon>
-      <ds-text key="tasks.completed"></ds-text>
+      <ds-text text="Completed"></ds-text>
     </ds-row>
   </ds-list-item>
 </ds-list>

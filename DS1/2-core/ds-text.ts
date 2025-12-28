@@ -1,36 +1,29 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
 import { getText, currentLanguage } from "../0-face/i18n";
+import styles from "./styles/ds-text.css?inline";
 
 /**
  * A component for displaying text from translations
  *
  * @element ds-text
- * @prop {string} key - The translation key to use
- * @prop {string} defaultValue - Default value if translation is not found
- * @prop {string} fallback - Optional fallback text if translation is not found (deprecated, use defaultValue)
+ * @prop {string} text - The translation text to use
  */
 export class Text extends LitElement {
   static get properties() {
     return {
-      key: { type: String, reflect: true },
-      defaultValue: { type: String, reflect: true, attribute: "default-value" },
-      fallback: { type: String, reflect: true }, // Kept for backward compatibility
+      text: { type: String, reflect: true },
       _text: { type: String, state: true },
     };
   }
 
-  declare key: string;
-  declare defaultValue: string;
-  declare fallback: string;
+  declare text: string;
   declare _text: string;
   declare _currentLanguage: string;
   private boundHandlers: { languageChanged: EventListener };
 
   constructor() {
     super();
-    this.key = "";
-    this.defaultValue = "";
-    this.fallback = "";
+    this.text = "";
     this._text = "";
     this._currentLanguage = currentLanguage.value;
 
@@ -46,35 +39,7 @@ export class Text extends LitElement {
     };
   }
 
-  static styles = css`
-    :host {
-      display: inline;
-      color: var(--text-color);
-      font-family: var(--typeface-regular);
-      font-size: var(--type-size-default);
-      font-weight: var(--type-weight-default);
-      line-height: calc(var(--type-lineheight-default) * var(--sf));
-      letter-spacing: calc(var(--type-letterspacing-default) * var(--sf));
-      text-align: var(--text-align-default);
-      text-transform: var(--text-transform-default);
-      text-decoration: var(--text-decoration-default);
-    }
-
-    :host([data-language="ja"]) {
-      font-family: var(--typeface-regular-jp);
-    }
-
-    :host([data-language="zh"]),
-    :host([data-language="zh-hant"]) {
-      font-family: var(--typeface-regular-zh-hant);
-      font-weight: 800;
-    }
-
-    :host([data-language="zh-hans"]) {
-      font-family: var(--typeface-regular-zh-hans);
-      font-weight: 800;
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   connectedCallback() {
     super.connectedCallback();
@@ -113,7 +78,7 @@ export class Text extends LitElement {
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties);
 
-    if (changedProperties.has("key") || changedProperties.has("defaultValue")) {
+    if (changedProperties.has("text")) {
       this._loadText();
     }
   }
@@ -149,26 +114,26 @@ export class Text extends LitElement {
   }
 
   _loadText() {
-    if (!this.key) {
-      this._text = this.defaultValue || this.fallback || "";
+    if (!this.text) {
+      this._text = "";
       this._updateLanguageAttribute();
       this.requestUpdate();
       return;
     }
 
     try {
-      const text = getText(this.key);
-      this._text = text || this.defaultValue || this.fallback || this.key;
+      const translatedText = getText(this.text);
+      this._text = translatedText || this.text;
     } catch (error) {
-      console.error("Error loading text for key:", this.key, error);
-      this._text = this.defaultValue || this.fallback || this.key;
+      console.error("Error loading text for text:", this.text, error);
+      this._text = this.text;
     }
     this._updateLanguageAttribute();
     this.requestUpdate();
   }
 
   render() {
-    return html`<span>${this._text || this.defaultValue || this.key}</span>`;
+    return html`<span>${this._text || this.text}</span>`;
   }
 }
 

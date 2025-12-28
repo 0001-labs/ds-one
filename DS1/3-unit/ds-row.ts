@@ -1,4 +1,5 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, unsafeCSS } from "lit";
+import styles from "./styles/ds-row.css?inline";
 
 declare global {
   interface CustomElementRegistry {
@@ -9,34 +10,23 @@ declare global {
 
 export class Row extends LitElement {
   static properties = {
-    type: { type: String, reflect: true },
+    fill: { type: Boolean, reflect: true },
+    centered: { type: Boolean, reflect: true },
+    end: { type: Boolean, reflect: true },
   };
 
-  declare type: "fill" | "centered";
+  declare fill: boolean;
+  declare centered: boolean;
+  declare end: boolean;
 
   constructor() {
     super();
-    this.type = "fill";
+    this.fill = false;
+    this.centered = false;
+    this.end = false;
   }
 
-  static styles = css`
-    :host {
-      display: flex;
-      align-items: end;
-      width: calc(240px * var(--sf));
-    }
-
-    :host([type="fill"]) {
-      justify-content: space-between;
-      height: calc(var(--1) * var(--sf));
-    }
-
-    :host([type="centered"]) {
-      justify-content: center;
-      height: calc(var(--1) * var(--sf));
-      gap: calc(var(--025) * var(--sf));
-    }
-  `;
+  static styles = unsafeCSS(styles);
 
   render() {
     return html`<slot></slot>`;
