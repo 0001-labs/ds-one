@@ -7,82 +7,81 @@ The `ds-text` component provides consistent typography styles across your applic
 
 ## Basic Usage
 
-Display text directly:
+Use the slot content as the translation key (recommended):
 
 ```html
-<ds-text variant="body">This is some text</ds-text>
+<ds-text>Welcome to the app</ds-text>
 ```
 
-## Variants
+The text inside the element serves as both the translation key and the fallback text. If a translation exists for "Welcome to the app", it will be displayed; otherwise, the original text is shown.
 
-### Heading
+## Slot Syntax vs Attribute Syntax
 
-Large heading text:
+### Slot Syntax (Preferred)
+
+The cleanest way to use `ds-text` - just put your text inside:
 
 ```html
-<ds-text variant="heading">Main Heading</ds-text>
+<ds-text>Services</ds-text>
+<ds-text>Contact us</ds-text>
+<ds-text>© 2025 0001</ds-text>
 ```
 
-### Body
+### Attribute Syntax (Still Supported)
 
-Standard body text:
+The `text` attribute still works for backwards compatibility:
 
 ```html
-<ds-text variant="body">This is body text for paragraphs.</ds-text>
+<ds-text text="Services"></ds-text>
 ```
 
-### Small
+## With Translations
 
-Smaller text for captions or secondary information:
+The component automatically looks up translations using the text content as the key:
 
 ```html
-<ds-text variant="small">Small text for captions</ds-text>
+<!-- If translations.json has { "Welcome": "ようこそ" } for Japanese -->
+<ds-text>Welcome</ds-text>
+<!-- Displays "ようこそ" when language is Japanese, "Welcome" otherwise -->
 ```
 
 ## Attributes
 
-| Attribute  | Type                             | Default  | Description                                          |
-| ---------- | -------------------------------- | -------- | ---------------------------------------------------- |
-| `variant`  | `'heading' \| 'body' \| 'small'` | `'body'` | Text style variant                                   |
-| `text`     | `string`                         | -        | Translation key for i18n (use this instead of `key`) |
-| `fallback` | `string`                         | -        | Fallback text (deprecated)                           |
-
-## With Translations
-
-Use the `text` attribute to specify the translation key:
-
-```html
-<ds-text variant="heading" text="Welcome"></ds-text>
-<ds-text variant="body" text="Greeting"></ds-text>
-```
-
-**Important:** Always use the `text` attribute for translations, not `key`. If a translation is not found, the component will fall back to displaying the `text` attribute value itself.
+| Attribute | Type     | Default | Description                                    |
+| --------- | -------- | ------- | ---------------------------------------------- |
+| `text`    | `string` | -       | Translation key (optional if using slot syntax)|
 
 ## Examples
 
-### Direct Text Content
-
-Display text directly without translations:
+### Navigation Links
 
 ```html
-<ds-text variant="body">
-  This text component supports multiple lines and will maintain proper spacing
-  and formatting.
-</ds-text>
+<a href="/about"><ds-text>About</ds-text></a>
+<a href="/contact"><ds-text>Contact</ds-text></a>
+<a href="/products"><ds-text>Products</ds-text></a>
 ```
 
-### Translation
+### Headings
 
 ```html
-<ds-text variant="heading" text="Page Title"></ds-text>
+<h1><ds-text>Welcome to our site</ds-text></h1>
+<h2><ds-text>Our services</ds-text></h2>
 ```
 
-If the translation for "Page Title" is not found, it will display "Page Title" as the fallback.
+### Paragraphs
 
-### Semantic HTML
+```html
+<p><ds-text>We design digital products that tell stories.</ds-text></p>
+```
 
-The component renders semantic HTML based on the variant:
+### With Styling
 
-- `heading` → `<h1>`, `<h2>`, etc.
-- `body` → `<p>`
-- `small` → `<small>`
+```html
+<span style="font-size: 48px;">
+  <ds-text>0001</ds-text>
+</span>
+```
+
+## Language Support
+
+The component automatically updates when the language changes and applies appropriate font settings for CJK languages (Japanese, Chinese).

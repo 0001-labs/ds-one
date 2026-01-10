@@ -6,7 +6,14 @@ import styles from "./styles/ds-text.css?inline";
  * A component for displaying text from translations
  *
  * @element ds-text
- * @prop {string} text - The translation text to use
+ * @prop {string} text - The translation key (optional if using slot content)
+ *
+ * @example
+ * // Using slot content as the key (preferred)
+ * <ds-text>Welcome to the app</ds-text>
+ *
+ * // Using text attribute (still supported)
+ * <ds-text text="Welcome to the app"></ds-text>
  */
 export class Text extends LitElement {
   static get properties() {
@@ -19,6 +26,7 @@ export class Text extends LitElement {
   declare text: string;
   declare _text: string;
   declare _currentLanguage: string;
+  private _slotKey: string = "";
   private boundHandlers: { languageChanged: EventListener };
 
   constructor() {
@@ -30,7 +38,6 @@ export class Text extends LitElement {
     // Create bound event handlers for proper cleanup
     this.boundHandlers = {
       languageChanged: (() => {
-        console.log("Language changed event received in ds-text");
         this._currentLanguage = currentLanguage.value;
         this._updateLanguageAttribute();
         this._loadText();
@@ -43,6 +50,17 @@ export class Text extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+
+    // Capture slot content as the translation key if no text attribute
+    if (!this.text) {
+      const slotContent = this.textContent?.trim() || "";
+      if (slotContent) {
+        this._slotKey = slotContent;
+        // Clear the slot content - we'll render the translation in shadow DOM
+        this.textContent = "";
+      }
+    }
+
     this._currentLanguage = currentLanguage.value;
     this._updateLanguageAttribute();
     this._loadText();
@@ -58,9 +76,6 @@ export class Text extends LitElement {
       "translations-loaded",
       this.boundHandlers.languageChanged
     );
-
-    // Listen for language changes via events instead of signals
-    // The currentLanguage signal changes will trigger the language-changed event
   }
 
   disconnectedCallback() {
@@ -114,7 +129,10 @@ export class Text extends LitElement {
   }
 
   _loadText() {
-    if (!this.text) {
+    // Use text attribute first, then slot content as fallback
+    const key = this.text || this._slotKey;
+
+    if (!key) {
       this._text = "";
       this._updateLanguageAttribute();
       this.requestUpdate();
@@ -122,18 +140,18 @@ export class Text extends LitElement {
     }
 
     try {
-      const translatedText = getText(this.text);
-      this._text = translatedText || this.text;
+      const translatedText = getText(key);
+      this._text = translatedText || key;
     } catch (error) {
-      console.error("Error loading text for text:", this.text, error);
-      this._text = this.text;
+      console.error("Error loading text for key:", key, error);
+      this._text = key;
     }
     this._updateLanguageAttribute();
     this.requestUpdate();
   }
 
   render() {
-    return html`<span>${this._text || this.text}</span>`;
+    return html`<span>${this._text || this.text || this._slotKey}</span>`;
   }
 }
 

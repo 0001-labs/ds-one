@@ -2,6 +2,7 @@
 // Input component for text and other input types
 
 import { LitElement, html, unsafeCSS } from "lit";
+import { getText, currentLanguage } from "../0-face/i18n";
 import "./ds-text";
 import styles from "./styles/ds-input.css?inline";
 
@@ -29,6 +30,8 @@ export class Input extends LitElement {
     error: { type: String },
     errorText: { type: String, attribute: "error-text" },
     _focused: { type: Boolean, state: true },
+    _placeholder: { type: String, state: true },
+    _currentLanguage: { type: String, state: true },
   };
 
   declare type:
@@ -63,6 +66,9 @@ export class Input extends LitElement {
   declare error: string;
   declare errorText: string;
   declare _focused: boolean;
+  declare _placeholder: string;
+  declare _currentLanguage: string;
+  private boundHandlers: { languageChanged: EventListener };
 
   constructor() {
     super();
@@ -88,9 +94,76 @@ export class Input extends LitElement {
     this.error = "";
     this.errorText = "";
     this._focused = false;
+    this._placeholder = "";
+    this._currentLanguage = currentLanguage.value;
+    
+    // Create bound event handlers for proper cleanup
+    this.boundHandlers = {
+      languageChanged: (() => {
+        this._currentLanguage = currentLanguage.value;
+        this._loadPlaceholder();
+        this.requestUpdate();
+      }) as EventListener,
+    };
   }
 
   static styles = unsafeCSS(styles);
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._currentLanguage = currentLanguage.value;
+    this._loadPlaceholder();
+
+    // Listen for language changes
+    window.addEventListener(
+      "language-changed",
+      this.boundHandlers.languageChanged
+    );
+
+    // Also listen for translations loaded event
+    window.addEventListener(
+      "translations-loaded",
+      this.boundHandlers.languageChanged
+    );
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener(
+      "language-changed",
+      this.boundHandlers.languageChanged
+    );
+    window.removeEventListener(
+      "translations-loaded",
+      this.boundHandlers.languageChanged
+    );
+  }
+
+  updated(changedProperties: Map<string, unknown>) {
+    super.updated(changedProperties);
+
+    if (changedProperties.has("placeholder") || changedProperties.has("placeholderKey")) {
+      this._loadPlaceholder();
+    }
+  }
+
+  private _loadPlaceholder() {
+    const placeholderText = this.placeholderKey || this.placeholder;
+    if (!placeholderText) {
+      this._placeholder = "";
+      this.requestUpdate();
+      return;
+    }
+
+    try {
+      const translatedText = getText(placeholderText);
+      this._placeholder = translatedText || placeholderText;
+    } catch (error) {
+      // Fallback to original text if translation fails
+      this._placeholder = placeholderText;
+    }
+    this.requestUpdate();
+  }
 
   private _handleInput(e: Event): void {
     const target = e.target as HTMLInputElement;
@@ -158,7 +231,7 @@ export class Input extends LitElement {
             .type=${this.type}
             .name=${this.name}
             .value=${this.value}
-            .placeholder=${this.placeholder}
+            .placeholder=${this._placeholder || this.placeholder}
             ?disabled=${this.disabled}
             ?readonly=${this.readonly}
             ?required=${this.required}

@@ -1,22 +1,25 @@
-/* version 0.3.0-alpha.5 */
+/* version 0.3.0-alpha.7 */
 
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@800");
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@800");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@350&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@350&display=swap");
 
 @font-face {
   font-family: GT-America-Standard-Regular;
   src: url("./fonts/GT-America-Standard-Regular.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
   font-family: GT-America-Standard-Medium;
   src: url("./fonts/GT-America-Standard-Medium.woff2") format("woff2");
+  font-display: swap;
 }
 
 @font-face {
   font-family: GT-America-Compressed-Regular;
   src: url("./fonts/GT-America-Compressed-Regular.woff2") format("woff2");
+  font-display: swap;
 }
 
 input {
@@ -165,7 +168,7 @@ input {
 
   /* button */
   --button-background-color-primary: var(--accent-color);
-  --button-background-color-secondary: var(--white);
+  --button-background-color-secondary: var(--slate-light);
   --button-text-color: light-dark(var(--black), var(--white));
   --button-text-color-on-light: var(--black);
   --button-text-color-secondary: light-dark(
