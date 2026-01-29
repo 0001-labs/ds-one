@@ -22,6 +22,12 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: GT-Canon-M-Standard-Medium;
+  src: url("./fonts/GT-Canon-M-Standard-Medium-Trial.woff2") format("woff2");
+  font-display: swap;
+}
+
 input {
   padding: 0;
 }
@@ -67,6 +73,7 @@ input {
   --typeface-medium: "GT-America-Standard-Medium";
   --typeface-compressed: "GT-America-Compressed-Regular";
   --typeface-mono: "Iosevka";
+  --typeface-canon: "GT-Canon-M-Standard-Medium";
 
   /* language specific typefaces */
 
